@@ -12,6 +12,8 @@ profile:
 news: false
 selected_papers: false
 social: true
+nav: true
+nav_order: 1
 ---
 
 I am a media scholar and sessional instructor at McMaster University. Working at the intersection of digital media, media theory, and the philosophy and politics of technology, my research investigates how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible.
