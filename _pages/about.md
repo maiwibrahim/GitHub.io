@@ -9,11 +9,27 @@ toc:
   sidebar: left
 ---
 
-<img src="/assets/img/prof_pic.jpg" style="width:200px;height:260px;object-fit:cover;object-position:top;border-radius:4px;float:right;margin:0 0 1rem 2rem;" />
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;margin:-2rem -2rem 0 -2rem;">
+  <div style="display:flex;align-items:baseline;gap:0;justify-content:center;margin:0 0 1rem;">
+    <span style="color:#efcc00;font-size:40px;font-weight:300;letter-spacing:8px;font-family:sans-serif;">Mai</span>
+    <span style="color:#2698ba;font-size:40px;font-weight:700;letter-spacing:2px;font-family:sans-serif;">W.</span>
+    <span style="color:rgba(255,255,255,0.8);font-size:40px;font-weight:300;letter-spacing:4px;font-family:sans-serif;">Ibrahim</span>
+  </div>
+  <p style="color:rgba(255,255,255,0.6);font-size:16px;margin:0;">Media theorist and researcher of digital cultures.</p>
+</div>
 
-My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.
+## About
+
+<div style="min-height:100vh;display:flex;gap:2rem;align-items:center;padding:2rem 0;flex-wrap:wrap;">
+  <img src="/assets/img/prof_pic.jpg" style="width:220px;height:280px;object-fit:cover;object-position:top;border-radius:4px;flex-shrink:0;" />
+  <div>
+    <p>My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
+  </div>
+</div>
 
 ## Research & Publications
+
+<div style="min-height:100vh;padding:2rem 0;">
 
 #### Book Chapters
 
@@ -41,10 +57,20 @@ Ibrahim, M. (2020). Review of the chapter *A Fast Food Civil Rights* in *Franchi
 
 Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.
 
+</div>
+
 ## CV
+
+<div style="min-height:100vh;display:flex;align-items:center;padding:2rem 0;">
 
 [Download ↓](/assets/pdf/cv.pdf){:target="_blank"}
 
+</div>
+
 ## Contact
 
+<div style="min-height:100vh;display:flex;align-items:center;padding:2rem 0;">
+
 [Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · [Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
+
+</div>
