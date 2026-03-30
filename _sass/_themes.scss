@@ -5,13 +5,13 @@
 @use "sass:color";
 
 :root {
-  color-scheme: light;
-  --global-bg-color: #{v.$cyan-color};
+  color-scheme: dark;
+  --global-bg-color: #0a192f;
   --global-code-bg-color: #{v.$code-bg-color-light};
-  --global-text-color: #{v.$black-color};
+  --global-text-color: #{v.$white-color};
   --global-text-color-light: #{v.$grey-color};
-  --global-theme-color: #{v.$blue-color};
-  --global-hover-color: #{v.$blue-color};
+  --global-theme-color: #{v.$cyan-color};
+  --global-hover-color: #{v.$cyan-color};
   --global-hover-text-color: #{v.$white-color};
   --global-footer-bg-color: #{v.$grey-color-dark};
   --global-footer-text-color: #{v.$grey-color-light};
