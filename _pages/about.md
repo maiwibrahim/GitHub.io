@@ -48,7 +48,7 @@ Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR 
 
 #### Reviews
 
-Ibrahim, M. (2021). [Review of the book *Nihilism and Technology*](/assets/pdf/nihilism-review.pdf){:target="_blank"}, by N. Gertz. *Communication Design Quarterly*, 9(1), 32-34.
+Ibrahim, M. (2021). Review of the book [*Nihilism and Technology*](/assets/pdf/nihilism-review.pdf){:target="_blank"}, by N. Gertz. *Communication Design Quarterly*, 9(1), 32-34.
 
 Ibrahim, M. (2020). Review of the chapter *A Fast Food Civil Rights* in *Franchise*, by M. Chatelain. HASTAC.
 
