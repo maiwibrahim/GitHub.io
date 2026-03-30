@@ -21,9 +21,9 @@ I hold a PhD in Communication, Rhetoric, and Digital Media from North Carolina S
 ---
 
 
-## Research & Publications
+## Publications
 
-### Book Chapters
+#### Book Chapters
 
 Ibrahim, M. (2025). Embodiment and Representation in Social VR. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), *Handbook of Digital Cultures* (pp. 307-314). De Gruyter.
 
@@ -35,17 +35,17 @@ Ibrahim, M. & Dubljević, V. (2023). Neurofeminism in BCI and BBI Ethics as a Pr
 
 Ibrahim, M. & Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. *Neuroéthique et diversité culturelle*, p. 95. ISTE Group.
 
-### Journal Articles
+#### Journal Articles
 
 Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. *Convergence*.
 
-### Reviews
+#### Reviews
 
 Ibrahim, M. (2021). [Review of the book *Nihilism and Technology*, by N. Gertz]. *Communication Design Quarterly*, 9(1), 32-34.
 
 Ibrahim, M. (2020). [Review of the chapter *A Fast Food Civil Rights* in *Franchise*, by M. Chatelain]. HASTAC.
 
-### Interview
+#### Interview
 
 Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.
 
