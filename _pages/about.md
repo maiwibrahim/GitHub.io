@@ -28,9 +28,7 @@ toc:
 
 <div id="research">
 <details>
-<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">
-  
-  ## Publications</summary>
+<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## Research & Publications</summary>
 
 #### Book Chapters
 
@@ -74,7 +72,11 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 <details>
 <summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## Contact</summary>
 
-[Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · [Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
+[Email](mailto:mai.w.ibrahim@gmail.com) ·
+
+[Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · 
+
+[Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
 
 </details>
 </div>
