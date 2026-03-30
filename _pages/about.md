@@ -18,7 +18,7 @@ toc:
 
 .page {
   font-family: 'Lora', Georgia, serif;
-  margin: -3rem -2rem 0 -2rem;
+  margin: 0 -2rem 0 -2rem;
 }
 
 :root { --nav-h: 57px; }
@@ -175,7 +175,7 @@ toc:
 <div class="page">
 
   <!-- HERO -->
-  <div class="hero">
+  <div class="hero" id="about">
     <h1 class="hero-name">Mai W. Ibrahim</h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
   </div>
@@ -190,7 +190,7 @@ toc:
   </div>
 
   <!-- PUBLICATIONS -->
-  <div class="pubs-section">
+  <div class="pubs-section" id="publications">
     <p class="section-label">Research &amp; Publications</p>
 
     <div class="pub-type-block type-chapters">
@@ -221,13 +221,13 @@ toc:
   </div>
 
   <!-- CV -->
-  <div class="bottom-section">
+  <div class="bottom-section" id="cv">
     <p class="section-label" style="margin-bottom:0;">CV</p>
     <a class="cv-download" href="/assets/pdf/cv.pdf" target="_blank">Download ↓</a>
   </div>
 
   <!-- CONTACT -->
-  <div class="footer-section">
+  <div class="footer-section" id="contact">
     <a class="footer-link" href="mailto:mai.w.ibrahim@gmail.com">Email</a>
     <span class="footer-sep">·</span>
     <a class="footer-link" href="https://bsky.app/profile/maiibrahim.bsky.social">Bluesky</a>
