@@ -22,7 +22,7 @@ toc:
   </div>
 </div>
 
----
+
 
 ## Research & Publications
 
@@ -54,7 +54,7 @@ Ibrahim, M. (2020). [Review of the chapter *A Fast Food Civil Rights* in *Franch
 
 Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.
 
----
+
 
 ## CV
 
