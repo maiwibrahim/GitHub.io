@@ -28,7 +28,9 @@ toc:
 
 <div id="research">
 <details>
-<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## Research & Publications</summary>
+<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">
+  
+  ## Publications</summary>
 
 #### Book Chapters
 
