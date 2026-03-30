@@ -29,10 +29,10 @@ toc:
 
 ## Research & Publications
 
-<div style="min-height:100vh;padding:2rem 0;">
 
 #### Book Chapters
 
+...
 Ibrahim, M. (2025). [Embodiment and Representation in Social VR](/assets/pdf/embodiment-social-vr.pdf){:target="_blank"}. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), *Handbook of Digital Cultures* (pp. 307-314). De Gruyter.
 
 Ibrahim, M. (2024). [Exploring Tahrir Square as an Intra-Active Hybrid Space](/assets/pdf/tahrir-square.pdf){:target="_blank"}. In Joanna Godlewicz-Adamiec & Pawel Piszczatowski (Eds.), *Re-Thinking Agency: Non-Anthropocentric Approaches* (pp. 21-33). Vandenhoeck & Ruprecht.
@@ -61,16 +61,12 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 
 ## CV
 
-<div style="min-height:100vh;display:flex;align-items:center;padding:2rem 0;">
 
 [Download ↓](/assets/pdf/cv.pdf){:target="_blank"}
 
-</div>
 
 ## Contact
 
-<div style="min-height:100vh;display:flex;align-items:center;padding:2rem 0;">
-
 [Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · [Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
 
-</div>
+
