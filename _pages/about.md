@@ -9,26 +9,11 @@ toc:
   sidebar: left
 ---
 
-<div style="min-height:100vh;background:#0a192f;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;margin:-2rem -2rem 3rem -2rem;border-radius:0;">
-  <div style="display:flex;align-items:baseline;gap:0;justify-content:center;margin:0 0 1rem;">
-    <span style="color:#efcc00;font-size:40px;font-weight:300;letter-spacing:8px;font-family:sans-serif;">Mai</span>
-    <span style="color:#2698ba;font-size:40px;font-weight:700;letter-spacing:2px;font-family:sans-serif;">W.</span>
-    <span style="color:rgba(255,255,255,0.8);font-size:40px;font-weight:300;letter-spacing:4px;font-family:sans-serif;">Ibrahim</span>
-  </div>
-  <p style="color:rgba(255,255,255,0.6);font-size:16px;margin:0 0 2.5rem;">Media theorist and researcher of digital cultures.</p>
-  <a href="#about" style="color:#0a192f;background:#2698ba;font-size:13px;padding:10px 28px;border-radius:4px;text-decoration:none;">View Profile</a>
-</div>
+<img src="/assets/img/prof_pic.jpg" style="width:200px;height:260px;object-fit:cover;object-position:top;border-radius:4px;float:right;margin:0 0 1rem 2rem;" />
 
-<div id="about" style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;flex-wrap:wrap;">
-  <img src="/assets/img/prof_pic.jpg" style="width:220px;height:280px;object-fit:cover;object-position:top;border-radius:4px;flex-shrink:0;" />
-  <div>
-    <p>My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
-  </div>
-</div>
+My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.
 
-<div id="research">
-<details>
-<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## Research & Publications</summary>
+## Research & Publications
 
 #### Book Chapters
 
@@ -56,27 +41,10 @@ Ibrahim, M. (2020). Review of the chapter *A Fast Food Civil Rights* in *Franchi
 
 Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.
 
-</details>
-</div>
-
-<div id="cv">
-<details>
-<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## CV</summary>
+## CV
 
 [Download ↓](/assets/pdf/cv.pdf){:target="_blank"}
 
-</details>
-</div>
+## Contact
 
-<div id="contact">
-<details>
-<summary style="cursor:pointer;font-size:20px;font-weight:500;padding:1rem 0;list-style:none;">## Contact</summary>
-
-[Email](mailto:mai.w.ibrahim@gmail.com) ·
-
-[Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · 
-
-[Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
-
-</details>
-</div>
+[Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social) · [Google Scholar](https://scholar.google.ca/citations?user=e39G1iYAAAAJ)
