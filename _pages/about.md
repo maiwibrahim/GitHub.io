@@ -2,7 +2,6 @@
 layout: about
 title: about
 permalink: /
-subtitle: Sessional Instructor, McMaster University | PhD, Communication, Rhetoric, and Digital Media, NC State University
 profile:
   align: right
   image: prof_pic.jpg
@@ -14,14 +13,13 @@ toc:
   sidebar: left
 ---
 
-I am a media scholar and sessional instructor at McMaster University. Working at the intersection of digital media, media theory, and the philosophy and politics of technology, my research investigates how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible.
+<div id="about"></div>
 
-I hold a PhD in Communication, Rhetoric, and Digital Media from North Carolina State University.
+My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.
 
 ---
 
-
-## Publications
+## Research & Publications
 
 #### Book Chapters
 
@@ -33,9 +31,11 @@ Ibrahim, M. (2023). Posthuman Subjectivity in BCI-VR Entanglement. In Veljko Dub
 
 Ibrahim, M. & Dubljević, V. (2023). Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics. In Michele Farisco (Ed.), *Neuroethics and Cultural Diversity* (pp. 77-94). ISTE/Wiley.
 
-Ibrahim, M. & Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. *Neuroéthique et diversité culturelle*, p. 95. ISTE Group.
+Ibrahim, M. (2024). Chapitre 5 - Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. In *Neuroéthique et diversité culturelle*. ISTE Group.
 
 #### Journal Articles
+
+Ibrahim, M. & Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. *Neuroéthique et diversité culturelle*, p. 95. ISTE Group.
 
 Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. *Convergence*.
 
@@ -51,7 +51,6 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 
 ---
 
-
 ## CV
 
 You can view my full CV below or [download it here](/assets/pdf/cv.pdf).
@@ -62,9 +61,7 @@ You can view my full CV below or [download it here](/assets/pdf/cv.pdf).
 
 ---
 
-
 ## Contact
 
-
-[Email](mailto:mai.w.ibrahim@gmail.com)
+[Email](mailto:mai.w.ibrahim@gmail.com) 
 [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
