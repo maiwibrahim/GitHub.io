@@ -9,10 +9,9 @@ toc:
   sidebar: left
 ---
 
-<div style="min-height:100vh;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;text-align:right;padding:3rem 4rem;margin:-2rem -2rem 0 -2rem;background:#a03060;">
-  <p style="font-family:Georgia,serif;font-size:52px;font-weight:400;line-height:0.95;letter-spacing:-0.01em;margin:0 0 16px;">
-    <span style="color:#ffd0e0;">Mai W.</span><br>
-    <span style="color:#fff0f4;">Ibrahim</span>
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;text-align:right;padding:3rem 4rem;margin:-3rem -2rem 0 -2rem;padding-top:0;background:#a03060;">
+  <p style="font-family:Georgia,serif;font-size:52px;font-weight:400;line-height:1.05;letter-spacing:-0.01em;margin:0 0 16px;">
+<span style="color:#ffd0e0;">Mai W. Ibrahim</span>
   </p>
   <p style="font-family:Georgia,serif;font-size:15px;color:#f0c0d0;line-height:1.6;margin:0;max-width:300px;">
     is a media theorist and researcher of <em style="color:#fff0f4;">digital cultures.</em>
