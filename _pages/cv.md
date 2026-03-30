@@ -1,12 +1,15 @@
 ---
-layout: cv
+layout: page
 permalink: /cv/
 title: CV
 nav: true
 nav_order: 3
-cv_pdf: /assets/pdf/cv.pdf
-cv_format: rendercv
-description: My academic CV.
-toc:
-  sidebar: left
 ---
+
+<div class="post">
+  <div class="cv">
+    <a href="/assets/pdf/cv.pdf" target="_blank" class="btn btn-primary">
+      Download CV (PDF)
+    </a>
+  </div>
+</div>
