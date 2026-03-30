@@ -64,4 +64,5 @@ You can view my full CV below or [download it here](/assets/pdf/cv.pdf).
 ## Contact
 
 [Email](mailto:mai.w.ibrahim@gmail.com) 
+
 [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
