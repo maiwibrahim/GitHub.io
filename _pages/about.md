@@ -16,7 +16,7 @@ toc:
 </div>
 
 <div id="about" style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;flex-wrap:wrap;">
-  <img src="/assets/img/prof_pic.jpg" style="width:220px;height:220px;object-fit:cover;border-radius:4px;flex-shrink:0;" />
+  <img src="/assets/img/prof_pic.jpg" style="width:220px;height:280px;object-fit:cover;object-position:top;border-radius:4px;flex-shrink:0;" />
   <div>
     <p>My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
   </div>
