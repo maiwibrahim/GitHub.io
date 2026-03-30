@@ -1,7 +1,9 @@
 ---
 layout: about
-title: ""
+title: About
 permalink: /
+nav: true
+nav_order: 1
 news: false
 selected_papers: false
 social: false
