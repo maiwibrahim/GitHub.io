@@ -37,15 +37,6 @@
 @use "font-awesome/brands";
 @use "font-awesome/solid";
 @use "font-awesome/regular";
-h1 {
-  color: #efcc00 !important;
-}
-
-.sidebar-header,
-.profile-name,
-.navbar-brand,
-#sidebar .p-name,
-.p-name,
-.site-title {
+.p-name, .sidebar-header, .profile-name, .navbar-brand, .site-title, h1.post-title, .header-bar h1 {
   display: none !important;
 }
