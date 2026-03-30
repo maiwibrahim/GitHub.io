@@ -40,3 +40,7 @@
 h1 {
   color: #efcc00 !important;
 }
+
+.sidebar-header, .profile h1, .profile-name, #profile-username {
+  display: none !important;
+}
