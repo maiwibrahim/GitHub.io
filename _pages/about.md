@@ -32,7 +32,6 @@ toc:
 
 #### Book Chapters
 
-...
 Ibrahim, M. (2025). [Embodiment and Representation in Social VR](/assets/pdf/embodiment-social-vr.pdf){:target="_blank"}. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), *Handbook of Digital Cultures* (pp. 307-314). De Gruyter.
 
 Ibrahim, M. (2024). [Exploring Tahrir Square as an Intra-Active Hybrid Space](/assets/pdf/tahrir-square.pdf){:target="_blank"}. In Joanna Godlewicz-Adamiec & Pawel Piszczatowski (Eds.), *Re-Thinking Agency: Non-Anthropocentric Approaches* (pp. 21-33). Vandenhoeck & Ruprecht.
