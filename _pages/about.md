@@ -14,22 +14,40 @@ toc:
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
-.page *,
-.page *::before,
-.page *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --nav-h: 57px; }
+
+/* Force full bleed — override al-folio's container */
+body { overflow-x: hidden; }
+
+.container, .container-fluid, .container-md,
+main, #main-content, .col, .col-md,
+.row, .wrapper, .post, .profile {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  float: none !important;
+}
 
 .page {
   font-family: 'Lora', Georgia, serif;
-  margin: 0 -2rem 0 -2rem;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  overflow-x: hidden;
 }
 
-:root { --nav-h: 57px; }
+.page *, .page *::before, .page *::after {
+  box-sizing: border-box;
+}
 
 /* HERO */
 .hero {
   background: #6b4472;
-  padding: 4rem 2.5rem 3.5rem;
+  padding: 4rem max(2.5rem, 6vw) 3.5rem;
   min-height: calc(100vh - var(--nav-h));
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,9 +72,10 @@ toc:
 
 /* ABOUT */
 .about-section {
-  padding: 3rem 2.5rem;
+  padding: 4rem max(2.5rem, 6vw);
   background: #fdf6ee;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,12 +87,14 @@ toc:
   color: #6b4472;
   margin-bottom: 1.25rem;
   font-style: normal;
+  font-family: 'Lora', serif;
 }
 .about-grid {
   display: grid;
   grid-template-columns: 112px 1fr;
   gap: 1.75rem;
   align-items: start;
+  max-width: 680px;
 }
 .about-img {
   width: 112px;
@@ -90,9 +111,10 @@ toc:
 
 /* PUBLICATIONS */
 .pubs-section {
-  padding: 3rem 2.5rem;
+  padding: 4rem max(2.5rem, 6vw);
   background: #fff;
   min-height: 100vh;
+  width: 100vw;
 }
 .pubs-section .section-label {
   color: #3a6b52;
@@ -100,6 +122,7 @@ toc:
 }
 .pub-type-block {
   margin-bottom: 2.25rem;
+  max-width: 680px;
 }
 .pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
@@ -122,6 +145,7 @@ toc:
   color: #3a3228;
   margin-bottom: 0.85rem;
   font-style: normal;
+  font-family: 'Lora', serif;
 }
 .pub-entry:last-child { margin-bottom: 0; }
 .pub-entry em { font-style: italic; }
@@ -134,13 +158,14 @@ toc:
 
 /* CV */
 .bottom-section {
-  padding: 2.5rem 2.5rem;
+  padding: 4rem max(2.5rem, 6vw);
   background: #fdf6ee;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   gap: 1rem;
-  flex-wrap: wrap;
 }
 .cv-download {
   font-size: 11px;
@@ -152,17 +177,21 @@ toc:
   padding: 7px 16px;
   border-radius: 2px;
   font-style: normal;
+  display: inline-block;
+  width: fit-content;
 }
 .cv-download:hover { background: #b080c4; color: #fff; }
 
-/* FOOTER */
+/* CONTACT */
 .footer-section {
-  padding: 2.25rem 2.5rem;
+  padding: 4rem max(2.5rem, 6vw);
   background: #3d1f4a;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   gap: 1.75rem;
-  flex-wrap: wrap;
 }
 .footer-link {
   font-size: 13px;
@@ -230,10 +259,9 @@ toc:
 
   <!-- CONTACT -->
   <div class="footer-section" id="contact">
+    <p class="section-label" style="color:#c9a0d6;">Contact</p>
     <a class="footer-link" href="mailto:mai.w.ibrahim@gmail.com">Email</a>
-    <span class="footer-sep">·</span>
     <a class="footer-link" href="https://bsky.app/profile/maiibrahim.bsky.social">Bluesky</a>
-    <span class="footer-sep">·</span>
     <a class="footer-link" href="https://scholar.google.ca/citations?user=e39G1iYAAAAJ">Google Scholar</a>
   </div>
 
