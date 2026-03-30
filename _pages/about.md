@@ -7,7 +7,7 @@ subtitle: Sessional Instructor, McMaster University
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: true
+  image_circular: false
 
 news: false
 selected_papers: false
