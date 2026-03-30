@@ -9,8 +9,8 @@ toc:
   sidebar: left
 ---
 
-<<div style="min-height:100vh;background:#0a192f;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;margin-bottom:3rem;border-radius:8px;">
-  <h1 style="color:#efcc00;font-size:42px;font-weight:500;margin:0 0 1rem;letter-spacing:-0.5px;">Mai W. Ibrahim</h1>
+<div style="min-height:100vh;background:#0a192f;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;margin:-2rem -2rem 3rem -2rem;border-radius:0;">
+  <h1 style="color:#efcc00;font-size:42px;font-weight:500;margin:0 0 1rem;letter-spacing:-0.5px;">MAI W. IBRAHIM</h1>
   <p style="color:rgba(255,255,255,0.6);font-size:16px;margin:0 0 2.5rem;">Media theorist and researcher of digital cultures.</p>
   <a href="#about" style="color:#0a192f;background:#2698ba;font-size:13px;padding:10px 28px;border-radius:4px;text-decoration:none;">View Profile</a>
 </div>
@@ -58,7 +58,6 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 
 [Download ↓](/assets/pdf/cv.pdf){:target="_blank"}
 
----
 
 ## Contact
 
