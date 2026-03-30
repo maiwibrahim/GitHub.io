@@ -9,13 +9,14 @@ toc:
   sidebar: left
 ---
 
-<div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;margin:-2rem -2rem 0 -2rem;">
-  <div style="display:flex;align-items:baseline;gap:0;justify-content:center;margin:0 0 1rem;">
-    <span style="color:#efcc00;font-size:40px;font-weight:300;letter-spacing:8px;font-family:sans-serif;">Mai</span>
-    <span style="color:#2698ba;font-size:40px;font-weight:700;letter-spacing:2px;font-family:sans-serif;">W.</span>
-    <span style="color:rgba(255,255,255,0.8);font-size:40px;font-weight:300;letter-spacing:4px;font-family:sans-serif;">Ibrahim</span>
-  </div>
-  <p style="color:rgba(255,255,255,0.6);font-size:16px;margin:0;">Media theorist and researcher of digital cultures.</p>
+<div style="min-height:100vh;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;text-align:right;padding:3rem 4rem;margin:-2rem -2rem 0 -2rem;background:#a03060;">
+  <p style="font-family:Georgia,serif;font-size:52px;font-weight:400;line-height:0.95;letter-spacing:-0.01em;margin:0 0 16px;">
+    <span style="color:#ffd0e0;">Mai W.</span><br>
+    <span style="color:#fff0f4;">Ibrahim</span>
+  </p>
+  <p style="font-family:Georgia,serif;font-size:15px;color:#f0c0d0;line-height:1.6;margin:0;max-width:300px;">
+    is a media theorist and researcher of <em style="color:#fff0f4;">digital cultures.</em>
+  </p>
 </div>
 
 ## About
