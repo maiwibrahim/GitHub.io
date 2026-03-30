@@ -16,11 +16,9 @@ Ibrahim, M. (2023). Posthuman Subjectivity in BCI-VR Entanglement. In Veljko Dub
 
 Ibrahim, M. & Dubljević, V. (2023). Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics. In Michele Farisco (Ed.), *Neuroethics and Cultural Diversity* (pp. 77-94). ISTE/Wiley.
 
-Ibrahim, M. (2024). Chapitre 5 - Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. In *Neuroéthique et diversité culturelle*. ISTE Group.
+Ibrahim, M. & Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. *Neuroéthique et diversité culturelle*, p. 95. ISTE Group.
 
 ## Journal Articles
-
-Ibrahim, M. & Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. *Neuroéthique et diversité culturelle*, p. 95. ISTE Group.
 
 Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. *Convergence*.
 
