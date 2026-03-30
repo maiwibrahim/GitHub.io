@@ -41,10 +41,11 @@ h1 {
   color: #efcc00 !important;
 }
 
-.sidebar-header {
-  display: none !important;
-}
-
-.profile-name {
+.sidebar-header,
+.profile-name,
+.navbar-brand,
+#sidebar .p-name,
+.p-name,
+.site-title {
   display: none !important;
 }
