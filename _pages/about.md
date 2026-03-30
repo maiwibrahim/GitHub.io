@@ -58,10 +58,12 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 
 ## CV
 
-[View my CV](/assets/pdf/cv.pdf){:target="_blank"}
+[Download ↓](/assets/pdf/cv.pdf){:target="_blank"}
 
 ---
 
 ## Contact
 
-[Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
+[Email](mailto:mai.w.ibrahim@gmail.com)
+
+[Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
