@@ -24,7 +24,7 @@ toc:
 
 
 
-## Research & Publications
+## Publications
 
 #### Book Chapters
 
