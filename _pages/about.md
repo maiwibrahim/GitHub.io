@@ -2,25 +2,25 @@
 layout: about
 title: " "
 permalink: /
-profile:
-  align: right
-  image: prof_pic.jpg
-  image_circular: false
 news: false
 selected_papers: false
-social: true
+social: false
 toc:
   sidebar: left
 ---
+
 <div style="background:#0a192f;padding:5rem 3rem;text-align:center;margin-bottom:3rem;border-radius:8px;">
   <h1 style="color:#efcc00;font-size:42px;font-weight:500;margin:0 0 1rem;letter-spacing:-0.5px;">MAI W. IBRAHIM</h1>
   <p style="color:rgba(255,255,255,0.6);font-size:16px;margin:0 0 2.5rem;">Media theorist and researcher of digital cultures.</p>
   <a href="#about" style="color:#0a192f;background:#2698ba;font-size:13px;padding:10px 28px;border-radius:4px;text-decoration:none;">View Profile</a>
 </div>
 
-<div id="about"></div>
-
-My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.
+<div id="about" style="display:flex;gap:2rem;align-items:flex-start;margin-bottom:3rem;flex-wrap:wrap;">
+  <img src="/assets/img/prof_pic.jpg" style="width:160px;height:160px;object-fit:cover;border-radius:4px;flex-shrink:0;" />
+  <div>
+    <p>My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
+  </div>
+</div>
 
 ---
 
@@ -64,6 +64,4 @@ Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chate
 
 ## Contact
 
-[Email](mailto:mai.w.ibrahim@gmail.com) 
-
-[Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
+[Email](mailto:mai.w.ibrahim@gmail.com) · [Bluesky](https://bsky.app/profile/maiibrahim.bsky.social)
