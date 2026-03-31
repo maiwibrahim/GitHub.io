@@ -83,26 +83,6 @@ main, #main-content, .col, .col-md,
   position: relative;
   overflow: hidden;
 }
-.about-section::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: -5%;
-  right: -5%;
-  height: 120px;
-  background: #6b4472;
-  transform: rotate(-3deg);
-}
-.about-section::after {
-  content: '';
-  position: absolute;
-  bottom: -60px;
-  left: -5%;
-  right: -5%;
-  height: 120px;
-  background: #6b4472;
-  transform: rotate(-3deg);
-}
 .section-label {
   font-size: 16px;
   letter-spacing: 0.2em;
