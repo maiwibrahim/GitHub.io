@@ -53,15 +53,17 @@ main, #main-content, .col, .col-md,
 }
 .hero-name {
   font-family: 'DM Serif Display', Georgia, serif;
-  font-size: clamp(56px, 11vw, 90px);
+  font-size: clamp(72px, 14vw, 130px);
   font-weight: 400;
   font-style: normal;
   line-height: 1.0;
-  letter-spacing: 0.25em;
+  letter-spacing: 0;
   margin-bottom: 1.1rem;
   white-space: nowrap;
   width: 100%;
   text-align: center;
+  transform: scaleX(1.15);
+  display: block;
 }
 .hero-desc {
   font-size: 22px;
