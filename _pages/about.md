@@ -1,14 +1,11 @@
 ---
 layout: about
-title: About
+title: ""
 permalink: /
-nav: true
-nav_order: 1
+nav: false
 news: false
 selected_papers: false
 social: false
-toc:
-  sidebar: left
 ---
 
 <style>
@@ -204,6 +201,15 @@ main, #main-content, .col, .col-md,
 </style>
 
 <div class="page">
+<div class="page">
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:#6b4472;padding:0 max(2.5rem,6vw);display:flex;gap:2.5rem;align-items:center;height:52px;border-bottom:1px solid rgba(255,255,255,0.1);">
+  <a href="#about" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
+  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
+  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">CV</a>
+  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
+</nav>
+
 
   <!-- HERO -->
   <div class="hero" id="about">
