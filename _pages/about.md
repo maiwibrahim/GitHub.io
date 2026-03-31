@@ -60,7 +60,7 @@ main, #main-content, .col, .col-md,
   white-space: nowrap;
 }
 .hero-desc {
-  font-size: 14px;
+  font-size: 18px;
   color: #d9b8e0;
   line-height: 1.7;
   font-style: italic;
@@ -100,7 +100,7 @@ main, #main-content, .col, .col-md,
   border-radius: 2px;
 }
 .about-text {
-  font-size: 13.5px;
+  font-size: 16px;
   line-height: 1.9;
   color: #5a3e2b;
 }
@@ -136,8 +136,8 @@ main, #main-content, .col, .col-md,
 .type-reviews   .pub-type-label { background: #dfe0f5; color: #3b3c80; }
 .type-interview .pub-type-label { background: #ecd8f0; color: #5a2870; }
 .pub-entry {
-  font-size: 13px;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.9;
   color: #3a3228;
   margin-bottom: 0.85rem;
   font-style: normal;
@@ -190,7 +190,7 @@ main, #main-content, .col, .col-md,
   gap: 1.75rem;
 }
 .footer-link {
-  font-size: 13px;
+  font-size: 16px;
   color: #c9a0d6;
   text-decoration: none;
   font-style: italic;
