@@ -9,7 +9,7 @@ social: false
 ---
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root { --nav-h: 57px; }
 
@@ -50,13 +50,12 @@ main, #main-content, .col, .col-md,
   justify-content: center;
 }
 .hero-name {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: 'DM Serif Display', Georgia, serif;
   font-size: clamp(44px, 9.5vw, 70px);
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
   line-height: 1.0;
   letter-spacing: -0.02em;
-  color: #f7edfb;
   margin-bottom: 1.1rem;
   white-space: nowrap;
 }
@@ -232,7 +231,11 @@ article {
 
   <!-- HERO -->
   <div class="hero" id="about">
-    <h1 class="hero-name">Mai W. Ibrahim</h1>
+    <h1 class="hero-name">
+  <span style="color:#efcc00;">Mai</span>
+  <span style="color:#d9b8e0;"> W.</span>
+  <span style="color:#efcc00;"> Ibrahim</span>
+</h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
   </div>
 
