@@ -72,15 +72,36 @@ main, #main-content, .col, .col-md,
   font-style: italic;
 }
 
-/* ABOUT */
 .about-section {
-  padding: 4rem max(2.5rem, 6vw);
+  padding: 6rem max(2.5rem, 6vw);
   background: #fdf6ee;
   min-height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -5%;
+  right: -5%;
+  height: 120px;
+  background: #6b4472;
+  transform: rotate(-3deg);
+}
+.about-section::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  left: -5%;
+  right: -5%;
+  height: 120px;
+  background: #6b4472;
+  transform: rotate(-3deg);
 }
 .section-label {
   font-size: 16px;
@@ -264,14 +285,18 @@ article {
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
   </div>
 
- <!-- ABOUT -->
-  <div class="about-section" id="about">
-    <p class="section-label">About</p>
-    <div class="about-grid">
-      <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
+<!-- ABOUT -->
+<div class="about-section" id="about">
+  <p class="section-label">About</p>
+  <div style="display:flex;gap:3rem;align-items:center;flex-wrap:wrap;position:relative;z-index:2;">
+    <div style="flex-shrink:0;transform:rotate(-3deg);">
+      <img src="/assets/img/prof_pic.jpg" style="width:220px;height:290px;object-fit:cover;object-position:top;border-radius:4px;box-shadow:8px 8px 0 rgba(107,68,114,0.2);" />
+    </div>
+    <div style="flex:1;min-width:260px;transform:rotate(-1deg);">
       <p class="about-text">My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology. I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible. I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
     </div>
   </div>
+</div>
 
   <!-- PUBLICATIONS -->
   <div class="pubs-section" id="publications">
