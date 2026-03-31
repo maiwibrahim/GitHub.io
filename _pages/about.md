@@ -90,7 +90,7 @@ main, #main-content, .col, .col-md,
   grid-template-columns: 112px 1fr;
   gap: 1.75rem;
   align-items: start;
-  max-width: 680px;
+  max-width: 100%;
 }
 .about-img {
   width: 112px;
@@ -118,7 +118,7 @@ main, #main-content, .col, .col-md,
 }
 .pub-type-block {
   margin-bottom: 2.25rem;
-  max-width: 680px;
+  max-width: 100%;
 }
 .pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
