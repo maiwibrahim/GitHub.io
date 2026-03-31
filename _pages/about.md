@@ -216,16 +216,16 @@ article {
   min-height: 100vh !important;
   width: 100vw !important;
 }
-</style>
+.navbar, nav.navbar { display: none !important; }
 </style>
 
 <div class="page">
 
-<nav style="position:fixed;top:0;left:0;right:0;z-index:1000;background:#6b4472;padding:0 max(2.5rem,6vw);display:flex;gap:2.5rem;align-items:center;height:52px;border-bottom:1px solid rgba(255,255,255,0.1);">
-  <a href="#about" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
-  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
-  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">CV</a>
-  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(2.5rem,6vw);display:flex;gap:2.5rem;align-items:center;height:52px;">
+  <a href="#about" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
+  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
+  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CV</a>
+  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
 </nav>
 
 
