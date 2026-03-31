@@ -149,12 +149,12 @@ main, #main-content, .col, .col-md,
 .pub-type-block { margin-bottom: 2.25rem; max-width: 100%; }
 .pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
-  font-size: 11.5px;
+  font-size: 15px;
   font-weight: 500;
   font-style: normal;
   letter-spacing: 0.01em;
   margin-bottom: 0.9rem;
-  padding: 4px 10px;
+  padding: 6px 14px;
   display: inline-block;
   border-radius: 3px;
 }
@@ -163,10 +163,10 @@ main, #main-content, .col, .col-md,
 .type-reviews   .pub-type-label { background: #dfe0f5; color: #3b3c80; }
 .type-interview .pub-type-label { background: #ecd8f0; color: #5a2870; }
 .pub-entry {
-  font-size: 15px;
-  line-height: 1.9;
+  font-size: 18px;
+  line-height: 2;
   color: #3a3228;
-  margin-bottom: 0.85rem;
+  margin-bottom: 1rem;
   font-style: normal;
   font-family: 'Lora', serif;
 }
