@@ -89,14 +89,14 @@ main, #main-content, .col, .col-md,
 }
 .about-grid {
   display: grid;
-  grid-template-columns: 112px 1fr;
+  grid-template-columns: 180px 1fr;
   gap: 1.75rem;
   align-items: start;
   max-width: 100%;
 }
 .about-img {
-  width: 112px;
-  height: 142px;
+  width: 180px;
+  height: 230px;
   object-fit: cover;
   object-position: top;
   border-radius: 2px;
@@ -242,7 +242,7 @@ article {
   </div>
 
   <!-- ABOUT -->
-  <div class="about-section">
+ <div class="hero" id="hero">
     <p class="section-label">About</p>
     <div class="about-grid">
       <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
