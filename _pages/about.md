@@ -236,6 +236,10 @@ article {
   width: 100vw !important;
 }
 .navbar, nav.navbar { display: none !important; }
+
+* {
+  cursor: url("data:image/svg+xml,...") 26 22, auto !important;
+}
 </style>
 
 <div class="page">
