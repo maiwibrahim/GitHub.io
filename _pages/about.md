@@ -48,10 +48,12 @@ main, #main-content, .col, .col-md,
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 .hero-name {
   font-family: 'DM Serif Display', Georgia, serif;
-  font-size: clamp(44px, 9.5vw, 70px);
+  font-size: clamp(56px, 11vw, 90px);
   font-weight: 400;
   font-style: normal;
   line-height: 1.0;
@@ -60,7 +62,7 @@ main, #main-content, .col, .col-md,
   white-space: nowrap;
 }
 .hero-desc {
-  font-size: 18px;
+  font-size: 22px;
   color: #d9b8e0;
   line-height: 1.7;
   font-style: italic;
@@ -164,7 +166,7 @@ main, #main-content, .col, .col-md,
   gap: 1rem;
 }
 .cv-download {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: #3d1f4a;
@@ -222,10 +224,10 @@ article {
 <div class="page">
 
 <nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(2.5rem,6vw);display:flex;gap:2.5rem;align-items:center;height:52px;">
-  <a href="#about" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
-  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
-  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CV</a>
-  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:11px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
+  <a href="#about" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
+  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
+  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CV</a>
+  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
 </nav>
 
 
