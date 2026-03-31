@@ -79,7 +79,7 @@ main, #main-content, .col, .col-md,
   justify-content: center;
 }
 .section-label {
-  font-size: 10px;
+  font-size: 16px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #6b4472;
@@ -113,6 +113,21 @@ main, #main-content, .col, .col-md,
   background: #fff;
   min-height: 100vh;
   width: 100vw;
+  color: #3a3228;
+}
+  .pubs-section * {
+  color: #3a3228;
+}
+.pubs-section a {
+  color: #3a3228 !important;
+  border-bottom: 0.5px solid rgba(58,50,40,0.3);
+}
+.pubs-section a:hover {
+  color: #6b4472 !important;
+}
+.pubs-section .section-label {
+  color: #3a6b52;
+  margin-bottom: 2rem;
 }
 .pubs-section .section-label {
   color: #3a6b52;
