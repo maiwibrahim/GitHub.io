@@ -198,6 +198,26 @@ main, #main-content, .col, .col-md,
 }
 .footer-link:hover { color: #f0ddf5; }
 .footer-sep { color: #6b3d7a; font-size: 12px; }
+  .footer-link:hover { color: #f0ddf5; }
+.footer-sep { color: #6b3d7a; font-size: 12px; }
+
+/* Remove al-folio padding */
+.post {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+article {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.post-header {
+  display: none !important;
+}
+.hero, .about-section, .pubs-section, .bottom-section, .footer-section {
+  min-height: 100vh !important;
+  width: 100vw !important;
+}
+</style>
 </style>
 
 <div class="page">
