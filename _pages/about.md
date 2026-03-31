@@ -11,7 +11,7 @@ social: false
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
-:root { --nav-h: 57px; }
+:root { --nav-h: 52px; }
 
 body { overflow-x: hidden; }
 
@@ -38,7 +38,7 @@ main, #main-content, .col, .col-md,
   box-sizing: border-box;
 }
 
-/* HERO — unchanged */
+/* HERO */
 .hero {
   background: #6b4472;
   padding: 4rem max(2.5rem, 6vw) 3.5rem;
@@ -52,26 +52,26 @@ main, #main-content, .col, .col-md,
 }
 .hero-name {
   font-family: 'DM Serif Display', Georgia, serif;
-  font-size: clamp(72px, 14vw, 130px);
+  font-size: clamp(48px, 12vw, 130px);
   font-weight: 400;
   font-style: normal;
-  line-height: 1.0;
+  line-height: 1.05;
   letter-spacing: 0;
   margin-bottom: 1.1rem;
-  white-space: nowrap;
   width: 100%;
   text-align: center;
-  transform: scaleX(1.15);
   display: block;
+  white-space: normal;
 }
 .hero-desc {
-  font-size: 22px;
+  font-size: clamp(16px, 3vw, 22px);
   color: #ffffff;
   line-height: 1.7;
   font-style: italic;
+  max-width: 600px;
 }
 
-/* ABOUT — diagonal top, photo tilted, text as narrow vertical column */
+/* ABOUT */
 .about-section {
   background: #fdf6ee;
   width: 100vw;
@@ -82,6 +82,7 @@ main, #main-content, .col, .col-md,
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 .section-label {
   font-size: 16px;
@@ -91,15 +92,19 @@ main, #main-content, .col, .col-md,
   margin-bottom: 2rem;
   font-style: normal;
   font-family: 'Lora', serif;
+  text-align: center;
+  width: 100%;
 }
 .about-inner {
   display: flex;
   gap: 3.5rem;
   align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .about-img {
-  width: 240px;
-  height: 310px;
+  width: 220px;
+  height: 285px;
   object-fit: cover;
   object-position: top;
   border-radius: 3px;
@@ -112,9 +117,12 @@ main, #main-content, .col, .col-md,
   flex-direction: column;
   gap: 1.5rem;
   max-width: 380px;
+  transform: rotate(-3deg);
+  margin-top: 10px;
+  min-width: 260px;
 }
 .about-text {
-  font-size: 18px;
+  font-size: 19px;
   line-height: 2;
   color: #5a3e2b;
   margin: 0;
@@ -122,14 +130,13 @@ main, #main-content, .col, .col-md,
 
 /* RESEARCH */
 .pubs-section {
-  padding: 4rem max(2.5rem, 6vw);
   background: #fff;
   min-height: 100vh;
   width: 100vw;
   color: #3a3228;
   margin-top: -60px;
   clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 100%);
-  padding-top: 120px;
+  padding: 120px max(2.5rem, 6vw) 4rem;
 }
 .pubs-section * { color: #3a3228; }
 .pubs-section a {
@@ -137,7 +144,7 @@ main, #main-content, .col, .col-md,
   border-bottom: 0.5px solid rgba(58,50,40,0.3);
 }
 .pubs-section a:hover { color: #6b4472 !important; }
-.pubs-section .section-label { color: #3a6b52; margin-bottom: 2rem; }
+.pubs-section .section-label { color: #3a6b52; margin-bottom: 2rem; text-align: left; }
 .pub-type-block { margin-bottom: 2.25rem; max-width: 100%; }
 .pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
@@ -221,18 +228,49 @@ main, #main-content, .col, .col-md,
 article { padding: 0 !important; margin: 0 !important; }
 .post-header { display: none !important; }
 .navbar, nav.navbar { display: none !important; }
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .about-section {
+    clip-path: polygon(0 30px, 100% 0, 100% 100%, 0 100%);
+    padding: 80px 1.5rem 80px;
+    margin-top: -30px;
+  }
+  .about-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .about-img {
+    transform: rotate(-2deg);
+    width: 180px;
+    height: 230px;
+  }
+  .text-col {
+    transform: rotate(-2deg);
+    max-width: 100%;
+    min-width: unset;
+  }
+  .about-text { font-size: 17px; }
+  .pubs-section {
+    clip-path: polygon(0 0, 100% 30px, 100% 100%, 0 100%);
+    padding-top: 80px;
+    margin-top: -30px;
+  }
+  .pub-entry { font-size: 14px; }
+}
 </style>
 
 <div class="page">
 
-<nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(2.5rem,6vw);display:flex;gap:2.5rem;align-items:center;height:52px;">
-  <a href="#about" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">ABOUT</a>
-  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">PUBLICATIONS</a>
-  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CV</a>
-  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(1.5rem,4vw);display:flex;gap:1.5rem;align-items:center;height:52px;flex-wrap:wrap;">
+  <a href="#about" style="font-family:'Space Mono',monospace;font-size:12px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">ABOUT</a>
+  <a href="#publications" style="font-family:'Space Mono',monospace;font-size:12px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">PUBLICATIONS</a>
+  <a href="#cv" style="font-family:'Space Mono',monospace;font-size:12px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">CV</a>
+  <a href="#contact" style="font-family:'Space Mono',monospace;font-size:12px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">CONTACT</a>
 </nav>
 
-<!-- HERO — unchanged -->
+<!-- HERO -->
 <div class="hero" id="hero">
   <h1 class="hero-name">
     <span style="color:#efcc00;">Mai</span>
