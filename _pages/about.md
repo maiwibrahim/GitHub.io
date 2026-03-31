@@ -57,13 +57,15 @@ main, #main-content, .col, .col-md,
   font-weight: 400;
   font-style: normal;
   line-height: 1.0;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.25em;
   margin-bottom: 1.1rem;
   white-space: nowrap;
+  width: 100%;
+  text-align: center;
 }
 .hero-desc {
   font-size: 22px;
-  color: #d9b8e0;
+  color: #ffffff;
   line-height: 1.7;
   font-style: italic;
 }
@@ -247,7 +249,7 @@ article {
 
 
   <!-- HERO -->
-  <div class="hero" id="about">
+ <div class="hero" id="hero">
     <h1 class="hero-name">
   <span style="color:#efcc00;">Mai</span>
   <span style="color:#d9b8e0;"> W.</span>
@@ -256,8 +258,8 @@ article {
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
   </div>
 
-  <!-- ABOUT -->
- <div class="hero" id="hero">
+ <!-- ABOUT -->
+  <div class="about-section" id="about">
     <p class="section-label">About</p>
     <div class="about-grid">
       <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
