@@ -105,7 +105,7 @@ main, #main-content, .col, .col-md,
   color: #5a3e2b;
 }
 
-/* PUBLICATIONS */
+/* RESEARCH */
 .pubs-section {
   padding: 4rem max(2.5rem, 6vw);
   background: #fff;
