@@ -71,13 +71,13 @@ main, #main-content, .col, .col-md,
   font-style: italic;
 }
 
-/* ABOUT — diagonal clip */
+/* ABOUT */
 .about-section {
   background: #fdf6ee;
   width: 100vw;
   padding: 100px max(2.5rem, 6vw) 120px;
-  margin-top: -40px;
-  clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+  margin-top: -60px;
+  clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -104,6 +104,8 @@ main, #main-content, .col, .col-md,
   object-position: top;
   border-radius: 3px;
   flex-shrink: 0;
+  transform: rotate(-3deg);
+  margin-top: 10px;
 }
 .text-col {
   display: flex;
@@ -125,7 +127,9 @@ main, #main-content, .col, .col-md,
   min-height: 100vh;
   width: 100vw;
   color: #3a3228;
-  margin-top: -40px;
+  margin-top: -60px;
+  clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 100%);
+  padding-top: 120px;
 }
 .pubs-section * {
   color: #3a3228;
@@ -226,10 +230,6 @@ main, #main-content, .col, .col-md,
 .post { padding: 0 !important; margin: 0 !important; }
 article { padding: 0 !important; margin: 0 !important; }
 .post-header { display: none !important; }
-.hero, .pubs-section, .bottom-section, .footer-section {
-  min-height: 100vh !important;
-  width: 100vw !important;
-}
 .navbar, nav.navbar { display: none !important; }
 </style>
 
