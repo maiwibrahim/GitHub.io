@@ -258,12 +258,9 @@ article {
   min-height: 100vh !important;
   width: 100vw !important;
 }
-.navbar, nav.navbar { display: none !important; }
-
 * {
-  cursor: url("data:image/svg+xml,...") 26 22, auto !important;
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='44' viewBox='0 0 52 72' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 48 Q18 58 19 65 Q21 69 26 69 Q31 69 33 65 Q34 58 32 48 Z' fill='white'/%3E%3Cpath d='M18 42 Q26 46 34 42 L32 48 Q26 51 20 48 Z' fill='%23ececec'/%3E%3Ccircle cx='26' cy='22' r='20' fill='none' stroke='white' stroke-width='5'/%3E%3Cellipse cx='26' cy='10' rx='9' ry='7' fill='white'/%3E%3Ccircle cx='29' cy='9' r='2.5' fill='%23e0e0e0'/%3E%3Ccircle cx='23' cy='9' r='2.5' fill='%23e0e0e0'/%3E%3Cellipse cx='26' cy='32' rx='8' ry='6' fill='white'/%3E%3Ccircle cx='26' cy='32' r='4' fill='%23e0e0e0'/%3E%3Ccircle cx='26' cy='32' r='2.5' fill='%23c8c8c8'/%3E%3C/svg%3E") 16 14, auto !important;
 }
-</style>
 
 <div class="page">
 
