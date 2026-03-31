@@ -239,7 +239,7 @@ article { padding: 0 !important; margin: 0 !important; }
   }
   .about-inner {
   display: flex;
-  gap: 6rem;
+  gap: 10rem;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
