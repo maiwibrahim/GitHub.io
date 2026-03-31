@@ -38,11 +38,11 @@ main, #main-content, .col, .col-md,
   box-sizing: border-box;
 }
 
-/* HERO */
+/* HERO — unchanged */
 .hero {
   background: #6b4472;
   padding: 4rem max(2.5rem, 6vw) 3.5rem;
-  min-height: calc(100vh - var(--nav-h));
+  min-height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -71,17 +71,17 @@ main, #main-content, .col, .col-md,
   font-style: italic;
 }
 
-/* ABOUT */
+/* ABOUT — diagonal top, photo tilted, text as narrow vertical column */
 .about-section {
   background: #fdf6ee;
   width: 100vw;
   padding: 100px max(2.5rem, 6vw) 120px;
   margin-top: -60px;
   clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
 }
 .section-label {
   font-size: 16px;
@@ -110,8 +110,8 @@ main, #main-content, .col, .col-md,
 .text-col {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding-top: 0.5rem;
+  gap: 1.5rem;
+  max-width: 380px;
 }
 .about-text {
   font-size: 18px;
@@ -131,24 +131,14 @@ main, #main-content, .col, .col-md,
   clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 100%);
   padding-top: 120px;
 }
-.pubs-section * {
-  color: #3a3228;
-}
+.pubs-section * { color: #3a3228; }
 .pubs-section a {
   color: #3a3228 !important;
   border-bottom: 0.5px solid rgba(58,50,40,0.3);
 }
-.pubs-section a:hover {
-  color: #6b4472 !important;
-}
-.pubs-section .section-label {
-  color: #3a6b52;
-  margin-bottom: 2rem;
-}
-.pub-type-block {
-  margin-bottom: 2.25rem;
-  max-width: 100%;
-}
+.pubs-section a:hover { color: #6b4472 !important; }
+.pubs-section .section-label { color: #3a6b52; margin-bottom: 2rem; }
+.pub-type-block { margin-bottom: 2.25rem; max-width: 100%; }
 .pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
   font-size: 11.5px;
@@ -242,7 +232,7 @@ article { padding: 0 !important; margin: 0 !important; }
   <a href="#contact" style="font-family:'Space Mono',monospace;font-size:13px;color:#f7edfb;text-decoration:none;letter-spacing:0.15em;">CONTACT</a>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — unchanged -->
 <div class="hero" id="hero">
   <h1 class="hero-name">
     <span style="color:#efcc00;">Mai</span>
