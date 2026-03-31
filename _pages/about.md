@@ -97,7 +97,7 @@ main, #main-content, .col, .col-md,
 }
 .about-inner {
   display: flex;
-  gap: 3.5rem;
+  gap: 10rem;
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
@@ -238,12 +238,8 @@ article { padding: 0 !important; margin: 0 !important; }
     margin-top: -30px;
   }
   .about-inner {
-  display: flex;
-  gap: 10rem;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+    gap: 2rem;
+  }
   .about-img {
     transform: rotate(-2deg);
     width: 180px;
@@ -266,11 +262,11 @@ article { padding: 0 !important; margin: 0 !important; }
 
 <div class="page">
 
-<nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(1.5rem,4vw);display:flex;gap:1.5rem;align-items:center;height:52px;flex-wrap:wrap;">
-  <a href="#about" ...>ABOUT</a>
-  <a href="#publications" ...>PUBLICATIONS</a>
-  <a href="#cv" ...>CV</a>
-  <a href="#contact" ...>CONTACT</a>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:99999;background:#6b4472;padding:0 max(1.5rem,4vw);display:flex;gap:2rem;align-items:center;justify-content:flex-end;height:52px;">
+  <a href="#about" style="font-family:'Lora',serif;font-size:15px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">ABOUT</a>
+  <a href="#publications" style="font-family:'Lora',serif;font-size:15px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">PUBLICATIONS</a>
+  <a href="#cv" style="font-family:'Lora',serif;font-size:15px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">CV</a>
+  <a href="#contact" style="font-family:'Lora',serif;font-size:15px;color:#f7edfb;text-decoration:none;letter-spacing:0.12em;">CONTACT</a>
 </nav>
 
 <!-- HERO -->
