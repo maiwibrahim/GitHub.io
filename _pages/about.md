@@ -103,13 +103,13 @@ main, #main-content, .col, .col-md,
   flex-wrap: wrap;
 }
 .about-img {
-  width: 220px;
-  height: 285px;
+  width: 280px;
+  height: 360px;
   object-fit: cover;
   object-position: top;
   border-radius: 3px;
   flex-shrink: 0;
-  transform: rotate(-3deg);
+  transform: rotate(-8deg);
   margin-top: 10px;
 }
 .text-col {
@@ -117,9 +117,10 @@ main, #main-content, .col, .col-md,
   flex-direction: column;
   gap: 1.5rem;
   max-width: 380px;
-  transform: rotate(-3deg);
+  transform: rotate(6deg);
   margin-top: 10px;
   min-width: 260px;
+  margin-left: 2rem;
 }
 .about-text {
   font-size: 19px;
@@ -237,10 +238,12 @@ article { padding: 0 !important; margin: 0 !important; }
     margin-top: -30px;
   }
   .about-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5rem;
-  }
+  display: flex;
+  gap: 6rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
   .about-img {
     transform: rotate(-2deg);
     width: 180px;
