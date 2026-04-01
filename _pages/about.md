@@ -41,6 +41,9 @@ main, #main-content, .col, .col-md,
 /* HERO */
 .hero {
   background: #6b4472;
+  background-image: url('/assets/img/vr-world.jpg');
+  background-size: cover;
+  background-position: center;
   padding: 4rem max(2.5rem, 6vw) 3.5rem;
   min-height: 100vh;
   width: 100vw;
@@ -49,6 +52,7 @@ main, #main-content, .col, .col-md,
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
 }
 .hero-name {
   font-family: 'DM Serif Display', Georgia, serif;
@@ -271,12 +275,15 @@ article { padding: 0 !important; margin: 0 !important; }
 
 <!-- HERO -->
 <div class="hero" id="hero">
-  <h1 class="hero-name">
-    <span style="color:#efcc00;">Mai</span>
-    <span style="color:#d9b8e0;"> W.</span>
-    <span style="color:#efcc00;"> Ibrahim</span>
-  </h1>
-  <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
+  <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom, rgba(107,68,114,0.4) 0%, rgba(10,5,20,0.75) 100%);filter:saturate(0.35);"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+    <h1 class="hero-name">
+      <span style="color:#efcc00;">Mai</span>
+      <span style="color:#d9b8e0;"> W.</span>
+      <span style="color:#efcc00;"> Ibrahim</span>
+    </h1>
+    <p class="hero-desc">is a media theorist &amp; researcher of digital cultures</p>
+  </div>
 </div>
 
 <!-- ABOUT -->
