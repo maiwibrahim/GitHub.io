@@ -285,8 +285,8 @@ article { padding: 0 !important; margin: 0 !important; }
   <div class="about-inner">
     <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
     <div class="text-col">
-      <p class="about-text">My work sits at the intersection of digital media, media theory, and the philosophy and politics of technology.</p>
-      <p class="about-text">I investigate how digital media do not simply represent reality but actively constitute it — shaping what exists, what can be known, and whose existence becomes legible.</p>
+      <p class="about-text">My research examines the relationship between digital media, pre-conscious intensities, and political economy. I investigate how digital media act upon the human body prior to conscious awareness, and in how platform capitalism transforms that bodily register into a site of extraction.</p>
+      <p class="about-text">My work engages a wide range of media, including virtual reality, brain-computer interfaces, social media, video games, among others.</p>
       <p class="about-text">I am currently a sessional instructor at McMaster University in Hamilton, Canada.</p>
     </div>
   </div>
