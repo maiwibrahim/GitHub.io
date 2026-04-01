@@ -445,29 +445,101 @@ article { padding: 0 !important; margin: 0 !important; }
 <div class="pubs-section" id="publications">
   <p class="section-label">Research &amp; Publications</p>
 
-  <div class="pub-type-block type-chapters">
-    <span class="pub-type-label">Book Chapters</span>
-    <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
-    <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring Tahrir Square as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
-    <p class="pub-entry">Ibrahim, M. (2023). <a href="/assets/pdf/posthuman-bci-vr.pdf" target="_blank">Posthuman Subjectivity in BCI-VR Entanglement</a>. In Veljko Dubljević &amp; Allen Coin (Eds.), <em>Policy, Identity, and Neurotechnology</em> (pp. 11–25). Springer.</p>
-    <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
-    <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
-  </div>
+  <div class="pubs-wrapper">
+    <!-- Publications List -->
+    <div class="pubs-content">
+      <div class="pub-type-block type-chapters">
+        <span class="pub-type-label">Book Chapters</span>
+        <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
+        <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring Tahrir Square as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
+        <p class="pub-entry">Ibrahim, M. (2023). <a href="/assets/pdf/posthuman-bci-vr.pdf" target="_blank">Posthuman Subjectivity in BCI-VR Entanglement</a>. In Veljko Dubljević &amp; Allen Coin (Eds.), <em>Policy, Identity, and Neurotechnology</em> (pp. 11–25). Springer.</p>
+        <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
+        <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
+      </div>
 
-  <div class="pub-type-block type-articles">
-    <span class="pub-type-label">Journal Articles</span>
-    <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. <em>Convergence</em>.</p>
-  </div>
+      <div class="pub-type-block type-articles">
+        <span class="pub-type-label">Journal Articles</span>
+        <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. <em>Convergence</em>.</p>
+      </div>
 
-  <div class="pub-type-block type-reviews">
-    <span class="pub-type-label">Reviews</span>
-    <p class="pub-entry">Ibrahim, M. (2021). Review of the book <a href="/assets/pdf/nihilism-review.pdf" target="_blank"><em>Nihilism and Technology</em></a>, by N. Gertz. <em>Communication Design Quarterly</em>, 9(1), 32–34.</p>
-    <p class="pub-entry">Ibrahim, M. (2020). Review of the chapter <em>A Fast Food Civil Rights</em> in <em>Franchise</em>, by M. Chatelain. HASTAC.</p>
-  </div>
+      <div class="pub-type-block type-reviews">
+        <span class="pub-type-label">Reviews</span>
+        <p class="pub-entry">Ibrahim, M. (2021). Review of the book <a href="/assets/pdf/nihilism-review.pdf" target="_blank"><em>Nihilism and Technology</em></a>, by N. Gertz. <em>Communication Design Quarterly</em>, 9(1), 32–34.</p>
+        <p class="pub-entry">Ibrahim, M. (2020). Review of the chapter <em>A Fast Food Civil Rights</em> in <em>Franchise</em>, by M. Chatelain. HASTAC.</p>
+      </div>
 
-  <div class="pub-type-block type-interview">
-    <span class="pub-type-label">Interview</span>
-    <p class="pub-entry">Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.</p>
+      <div class="pub-type-block type-interview">
+        <span class="pub-type-label">Interview</span>
+        <p class="pub-entry">Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.</p>
+      </div>
+    </div>
+
+    <!-- Images Column -->
+    <div class="pubs-images">
+      <img src="/assets/img/vr-headset.jpg" alt="Mai wearing VR headset" />
+      <img src="/assets/img/vr-space.jpg" alt="Virtual reality space environment" />
+      <img src="/assets/img/bcd-pic.jpg" alt="Brain-computer interface setup" />
+      <img src="/assets/img/vr-museum.JPG" alt="VR museum environment" />
+    </div>
+  </div>
+</div>
+
+<style>
+/* Publications Wrapper */
+.pubs-wrapper {
+  display: flex;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+.pubs-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.pubs-images {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 120px;
+}
+
+.pubs-images img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  filter: grayscale(20%) contrast(105%);
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.pubs-images img:hover {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 900px) {
+  .pubs-wrapper {
+    flex-direction: column;
+  }
+
+  .pubs-images {
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+    gap: 1rem;
+  }
+
+  .pubs-images img {
+    width: 200px;
+    height: 120px;
+  }
+}
+</style>
   </div>
 
 </div>
