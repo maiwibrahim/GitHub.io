@@ -121,7 +121,7 @@ article{ padding:0!important;margin:0!important; }
 }
 .hero-name {
   font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(44px,8vw,90px);font-weight:400;
+  font-size:clamp(43px,7.9vw,89px);font-weight:400;
   line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
 }
 .hero-name .first { color:var(--yellow-soft); }
@@ -185,7 +185,7 @@ article{ padding:0!important;margin:0!important; }
   max-width:520px;transform:rotate(2.5deg);
   min-width:280px;padding-top:24px;
 }
-.about-text { font-size:17px;line-height:1.95;color:#1a2e3a;margin:0; }
+.about-text { font-size:16px;line-height:1.95;color:#1a2e3a;margin:0; }
 
 /* ===================== PUBLICATIONS ===================== */
 @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-3deg);}  50%{transform:translateY(-18px) rotate(-3deg);} }
@@ -238,7 +238,7 @@ article{ padding:0!important;margin:0!important; }
 .type-interview .pub-type-label { background:#e8faf9;color:#0a7a74; }
 
 .pub-entry {
-  font-size:17px;line-height:1.9;color:#1a2e3a;
+  font-size:16px;line-height:1.9;color:#1a2e3a;
   margin-bottom:.9rem;font-family:'Lora',serif;
 }
 .pub-entry:last-child { margin-bottom:0; }
@@ -637,7 +637,7 @@ article{ padding:0!important;margin:0!important; }
     <div class="pub-type-block type-chapters">
       <span class="pub-type-label">Book Chapters</span>
       <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
-      <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring Tahrir Square as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
+      <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring <em>Tahrir Square</em> as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
       <p class="pub-entry">Ibrahim, M. (2023). <a href="/assets/pdf/posthuman-bci-vr.pdf" target="_blank">Posthuman Subjectivity in BCI-VR Entanglement</a>. In Veljko Dubljević &amp; Allen Coin (Eds.), <em>Policy, Identity, and Neurotechnology</em> (pp. 11–25). Springer.</p>
       <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
       <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
@@ -645,7 +645,7 @@ article{ padding:0!important;margin:0!important; }
 
     <div class="pub-type-block type-articles">
       <span class="pub-type-label">Journal Articles</span>
-      <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the Better World Museum. <em>Convergence</em>.</p>
+      <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the <em>Better World Museum</em>. <em>Convergence</em>.</p>
     </div>
 
     <div class="pub-type-block type-reviews">
