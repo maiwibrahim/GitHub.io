@@ -23,68 +23,60 @@ body {
   width: 100vw; height: 100vh;
 }
 
-/* ── Avatar wrapper: circle frame + label stacked ── */
-.av-wrap {
+/* Three individual shader canvases — one per avatar */
+.shader-canvas {
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  z-index: 5;
+  border-radius: 50%;
+  z-index: 1;
   pointer-events: none;
-  opacity: 0;
-  animation: avIn 1s ease forwards;
-}
-@keyframes avIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 0.42; transform: translateY(0); }
-}
-
-/* The circle border that frames the shader canvas */
-.av-circle {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-  /* coloured ring — overridden per avatar via inline style */
-  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.12), 0 4px 24px rgba(0,0,0,0.4);
-}
-
-/* Shader canvas sits inside the circle, clipped to it */
-.av-circle canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 50%;
-  display: block;
   opacity: 0;
   transition: opacity 1.6s ease;
 }
 
-/* Thin inner shadow to reinforce the circle edge */
-.av-circle::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.55);
-  pointer-events: none;
-  z-index: 2;
+/* NAV */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+  background: rgba(11,27,46,.88); backdrop-filter: blur(14px);
+  display: flex; gap: 2rem; align-items: center; justify-content: flex-end;
+  height: 60px; padding: 0 3rem;
+  border-bottom: .5px solid rgba(13,191,180,.18);
+}
+.site-nav a {
+  font-family: 'Space Mono', monospace; font-size: 12px;
+  color: #fff; text-decoration: none;
+  letter-spacing: .18em; text-transform: uppercase;
 }
 
+.hero {
+  position: relative; z-index: 2;
+  width: 100vw; height: 100vh;
+  display: flex; align-items: center;
+  padding: 60px 6vw 0;
+  pointer-events: none;
+}
+
+/* Avatar label groups */
+.av-label-group {
+  position: absolute;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  z-index: 10;
+  opacity: 0;
+  animation: labelIn .9s ease forwards;
+}
+@keyframes labelIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 0.42; transform: translateY(0); }
+}
 .av-label {
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .08em;
-  background: rgba(0,0,0,.42);
-  padding: 3px 9px;
-  border-radius: 2px;
+  font-size: 9.5px; letter-spacing: .06em;
+  background: rgba(0,0,0,.4);
+  padding: 2px 8px; border-radius: 2px;
   white-space: nowrap;
 }
 
-/* ── Tags ── */
+/* Tags */
 .hero-tag {
   position: absolute; z-index: 10;
   opacity: 0; animation: tagIn .7s ease forwards;
@@ -103,29 +95,7 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
 }
 
-/* ── NAV ── */
-.site-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
-  background: rgba(11,27,46,.88); backdrop-filter: blur(14px);
-  display: flex; gap: 2rem; align-items: center; justify-content: flex-end;
-  height: 60px; padding: 0 3rem;
-  border-bottom: .5px solid rgba(13,191,180,.18);
-}
-.site-nav a {
-  font-family: 'Space Mono', monospace; font-size: 12px;
-  color: #fff; text-decoration: none;
-  letter-spacing: .18em; text-transform: uppercase;
-}
-
-/* ── Hero layout ── */
-.hero {
-  position: relative; z-index: 2;
-  width: 100vw; height: 100vh;
-  display: flex; align-items: center;
-  padding: 60px 6vw 0;
-  pointer-events: none;
-}
-
+/* Hero content */
 .hero-content {
   position: relative; z-index: 10;
   display: flex; flex-direction: column; gap: 14px;
@@ -156,9 +126,23 @@ body {
   display: flex; gap: 5px; z-index: 20;
 }
 .ui-dots span { width: 6px; height: 6px; border-radius: 50%; }
+
+.version-badge {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  font-family: 'Space Mono', monospace; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(13,191,180,.5); z-index: 100;
+  background: rgba(11,27,46,.7); padding: 6px 16px; border-radius: 20px;
+  border: .5px solid rgba(13,191,180,.2);
+}
 </style>
 </head>
 <body>
+
+<!-- One WebGL canvas per avatar concept -->
+<canvas class="shader-canvas" id="c-intensity"  width="280" height="280"></canvas>
+<canvas class="shader-canvas" id="c-extraction" width="280" height="280"></canvas>
+<canvas class="shader-canvas" id="c-glitch"     width="280" height="280"></canvas>
 
 <nav class="site-nav">
   <a href="#">About</a>
@@ -174,43 +158,20 @@ body {
     <span style="background:#f5e27a;"></span>
   </div>
 
-  <!--
-    Positioning logic:
-    The hero name sits at ~50% vertically (flex align-items:center + 60px nav offset).
-    We want the HIGHEST avatar top edge to be just above that — so we use top:38% for
-    intensity02 (the topmost). The others cascade below it.
-    right% values mirror the original layout but condensed inward a touch.
-  -->
-
-  <!-- intensity02 — top-right, just above name level -->
-  <div class="av-wrap" id="wrap-intensity" style="top:38%; right:10%; animation-delay:.6s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(245,226,122,0.45); box-shadow: 0 0 0 1px rgba(245,226,122,0.12), 0 0 18px rgba(245,226,122,0.12), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-intensity" width="320" height="320"></canvas>
-    </div>
+  <div class="av-label-group" style="top:16%;right:11%;animation-delay:.8s;">
     <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
   </div>
-
-  <!-- extraction05 — centre-right, slightly lower -->
-  <div class="av-wrap" id="wrap-extraction" style="top:46%; right:36%; animation-delay:.8s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(255,61,130,0.45); box-shadow: 0 0 0 1px rgba(255,61,130,0.12), 0 0 18px rgba(255,61,130,0.10), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-extraction" width="320" height="320"></canvas>
-    </div>
+  <div class="av-label-group" style="top:22%;right:40%;animation-delay:1s;">
     <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
   </div>
-
-  <!-- glitch_24 — lower, between the other two -->
-  <div class="av-wrap" id="wrap-glitch" style="top:58%; right:22%; animation-delay:1s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(13,191,180,0.45); box-shadow: 0 0 0 1px rgba(13,191,180,0.12), 0 0 18px rgba(13,191,180,0.10), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-glitch" width="320" height="320"></canvas>
-    </div>
+  <div class="av-label-group" style="top:42%;right:28%;animation-delay:1.2s;">
     <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
   </div>
 
-  <!-- Floating tags — repositioned to sit near the avatar cluster -->
-  <div class="hero-tag" style="top:44%; right:24%; animation-delay:1.1s;">
+  <div class="hero-tag" style="top:30%;right:24%;animation-delay:1.3s;">
     <div class="hero-tag-inner">digital media</div>
   </div>
-  <div class="hero-tag" style="top:68%; right:8%; animation-delay:1.25s;">
+  <div class="hero-tag" style="top:54%;right:9%;animation-delay:1.45s;">
     <div class="hero-tag-inner">
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
         <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
@@ -229,8 +190,10 @@ body {
   </div>
 </div>
 
+<div class="version-badge">Version B — GLSL Shaders</div>
+
 <script>
-// ── Shared WebGL boilerplate ──────────────────────────────────────────────────
+// ── Shared WebGL boilerplate ─────────────────────────────────────────────────
 function createShaderProgram(gl, vert, frag) {
   function compile(type, src) {
     const s = gl.createShader(type);
@@ -248,10 +211,12 @@ function createShaderProgram(gl, vert, frag) {
 function initCanvas(canvas) {
   const gl = canvas.getContext('webgl', { premultipliedAlpha: false, alpha: true });
   gl.clearColor(0, 0, 0, 0);
+
   const verts = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
   const buf = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+
   const vert = `
     attribute vec2 a_pos;
     varying vec2 v_uv;
@@ -273,8 +238,23 @@ function drawQuad(gl, prog) {
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }
 
+// ── Position canvases to match CSS avatar positions ──────────────────────────
+function positionCanvas(canvas, rightPct, topPct, size) {
+  canvas.style.width  = size + 'px';
+  canvas.style.height = size + 'px';
+  canvas.style.right  = (rightPct / 100 * window.innerWidth  - size / 2) + 'px';
+  canvas.style.top    = (topPct  / 100 * window.innerHeight - size / 2 + 60) + 'px';
+}
+
+const SZ = 240;
+positionCanvas(document.getElementById('c-intensity'),  11, 16, SZ);
+positionCanvas(document.getElementById('c-extraction'), 40, 22, SZ);
+positionCanvas(document.getElementById('c-glitch'),     28, 42, SZ);
+
 // ════════════════════════════════════════════════════════════════════════════
-// INTENSITY02 — domain-warped FBM, golden warmth that never resolves
+// INTENSITY02 — Massumi's affect: pre-conscious, unresolved, never forming
+// A field that almost coheres — golden warmth pooling, never crystallising.
+// Uses layered fbm (fractal Brownian motion) with time-morphing domain warp.
 // ════════════════════════════════════════════════════════════════════════════
 (function () {
   const canvas = document.getElementById('c-intensity');
@@ -285,20 +265,26 @@ function drawQuad(gl, prog) {
     varying vec2 v_uv;
     uniform float u_time;
 
+    // Permutation hash
     vec3 hash3(vec2 p) {
       vec3 q = vec3(dot(p,vec2(127.1,311.7)),
                     dot(p,vec2(269.5,183.3)),
                     dot(p,vec2(419.2,371.9)));
       return fract(sin(q) * 43758.5453);
     }
+
+    // Smooth value noise
     float noise(vec2 p) {
-      vec2 i = floor(p); vec2 f = fract(p);
+      vec2 i = floor(p);
+      vec2 f = fract(p);
       vec2 u = f*f*(3.0-2.0*f);
       return mix(mix(dot(hash3(i+vec2(0,0)).xy, f-vec2(0,0)),
                      dot(hash3(i+vec2(1,0)).xy, f-vec2(1,0)), u.x),
                  mix(dot(hash3(i+vec2(0,1)).xy, f-vec2(0,1)),
                      dot(hash3(i+vec2(1,1)).xy, f-vec2(1,1)), u.x), u.y);
     }
+
+    // FBM — fractal Brownian motion
     float fbm(vec2 p) {
       float v = 0.0; float a = 0.5;
       mat2 rot = mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.5));
@@ -313,24 +299,38 @@ function drawQuad(gl, prog) {
     void main() {
       vec2 uv = v_uv * 2.0 - 1.0;
       float r = length(uv);
+
+      // Soft circular mask — feathered edge
       float mask = 1.0 - smoothstep(0.70, 1.0, r);
       if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
 
       float t = u_time * 0.18;
+
+      // Domain warp — two fbm layers twist the coordinate
       vec2 q = vec2(fbm(uv + vec2(0.0, 0.0) + t),
                     fbm(uv + vec2(5.2, 1.3) + t * 0.7));
       vec2 r2 = vec2(fbm(uv + 4.0*q + vec2(1.7, 9.2) + t * 0.4),
                      fbm(uv + 4.0*q + vec2(8.3, 2.8) + t * 0.3));
+
       float f = fbm(uv + 4.0*r2 + t * 0.2);
       f = f*f*f + 0.6*f*f + 0.5*f;
 
-      vec3 col = mix(vec3(0.04, 0.11, 0.22), vec3(0.96, 0.89, 0.48),
-                     clamp(f * 2.0, 0.0, 1.0));
-      col = mix(col, vec3(0.99, 0.96, 0.82),
-                clamp((f - 0.5) * 2.0, 0.0, 1.0));
+      // Colour: deep navy → warm gold → pale cream
+      vec3 col = mix(
+        vec3(0.04, 0.11, 0.22),   // deep navy
+        vec3(0.96, 0.89, 0.48),   // warm gold
+        clamp(f * 2.0, 0.0, 1.0)
+      );
+      col = mix(col,
+        vec3(0.99, 0.96, 0.82),   // pale cream at peaks
+        clamp((f - 0.5) * 2.0, 0.0, 1.0)
+      );
+
+      // Radial vignette — brighter at centre
       col *= (0.5 + 0.5 * (1.0 - r * 0.9));
 
-      float alpha = mask * 0.82 * smoothstep(0.0, 0.4, f + 0.2);
+      // Master opacity: 0.36 so name leads
+      float alpha = mask * 0.36 * smoothstep(0.0, 0.4, f + 0.2);
       col *= alpha;
       gl_FragColor = vec4(col, alpha);
     }
@@ -338,6 +338,7 @@ function drawQuad(gl, prog) {
 
   const prog = createShaderProgram(gl, vert, frag);
   const uTime = gl.getUniformLocation(prog, 'u_time');
+
   let t = Math.random() * 100;
   function loop() {
     requestAnimationFrame(loop);
@@ -348,11 +349,13 @@ function drawQuad(gl, prog) {
     drawQuad(gl, prog);
   }
   loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 300);
+  setTimeout(() => { canvas.style.opacity = '1'; }, 400);
 })();
 
+
 // ════════════════════════════════════════════════════════════════════════════
-// EXTRACTION05 — vortex + silver particle rain into void
+// EXTRACTION05 — platform capitalism's body-as-site: a vortex pulling inward.
+// Spiralling pink field with silver particles raining into a black void.
 // ════════════════════════════════════════════════════════════════════════════
 (function () {
   const canvas = document.getElementById('c-extraction');
@@ -363,26 +366,35 @@ function drawQuad(gl, prog) {
     varying vec2 v_uv;
     uniform float u_time;
 
-    float hash(float x) { return fract(sin(x) * 43758.5453); }
-    float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float hash(vec2 p) {
+      return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+    }
+
+    // Smooth noise
     float noise(vec2 p) {
       vec2 i = floor(p); vec2 f = fract(p);
       vec2 u = f*f*(3.0-2.0*f);
-      float a = hash2(i), b = hash2(i+vec2(1,0)),
-            c = hash2(i+vec2(0,1)), d = hash2(i+vec2(1,1));
+      float a = hash(i);
+      float b = hash(i+vec2(1,0));
+      float c = hash(i+vec2(0,1));
+      float d = hash(i+vec2(1,1));
       return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
     }
 
+    // Silver particle dots — discrete squares of luminance
     float particles(vec2 uv, float t) {
       float result = 0.0;
+      // 18 particles in 3 rows
       for(int i = 0; i < 18; i++) {
         float fi = float(i);
         float col_f = mod(fi, 6.0);
         float row_f = floor(fi / 6.0);
+        // x spread, y rains downward toward centre
         float px = -0.55 + col_f * 0.22 + sin(fi * 2.3 + t * 0.4) * 0.04;
         float baseY = 0.75 - row_f * 0.28;
         float py = baseY - mod(t * (0.12 + hash(vec2(fi,0.0)) * 0.08) + hash(vec2(fi,1.0)), 1.2);
         float d = length(uv - vec2(px, py));
+        // taper opacity as they converge downward
         float fade = 1.0 - smoothstep(-0.2, 0.5, py);
         result += (1.0 - smoothstep(0.012, 0.030, d)) * fade * 0.85;
       }
@@ -391,30 +403,43 @@ function drawQuad(gl, prog) {
 
     void main() {
       vec2 uv = v_uv * 2.0 - 1.0;
-      float r   = length(uv);
+      float r  = length(uv);
       float ang = atan(uv.y, uv.x);
-      float t   = u_time * 0.22;
+      float t  = u_time * 0.22;
 
       float mask = 1.0 - smoothstep(0.72, 1.0, r);
       if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
 
-      float spin   = ang - t * 1.4 + r * 3.5;
+      // Funnel field — tighter spin toward centre
+      float spin = ang - t * 1.4 + r * 3.5;
       float funnel = sin(spin * 3.0) * 0.5 + 0.5;
-      funnel *= smoothstep(0.0, 0.55, r);
-      funnel *= (1.0 - smoothstep(0.40, 0.72, r));
+      funnel *= smoothstep(0.0, 0.55, r); // hollow centre
+      funnel *= (1.0 - smoothstep(0.40, 0.72, r)); // fade edge
 
-      float turb     = noise(uv * 3.5 + vec2(t * 0.5, -t * 0.3));
+      // Noise turbulence
+      float turb = noise(uv * 3.5 + vec2(t * 0.5, -t * 0.3));
+
+      // Void at centre: deep black hole
       float voidMask = 1.0 - smoothstep(0.0, 0.22, r);
 
-      vec3 funnelCol = mix(vec3(0.55, 0.04, 0.22), vec3(1.0, 0.24, 0.51),
-                           clamp(funnel * 1.5 + turb * 0.4, 0.0, 1.0));
+      // Funnel colour: deep rose → hot pink → void black
+      vec3 funnelCol = mix(
+        vec3(0.55, 0.04, 0.22),   // deep rose
+        vec3(1.0,  0.24, 0.51),   // hot pink
+        clamp(funnel * 1.5 + turb * 0.4, 0.0, 1.0)
+      );
       funnelCol = mix(funnelCol, vec3(0.0), voidMask);
 
+      // Silver particles
       float pts = particles(uv, t);
-      vec3 silverCol = mix(funnelCol, vec3(0.75, 0.82, 0.88), pts);
+      vec3 silverCol = mix(funnelCol,
+        vec3(0.75, 0.82, 0.88),   // silver
+        pts
+      );
 
-      float alpha = mask * 0.82 * (funnel * 0.8 + turb * 0.2 + pts * 0.7 + 0.05);
-      alpha = clamp(alpha, 0.0, 0.82);
+      // Build alpha
+      float alpha = mask * 0.36 * (funnel * 0.8 + turb * 0.2 + pts * 0.7 + 0.05);
+      alpha = clamp(alpha, 0.0, 0.36);
       silverCol *= alpha / max(alpha, 0.001);
       gl_FragColor = vec4(silverCol * alpha, alpha);
     }
@@ -422,6 +447,7 @@ function drawQuad(gl, prog) {
 
   const prog = createShaderProgram(gl, vert, frag);
   const uTime = gl.getUniformLocation(prog, 'u_time');
+
   let t = Math.random() * 100;
   function loop() {
     requestAnimationFrame(loop);
@@ -432,11 +458,14 @@ function drawQuad(gl, prog) {
     drawQuad(gl, prog);
   }
   loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 600);
+  setTimeout(() => { canvas.style.opacity = '1'; }, 700);
 })();
 
+
 // ════════════════════════════════════════════════════════════════════════════
-// GLITCH_24 — CRT corruption: scanlines, slice tears, RGB channel split
+// GLITCH_24 — corrupted signal; time as broken data.
+// A screen that tears, displaces, bleeds RGB channels continuously.
+// CRT scanlines, digital noise blocks, chromatic aberration as lived time.
 // ════════════════════════════════════════════════════════════════════════════
 (function () {
   const canvas = document.getElementById('c-glitch');
@@ -447,77 +476,107 @@ function drawQuad(gl, prog) {
     varying vec2 v_uv;
     uniform float u_time;
 
-    float hash(float x)  { return fract(sin(x) * 43758.5453); }
-    float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float hash(float x) { return fract(sin(x) * 43758.5453); }
+    float hash2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
     float noise(vec2 p) {
       vec2 i = floor(p); vec2 f = fract(p);
       vec2 u = f*f*(3.0-2.0*f);
-      return mix(mix(hash2(i),          hash2(i+vec2(1,0)), u.x),
-                 mix(hash2(i+vec2(0,1)), hash2(i+vec2(1,1)), u.x), u.y);
+      return mix(mix(hash2(i),         hash2(i+vec2(1,0)), u.x),
+                 mix(hash2(i+vec2(0,1)),hash2(i+vec2(1,1)),u.x), u.y);
     }
 
     void main() {
       vec2 uv = v_uv;
       float t = u_time;
+
+      // Circular mask
       vec2 c = uv * 2.0 - 1.0;
       float r = length(c);
       float mask = 1.0 - smoothstep(0.70, 1.0, r);
       if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
 
-      float sliceY    = floor(uv.y * 18.0) / 18.0;
+      // ── GLITCH DISPLACEMENT ──────────────────────────────
+      // Large horizontal slice tears
+      float sliceY = floor(uv.y * 18.0) / 18.0;
       float sliceSeed = hash(sliceY + floor(t * 7.0) * 0.3);
-      float tearStr   = step(0.82, sliceSeed) * hash(sliceY * 31.7 + t) * 0.18;
-      float uvX       = uv.x + tearStr * (hash(sliceY + t * 2.0) - 0.5);
-      float scanSeed  = hash(floor(uv.y * 80.0) + floor(t * 14.0));
-      uvX += (step(0.94, scanSeed) - 0.5) * 0.025;
+      float tearStrength = step(0.82, sliceSeed) * hash(sliceY * 31.7 + t) * 0.18;
+      float uvX = uv.x + tearStrength * (hash(sliceY + t * 2.0) - 0.5);
+
+      // Fine scanline micro-jitter
+      float scanSeed = hash(floor(uv.y * 80.0) + floor(t * 14.0));
+      float microJitter = (step(0.94, scanSeed) - 0.5) * 0.025;
+      uvX += microJitter;
+
       vec2 uvD = vec2(clamp(uvX, 0.0, 1.0), uv.y);
 
+      // ── RGB CHANNEL SPLIT (chromatic aberration) ─────────
       float caAmt = 0.014 + sin(t * 0.9) * 0.006;
       vec2 uvR = vec2(uvD.x + caAmt, uvD.y);
       vec2 uvG = uvD;
       vec2 uvB = vec2(uvD.x - caAmt, uvD.y);
 
+      // ── SCREEN CONTENT (generated stripes + noise) ───────
       float stripeR = 0.0, stripeG = 0.0, stripeB = 0.0;
-      float band    = floor(uvD.y * 7.0);
+
+      // Horizontal coloured bands (the "content" being corrupted)
+      float band = floor(uvD.y * 7.0);
       float bandCol = hash(band + 0.5);
 
-      stripeR += step(0.55,bandCol)*step(bandCol,0.70)*0.20*noise(uvR*vec2(6.,1.)+t*.3);
-      stripeG += step(0.55,bandCol)*step(bandCol,0.70)*0.88*noise(uvG*vec2(6.,1.)+t*.3);
-      stripeB += step(0.55,bandCol)*step(bandCol,0.70)*0.84*noise(uvB*vec2(6.,1.)+t*.3);
-      stripeR += step(0.30,bandCol)*step(bandCol,0.45)*0.90*noise(uvR*vec2(4.,1.)-t*.2);
-      stripeG += step(0.30,bandCol)*step(bandCol,0.45)*0.15*noise(uvG*vec2(4.,1.));
-      stripeB += step(0.30,bandCol)*step(bandCol,0.45)*0.42*noise(uvB*vec2(4.,1.));
-      stripeR += step(0.72,bandCol)*0.95*noise(uvR*vec2(5.,1.)+t*.4);
-      stripeG += step(0.72,bandCol)*0.88*noise(uvG*vec2(5.,1.)+t*.4);
-      stripeB += step(0.72,bandCol)*0.25;
-      stripeR += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
-      stripeG += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
-      stripeB += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
+      // Teal bands
+      stripeR += step(0.55, bandCol) * step(bandCol, 0.70) * 0.20 * noise(uvR * vec2(6.0, 1.0) + t*0.3);
+      stripeG += step(0.55, bandCol) * step(bandCol, 0.70) * 0.88 * noise(uvG * vec2(6.0, 1.0) + t*0.3);
+      stripeB += step(0.55, bandCol) * step(bandCol, 0.70) * 0.84 * noise(uvB * vec2(6.0, 1.0) + t*0.3);
+
+      // Pink bands
+      stripeR += step(0.30, bandCol) * step(bandCol, 0.45) * 0.90 * noise(uvR * vec2(4.0, 1.0) - t*0.2);
+      stripeG += step(0.30, bandCol) * step(bandCol, 0.45) * 0.15 * noise(uvG * vec2(4.0, 1.0));
+      stripeB += step(0.30, bandCol) * step(bandCol, 0.45) * 0.42 * noise(uvB * vec2(4.0, 1.0));
+
+      // Yellow band
+      stripeR += step(0.72, bandCol) * 0.95 * noise(uvR * vec2(5.0,1.0) + t*0.4);
+      stripeG += step(0.72, bandCol) * 0.88 * noise(uvG * vec2(5.0,1.0) + t*0.4);
+      stripeB += step(0.72, bandCol) * 0.25;
+
+      // White fragment
+      stripeR += step(0.15, bandCol) * step(bandCol, 0.22) * 0.70;
+      stripeG += step(0.15, bandCol) * step(bandCol, 0.22) * 0.70;
+      stripeB += step(0.15, bandCol) * step(bandCol, 0.22) * 0.70;
 
       vec3 screenCol = vec3(stripeR, stripeG, stripeB);
 
+      // ── NOISE BLOCKS — random coloured rectangles ────────
       for(int i = 0; i < 6; i++) {
         float fi = float(i);
-        float bx = hash(fi*7.3+floor(t*5.0));
-        float by = hash(fi*13.1+floor(t*4.0));
-        float bw = 0.06+hash(fi*3.7)*0.12;
-        float bh = 0.04+hash(fi*5.2)*0.08;
-        if(uvD.x>bx && uvD.x<bx+bw && uvD.y>by && uvD.y<by+bh) {
-          vec3 nc = vec3(hash(fi+t*.5),hash(fi*2.+t*.3),hash(fi*3.+t*.4));
-          nc = mix(nc, mix(vec3(.05,.75,.71),vec3(1.,.24,.51),hash(fi)), .7);
-          screenCol = mix(screenCol, nc, 0.9);
+        float bx = hash(fi * 7.3 + floor(t * 5.0));
+        float by = hash(fi * 13.1 + floor(t * 4.0));
+        float bw = 0.06 + hash(fi * 3.7) * 0.12;
+        float bh = 0.04 + hash(fi * 5.2) * 0.08;
+        if(uvD.x > bx && uvD.x < bx+bw && uvD.y > by && uvD.y < by+bh) {
+          vec3 noiseCol = vec3(hash(fi + t*0.5), hash(fi*2.0+t*0.3), hash(fi*3.0+t*0.4));
+          // Bias toward palette colours
+          noiseCol = mix(noiseCol,
+            mix(vec3(0.05, 0.75, 0.71), vec3(1.0, 0.24, 0.51), hash(fi)),
+            0.7);
+          screenCol = mix(screenCol, noiseCol, 0.9);
         }
       }
 
+      // ── SCANLINES ────────────────────────────────────────
       float scan = sin(uv.y * 180.0 + t * 0.5) * 0.5 + 0.5;
       screenCol *= 0.82 + scan * 0.18;
-      screenCol *= (1.0 - r * 0.6);
 
+      // ── CRT VIGNETTE ─────────────────────────────────────
+      float vig = (1.0 - r * 0.6);
+      screenCol *= vig;
+
+      // ── DARK BASE (screen off-state underneath) ──────────
       vec3 dark = vec3(0.008, 0.03, 0.07);
-      float cStr = clamp(stripeR+stripeG+stripeB,0.,1.)*0.7+0.15;
-      screenCol = mix(dark, screenCol, cStr);
+      float contentStr = clamp(stripeR + stripeG + stripeB, 0.0, 1.0) * 0.7 + 0.15;
+      screenCol = mix(dark, screenCol, contentStr);
 
-      float alpha = mask * 0.82;
+      // ── ALPHA ─────────────────────────────────────────────
+      float alpha = mask * 0.37;
       screenCol *= alpha;
       gl_FragColor = vec4(screenCol, alpha);
     }
@@ -525,6 +584,12 @@ function drawQuad(gl, prog) {
 
   const prog = createShaderProgram(gl, vert, frag);
   const uTime = gl.getUniformLocation(prog, 'u_time');
+
+  // Ambient drift: oscillate canvas position slightly
+  const canvasEl = canvas;
+  const baseRight = parseFloat(canvasEl.style.right);
+  const baseTop   = parseFloat(canvasEl.style.top);
+
   let t = Math.random() * 100;
   function loop() {
     requestAnimationFrame(loop);
@@ -533,29 +598,29 @@ function drawQuad(gl, prog) {
     gl.useProgram(prog);
     gl.uniform1f(uTime, t);
     drawQuad(gl, prog);
+
+    // Very gentle float
+    canvasEl.style.right = (baseRight + Math.sin(t * 0.28) * 5) + 'px';
+    canvasEl.style.top   = (baseTop   + Math.sin(t * 0.21) * 6) + 'px';
   }
   loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 900);
+  setTimeout(() => { canvas.style.opacity = '1'; }, 1000);
 })();
 
-// ── Ambient drift — gently float each wrapper div ───────────────────────────
-(function () {
-  const avatars = [
-    { el: document.getElementById('wrap-intensity'),  px: 0.0,  py: 0.0,  fx: 0.34, fy: 0.26, ax: 5, ay: 7 },
-    { el: document.getElementById('wrap-extraction'), px: 0.0,  py: 0.0,  fx: 0.29, fy: 0.22, ax: 4, ay: 5 },
-    { el: document.getElementById('wrap-glitch'),     px: 0.0,  py: 0.0,  fx: 0.28, fy: 0.21, ax: 6, ay: 5 },
-  ];
-
-  // Store natural CSS transform offsets (none — we drive via translateX/Y)
+// Ambient float for intensity and extraction canvases
+(function() {
+  const ci = document.getElementById('c-intensity');
+  const ce = document.getElementById('c-extraction');
+  const ri = parseFloat(ci.style.right), ti = parseFloat(ci.style.top);
+  const re = parseFloat(ce.style.right), te = parseFloat(ce.style.top);
   let t = 0;
   function drift() {
     requestAnimationFrame(drift);
     t += 0.016;
-    avatars.forEach((av, i) => {
-      const dx = Math.sin(t * av.fx + i * 1.8) * av.ax;
-      const dy = Math.sin(t * av.fy + i * 2.4) * av.ay;
-      av.el.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
+    ci.style.right = (ri + Math.sin(t * 0.34 + 0.5) * 6) + 'px';
+    ci.style.top   = (ti + Math.sin(t * 0.26 + 1.2) * 7) + 'px';
+    ce.style.right = (re + Math.sin(t * 0.29 + 2.1) * 5) + 'px';
+    ce.style.top   = (te + Math.sin(t * 0.22 + 0.8) * 6) + 'px';
   }
   drift();
 })();
