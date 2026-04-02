@@ -93,12 +93,6 @@ article{ padding:0!important;margin:0!important; }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
 /* ---- SHADER AVATAR WRAPPERS ---- */
-/*
-  Each avatar: a flex column (oval canvas + label).
-  Positioned absolutely inside .hero.
-  Tops set so the uppermost avatar (intensity02) starts
-  just slightly above the hero name (~vertical centre of hero).
-*/
 .shader-wrap {
   position: absolute;
   z-index: 5;
@@ -113,18 +107,17 @@ article{ padding:0!important;margin:0!important; }
 }
 @keyframes avFadeIn {
   from { opacity:0; transform:translateY(14px); }
-  to   { opacity:0.38; transform:translateY(0); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
-/* The oval container — overflow:hidden clips the shader to the oval shape */
+/* More elongated oval shape */
 .shader-oval {
   overflow: hidden;
-  /* Base oval shape; each avatar gets its own slightly-different border-radius via inline style */
-  border-radius: 52% 48% 55% 45% / 48% 52% 48% 52%;
+  border-radius: 40% 60% 55% 45% / 35% 40% 60% 65%;
   box-shadow:
-    0 0 0 1.5px rgba(255,255,255,0.10),
-    0 0 22px rgba(13,191,180,0.07),
-    inset 0 0 12px rgba(0,0,0,0.4);
+    0 0 0 1.5px rgba(255,255,255,0.14),
+    0 0 28px rgba(13,191,180,0.10),
+    inset 0 0 14px rgba(0,0,0,0.35);
   position: relative;
 }
 .shader-oval canvas {
@@ -396,49 +389,35 @@ article{ padding:0!important;margin:0!important; }
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!--
-    Avatar positions:
-    Hero name sits at ~45–50% viewport height (flex-centered + 60px nav).
-    intensity02: top 35% — starts just above the name's top edge.
-    extraction05: top 50% — roughly at name's vertical centre.
-    glitch_24:    top 60% — below the name, anchoring the cluster.
-
-    All three shifted right (right: 8–36%) so they stay in the right
-    half of the screen and don't overlap the text column.
-
-    Oval sizes: 130×112px, 122×106px, 128×110px — small enough to
-    clearly support rather than compete with the hero name.
-  -->
-
-  <!-- intensity02 — upper right, just above name -->
+  <!-- intensity02 — upper right, warm golden tones -->
   <div class="shader-wrap" id="wrap-intensity"
        style="top:35%;right:9%;animation-delay:.45s;">
     <div class="shader-oval"
-         style="width:130px;height:112px;
-                border-radius:54% 46% 52% 48% / 47% 53% 49% 51%;">
-      <canvas id="c-intensity" width="130" height="112"></canvas>
+         style="width:160px;height:120px;
+                border-radius:42% 58% 50% 50% / 32% 38% 62% 68%;">
+      <canvas id="c-intensity" width="160" height="120"></canvas>
     </div>
     <div class="av-label" style="color:rgba(249,237,170,.88);">intensity02</div>
   </div>
 
-  <!-- extraction05 — mid right -->
+  <!-- extraction05 — mid right, hot pink vortex -->
   <div class="shader-wrap" id="wrap-extraction"
        style="top:50%;right:36%;animation-delay:.65s;">
     <div class="shader-oval"
-         style="width:122px;height:106px;
-                border-radius:46% 54% 49% 51% / 53% 47% 54% 46%;">
-      <canvas id="c-extraction" width="122" height="106"></canvas>
+         style="width:150px;height:108px;
+                border-radius:50% 50% 44% 56% / 36% 42% 58% 64%;">
+      <canvas id="c-extraction" width="150" height="108"></canvas>
     </div>
     <div class="av-label" style="color:rgba(255,111,163,.88);">extraction05</div>
   </div>
 
-  <!-- glitch_24 — lower right -->
+  <!-- glitch_24 — lower right, teal CRT glitch -->
   <div class="shader-wrap" id="wrap-glitch"
        style="top:60%;right:20%;animation-delay:.85s;">
     <div class="shader-oval"
-         style="width:128px;height:110px;
-                border-radius:50% 50% 46% 54% / 55% 45% 51% 49%;">
-      <canvas id="c-glitch" width="128" height="110"></canvas>
+         style="width:155px;height:112px;
+                border-radius:46% 54% 48% 52% / 34% 40% 60% 66%;">
+      <canvas id="c-glitch" width="155" height="112"></canvas>
     </div>
     <div class="av-label" style="color:rgba(128,232,227,.88);">glitch_24</div>
   </div>
@@ -619,8 +598,8 @@ function frame(gl, prog, uLoc, t){
 }
 
 // ══════════════════════════════════════════════════════════════════════════
-// INTENSITY02 — domain-warped FBM: golden warmth pooling, never crystallising
-// Canvas: 130×112  aspect ~1.161  → c.y *= 1.161 to circularise
+// INTENSITY02 — warm golden FBM pools, pale yellow tones
+// Very slow drift. Canvas: 160×120  aspect 1.333  → c.y *= 1.333
 // ══════════════════════════════════════════════════════════════════════════
 (function(){
   var canvas = document.getElementById('c-intensity');
@@ -631,11 +610,11 @@ function frame(gl, prog, uLoc, t){
   'varying vec2 v_uv;',
   'uniform float u_time;',
 
-  // Oval mask — corrects for canvas aspect so the shape reads as oval, not squashed
+  // Oval mask — corrects for canvas aspect 160/120 = 1.333
   'float mask(vec2 uv){',
   '  vec2 c=uv*2.-1.;',
-  '  c.y*=1.161;',            // 130/112 ≈ 1.161
-  '  return 1.-smoothstep(.78,1.,length(c));',
+  '  c.y*=1.333;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
   '}',
 
   'vec3 h3(vec2 p){',
@@ -657,16 +636,22 @@ function frame(gl, prog, uLoc, t){
   'void main(){',
   '  float m=mask(v_uv);',
   '  if(m<.001){gl_FragColor=vec4(0.);return;}',
+  // Very slow: t * 0.025 instead of 0.15
   '  vec2 uv=v_uv*2.-1.;',
-  '  float t=u_time*.15;',
+  '  float t=u_time*.025;',
   '  vec2 q=vec2(fbm(uv+t),fbm(uv+vec2(5.2,1.3)+t*.7));',
-  '  vec2 r2=vec2(fbm(uv+4.*q+vec2(1.7,9.2)+t*.4),fbm(uv+4.*q+vec2(8.3,2.8)+t*.3));',
-  '  float f=fbm(uv+4.*r2+t*.2);',
+  '  vec2 r2=vec2(fbm(uv+3.*q+vec2(1.7,9.2)+t*.4),fbm(uv+3.*q+vec2(8.3,2.8)+t*.3));',
+  '  float f=fbm(uv+3.*r2+t*.2);',
+  // Boost contrast so the pattern fills the oval properly
   '  f=f*f*f+.6*f*f+.5*f;',
-  '  vec3 col=mix(vec3(.04,.10,.20),vec3(.96,.88,.44),clamp(f*2.,0.,1.));',
-  '  col=mix(col,vec3(.99,.96,.80),clamp((f-.5)*2.,0.,1.));',
-  '  col*=(.5+.5*(1.-length(uv)*.8));',
-  '  float alpha=m*.40*smoothstep(0.,.3,f+.2);',
+  // Colours: deep navy → warm gold → pale yellow (site palette)
+  '  vec3 col=mix(vec3(.04,.10,.20),vec3(.96,.88,.30),clamp(f*2.2,0.,1.));',
+  '  col=mix(col,vec3(.98,.96,.82),clamp((f-.45)*2.5,0.,1.));',
+  // Soft centre vignette
+  '  col*=(.65+.45*(1.-length(uv)*.7));',
+  // Alpha: use mask directly — no extra strength multiplier killing visibility
+  // Keep the aesthetic subtlety with 0.38 ceiling
+  '  float alpha=m*.38;',
   '  gl_FragColor=vec4(col*alpha,alpha);',
   '}'
   ].join('\n');
@@ -678,8 +663,8 @@ function frame(gl, prog, uLoc, t){
 })();
 
 // ══════════════════════════════════════════════════════════════════════════
-// EXTRACTION05 — vortex + silver particles raining into black void
-// Completely rebuilt. Canvas: 122×106  aspect ~1.151  → c.y *= 1.151
+// EXTRACTION05 — hot pink vortex, very slow spin, silver rim
+// Canvas: 150×108  aspect 1.389  → c.y *= 1.389
 // ══════════════════════════════════════════════════════════════════════════
 (function(){
   var canvas = document.getElementById('c-extraction');
@@ -698,32 +683,10 @@ function frame(gl, prog, uLoc, t){
   '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
   '}',
 
-  // Oval mask — 122/106 ≈ 1.151
+  // Oval mask — 150/108 = 1.389
   'float mask(vec2 uv){',
-  '  vec2 c=uv*2.-1.; c.y*=1.151;',
-  '  return 1.-smoothstep(.77,1.,length(c));',
-  '}',
-
-  // Silver particles: rain from top, converge to centre-bottom void
-  'float particles(vec2 uv, float t){',
-  '  float res=0.;',
-  '  for(int i=0;i<18;i++){',
-  '    float fi=float(i);',
-  '    float col_f=mod(fi,5.);',
-  '    float row_f=floor(fi/5.);',
-  '    // spread across x, converge inward as they fall
-  '    float startX=-0.55+col_f*.28+sin(fi*2.1+t*.25)*.05;',
-  '    float baseY=.90-row_f*.32;',
-  '    float speed=.09+hf(fi*3.7)*.08;',
-  '    float py=baseY-mod(t*speed+hf(fi*11.3),1.3);',
-  '    // converge x toward 0 as py drops
-  '    float conv=clamp((.9-py)*0.85,0.,1.);',
-  '    float px=mix(startX,0.,conv);',
-  '    float d=length(uv-vec2(px,py));',
-  '    float fade=1.-smoothstep(-.1,.55,py);',
-  '    res+=(1.-smoothstep(.012,.030,d))*fade*.88;',
-  '  }',
-  '  return clamp(res,0.,1.);',
+  '  vec2 c=uv*2.-1.; c.y*=1.389;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
   '}',
 
   'void main(){',
@@ -731,40 +694,40 @@ function frame(gl, prog, uLoc, t){
   '  if(m<.001){gl_FragColor=vec4(0.);return;}',
 
   '  vec2 uv=v_uv*2.-1.;',
-  // Polar: correct for aspect so the vortex looks round
-  '  vec2 uvA=vec2(uv.x,uv.y*1.151);',
+  // Aspect correction for internal geometry
+  '  vec2 uvA=vec2(uv.x,uv.y*1.389);',
   '  float r=length(uvA);',
   '  float ang=atan(uvA.y,uvA.x);',
-  '  float t=u_time*.22;',
+  // Very slow: 0.04 instead of 0.22
+  '  float t=u_time*.04;',
 
-  // Spinning funnel field
-  '  float spin=ang-t*1.8+r*4.2;',
-  '  float funnel=sin(spin*3.)*0.5+0.5;',
-  '  funnel*=smoothstep(0.,.48,r);',      // hollow at centre
-  '  funnel*=(1.-smoothstep(.42,.80,r));', // fade at edge
+  // Slow spinning funnel
+  '  float spin=ang-t*0.6+r*3.5;',
+  '  float funnel=sin(spin*3.)*.5+.5;',
+  '  funnel*=smoothstep(0.,.45,r);',
+  '  funnel*=(1.-smoothstep(.44,.82,r));',
 
-  // Turbulence
-  '  float turb=ns(uv*3.2+vec2(t*.45,-t*.28));',
+  // Gentle turbulence, very slow
+  '  float turb=ns(uv*3.0+vec2(t*.3,-t*.2));',
 
-  // Void hole at centre
-  '  float vd=1.-smoothstep(0.,.16,r);',
+  // Dark void at centre
+  '  float vd=1.-smoothstep(0.,.14,r);',
 
-  // Colour: deep rose → hot pink
-  '  vec3 col=mix(vec3(.50,.03,.18),vec3(1.,.24,.51),',
-  '    clamp(funnel*1.7+turb*.3,0.,1.));',
+  // Hot pink palette — core site colour
+  '  vec3 col=mix(vec3(.55,.02,.20),vec3(1.,.24,.51),',
+  '    clamp(funnel*1.8+turb*.25,0.,1.));',
   '  col=mix(col,vec3(0.),vd);',
 
-  // Rim highlight at funnel boundary
-  '  float rim=smoothstep(.36,.43,r)*(1.-smoothstep(.43,.55,r));',
-  '  col=mix(col,vec3(1.,.6,.75),rim*.55);',
+  // Teal rim highlight — uses second site colour
+  '  float rim=smoothstep(.36,.44,r)*(1.-smoothstep(.44,.58,r));',
+  '  col=mix(col,vec3(.05,.75,.71),rim*.50);',
 
-  // Silver particle layer
-  '  float pts=particles(v_uv*2.-1.,t);',
-  '  col=mix(col,vec3(.80,.88,.95),pts);',
+  // Pale glow at outermost ring
+  '  float glow=smoothstep(.60,.82,r)*(1.-smoothstep(.82,.98,r));',
+  '  col=mix(col,vec3(.98,.96,.82),glow*.30);',
 
-  // Alpha — high enough that shader is clearly visible, not empty
-  '  float strength=funnel*.90+turb*.15+pts*.95+.10;',
-  '  float alpha=m*.42*clamp(strength,0.,1.);',
+  // Alpha directly from mask — no compounding kills
+  '  float alpha=m*.38;',
   '  gl_FragColor=vec4(col*alpha,alpha);',
   '}'
   ].join('\n');
@@ -776,8 +739,8 @@ function frame(gl, prog, uLoc, t){
 })();
 
 // ══════════════════════════════════════════════════════════════════════════
-// GLITCH_24 — live CRT corruption: tears, RGB split, scanlines, noise blocks
-// Canvas: 128×110  aspect ~1.164  → c.y *= 1.164
+// GLITCH_24 — CRT teal/pink/yellow colour bands, very slow drift
+// Canvas: 155×112  aspect 1.384  → c.y *= 1.384
 // ══════════════════════════════════════════════════════════════════════════
 (function(){
   var canvas = document.getElementById('c-glitch');
@@ -796,10 +759,10 @@ function frame(gl, prog, uLoc, t){
   '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
   '}',
 
-  // Oval mask — 128/110 ≈ 1.164
+  // Oval mask — 155/112 = 1.384
   'float mask(vec2 uv){',
-  '  vec2 c=uv*2.-1.; c.y*=1.164;',
-  '  return 1.-smoothstep(.78,1.,length(c));',
+  '  vec2 c=uv*2.-1.; c.y*=1.384;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
   '}',
 
   'void main(){',
@@ -807,78 +770,64 @@ function frame(gl, prog, uLoc, t){
   '  if(m<.001){gl_FragColor=vec4(0.);return;}',
 
   '  vec2 uv=v_uv;',
-  '  float t=u_time;',
+  // Very slow time — glitch is subtle, not frenetic
+  '  float t=u_time*.018;',
 
-  // Horizontal slice tears
-  '  float sy=floor(uv.y*16.)/16.;',
-  '  float ss=hf(sy+floor(t*5.5)*.45);',
-  '  float tear=step(.80,ss)*hf(sy*31.+t)*.15;',
-  '  float uvX=uv.x+tear*(hf(sy+t*1.7)-.5);',
-
-  // Micro-jitter
-  '  float ms2=hf(floor(uv.y*70.)+floor(t*11.));',
-  '  uvX+=(step(.93,ms2)-.5)*.020;',
+  // Minimal horizontal jitter — very slow slice updates
+  '  float sy=floor(uv.y*10.)/10.;',
+  '  float ss=hf(sy+floor(t*0.8)*.45);',
+  '  float tear=step(.88,ss)*hf(sy*31.+t)*.06;',
+  '  float uvX=uv.x+tear*(hf(sy+t*0.5)-.5);',
   '  uvX=clamp(uvX,0.,1.);',
 
-  // RGB channel split
-  '  float ca=.012+sin(t*.8)*.005;',
+  // Very subtle RGB split, slow oscillation
+  '  float ca=.007+sin(t*.3)*.003;',
   '  vec2 uvR=vec2(clamp(uvX+ca,0.,1.),uv.y);',
   '  vec2 uvG=vec2(uvX,uv.y);',
   '  vec2 uvB=vec2(clamp(uvX-ca,0.,1.),uv.y);',
 
-  // Coloured band content
-  '  float band=floor(uv.y*7.);',
+  // Colour bands — using site palette: teal, pink, yellow
+  '  float band=floor(uv.y*6.);',
   '  float bc=hf(band+.5);',
+
   '  float sR=0.,sG=0.,sB=0.;',
 
-  // Teal band
-  '  float iT=step(.55,bc)*step(bc,.70);',
-  '  sR+=iT*.18*ns(uvR*vec2(5.,1.)+t*.3);',
-  '  sG+=iT*.90*ns(uvG*vec2(5.,1.)+t*.3);',
-  '  sB+=iT*.84*ns(uvB*vec2(5.,1.)+t*.3);',
+  // Teal band — primary site teal
+  '  float iT=step(.52,bc)*step(bc,.70);',
+  '  sR+=iT*.08*ns(uvR*vec2(4.,1.)+t*.2);',
+  '  sG+=iT*.88*ns(uvG*vec2(4.,1.)+t*.2);',
+  '  sB+=iT*.82*ns(uvB*vec2(4.,1.)+t*.2);',
 
-  // Pink band
-  '  float iP=step(.28,bc)*step(bc,.44);',
-  '  sR+=iP*.94*ns(uvR*vec2(4.,1.)-t*.2);',
-  '  sG+=iP*.14*ns(uvG*vec2(4.,1.));',
-  '  sB+=iP*.42*ns(uvB*vec2(4.,1.));',
+  // Hot pink band
+  '  float iP=step(.25,bc)*step(bc,.42);',
+  '  sR+=iP*.95*ns(uvR*vec2(3.,1.)-t*.15);',
+  '  sG+=iP*.12*ns(uvG*vec2(3.,1.));',
+  '  sB+=iP*.38*ns(uvB*vec2(3.,1.));',
 
-  // Yellow band
+  // Pale yellow band
   '  float iY=step(.72,bc);',
-  '  sR+=iY*.97*ns(uvR*vec2(5.,1.)+t*.4);',
-  '  sG+=iY*.89*ns(uvG*vec2(5.,1.)+t*.4);',
-  '  sB+=iY*.20;',
+  '  sR+=iY*.96*ns(uvR*vec2(4.,1.)+t*.3);',
+  '  sG+=iY*.90*ns(uvG*vec2(4.,1.)+t*.3);',
+  '  sB+=iY*.15;',
 
-  // White flash
-  '  float iW=step(.14,bc)*step(bc,.22);',
-  '  sR+=iW*.70; sG+=iW*.70; sB+=iW*.70;',
+  // Dark navy fill for remaining bands
+  '  float iN=step(bc,.22);',
+  '  sR+=iN*.04; sG+=iN*.10; sB+=iN*.22;',
 
   '  vec3 col=vec3(sR,sG,sB);',
 
-  // Noise blocks
-  '  for(int i=0;i<5;i++){',
-  '    float fi=float(i);',
-  '    float bx=hf(fi*7.3+floor(t*4.2));',
-  '    float by=hf(fi*13.1+floor(t*3.6));',
-  '    float bw=.07+hf(fi*3.7)*.10;',
-  '    float bh=.05+hf(fi*5.2)*.07;',
-  '    if(uvX>bx&&uvX<bx+bw&&uv.y>by&&uv.y<by+bh){',
-  '      vec3 nb=mix(vec3(.05,.75,.71),vec3(1.,.24,.51),hf(fi+t*.4));',
-  '      col=mix(col,nb,.88);',
-  '    }',
-  '  }',
-
-  // Scanlines
-  '  col*=.80+sin(uv.y*155.+t*.4)*.5*.20;',
+  // Scanlines — very subtle, slow
+  '  col*=.88+sin(uv.y*120.+t*.3)*.5*.12;',
 
   // Vignette
-  '  vec2 cv=uv*2.-1.; col*=1.-length(cv)*.40;',
+  '  vec2 cv=uv*2.-1.; col*=1.-length(cv)*.35;',
 
-  // Dark base
-  '  float cs=clamp(sR+sG+sB,0.,1.)*.65+.18;',
+  // Ensure dark base where no band matches
+  '  float cs=clamp(sR+sG+sB,0.,1.)*.70+.18;',
   '  col=mix(vec3(.008,.028,.065),col,cs);',
 
-  '  float alpha=m*.39;',
+  // Alpha directly from mask — consistent with other avatars
+  '  float alpha=m*.38;',
   '  gl_FragColor=vec4(col*alpha,alpha);',
   '}'
   ].join('\n');
