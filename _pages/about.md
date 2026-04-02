@@ -1,138 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GLSL Hero — Mai W. Ibrahim</title>
+---
+layout: about
+title: ""
+permalink: /
+nav: false
+news: false
+selected_papers: false
+social: false
+---
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-  --teal:        #0dbfb4;
-  --teal-soft:   #35d4ca;
-  --pink:        #ff3d82;
-  --yellow-soft: #f9edaa;
-  --hero-bg:     #0b1b2e;
+  --hero-bg:      #0b1b2e;
+  --navy:         #0f2540;
+  --navy-soft:    #1a3a5c;
+  --teal:         #0dbfb4;
+  --teal-soft:    #35d4ca;
+  --teal-muted:   #80e8e3;
+  --pink:         #ff3d82;
+  --pink-soft:    #ff6fa3;
+  --pink-muted:   #ffaac9;
+  --yellow:       #f5e27a;
+  --yellow-soft:  #f9edaa;
+  --yellow-muted: #fdf4d0;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { overflow-x: hidden; }
 
-body {
-  background: var(--hero-bg);
-  overflow: hidden;
-  font-family: 'Lora', Georgia, serif;
-  width: 100vw; height: 100vh;
+.container,.container-fluid,.container-md,
+main,#main-content,.col,.col-md,
+.row,.wrapper,.post,.profile {
+  max-width:100%!important;width:100%!important;
+  padding:0!important;margin:0!important;float:none!important;
+}
+
+.page {
+  font-family:'Lora',Georgia,serif;
+  width:100vw;position:relative;left:50%;margin-left:-50vw;overflow-x:hidden;
+}
+.page *,.page *::before,.page *::after { box-sizing:border-box; }
+
+.post  { padding:0!important;margin:0!important; }
+article{ padding:0!important;margin:0!important; }
+.post-header              { display:none!important; }
+.navbar,nav.navbar        { display:none!important; }
+.p-name,.sidebar-header,.profile-name { display:none!important; }
+
+/* SCROLL BAR */
+.scroll-bar {
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  z-index:999999;transition:width .05s linear;pointer-events:none;
+  box-shadow:0 0 8px rgba(245,226,122,.55);
 }
 
 /* NAV */
 .site-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  background: rgba(11,27,46,.92); backdrop-filter: blur(14px);
-  display: flex; gap: 2rem; align-items: center; justify-content: flex-end;
-  height: 60px; padding: 0 3rem;
-  border-bottom: .5px solid rgba(13,191,180,.18);
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(11,27,46,.92);backdrop-filter:blur(14px);
+  display:flex;gap:2rem;align-items:center;justify-content:flex-end;
+  height:60px;padding:0 3rem;
+  border-bottom:.5px solid rgba(13,191,180,.18);
 }
 .site-nav a {
-  font-family: 'Space Mono', monospace; font-size: 12px;
-  color: #fff; text-decoration: none;
-  letter-spacing: .18em; text-transform: uppercase;
+  font-family:'Space Mono',monospace;font-size:12px;
+  color:#ffffff;text-decoration:none;
+  letter-spacing:.18em;text-transform:uppercase;transition:color .2s;
 }
+.site-nav a:hover { color:var(--teal-soft); }
 
-/* HERO */
+/* ===================== HERO ===================== */
 .hero {
-  position: relative; z-index: 2;
-  width: 100vw; height: 100vh;
-  display: flex; align-items: center;
-  padding: 60px 6vw 0;
+  background:var(--hero-bg);
+  min-height:100vh;width:100vw;
+  display:flex;align-items:center;
+  padding:60px 6vw 0;
+  position:relative;overflow:hidden;
 }
 
-/* HERO TEXT */
-.hero-content {
-  position: relative; z-index: 20;
-  display: flex; flex-direction: column; gap: 14px;
-  max-width: 600px;
+.hero-blob {
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1;
 }
-.hero-name {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-size: clamp(37px, 6.8vw, 76px);
-  font-weight: 400; line-height: .92;
-  white-space: nowrap; letter-spacing: -.01em;
-}
-.hero-name .first { color: var(--yellow-soft); }
-.hero-name .rest  { color: #e0f0f8; }
-.hero-name em     { font-style: italic; color: rgba(13,191,180,.45); }
-.hero-desc {
-  font-size: clamp(14px, 2vw, 18px);
-  color: #fff; font-style: italic; line-height: 1.6;
-}
-.hero-btn { margin-top: 10px; }
-.hero-btn a {
-  font-family: 'Space Mono', monospace; font-size: 11px;
-  letter-spacing: .15em; text-transform: uppercase;
-  color: #0b1b2e; background: var(--teal);
-  padding: 12px 28px; text-decoration: none; display: inline-block;
-}
+.hero-blob-a { width:500px;height:500px;background:rgba(255,61,130,.14);top:-140px;right:3%; }
+.hero-blob-b { width:320px;height:320px;background:rgba(13,191,180,.12);bottom:10%;right:28%; }
+.hero-blob-c { width:260px;height:260px;background:rgba(245,226,122,.07);top:20%;left:5%; }
 
-/* UI dots */
 .ui-dots {
-  position: absolute; top: 18px; right: 20px;
-  display: flex; gap: 5px; z-index: 20;
+  position:absolute;top:18px;right:20px;
+  display:flex;gap:5px;z-index:10;
 }
-.ui-dots span { width: 6px; height: 6px; border-radius: 50%; }
+.ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-/* ─── AVATAR WRAPPERS ───────────────────────────────────────────────────── */
+/* ---- SHADER AVATAR WRAPPERS ---- */
 /*
-  Each avatar is a positioned div containing:
-    - a <canvas> for the WebGL shader
-    - an oval border overlay (::before pseudo)
-    - an inner glow overlay (::after pseudo)
-    - a label below
-
-  We do NOT clip the canvas with border-radius — WebGL canvases get clipped
-  by the SHADER itself (circular/oval mask in GLSL). The border is purely CSS.
+  Each avatar: a flex column (oval canvas + label).
+  Positioned absolutely inside .hero.
+  Tops set so the uppermost avatar (intensity02) starts
+  just slightly above the hero name (~vertical centre of hero).
 */
-
-.av-wrap {
+.shader-wrap {
   position: absolute;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  z-index: 10;
+  gap: 6px;
+  opacity: 0;
+  animation: avFadeIn 1s ease forwards;
   pointer-events: none;
+  will-change: transform;
+}
+@keyframes avFadeIn {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:0.38; transform:translateY(0); }
 }
 
-/* The oval "frame" div that holds the canvas */
-.av-frame {
+/* The oval container — overflow:hidden clips the shader to the oval shape */
+.shader-oval {
+  overflow: hidden;
+  /* Base oval shape; each avatar gets its own slightly-different border-radius via inline style */
+  border-radius: 52% 48% 55% 45% / 48% 52% 48% 52%;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.10),
+    0 0 22px rgba(13,191,180,0.07),
+    inset 0 0 12px rgba(0,0,0,0.4);
   position: relative;
-  /* Each avatar gets its own width/height via inline style */
 }
-
-/* Oval border ring — sits on top of canvas via z-index */
-.av-frame::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  z-index: 3;
-  pointer-events: none;
-  /* border colour set per-avatar via inline style on av-frame */
-}
-
-/* Inner shadow to deepen edges */
-.av-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 18px rgba(0,0,0,.6);
-  z-index: 4;
-  pointer-events: none;
-}
-
-/* Canvas fills the frame exactly — NO CSS border-radius on canvas itself
-   because that breaks WebGL on some browsers. Shape comes from GLSL mask. */
-.av-frame canvas {
+.shader-oval canvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -140,563 +135,776 @@ body {
 
 .av-label {
   font-family: 'Space Mono', monospace;
-  font-size: 9px; letter-spacing: .08em;
-  background: rgba(0,0,0,.45);
-  padding: 3px 9px; border-radius: 2px;
-  white-space: nowrap;
-  /* colour set per-avatar */
+  font-size: 9px; letter-spacing: .06em;
+  background: rgba(0,0,0,.42);
+  padding: 2px 8px; border-radius: 2px;
+  white-space: nowrap; color: #fff;
 }
 
-/* Fade-in animation — each wrapper fades to its final opacity */
-@keyframes avFadeIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: var(--final-op, .42); transform: translateY(0); }
-}
-
-/* ─── FLOATING TAGS ──────────────────────────────────────────────────────── */
+/* Floating tags */
 .hero-tag {
-  position: absolute; z-index: 15;
-  opacity: 0;
-  animation: tagFadeIn .8s ease forwards;
+  position: absolute; z-index: 6;
+  opacity: 0; animation: tagFadeIn .8s ease forwards;
+  pointer-events: none;
 }
 @keyframes tagFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: .38; transform: translateY(0); }
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:0.40; transform:translateY(0); }
 }
 .hero-tag-inner {
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.09);
   border: .5px solid rgba(255,255,255,.22);
-  padding: 5px 13px;
+  padding: 5px 13px; font-size: 11px;
   font-family: 'Space Mono', monospace;
-  font-size: 11px; color: rgba(255,255,255,.8);
+  color: rgba(255,255,255,.8);
   white-space: nowrap; border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(255,61,130,.10);
   display: inline-flex; align-items: center; gap: 6px;
 }
+
+/* ---- HERO CONTENT ---- */
+.hero-content {
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column; gap: 14px; max-width: 600px;
+}
+.hero-name {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(37px,6.8vw,76px); font-weight: 400;
+  line-height: .92; white-space: nowrap; letter-spacing: -.01em; margin: 0;
+}
+.hero-name .first { color: var(--yellow-soft); }
+.hero-name .rest  { color: #e0f0f8; }
+.hero-name em     { font-style: italic; color: rgba(13,191,180,.45); }
+
+.hero-desc {
+  font-size: clamp(14px,2vw,18px); color: #ffffff;
+  font-style: italic; line-height: 1.6; margin: 0;
+}
+.hero-btn { margin-top: 10px; }
+.hero-btn a {
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: #0b1b2e; background: var(--teal);
+  padding: 12px 28px; text-decoration: none; display: inline-block; transition: background .2s;
+}
+.hero-btn a:hover { background: var(--teal-soft); }
+
+/* ===================== ABOUT ===================== */
+.about-section {
+  background: #f0f8fa; width: 100vw;
+  padding: 130px max(2.5rem,6vw) 140px;
+  margin-top: -60px;
+  clip-path: polygon(0 60px,100% 0,100% 100%,0 100%);
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; position: relative;
+}
+.section-label {
+  font-size: 17px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 2.5rem;
+  font-style: normal; font-family: 'Space Mono', monospace;
+  text-align: center; width: 100%;
+}
+.about-inner {
+  display: flex; gap: 9rem; align-items: center;
+  justify-content: center; flex-wrap: wrap; position: relative;
+}
+.about-img-wrap {
+  flex-shrink: 0; transform: rotate(-6deg);
+  position: relative; align-self: center;
+}
+.about-img {
+  width: 230px; height: 298px;
+  object-fit: cover; object-position: top; display: block;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #fff, 6px 10px 36px rgba(255,61,130,.22), -2px -2px 0 1px rgba(13,191,180,.35);
+}
+.text-col {
+  display: flex; flex-direction: column; gap: 1.4rem;
+  max-width: 520px; transform: rotate(2.5deg);
+  min-width: 280px; padding-top: 24px;
+}
+.about-text { font-size: 16px; line-height: 1.95; color: #1a2e3a; margin: 0; }
+
+/* ===================== PUBLICATIONS ===================== */
+@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-3deg);}  50%{transform:translateY(-18px) rotate(-3deg);} }
+@keyframes floatB { 0%,100%{transform:translateY(0) rotate(2deg);}   50%{transform:translateY(-14px) rotate(2deg);} }
+@keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
+@keyframes floatD { 0%,100%{transform:translateY(0) rotate(4deg);}   50%{transform:translateY(-12px) rotate(4deg);} }
+
+.pubs-section {
+  background: #fdfcff; min-height: 100vh; width: 100vw; color: #1a2e3a;
+  margin-top: -60px;
+  clip-path: polygon(0 0,100% 60px,100% 100%,0 100%);
+  padding: 130px max(2.5rem,6vw) 6rem;
+  position: relative; overflow: hidden;
+}
+.pubs-section * { color: #1a2e3a; }
+.pubs-section a { color: #1a2e3a!important; border-bottom: .5px solid rgba(26,46,58,.28); text-decoration: none; }
+.pubs-section a:hover { color: var(--pink)!important; border-bottom-color: var(--pink); }
+.pubs-section .section-label { color: var(--pink); margin-bottom: 2rem; text-align: left; font-size: 17px; }
+
+.pub-img-float {
+  position: absolute; z-index: 2; overflow: hidden;
+  border-radius: 4px; box-shadow: 0 8px 32px rgba(255,61,130,.1); cursor: pointer;
+}
+.pub-img-float img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: .14; filter: grayscale(10%);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.pub-img-float:hover img { opacity: .88; transform: scale(1.04); }
+.pub-img-a { width:320px;height:310px;top:90px;right:22px;animation:floatA 8s ease-in-out infinite; }
+.pub-img-a img { object-fit:cover;object-position:top center; }
+.pub-img-c { width:280px;height:380px;top:490px;right:370px;animation:floatC 9s ease-in-out infinite;background:transparent; }
+.pub-img-c img { object-fit:cover;object-position:center;background:transparent; }
+.pub-img-d { width:280px;height:258px;top:430px;right:60px;animation:floatD 7s ease-in-out infinite; }
+.pub-img-b { width:260px;height:330px;top:110px;right:380px;animation:floatB 10s ease-in-out infinite; }
+
+.pub-content { position: relative; z-index: 10; max-width: 660px; }
+.pub-type-block { margin-bottom: 2.8rem; }
+.pub-type-block:last-child { margin-bottom: 0; }
+.pub-type-label {
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 1rem; padding: 5px 14px; display: inline-block; border-radius: 3px;
+  font-family: 'Space Mono', monospace;
+}
+.type-chapters  .pub-type-label { background:#d0eef8;color:#0a5e78; }
+.type-articles  .pub-type-label { background:#ffe5ef;color:var(--pink); }
+.type-reviews   .pub-type-label { background:#fdf4d0;color:#7a6820; }
+.type-interview .pub-type-label { background:#e8faf9;color:#0a7a74; }
+.pub-entry {
+  font-size: 16px; line-height: 1.9; color: #1a2e3a;
+  margin-bottom: .9rem; font-family: 'Lora', serif;
+}
+.pub-entry:last-child { margin-bottom: 0; }
+.pub-entry em { font-style: italic; }
+.pub-entry a { color: inherit; text-decoration: none; border-bottom: .5px solid rgba(26,46,58,.28); }
+.pub-entry a:hover { border-bottom-color: var(--pink); color: var(--pink)!important; }
+
+/* ===================== CV + CONTACT ===================== */
+.cv-contact-section {
+  background: #0b1b2e; min-height: 100vh; width: 100vw;
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  position: relative; overflow: hidden;
+}
+.cv-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0; }
+.cv-blob-a { width:500px;height:500px;background:rgba(255,61,130,.12);top:-120px;left:-100px; }
+.cv-blob-b { width:380px;height:380px;background:rgba(13,191,180,.1);bottom:-80px;right:-80px; }
+.cv-blob-c { width:280px;height:280px;background:rgba(245,226,122,.05);top:40%;left:40%; }
+.cv-top-stripe {
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  z-index:10;
+}
+.cv-divider { background:rgba(13,191,180,.14);align-self:stretch;position:relative;z-index:2; }
+.cv-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);
+  position:relative;z-index:2;
+}
+.cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
+.cv-download {
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:#0b1b2e;background:var(--teal);
+  text-decoration:none;padding:14px 32px;
+  display:inline-flex;align-items:center;gap:10px;transition:background .2s;width:fit-content;
+}
+.cv-download:hover { background:var(--teal-soft);color:#0b1b2e; }
+.cv-download::after { content:'↓';font-size:16px; }
+.contact-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);
+  position:relative;z-index:2;
+}
+.contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
+.contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px; }
+.contact-row {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 0;border-bottom:.5px solid rgba(13,191,180,.15);
+  text-decoration:none;transition:padding-left .25s,color .2s;
+}
+.contact-row:first-child { border-top:.5px solid rgba(13,191,180,.15); }
+.contact-row:hover { padding-left:.65rem; }
+.contact-label {
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);min-width:100px;
+}
+.contact-value {
+  font-family:'Lora',serif;font-size:16px;font-style:italic;
+  color:#ffffff;flex:1;padding:0 1rem;
+}
+.contact-arrow {
+  font-family:'Space Mono',monospace;font-size:13px;
+  color:rgba(13,191,180,.36);transition:transform .2s,color .2s;
+}
+.contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
+.contact-row:hover .contact-value { color:var(--teal-muted); }
+
+/* ===================== MOBILE ===================== */
+@media (max-width:640px) {
+  .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
+  .site-nav a { font-size:10px; }
+  .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
+  .hero-name { white-space:normal; }
+  .hero-content { max-width:55%; }
+  .shader-wrap,.hero-tag { display:none; }
+  .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
+  .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
+  .about-img-wrap { transform:rotate(-3deg); }
+  .about-img { width:190px;height:246px; }
+  .text-col { transform:rotate(1.5deg);max-width:100%;min-width:unset; }
+  .about-text { font-size:15px; }
+  .section-label { font-size:15px; }
+  .pubs-section { clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);padding-top:80px;margin-top:-30px; }
+  .pub-entry { font-size:15px; }
+  .pub-img-float { display:none; }
+  .cv-contact-section { grid-template-columns:1fr; }
+  .cv-divider { display:none; }
+  .cv-panel { padding:5rem 1.5rem 3rem; }
+  .contact-panel { padding:2rem 1.5rem 5rem; }
+  .contact-value { font-size:14px; }
+}
+@media (max-width:900px) and (min-width:641px) {
+  .pub-img-a { width:200px;height:194px;right:14px;top:100px; }
+  .pub-img-d { width:175px;height:161px;top:330px;right:38px; }
+  .pub-img-b { width:162px;height:206px;top:100px;right:238px; }
+  .pub-img-c { width:175px;height:237px;top:350px;right:231px; }
+}
 </style>
-</head>
-<body>
+
+<div class="page">
+
+<div class="scroll-bar" id="scrollBar"></div>
 
 <nav class="site-nav">
-  <a href="#">About</a>
-  <a href="#">Publications</a>
-  <a href="#">CV</a>
-  <a href="#">Contact</a>
+  <a href="#about">About</a>
+  <a href="#publications">Publications</a>
+  <a href="#cv">CV</a>
+  <a href="#contact">Contact</a>
 </nav>
 
-<div class="hero">
+<!-- ===================== HERO ===================== -->
+<div class="hero" id="hero">
+  <div class="hero-blob hero-blob-a"></div>
+  <div class="hero-blob hero-blob-b"></div>
+  <div class="hero-blob hero-blob-c"></div>
+
   <div class="ui-dots">
-    <span style="background:#0dbfb4;"></span>
-    <span style="background:#ff3d82;"></span>
-    <span style="background:#f5e27a;"></span>
+    <span style="background:var(--teal);"></span>
+    <span style="background:var(--pink);"></span>
+    <span style="background:var(--yellow);"></span>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       AVATAR 1 — intensity02
-       Oval shape: wider than tall, tilted slightly
-       Position: upper right, just above name level
-  ══════════════════════════════════════════════════════ -->
-  <div class="av-wrap" id="av-intensity"
-       style="top:36%; right:9%;
-              opacity:0;
-              animation: avFadeIn 1s ease .5s forwards;
-              --final-op: .42;">
-    <div class="av-frame"
-         style="width:154px; height:130px;
-                border-radius: 52% 48% 55% 45% / 48% 52% 48% 52%;
-                border: 1.5px solid rgba(245,226,122,.5);
-                box-shadow: 0 0 22px rgba(245,226,122,.15), 0 4px 20px rgba(0,0,0,.5);">
-      <!-- canvas pixel size matches display size exactly -->
-      <canvas id="c-intensity" width="154" height="130"></canvas>
+  <!--
+    Avatar positions:
+    Hero name sits at ~45–50% viewport height (flex-centered + 60px nav).
+    intensity02: top 35% — starts just above the name's top edge.
+    extraction05: top 50% — roughly at name's vertical centre.
+    glitch_24:    top 60% — below the name, anchoring the cluster.
+
+    All three shifted right (right: 8–36%) so they stay in the right
+    half of the screen and don't overlap the text column.
+
+    Oval sizes: 130×112px, 122×106px, 128×110px — small enough to
+    clearly support rather than compete with the hero name.
+  -->
+
+  <!-- intensity02 — upper right, just above name -->
+  <div class="shader-wrap" id="wrap-intensity"
+       style="top:35%;right:9%;animation-delay:.45s;">
+    <div class="shader-oval"
+         style="width:130px;height:112px;
+                border-radius:54% 46% 52% 48% / 47% 53% 49% 51%;">
+      <canvas id="c-intensity" width="130" height="112"></canvas>
     </div>
-    <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
+    <div class="av-label" style="color:rgba(249,237,170,.88);">intensity02</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       AVATAR 2 — extraction05
-       Oval shape: taller than wide, different border-radius
-       Position: centre-right cluster
-  ══════════════════════════════════════════════════════ -->
-  <div class="av-wrap" id="av-extraction"
-       style="top:47%; right:33%;
-              opacity:0;
-              animation: avFadeIn 1s ease .75s forwards;
-              --final-op: .42;">
-    <div class="av-frame"
-         style="width:138px; height:158px;
-                border-radius: 45% 55% 48% 52% / 55% 45% 55% 45%;
-                border: 1.5px solid rgba(255,61,130,.5);
-                box-shadow: 0 0 22px rgba(255,61,130,.14), 0 4px 20px rgba(0,0,0,.5);">
-      <canvas id="c-extraction" width="138" height="158"></canvas>
+  <!-- extraction05 — mid right -->
+  <div class="shader-wrap" id="wrap-extraction"
+       style="top:50%;right:36%;animation-delay:.65s;">
+    <div class="shader-oval"
+         style="width:122px;height:106px;
+                border-radius:46% 54% 49% 51% / 53% 47% 54% 46%;">
+      <canvas id="c-extraction" width="122" height="106"></canvas>
     </div>
-    <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
+    <div class="av-label" style="color:rgba(255,111,163,.88);">extraction05</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════
-       AVATAR 3 — glitch_24
-       Oval shape: slightly landscape, irregular
-       Position: lower, between the two above
-  ══════════════════════════════════════════════════════ -->
-  <div class="av-wrap" id="av-glitch"
-       style="top:59%; right:18%;
-              opacity:0;
-              animation: avFadeIn 1s ease 1s forwards;
-              --final-op: .42;">
-    <div class="av-frame"
-         style="width:148px; height:122px;
-                border-radius: 48% 52% 44% 56% / 52% 48% 56% 44%;
-                border: 1.5px solid rgba(13,191,180,.5);
-                box-shadow: 0 0 22px rgba(13,191,180,.14), 0 4px 20px rgba(0,0,0,.5);">
-      <canvas id="c-glitch" width="148" height="122"></canvas>
+  <!-- glitch_24 — lower right -->
+  <div class="shader-wrap" id="wrap-glitch"
+       style="top:60%;right:20%;animation-delay:.85s;">
+    <div class="shader-oval"
+         style="width:128px;height:110px;
+                border-radius:50% 50% 46% 54% / 55% 45% 51% 49%;">
+      <canvas id="c-glitch" width="128" height="110"></canvas>
     </div>
-    <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
+    <div class="av-label" style="color:rgba(128,232,227,.88);">glitch_24</div>
   </div>
 
-  <!-- FLOATING TAGS -->
-  <div class="hero-tag" style="top:44%; right:22%; animation-delay:1.1s;">
+  <!-- "digital media" floating tag -->
+  <div class="hero-tag" style="top:44%;right:25%;animation-delay:1.05s;">
     <div class="hero-tag-inner">digital media</div>
   </div>
-  <div class="hero-tag" style="top:68%; right:7%; animation-delay:1.25s;">
+
+  <!-- "researching" floating tag -->
+  <div class="hero-tag" style="top:68%;right:8%;animation-delay:1.2s;">
     <div class="hero-tag-inner">
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-        <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,.65)" stroke-width="1.3"/>
-        <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,.65)" stroke-width="1.4" stroke-linecap="round"/>
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"
+           xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block;">
+        <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
+        <line x1="7.4" y1="7.4" x2="11" y2="11"
+              stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
       researching
     </div>
   </div>
 
-  <!-- HERO TEXT -->
   <div class="hero-content">
     <h1 class="hero-name">
       <span class="first">Mai</span><span class="rest"> W. <em>Ibrahim</em></span>
     </h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures.</p>
-    <div class="hero-btn"><a href="#">Enter ↓</a></div>
+    <div class="hero-btn"><a href="#about">Enter ↓</a></div>
   </div>
 </div>
 
+<!-- ===================== ABOUT ===================== -->
+<div class="about-section" id="about">
+  <p class="section-label">About</p>
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
+    </div>
+    <div class="text-col">
+      <p class="about-text">My research examines the relationship between digital media, pre-conscious intensities, and political economy. I investigate how digital media act upon the human body prior to conscious awareness, and how platform capitalism transforms that bodily register into a site of extraction.</p>
+      <p class="about-text">My work engages a wide range of media, including virtual reality, brain-computer interfaces, social media, and video games.</p>
+      <p class="about-text">I am currently a sessional instructor at McMaster University in Hamilton, Canada. I was a Postdoctoral Visitor at York University's Department of Communication and Media Studies in Toronto, Canada 2024–2025, where I researched toxicity in video games. I completed my PhD in Communication, Rhetoric, and Digital Media at North Carolina State University in Raleigh, U.S.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PUBLICATIONS ===================== -->
+<div class="pubs-section" id="publications">
+  <div class="pub-img-float pub-img-a">
+    <img src="/assets/img/vr-headset.jpg" alt="VR headset" />
+  </div>
+  <div class="pub-img-float pub-img-b">
+    <img src="/assets/img/vr-museum.jpg" alt="VR museum" />
+  </div>
+  <div class="pub-img-float pub-img-c">
+    <img src="/assets/img/vr-space.jpg" alt="VR space" />
+  </div>
+  <div class="pub-img-float pub-img-d">
+    <img src="/assets/img/bci-headset.jpg" alt="BCI headset" />
+  </div>
+
+  <div class="pub-content">
+    <p class="section-label">Research &amp; Publications</p>
+
+    <div class="pub-type-block type-chapters">
+      <span class="pub-type-label">Book Chapters</span>
+      <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
+      <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring <em>Tahrir Square</em> as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
+      <p class="pub-entry">Ibrahim, M. (2023). <a href="/assets/pdf/posthuman-bci-vr.pdf" target="_blank">Posthuman Subjectivity in BCI-VR Entanglement</a>. In Veljko Dubljević &amp; Allen Coin (Eds.), <em>Policy, Identity, and Neurotechnology</em> (pp. 11–25). Springer.</p>
+      <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
+      <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
+    </div>
+
+    <div class="pub-type-block type-articles">
+      <span class="pub-type-label">Journal Articles</span>
+      <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR through the <em>Better World Museum</em>. <em>Convergence</em>.</p>
+    </div>
+
+    <div class="pub-type-block type-reviews">
+      <span class="pub-type-label">Reviews</span>
+      <p class="pub-entry">Ibrahim, M. (2021). Review of the book <a href="/assets/pdf/nihilism-review.pdf" target="_blank"><em>Nihilism and Technology</em></a>, by N. Gertz. <em>Communication Design Quarterly</em>, 9(1), 32–34.</p>
+      <p class="pub-entry">Ibrahim, M. (2020). Review of the chapter <em>A Fast Food Civil Rights</em> in <em>Franchise</em>, by M. Chatelain. HASTAC.</p>
+    </div>
+
+    <div class="pub-type-block type-interview">
+      <span class="pub-type-label">Interview</span>
+      <p class="pub-entry">Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CV + CONTACT ===================== -->
+<div class="cv-contact-section" id="cv">
+  <div class="cv-top-stripe"></div>
+  <div class="cv-blob cv-blob-a"></div>
+  <div class="cv-blob cv-blob-b"></div>
+  <div class="cv-blob cv-blob-c"></div>
+
+  <div class="cv-panel">
+    <p class="section-label">CV</p>
+    <a class="cv-download" href="/assets/pdf/cv.pdf" target="_blank">Download CV</a>
+  </div>
+
+  <div class="cv-divider"></div>
+
+  <div class="contact-panel" id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <a class="contact-row" href="mailto:mai.w.ibrahim@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">mai.w.ibrahim@gmail.com</span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a class="contact-row" href="https://bsky.app/profile/maiibrahim.bsky.social" target="_blank">
+        <span class="contact-label">Bluesky</span>
+        <span class="contact-value">@maiibrahim.bsky.social</span>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<!-- ===================== SCRIPTS ===================== -->
 <script>
-'use strict';
+// ── Scroll progress bar ─────────────────────────────────────────────────────
+(function(){
+  var bar = document.getElementById('scrollBar');
+  function onScroll(){
+    var s = window.scrollY || document.documentElement.scrollTop;
+    var d = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   SHARED WEBGL UTILITIES
-   Key principle: canvas pixel dimensions (width/height attributes) must
-   match exactly what the CSS renders. We set them in HTML and never touch
-   them again. drawQuad is called after useProgram + uniforms.
-══════════════════════════════════════════════════════════════════════════════ */
-
-function buildGL(canvasId) {
-  const canvas = document.getElementById(canvasId);
-  const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: false });
+// ── Shared WebGL boilerplate ────────────────────────────────────────────────
+function makeGL(canvas) {
+  var gl = canvas.getContext('webgl', {premultipliedAlpha:false, alpha:true});
   if (!gl) return null;
   gl.clearColor(0, 0, 0, 0);
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-  // Full-screen quad
-  const buf = gl.createBuffer();
+  var buf = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, buf);
   gl.bufferData(gl.ARRAY_BUFFER,
-    new Float32Array([-1,-1, 1,-1, -1,1, 1,1]),
-    gl.STATIC_DRAW);
-
-  return { gl, canvas };
+    new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  return gl;
 }
 
-function buildProgram(gl, fragSrc) {
-  const vertSrc = `
-    attribute vec2 pos;
-    varying   vec2 vUV;
-    void main(){
-      vUV = pos * .5 + .5;
-      gl_Position = vec4(pos, 0., 1.);
-    }`;
-
-  function shader(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
+function buildProg(gl, fragSrc) {
+  var vSrc = [
+    'attribute vec2 a_pos;',
+    'varying vec2 v_uv;',
+    'void main(){v_uv=a_pos*.5+.5;gl_Position=vec4(a_pos,0.,1.);}'
+  ].join('\n');
+  function sh(type, src){
+    var s=gl.createShader(type);
+    gl.shaderSource(s,src);gl.compileShader(s);return s;
   }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, shader(gl.VERTEX_SHADER, vertSrc));
-  gl.attachShader(prog, shader(gl.FRAGMENT_SHADER, fragSrc));
-  gl.linkProgram(prog);
-  return prog;
+  var p=gl.createProgram();
+  gl.attachShader(p,sh(gl.VERTEX_SHADER,vSrc));
+  gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fragSrc));
+  gl.linkProgram(p);
+  return p;
 }
 
-function drawFrame(gl, prog, uniforms) {
+function frame(gl, prog, uLoc, t){
   gl.clear(gl.COLOR_BUFFER_BIT);
   gl.useProgram(prog);
-  // bind pos attribute
-  const posLoc = gl.getAttribLocation(prog, 'pos');
-  gl.enableVertexAttribArray(posLoc);
-  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-  // set uniforms
-  uniforms.forEach(([name, val]) => {
-    const loc = gl.getUniformLocation(prog, name);
-    if (loc !== null) gl.uniform1f(loc, val);
-  });
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+  var a=gl.getAttribLocation(prog,'a_pos');
+  gl.enableVertexAttribArray(a);
+  gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+  gl.uniform1f(uLoc,t);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AVATAR 1 — intensity02
-   Concept: Massumi's pre-conscious affect — a field of warmth that continuously
-   pools and shifts without ever resolving into a stable form.
-   Technique: domain-warped fractal Brownian motion (FBM on FBM).
-   The oval mask in GLSL uses the canvas aspect ratio so it fills correctly.
-══════════════════════════════════════════════════════════════════════════════ */
-(function intensity02() {
-  const { gl, canvas } = buildGL('c-intensity');
+// ══════════════════════════════════════════════════════════════════════════
+// INTENSITY02 — domain-warped FBM: golden warmth pooling, never crystallising
+// Canvas: 130×112  aspect ~1.161  → c.y *= 1.161 to circularise
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-intensity');
+  var gl = makeGL(canvas); if(!gl) return;
 
-  const frag = `
-    precision highp float;
-    varying vec2 vUV;
-    uniform float uT;
-    uniform float uAR; /* width / height */
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
 
-    /* --- noise helpers --- */
-    vec2 hash2(vec2 p){
-      p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
-      return fract(sin(p)*43758.5453);
-    }
-    float vnoise(vec2 p){
-      vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
-      float a=dot(hash2(i),          f);
-      float b=dot(hash2(i+vec2(1,0)),f-vec2(1,0));
-      float c=dot(hash2(i+vec2(0,1)),f-vec2(0,1));
-      float d=dot(hash2(i+vec2(1,1)),f-vec2(1,1));
-      return mix(mix(a,b,u.x),mix(c,d,u.x),u.y)*0.5+0.5;
-    }
-    float fbm(vec2 p){
-      float v=0.,a=.5;
-      mat2 R=mat2(.8,.6,-.6,.8);
-      for(int i=0;i<5;i++){ v+=a*vnoise(p); p=R*p*2.1; a*=.5; }
-      return v;
-    }
+  // Oval mask — corrects for canvas aspect so the shape reads as oval, not squashed
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.;',
+  '  c.y*=1.161;',            // 130/112 ≈ 1.161
+  '  return 1.-smoothstep(.78,1.,length(c));',
+  '}',
 
-    void main(){
-      /* aspect-corrected UV centred at 0,0 */
-      vec2 uv = (vUV*2.-1.) * vec2(uAR, 1.);
+  'vec3 h3(vec2 p){',
+  '  vec3 q=vec3(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)),dot(p,vec2(419.2,371.9)));',
+  '  return fract(sin(q)*43758.5453);',
+  '}',
+  'float n(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(dot(h3(i).xy,f),dot(h3(i+vec2(1,0)).xy,f-vec2(1,0)),u.x),',
+  '             mix(dot(h3(i+vec2(0,1)).xy,f-vec2(0,1)),dot(h3(i+vec2(1,1)).xy,f-vec2(1,1)),u.x),u.y);',
+  '}',
+  'float fbm(vec2 p){',
+  '  float v=0.;float a=.5;',
+  '  mat2 r=mat2(.88,.48,-.48,.88);',
+  '  for(int i=0;i<5;i++){v+=a*n(p);p=r*p*2.02;a*=.5;}',
+  '  return v;',
+  '}',
 
-      /* oval mask: x scaled by aspect ratio so oval fits frame */
-      float rx = uAR * 0.82;
-      float ry = 0.82;
-      float oval = (uv.x*uv.x)/(rx*rx) + (uv.y*uv.y)/(ry*ry);
-      float mask = 1. - smoothstep(0.80, 1.02, oval);
-      if(mask < 0.001){ gl_FragColor=vec4(0.); return; }
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
+  '  vec2 uv=v_uv*2.-1.;',
+  '  float t=u_time*.15;',
+  '  vec2 q=vec2(fbm(uv+t),fbm(uv+vec2(5.2,1.3)+t*.7));',
+  '  vec2 r2=vec2(fbm(uv+4.*q+vec2(1.7,9.2)+t*.4),fbm(uv+4.*q+vec2(8.3,2.8)+t*.3));',
+  '  float f=fbm(uv+4.*r2+t*.2);',
+  '  f=f*f*f+.6*f*f+.5*f;',
+  '  vec3 col=mix(vec3(.04,.10,.20),vec3(.96,.88,.44),clamp(f*2.,0.,1.));',
+  '  col=mix(col,vec3(.99,.96,.80),clamp((f-.5)*2.,0.,1.));',
+  '  col*=(.5+.5*(1.-length(uv)*.8));',
+  '  float alpha=m*.40*smoothstep(0.,.3,f+.2);',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
 
-      float t = uT * 0.15;
-
-      /* two-layer domain warp */
-      vec2 q = vec2(fbm(uv*1.2 + t),
-                    fbm(uv*1.2 + vec2(4.1,2.7) + t*.8));
-      vec2 r2= vec2(fbm(uv*1.1 + 3.8*q + vec2(1.7,9.2) + t*.5),
-                    fbm(uv*1.1 + 3.8*q + vec2(8.3,2.8) + t*.3));
-      float f = fbm(uv + 3.5*r2 + t*.2);
-      f = f*f*f + .55*f*f + .5*f;
-
-      /* palette: deep navy → warm gold → pale cream */
-      vec3 col = mix(vec3(.04,.10,.22), vec3(.96,.88,.40), clamp(f*2.2,0.,1.));
-      col = mix(col, vec3(.99,.96,.80), clamp((f-.45)*2.5,0.,1.));
-
-      /* radial vignette — brightest at centre */
-      float rLen = sqrt((uv.x*uv.x)/(uAR*uAR) + uv.y*uv.y);
-      col *= .45 + .55*(1.-rLen*.85);
-
-      /* soft edge feather */
-      float alpha = mask * (0.55 + 0.45*smoothstep(0.,0.35,f));
-      gl_FragColor = vec4(col * alpha, alpha);
-    }
-  `;
-
-  const prog = buildProgram(gl, frag);
-  const AR = canvas.width / canvas.height;
-  let t = Math.random() * 100;
-
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    drawFrame(gl, prog, [['uT', t], ['uAR', AR]]);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; canvas.style.transition = 'opacity 1.4s ease'; }, 200);
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
 })();
 
+// ══════════════════════════════════════════════════════════════════════════
+// EXTRACTION05 — vortex + silver particles raining into black void
+// Completely rebuilt. Canvas: 122×106  aspect ~1.151  → c.y *= 1.151
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-extraction');
+  var gl = makeGL(canvas); if(!gl) return;
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AVATAR 2 — extraction05
-   Concept: Platform capitalism extracting affect from bodies.
-   A downward spiral vortex with silver particle dots raining into a void.
-   Built simply and reliably — no complex loops that might silently fail.
-══════════════════════════════════════════════════════════════════════════════ */
-(function extraction05() {
-  const { gl, canvas } = buildGL('c-extraction');
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
 
-  const frag = `
-    precision highp float;
-    varying vec2 vUV;
-    uniform float uT;
-    uniform float uAR;
+  'float hf(float x){return fract(sin(x)*43758.5453);}',
+  'float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float ns(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),',
+  '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
+  '}',
 
-    float h(float n){ return fract(sin(n)*43758.5453); }
-    float h2(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+  // Oval mask — 122/106 ≈ 1.151
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.; c.y*=1.151;',
+  '  return 1.-smoothstep(.77,1.,length(c));',
+  '}',
 
-    float vnoise(vec2 p){
-      vec2 i=floor(p), f=fract(p), u=f*f*(3.-2.*f);
-      return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),
-                 mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);
-    }
+  // Silver particles: rain from top, converge to centre-bottom void
+  'float particles(vec2 uv, float t){',
+  '  float res=0.;',
+  '  for(int i=0;i<18;i++){',
+  '    float fi=float(i);',
+  '    float col_f=mod(fi,5.);',
+  '    float row_f=floor(fi/5.);',
+  '    // spread across x, converge inward as they fall
+  '    float startX=-0.55+col_f*.28+sin(fi*2.1+t*.25)*.05;',
+  '    float baseY=.90-row_f*.32;',
+  '    float speed=.09+hf(fi*3.7)*.08;',
+  '    float py=baseY-mod(t*speed+hf(fi*11.3),1.3);',
+  '    // converge x toward 0 as py drops
+  '    float conv=clamp((.9-py)*0.85,0.,1.);',
+  '    float px=mix(startX,0.,conv);',
+  '    float d=length(uv-vec2(px,py));',
+  '    float fade=1.-smoothstep(-.1,.55,py);',
+  '    res+=(1.-smoothstep(.012,.030,d))*fade*.88;',
+  '  }',
+  '  return clamp(res,0.,1.);',
+  '}',
 
-    void main(){
-      vec2 uv = (vUV*2.-1.) * vec2(uAR, 1.);
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
 
-      /* oval mask */
-      float rx = uAR * 0.84;
-      float oval = (uv.x*uv.x)/(rx*rx) + uv.y*uv.y/(0.84*0.84);
-      float mask = 1. - smoothstep(0.80, 1.02, oval);
-      if(mask < 0.001){ gl_FragColor=vec4(0.); return; }
+  '  vec2 uv=v_uv*2.-1.;',
+  // Polar: correct for aspect so the vortex looks round
+  '  vec2 uvA=vec2(uv.x,uv.y*1.151);',
+  '  float r=length(uvA);',
+  '  float ang=atan(uvA.y,uvA.x);',
+  '  float t=u_time*.22;',
 
-      float t = uT * 0.20;
-      float r = length(uv);
-      float ang = atan(uv.y, uv.x);
+  // Spinning funnel field
+  '  float spin=ang-t*1.8+r*4.2;',
+  '  float funnel=sin(spin*3.)*0.5+0.5;',
+  '  funnel*=smoothstep(0.,.48,r);',      // hollow at centre
+  '  funnel*=(1.-smoothstep(.42,.80,r));', // fade at edge
 
-      /* ── VORTEX SPIRAL ── */
-      /* spin speed increases toward centre = extraction pull */
-      float spin = ang - t * 1.6 + r * 4.2;
-      float vortex = sin(spin * 3.5) * .5 + .5;
-      /* hollow eye at very centre, fade at edge */
-      vortex *= smoothstep(0.0, 0.50, r);
-      vortex *= 1. - smoothstep(0.38, 0.84, r);
+  // Turbulence
+  '  float turb=ns(uv*3.2+vec2(t*.45,-t*.28));',
 
-      float turb = vnoise(uv * 3.2 + vec2(t*.6, -t*.35)) * .5 + .5;
+  // Void hole at centre
+  '  float vd=1.-smoothstep(0.,.16,r);',
 
-      /* void at centre — darkens strongly near origin */
-      float voidDepth = 1. - smoothstep(0., 0.28, r);
+  // Colour: deep rose → hot pink
+  '  vec3 col=mix(vec3(.50,.03,.18),vec3(1.,.24,.51),',
+  '    clamp(funnel*1.7+turb*.3,0.,1.));',
+  '  col=mix(col,vec3(0.),vd);',
 
-      /* ── SILVER PARTICLE DOTS ── */
-      /* 15 particles: column index 0..4, row 0..2 */
-      float pts = 0.;
-      for(int row=0; row<3; row++){
-        for(int col=0; col<5; col++){
-          float fi = float(row)*5. + float(col);
-          /* x: spread across width, slight lateral sway */
-          float px = -0.60 + float(col)*0.30 + sin(fi*2.1 + t*.5)*0.05;
-          /* y: start above, rain downward, loop */
-          float spd = 0.11 + h(fi)*0.07;
-          float phase = h(fi + 7.3);
-          float py = 0.85 - mod(t * spd + phase * 1.5, 1.7);
-          /* fade as they approach void */
-          float fade = smoothstep(-0.1, 0.6, py);
-          float d = length(uv - vec2(px, py));
-          pts += (1. - smoothstep(0.015, 0.038, d)) * fade;
-        }
-      }
-      pts = clamp(pts, 0., 1.);
+  // Rim highlight at funnel boundary
+  '  float rim=smoothstep(.36,.43,r)*(1.-smoothstep(.43,.55,r));',
+  '  col=mix(col,vec3(1.,.6,.75),rim*.55);',
 
-      /* ── COLOUR ── */
-      vec3 vortexCol = mix(
-        vec3(0.50, 0.03, 0.20),   /* deep crimson */
-        vec3(1.00, 0.22, 0.50),   /* hot pink */
-        clamp(vortex*1.6 + turb*0.4 - 0.1, 0., 1.)
-      );
-      /* void eats colour at centre */
-      vortexCol = mix(vortexCol, vec3(0.01,0.01,0.03), voidDepth);
+  // Silver particle layer
+  '  float pts=particles(v_uv*2.-1.,t);',
+  '  col=mix(col,vec3(.80,.88,.95),pts);',
 
-      /* silver overlay for particles */
-      vec3 col = mix(vortexCol, vec3(0.78, 0.85, 0.90), pts);
+  // Alpha — high enough that shader is clearly visible, not empty
+  '  float strength=funnel*.90+turb*.15+pts*.95+.10;',
+  '  float alpha=m*.42*clamp(strength,0.,1.);',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
 
-      /* very faint field base so interior isn't fully black */
-      col = mix(vec3(0.04,0.02,0.10), col,
-                clamp(vortex*1.2 + pts*0.8 + 0.12, 0., 1.));
-
-      float alpha = mask * (vortex*0.75 + pts*0.70 + turb*0.10 + 0.08);
-      alpha = clamp(alpha, 0., 0.88);
-
-      gl_FragColor = vec4(col * alpha, alpha);
-    }
-  `;
-
-  const prog = buildProgram(gl, frag);
-  const AR = canvas.width / canvas.height;
-  let t = Math.random() * 100;
-
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    drawFrame(gl, prog, [['uT', t], ['uAR', AR]]);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; canvas.style.transition = 'opacity 1.4s ease'; }, 500);
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
 })();
 
+// ══════════════════════════════════════════════════════════════════════════
+// GLITCH_24 — live CRT corruption: tears, RGB split, scanlines, noise blocks
+// Canvas: 128×110  aspect ~1.164  → c.y *= 1.164
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-glitch');
+  var gl = makeGL(canvas); if(!gl) return;
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AVATAR 3 — glitch_24
-   Concept: Corrupted digital time — CRT screen tearing, RGB fringing,
-   scanline displacement, noise blocks regenerating every frame.
-══════════════════════════════════════════════════════════════════════════════ */
-(function glitch24() {
-  const { gl, canvas } = buildGL('c-glitch');
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
 
-  const frag = `
-    precision highp float;
-    varying vec2 vUV;
-    uniform float uT;
-    uniform float uAR;
+  'float hf(float x){return fract(sin(x)*43758.5453);}',
+  'float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float ns(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),',
+  '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
+  '}',
 
-    float h(float n)  { return fract(sin(n)*43758.5453); }
-    float h2(vec2 p)  { return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-    float vnoise(vec2 p){
-      vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);
-      return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),
-                 mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);
-    }
+  // Oval mask — 128/110 ≈ 1.164
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.; c.y*=1.164;',
+  '  return 1.-smoothstep(.78,1.,length(c));',
+  '}',
 
-    void main(){
-      vec2 uv = vUV; /* 0..1 */
-      vec2 c  = uv*2.-1.;
-      vec2 ca = c * vec2(uAR, 1.);
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
 
-      /* oval mask */
-      float rx = uAR * 0.84;
-      float oval = (ca.x*ca.x)/(rx*rx) + ca.y*ca.y/(0.84*0.84);
-      float mask = 1. - smoothstep(0.80, 1.02, oval);
-      if(mask < 0.001){ gl_FragColor=vec4(0.); return; }
+  '  vec2 uv=v_uv;',
+  '  float t=u_time;',
 
-      float t = uT;
+  // Horizontal slice tears
+  '  float sy=floor(uv.y*16.)/16.;',
+  '  float ss=hf(sy+floor(t*5.5)*.45);',
+  '  float tear=step(.80,ss)*hf(sy*31.+t)*.15;',
+  '  float uvX=uv.x+tear*(hf(sy+t*1.7)-.5);',
 
-      /* ── SCANLINE SLICE TEARS ── */
-      float sliceRow  = floor(uv.y * 20.0);
-      float sliceSeed = h(sliceRow + floor(t * 6.0) * 0.37);
-      float tear      = step(0.80, sliceSeed) * h(sliceRow*17.3 + t*1.1) * 0.16;
-      float uvX       = uv.x + tear * (h(sliceRow + t*1.8) - 0.5);
+  // Micro-jitter
+  '  float ms2=hf(floor(uv.y*70.)+floor(t*11.));',
+  '  uvX+=(step(.93,ms2)-.5)*.020;',
+  '  uvX=clamp(uvX,0.,1.);',
 
-      /* micro-jitter on random scanlines */
-      float jSeed = h(floor(uv.y*90.) + floor(t*15.)*0.5);
-      uvX += (step(0.93, jSeed) - 0.5) * 0.022;
-      uvX  = clamp(uvX, 0., 1.);
+  // RGB channel split
+  '  float ca=.012+sin(t*.8)*.005;',
+  '  vec2 uvR=vec2(clamp(uvX+ca,0.,1.),uv.y);',
+  '  vec2 uvG=vec2(uvX,uv.y);',
+  '  vec2 uvB=vec2(clamp(uvX-ca,0.,1.),uv.y);',
 
-      vec2 uvD = vec2(uvX, uv.y);
+  // Coloured band content
+  '  float band=floor(uv.y*7.);',
+  '  float bc=hf(band+.5);',
+  '  float sR=0.,sG=0.,sB=0.;',
 
-      /* ── RGB CHANNEL ABERRATION ── */
-      float ca2 = 0.013 + sin(t*0.85)*0.005;
-      vec2 uvR = vec2(clamp(uvD.x+ca2,0.,1.), uvD.y);
-      vec2 uvB = vec2(clamp(uvD.x-ca2,0.,1.), uvD.y);
+  // Teal band
+  '  float iT=step(.55,bc)*step(bc,.70);',
+  '  sR+=iT*.18*ns(uvR*vec2(5.,1.)+t*.3);',
+  '  sG+=iT*.90*ns(uvG*vec2(5.,1.)+t*.3);',
+  '  sB+=iT*.84*ns(uvB*vec2(5.,1.)+t*.3);',
 
-      /* ── COLOURED HORIZONTAL BANDS (corrupted "content") ── */
-      float band    = floor(uvD.y * 8.0);
-      float bandTag = h(band + 0.5);
+  // Pink band
+  '  float iP=step(.28,bc)*step(bc,.44);',
+  '  sR+=iP*.94*ns(uvR*vec2(4.,1.)-t*.2);',
+  '  sG+=iP*.14*ns(uvG*vec2(4.,1.));',
+  '  sB+=iP*.42*ns(uvB*vec2(4.,1.));',
 
-      float R=0.,G=0.,B=0.;
+  // Yellow band
+  '  float iY=step(.72,bc);',
+  '  sR+=iY*.97*ns(uvR*vec2(5.,1.)+t*.4);',
+  '  sG+=iY*.89*ns(uvG*vec2(5.,1.)+t*.4);',
+  '  sB+=iY*.20;',
 
-      /* teal bands */
-      float isTeal = step(0.55,bandTag)*step(bandTag,0.70);
-      R += isTeal * 0.18 * vnoise(uvR*vec2(7.,1.)+t*.4);
-      G += isTeal * 0.88 * vnoise(uvD*vec2(7.,1.)+t*.4);
-      B += isTeal * 0.82 * vnoise(uvB*vec2(7.,1.)+t*.4);
+  // White flash
+  '  float iW=step(.14,bc)*step(bc,.22);',
+  '  sR+=iW*.70; sG+=iW*.70; sB+=iW*.70;',
 
-      /* pink bands */
-      float isPink = step(0.28,bandTag)*step(bandTag,0.43);
-      R += isPink * 0.92 * vnoise(uvR*vec2(5.,1.)-t*.3);
-      G += isPink * 0.14 * vnoise(uvD*vec2(5.,1.));
-      B += isPink * 0.40 * vnoise(uvB*vec2(5.,1.));
+  '  vec3 col=vec3(sR,sG,sB);',
 
-      /* yellow band */
-      float isYellow = step(0.72,bandTag)*step(bandTag,0.87);
-      R += isYellow * 0.95 * vnoise(uvR*vec2(6.,1.)+t*.5);
-      G += isYellow * 0.86 * vnoise(uvD*vec2(6.,1.)+t*.5);
-      B += isYellow * 0.20;
+  // Noise blocks
+  '  for(int i=0;i<5;i++){',
+  '    float fi=float(i);',
+  '    float bx=hf(fi*7.3+floor(t*4.2));',
+  '    float by=hf(fi*13.1+floor(t*3.6));',
+  '    float bw=.07+hf(fi*3.7)*.10;',
+  '    float bh=.05+hf(fi*5.2)*.07;',
+  '    if(uvX>bx&&uvX<bx+bw&&uv.y>by&&uv.y<by+bh){',
+  '      vec3 nb=mix(vec3(.05,.75,.71),vec3(1.,.24,.51),hf(fi+t*.4));',
+  '      col=mix(col,nb,.88);',
+  '    }',
+  '  }',
 
-      /* white flash band */
-      float isWhite = step(0.12,bandTag)*step(bandTag,0.20);
-      R += isWhite * 0.72;
-      G += isWhite * 0.72;
-      B += isWhite * 0.72;
+  // Scanlines
+  '  col*=.80+sin(uv.y*155.+t*.4)*.5*.20;',
 
-      vec3 col = vec3(R, G, B);
+  // Vignette
+  '  vec2 cv=uv*2.-1.; col*=1.-length(cv)*.40;',
 
-      /* ── NOISE BLOCKS (regenerate at ~5fps) ── */
-      float blockT = floor(t * 5.0);
-      for(int i=0;i<5;i++){
-        float fi=float(i);
-        float bx = h(fi*7.3 + blockT);
-        float by = h(fi*13.1+ blockT*1.3);
-        float bw = 0.05 + h(fi*3.7)*0.14;
-        float bh = 0.04 + h(fi*5.2)*0.10;
-        if(uvD.x>bx && uvD.x<bx+bw && uvD.y>by && uvD.y<by+bh){
-          vec3 nc = mix(
-            mix(vec3(0.05,0.75,0.71), vec3(1.,0.24,0.51), h(fi+blockT)),
-            vec3(h(fi+blockT*.7), h(fi*2.+blockT*.5), h(fi*3.+blockT*.3)),
-            0.35
-          );
-          col = mix(col, nc, 0.92);
-        }
-      }
+  // Dark base
+  '  float cs=clamp(sR+sG+sB,0.,1.)*.65+.18;',
+  '  col=mix(vec3(.008,.028,.065),col,cs);',
 
-      /* ── SCANLINES ── */
-      float scan = sin(uv.y * 200.0 + t) * 0.5 + 0.5;
-      col *= 0.80 + scan * 0.20;
+  '  float alpha=m*.39;',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
 
-      /* ── VIGNETTE ── */
-      float rr = length(ca) / uAR;
-      col *= 1. - rr * 0.55;
-
-      /* ── DARK BASE ── */
-      float brightness = clamp(R+G+B, 0.,1.)*0.65 + 0.18;
-      col = mix(vec3(0.01,0.03,0.07), col, brightness);
-
-      float alpha = mask * 0.82;
-      gl_FragColor = vec4(col * alpha, alpha);
-    }
-  `;
-
-  const prog = buildProgram(gl, frag);
-  const AR = canvas.width / canvas.height;
-  let t = Math.random() * 100;
-
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    drawFrame(gl, prog, [['uT', t], ['uAR', AR]]);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; canvas.style.transition = 'opacity 1.4s ease'; }, 800);
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
 })();
 
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   AMBIENT DRIFT — gently float each avatar wrapper using CSS transform.
-   Does NOT alter top/right positioning — only adds a small translate.
-══════════════════════════════════════════════════════════════════════════════ */
-(function ambientDrift() {
-  const avatars = [
-    { el: document.getElementById('av-intensity'),  fx: 0.33, fy: 0.25, ax: 5, ay: 7, ph: 0.0 },
-    { el: document.getElementById('av-extraction'), fx: 0.28, fy: 0.21, ax: 4, ay: 5, ph: 1.8 },
-    { el: document.getElementById('av-glitch'),     fx: 0.26, fy: 0.20, ax: 6, ay: 5, ph: 3.4 },
+// ── Ambient drift: translate each avatar-wrap on a slow sin path ───────────
+(function(){
+  var wraps=[
+    {el:document.getElementById('wrap-intensity'), ph:0.0, ax:5,ay:7,fx:.28,fy:.20},
+    {el:document.getElementById('wrap-extraction'),ph:1.5, ax:4,ay:6,fx:.24,fy:.17},
+    {el:document.getElementById('wrap-glitch'),    ph:2.9, ax:5,ay:5,fx:.22,fy:.26},
   ];
-
-  let t = 0;
-  // We track the CSS animation's final translateY and blend drift on top.
-  // By the time drift runs the CSS animation has settled (animation-delay + 1s).
-  // We override transform entirely — the fade-in animation has already fired.
-
-  function drift() {
+  var t=0;
+  (function drift(){
     requestAnimationFrame(drift);
-    t += 0.016;
-    avatars.forEach(av => {
-      const dx = Math.sin(t * av.fx + av.ph)       * av.ax;
-      const dy = Math.sin(t * av.fy + av.ph + 1.2) * av.ay;
-      av.el.style.transform = `translate(${dx}px, ${dy}px)`;
+    t+=.016;
+    wraps.forEach(function(w){
+      var dx=Math.sin(t*w.fx+w.ph)*w.ax;
+      var dy=Math.sin(t*w.fy+w.ph+.5)*w.ay;
+      w.el.style.transform='translate('+dx+'px,'+dy+'px)';
     });
-  }
-
-  // Start drift after all CSS fade-ins complete (longest delay = 1s + 1s anim = 2s)
-  setTimeout(drift, 2100);
+  })();
 })();
-
-window.addEventListener('resize', () => location.reload());
 </script>
-</body>
-</html>
