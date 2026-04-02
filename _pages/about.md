@@ -47,7 +47,7 @@ article{ padding:0!important;margin:0!important; }
 .navbar,nav.navbar        { display:none!important; }
 .p-name,.sidebar-header,.profile-name { display:none!important; }
 
-/* ===================== SCROLL BAR — #1 pale yellow shades ===================== */
+/* SCROLL BAR — pale yellow */
 .scroll-bar {
   position:fixed;top:0;left:0;height:3px;width:0%;
   background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
@@ -55,7 +55,7 @@ article{ padding:0!important;margin:0!important; }
   box-shadow:0 0 8px rgba(245,226,122,.55);
 }
 
-/* ===================== NAV — #2 slightly taller, white text ===================== */
+/* NAV */
 .site-nav {
   position:fixed;top:0;left:0;right:0;z-index:99999;
   background:rgba(11,27,46,.92);backdrop-filter:blur(14px);
@@ -121,7 +121,7 @@ article{ padding:0!important;margin:0!important; }
   color:rgba(255,255,255,.7);
   white-space:nowrap;border-radius:6px 6px 6px 0;
 }
-.av-icon { width:28px;height:28px;flex-shrink:0;display:block; }
+.av-icon { width:32px;height:32px;flex-shrink:0;display:block; }
 
 /* ---- HERO CONTENT ---- */
 .hero-content {
@@ -225,11 +225,9 @@ article{ padding:0!important;margin:0!important; }
 }
 .pub-img-float:hover img { opacity:.88;transform:scale(1.04); }
 
-/* #7 — vr-headset: show from top, enough height to reveal controller */
 .pub-img-a { width:320px;height:310px;top:90px;right:22px;animation:floatA 8s ease-in-out infinite; }
 .pub-img-a img { object-fit:cover;object-position:top center; }
 
-/* #8 — vr-space: remove white border / background bleed — use contain + dark bg */
 .pub-img-c { width:280px;height:380px;top:490px;right:370px;animation:floatC 9s ease-in-out infinite;background:transparent; }
 .pub-img-c img { object-fit:cover;object-position:center;background:transparent; }
 
@@ -312,7 +310,6 @@ article{ padding:0!important;margin:0!important; }
 .contact-row:first-child { border-top:.5px solid rgba(13,191,180,.15); }
 .contact-row:hover { padding-left:.65rem; }
 
-/* #9 — label stays teal, value is white */
 .contact-label {
   font-family:'Space Mono',monospace;font-size:9px;
   letter-spacing:.18em;text-transform:uppercase;
@@ -339,10 +336,6 @@ article{ padding:0!important;margin:0!important; }
   .hero-content { max-width:55%; }
 
   .av { transform:scale(.78);transform-origin:top left; }
-  .av-1 { top:18%!important;right:1%!important;animation-delay:.1s; }
-  .av-2 { top:30%!important;right:1%!important;animation-delay:.28s; }
-  .av-3 { top:44%!important;right:1%!important;animation-delay:.45s; }
-  .av-4 { top:58%!important;right:1%!important;animation-delay:.6s; }
 
   .about-section {
     clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);
@@ -401,115 +394,234 @@ article{ padding:0!important;margin:0!important; }
   </div>
 
   <!--
-    LAYOUT (approx vertical positions, all on right half):
-      intensity02  — 18% top, 13% right  (upper far right)
-      extraction_05 — 20% top, 40% right (upper centre-right)
-      digital media speech bubble sits between extraction_05 and intensity02
-      researching   — sits just below capture (56% top)
-      glitch24      — 44% top, 34% right (mid)
+    AVATAR MAP (desktop):
+      intensity02   top:16%  right:11%   — upper far right
+      extraction05  top:22%  right:40%   — upper centre-right
+      "digital media" speech bubble on extraction05, floats between all three
+      glitch_24     top:42%  right:28%   — mid, between extraction & intensity
+      researching   top:58%  right:16%   — lower right, below glitch_24
   -->
 
-  <!-- av-1: intensity02 — sparkle/ignite SVG — upper far right -->
-  <div class="av" style="top:18%;right:13%;animation-delay:.1s;">
-    <div class="av-body" style="width:54px;height:60px;background:rgba(245,226,122,.18);border:1px solid rgba(245,226,122,.45);">
-      <!-- Sparkle / ignite: starburst with radiating spikes -->
-      <svg class="av-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Central bright core -->
-        <circle cx="16" cy="16" r="3.2" fill="rgba(255,240,130,1)"/>
-        <!-- 8 radiating spikes -->
-        <line x1="16" y1="3"  x2="16" y2="9"  stroke="rgba(245,226,122,0.95)" stroke-width="2"   stroke-linecap="round"/>
-        <line x1="16" y1="23" x2="16" y2="29" stroke="rgba(245,226,122,0.95)" stroke-width="2"   stroke-linecap="round"/>
-        <line x1="3"  y1="16" x2="9"  y2="16" stroke="rgba(245,226,122,0.95)" stroke-width="2"   stroke-linecap="round"/>
-        <line x1="23" y1="16" x2="29" y2="16" stroke="rgba(245,226,122,0.95)" stroke-width="2"   stroke-linecap="round"/>
-        <line x1="6.5"  y1="6.5"  x2="10.7" y2="10.7" stroke="rgba(245,226,122,0.7)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="21.3" y1="21.3" x2="25.5" y2="25.5" stroke="rgba(245,226,122,0.7)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="25.5" y1="6.5"  x2="21.3" y2="10.7" stroke="rgba(245,226,122,0.7)" stroke-width="1.4" stroke-linecap="round"/>
-        <line x1="10.7" y1="21.3" x2="6.5"  y2="25.5" stroke="rgba(245,226,122,0.7)" stroke-width="1.4" stroke-linecap="round"/>
-        <!-- Outer glow dots -->
-        <circle cx="16" cy="1.2" r=".9" fill="rgba(255,240,160,.7)"/>
-        <circle cx="16" cy="30.8" r=".9" fill="rgba(255,240,160,.7)"/>
-        <circle cx="1.2" cy="16" r=".9" fill="rgba(255,240,160,.7)"/>
-        <circle cx="30.8" cy="16" r=".9" fill="rgba(255,240,160,.7)"/>
+  <!-- intensity02 — sparkle / glitter — upper far right -->
+  <div class="av" style="top:16%;right:11%;animation-delay:.1s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(245,226,122,.16);border:1px solid rgba(245,226,122,.5);">
+      <!--
+        INTENSITY02 — pure glitter/sparkle aesthetic.
+        Three 4-point diamond sparkles at different sizes & rotations,
+        plus scattered tiny dot glints. No circles, no sun. Just glitter.
+        A 4-point sparkle is drawn as two thin elongated diamond lozenges
+        crossing at 90°: vertical lozenge + horizontal lozenge.
+      -->
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- LARGE centre sparkle at (20,20) — classic 4-point star/diamond shape -->
+        <!-- Vertical lozenge: tall narrow diamond -->
+        <path d="M20 6 L22.2 20 L20 34 L17.8 20 Z" fill="rgba(255,248,180,0.98)"/>
+        <!-- Horizontal lozenge: wide narrow diamond -->
+        <path d="M6 20 L20 22.2 L34 20 L20 17.8 Z" fill="rgba(255,248,180,0.98)"/>
+        <!-- Tiny bright core dot -->
+        <circle cx="20" cy="20" r="1.6" fill="#ffffff"/>
+
+        <!-- MEDIUM sparkle top-right at (30,10) — rotated 22° -->
+        <g transform="rotate(22 30 10)">
+          <path d="M30 3  L31.3 10 L30 17 L28.7 10 Z" fill="rgba(255,240,130,0.88)"/>
+          <path d="M23 10 L30 11.3 L37 10 L30 8.7 Z" fill="rgba(255,240,130,0.88)"/>
+        </g>
+        <circle cx="30" cy="10" r="1" fill="rgba(255,255,220,0.95)"/>
+
+        <!-- SMALL sparkle bottom-left at (10,30) — rotated -15° -->
+        <g transform="rotate(-15 10 30)">
+          <path d="M10 24.5 L11 30 L10 35.5 L9 30 Z" fill="rgba(255,232,100,0.82)"/>
+          <path d="M4.5 30 L10 31 L15.5 30 L10 29 Z" fill="rgba(255,232,100,0.82)"/>
+        </g>
+        <circle cx="10" cy="30" r=".8" fill="rgba(255,248,160,0.9)"/>
+
+        <!-- TINY sparkle top-left at (9,11) — rotated 10° -->
+        <g transform="rotate(10 9 11)">
+          <path d="M9 7  L9.7 11 L9 15 L8.3 11 Z" fill="rgba(255,244,150,0.75)"/>
+          <path d="M5 11 L9 11.7 L13 11 L9 10.3 Z" fill="rgba(255,244,150,0.75)"/>
+        </g>
+
+        <!-- TINY sparkle bottom-right at (32,32) — rotated -8° -->
+        <g transform="rotate(-8 32 32)">
+          <path d="M32 28 L32.6 32 L32 36 L31.4 32 Z" fill="rgba(255,236,110,0.7)"/>
+          <path d="M28 32 L32 32.6 L36 32 L32 31.4 Z" fill="rgba(255,236,110,0.7)"/>
+        </g>
+
+        <!-- Scattered glint dots — no circles, just tiny bright pixels -->
+        <rect x="5"  y="5"  width="1.5" height="1.5" fill="rgba(255,255,200,0.8)"  rx=".3"/>
+        <rect x="34" y="6"  width="1.2" height="1.2" fill="rgba(255,240,120,0.75)" rx=".2"/>
+        <rect x="3"  y="26" width="1.3" height="1.3" fill="rgba(255,248,170,0.7)"  rx=".2"/>
+        <rect x="36" y="28" width="1.1" height="1.1" fill="rgba(255,255,180,0.65)" rx=".2"/>
+        <rect x="18" y="2"  width="1"   height="1"   fill="rgba(255,255,210,0.8)"  rx=".2"/>
+        <rect x="25" y="37" width="1.2" height="1.2" fill="rgba(255,240,130,0.7)"  rx=".2"/>
+        <rect x="37" y="17" width="1"   height="1"   fill="rgba(255,255,190,0.65)" rx=".2"/>
+        <rect x="2"  y="16" width="1"   height="1"   fill="rgba(255,248,160,0.7)"  rx=".2"/>
       </svg>
     </div>
-    <div class="av-shadow" style="width:36px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
-    <div class="av-label" style="color:rgba(249,237,170,.85);">intensity02</div>
+    <div style="width:38px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
+    <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
   </div>
 
-  <!-- av-2: extraction_05 — funnel/drain pulling pixelated dots into void — upper centre-right -->
-  <!-- "digital media" speech bubble sits here, between extraction_05 and intensity02 -->
-  <div class="av" style="top:20%;right:40%;animation-delay:.28s;">
-    <div style="position:relative;">
-      <div class="speech" style="top:-34px;right:36px;border-radius:6px 6px 0 6px;">digital media</div>
-    </div>
-    <div class="av-body" style="width:54px;height:60px;background:rgba(255,61,130,.22);border:1px solid rgba(255,61,130,.45);">
-      <!-- Funnel draining pixelated dots downward into dark void -->
-      <svg class="av-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Funnel outline -->
-        <path d="M4 4 L28 4 L20 16 L20 27 L12 27 L12 16 Z" stroke="rgba(255,111,163,0.9)" stroke-width="1.4" fill="rgba(255,61,130,0.12)" stroke-linejoin="round"/>
-        <!-- Dark void at bottom -->
-        <ellipse cx="16" cy="27.5" rx="4.5" ry="1.6" fill="rgba(20,0,20,0.7)"/>
-        <!-- Pixelated dots being pulled in — scattered above, converging below -->
-        <rect x="7"  y="5.5" width="2" height="2" fill="rgba(255,170,201,0.85)" rx=".3"/>
-        <rect x="13" y="5.5" width="2" height="2" fill="rgba(255,111,163,0.85)" rx=".3"/>
-        <rect x="19" y="5.5" width="2" height="2" fill="rgba(255,170,201,0.85)" rx=".3"/>
-        <rect x="23" y="5.5" width="2" height="2" fill="rgba(255,61,130,0.7)"   rx=".3"/>
-        <!-- Mid-funnel dots getting smaller/closer -->
-        <rect x="13.5" y="11" width="1.5" height="1.5" fill="rgba(255,111,163,0.7)" rx=".2"/>
-        <rect x="17"   y="12" width="1.5" height="1.5" fill="rgba(255,170,201,0.6)" rx=".2"/>
-        <!-- Bottom drain dots -->
-        <rect x="15" y="20" width="1"   height="1"   fill="rgba(255,61,130,0.5)"  rx=".1"/>
-        <rect x="15.8" y="23" width=".8" height=".8" fill="rgba(255,61,130,0.35)" rx=".1"/>
+  <!-- extraction05 — funnel with dots outside it too — upper centre-right -->
+  <!-- digital media bubble removed from here; moved to its own floating tag below -->
+  <div class="av" style="top:22%;right:40%;animation-delay:.28s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(255,61,130,.2);border:1px solid rgba(255,61,130,.5);">
+      <!--
+        EXTRACTION05: funnel + pixelated dots BOTH inside AND outside/around it.
+        Dots outside float freely around the funnel before being pulled in.
+        Dots inside converge toward the void at the bottom.
+      -->
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Funnel walls -->
+        <path d="M5 6 L35 6 L25 19 L25 34 L15 34 L15 19 Z"
+              stroke="rgba(255,100,160,0.9)" stroke-width="1.4"
+              fill="rgba(255,61,130,0.1)" stroke-linejoin="round"/>
+        <!-- Inner shading -->
+        <path d="M11 6 L29 6 L22 17 L22 34 L18 34 L18 17 Z"
+              fill="rgba(255,61,130,0.06)"/>
+        <!-- Dark void -->
+        <ellipse cx="20" cy="34.5" rx="5.5" ry="2" fill="rgba(10,0,15,0.88)"/>
+        <ellipse cx="20" cy="34.5" rx="3"   ry="1.1" fill="rgba(0,0,0,0.95)"/>
+
+        <!-- OUTSIDE dots — floating around the funnel, not yet captured -->
+        <!-- Far left outside -->
+        <rect x="-1" y="4"   width="3"   height="3"   fill="rgba(255,170,210,0.9)" rx=".4"/>
+        <rect x="0"  y="10"  width="2.5" height="2.5" fill="rgba(255,80,150,0.85)" rx=".3"/>
+        <rect x="-1" y="16"  width="2"   height="2"   fill="rgba(255,140,190,0.8)" rx=".3"/>
+        <!-- Far right outside -->
+        <rect x="37" y="5"   width="3"   height="3"   fill="rgba(255,61,130,0.9)"  rx=".4"/>
+        <rect x="37.5" y="11" width="2.5" height="2.5" fill="rgba(255,170,200,0.8)" rx=".3"/>
+        <rect x="38"  y="17"  width="2"   height="2"   fill="rgba(255,100,160,0.75)" rx=".3"/>
+        <!-- Above funnel mouth — floating dots not yet aligned -->
+        <rect x="2"  y="1"   width="2.5" height="2.5" fill="rgba(255,111,163,0.85)" rx=".3"/>
+        <rect x="34" y="1.5" width="2"   height="2"   fill="rgba(255,61,130,0.8)"  rx=".3"/>
+        <!-- Below funnel sides — escaping dots -->
+        <rect x="1"  y="22"  width="2"   height="2"   fill="rgba(255,150,195,0.7)" rx=".3"/>
+        <rect x="37" y="23"  width="2"   height="2"   fill="rgba(255,100,160,0.7)" rx=".3"/>
+
+        <!-- INSIDE funnel — top row just entered -->
+        <rect x="8"  y="7"   width="2.5" height="2.5" fill="rgba(255,170,210,0.9)" rx=".4"/>
+        <rect x="15" y="7"   width="2"   height="2"   fill="rgba(255,61,130,0.85)" rx=".3"/>
+        <rect x="22" y="7"   width="2.5" height="2.5" fill="rgba(255,200,220,0.85)" rx=".4"/>
+        <rect x="29" y="7"   width="2"   height="2"   fill="rgba(255,80,150,0.8)"  rx=".3"/>
+
+        <!-- Mid-funnel — shrinking, with motion streaks -->
+        <rect x="15.5" y="12" width="2"   height="2"   fill="rgba(255,100,160,0.7)" rx=".3"/>
+        <rect x="21"   y="13" width="1.8" height="1.8" fill="rgba(255,61,130,0.65)" rx=".2"/>
+        <line x1="16.5" y1="12" x2="16.5" y2="9.5" stroke="rgba(255,111,163,0.28)" stroke-width=".8" stroke-linecap="round"/>
+        <line x1="21.9" y1="13" x2="21.9" y2="10.5" stroke="rgba(255,61,130,0.22)" stroke-width=".8" stroke-linecap="round"/>
+
+        <!-- Lower funnel — very small, converging -->
+        <rect x="18"   y="18" width="1.5" height="1.5" fill="rgba(255,80,140,0.58)" rx=".2"/>
+        <rect x="19.8" y="22" width="1.2" height="1.2" fill="rgba(255,61,130,0.48)" rx=".2"/>
+        <rect x="19"   y="26" width="1"   height="1"   fill="rgba(255,61,130,0.38)" rx=".1"/>
+        <line x1="19.5" y1="27" x2="19.5" y2="24.5" stroke="rgba(255,61,130,0.18)" stroke-width=".6" stroke-linecap="round"/>
+
+        <!-- Near-void — disappearing -->
+        <rect x="19.2" y="30" width=".8" height=".8" fill="rgba(255,61,130,0.25)" rx=".1"/>
+        <rect x="20"   y="32" width=".6" height=".6" fill="rgba(255,61,130,0.15)" rx=".1"/>
       </svg>
     </div>
-    <div class="av-shadow" style="width:36px;background:rgba(255,61,130,.12);height:5px;border-radius:50%;"></div>
-    <div class="av-label" style="color:rgba(255,111,163,.85);">extraction_05</div>
+    <div style="width:38px;background:rgba(255,61,130,.1);height:5px;border-radius:50%;"></div>
+    <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
   </div>
 
-  <!-- av-3: glitch24 — glitchy icon — mid centre-right — #4 renamed from "capture" -->
-  <div class="av" style="top:44%;right:34%;animation-delay:.45s;">
-    <div class="av-body" style="width:54px;height:60px;background:rgba(13,191,180,.2);border:1px solid rgba(13,191,180,.48);">
-      <!-- Glitch icon: fragmented/offset rectangle blocks -->
-      <svg class="av-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Base screen/block -->
-        <rect x="4" y="8" width="24" height="16" rx="1" fill="rgba(13,191,180,0.15)" stroke="rgba(13,191,180,0.7)" stroke-width="1.2"/>
-        <!-- Glitch slice 1 — offset to the right with teal fill -->
-        <rect x="8"  y="11" width="18" height="3" fill="rgba(13,191,180,0.55)" rx=".4"/>
-        <!-- Glitch slice 2 — shifted left, pink accent -->
-        <rect x="2"  y="15" width="16" height="2.5" fill="rgba(255,61,130,0.55)" rx=".4"/>
-        <!-- Glitch slice 3 — shifted right -->
-        <rect x="12" y="18" width="14" height="2" fill="rgba(13,191,180,0.4)" rx=".4"/>
-        <!-- Noise pixels -->
-        <rect x="5"  y="13" width="2" height="1.5" fill="rgba(255,240,130,0.8)" rx=".2"/>
-        <rect x="25" y="17" width="2" height="1.5" fill="rgba(255,111,163,0.8)" rx=".2"/>
-        <rect x="18" y="10" width="1.5" height="1.5" fill="rgba(255,240,130,0.6)" rx=".2"/>
-        <!-- Scan-line effect -->
-        <line x1="4" y1="13.5" x2="28" y2="13.5" stroke="rgba(255,255,255,0.06)" stroke-width=".8"/>
-        <line x1="4" y1="17"   x2="28" y2="17"   stroke="rgba(255,255,255,0.06)" stroke-width=".8"/>
-        <!-- RGB fringe top-left -->
-        <rect x="4" y="8" width="6" height="2" fill="rgba(255,0,80,0.2)" rx=".3"/>
-        <rect x="4" y="8" width="4" height="2" fill="rgba(0,255,220,0.2)" rx=".3"/>
+  <!-- glitch_24 — heavily glitched screen SVG — mid between extraction & intensity -->
+  <div class="av" style="top:42%;right:28%;animation-delay:.45s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(13,191,180,.18);border:1px solid rgba(13,191,180,.55);">
+      <!--
+        GLITCH_24 icon: a monitor/screen whose contents are completely
+        corrupted. Multiple hard-offset slices in teal, pink, and yellow.
+        RGB channel separation on the edges. Scattered noise rectangles.
+        Horizontal scan-tear lines. Inverted pixel blocks. Looks broken.
+      -->
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Screen base -->
+        <rect x="3" y="6" width="34" height="24" rx="1.5"
+              fill="rgba(5,15,25,0.9)" stroke="rgba(13,191,180,0.6)" stroke-width="1.3"/>
+        <!-- Stand -->
+        <rect x="16" y="30" width="8" height="3" fill="rgba(13,191,180,0.35)" rx=".5"/>
+        <rect x="13" y="33" width="14" height="1.8" fill="rgba(13,191,180,0.3)" rx=".4"/>
+
+        <!-- === GLITCH SLICES === -->
+
+        <!-- Slice A: wide teal bar offset right by 5px -->
+        <rect x="8"  y="10" width="28" height="3.5" fill="rgba(13,191,180,0.65)" rx=".3"/>
+        <!-- same bar offset left (RGB bleed) -->
+        <rect x="3"  y="10" width="20" height="3.5" fill="rgba(0,255,220,0.18)"  rx=".3"/>
+        <rect x="13" y="10" width="22" height="3.5" fill="rgba(255,0,80,0.12)"   rx=".3"/>
+
+        <!-- Slice B: pink strip offset left by 7px -->
+        <rect x="-1" y="15" width="22" height="2.8" fill="rgba(255,61,130,0.7)"  rx=".3" clip-path="url(#screen-clip)"/>
+        <rect x="3"  y="15" width="22" height="2.8" fill="rgba(255,0,80,0.15)"   rx=".3"/>
+
+        <!-- Slice C: yellow narrow strip, shifted right -->
+        <rect x="11" y="19.5" width="26" height="2" fill="rgba(245,226,122,0.55)" rx=".3"/>
+
+        <!-- Slice D: another teal chunk, offset further right (overflows) -->
+        <rect x="15" y="23" width="24" height="2.5" fill="rgba(13,191,180,0.45)" rx=".3"/>
+        <!-- matching bleed -->
+        <rect x="10" y="23" width="18" height="2.5" fill="rgba(255,61,130,0.15)" rx=".3"/>
+
+        <!-- === NOISE PIXELS scattered across screen === -->
+        <rect x="4"   y="7"    width="2"   height="2"   fill="rgba(255,240,130,0.9)" rx=".2"/>
+        <rect x="28"  y="7"    width="2.5" height="2"   fill="rgba(255,61,130,0.85)" rx=".2"/>
+        <rect x="33"  y="8"    width="1.8" height="1.8" fill="rgba(0,255,220,0.8)"   rx=".2"/>
+        <rect x="5"   y="25"   width="3"   height="1.5" fill="rgba(255,111,163,0.85)" rx=".2"/>
+        <rect x="22"  y="8.5"  width="1.5" height="1.5" fill="rgba(255,255,255,0.7)" rx=".2"/>
+        <rect x="9"   y="22"   width="2"   height="2"   fill="rgba(245,226,122,0.75)" rx=".2"/>
+        <rect x="30"  y="21"   width="2.5" height="1.8" fill="rgba(13,191,180,0.8)"  rx=".2"/>
+        <rect x="6"   y="13"   width="1.5" height="3"   fill="rgba(255,255,255,0.15)" rx=".2"/>
+        <rect x="35"  y="16"   width="2"   height="4"   fill="rgba(255,255,255,0.12)" rx=".2"/>
+
+        <!-- === HORIZONTAL SCAN TEARS === -->
+        <line x1="3" y1="13"   x2="37" y2="13"   stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <line x1="3" y1="18.5" x2="37" y2="18.5" stroke="rgba(255,255,255,0.06)" stroke-width=".7"/>
+        <line x1="3" y1="22.5" x2="37" y2="22.5" stroke="rgba(13,191,180,0.1)"  stroke-width=".7"/>
+
+        <!-- === RGB CHANNEL FRINGE on left & right edges === -->
+        <!-- Left red fringe -->
+        <rect x="3" y="9" width="2" height="16" fill="rgba(255,0,80,0.15)"   rx=".2"/>
+        <!-- Left cyan fringe (offset 1px) -->
+        <rect x="4" y="9" width="1" height="16" fill="rgba(0,255,220,0.12)"  rx=".2"/>
+        <!-- Right fringe -->
+        <rect x="35" y="9" width="2" height="16" fill="rgba(255,0,80,0.12)"  rx=".2"/>
+
+        <!-- === INVERTED pixel block (pure white box) === -->
+        <rect x="17" y="12" width="6" height="4" fill="rgba(255,255,255,0.08)" rx=".2"/>
+        <rect x="18" y="12.5" width="4" height="3" fill="rgba(255,255,255,0.15)" rx=".1"/>
+
+        <!-- Clip path for screen boundary -->
+        <defs>
+          <clipPath id="screen-clip">
+            <rect x="3" y="6" width="34" height="24" rx="1.5"/>
+          </clipPath>
+        </defs>
       </svg>
     </div>
-    <div class="av-shadow" style="width:36px;background:rgba(13,191,180,.1);height:5px;border-radius:50%;"></div>
-    <div class="av-label" style="color:rgba(128,232,227,.85);">glitch24</div>
+    <div style="width:38px;background:rgba(13,191,180,.1);height:5px;border-radius:50%;"></div>
+    <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
   </div>
 
-  <!-- av-4: researching — sits slightly below glitch24, positioned lower -->
-  <div class="av" style="top:56%;right:20%;animation-delay:.62s;">
-    <div style="position:relative;">
-      <div class="speech" style="top:-34px;left:36px;border-radius:6px 6px 6px 0;">researching 🔍</div>
-    </div>
-    <div class="av-body" style="width:54px;height:60px;background:rgba(245,226,122,.16);border:1px solid rgba(245,226,122,.4);">
-      <!-- Magnifying glass / search icon -->
-      <svg class="av-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="13" cy="13" r="7.5" stroke="rgba(245,226,122,0.85)" stroke-width="2" fill="rgba(245,226,122,0.08)"/>
-        <line x1="18.8" y1="18.8" x2="27" y2="27" stroke="rgba(245,226,122,0.85)" stroke-width="2.5" stroke-linecap="round"/>
-        <circle cx="13" cy="13" r="4" stroke="rgba(245,226,122,0.3)" stroke-width="1" fill="none"/>
-      </svg>
-    </div>
-    <div class="av-shadow" style="width:36px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
-    <div class="av-label" style="color:rgba(249,237,170,.85);">researching</div>
+  <!--
+    "digital media" standalone floating speech tag.
+    Positioned at the visual centroid of the three avatars:
+      intensity02  top:16% right:11%
+      extraction05 top:22% right:40%
+      glitch_24    top:42% right:28%
+    Centroid ≈ top:27% right:26% — floats freely, no body underneath.
+  -->
+  <div style="position:absolute;top:30%;right:24%;z-index:6;opacity:0;animation:avFloat .7s ease .55s forwards;">
+    <div style="
+      background:rgba(255,255,255,.09);
+      border:.5px solid rgba(255,255,255,.22);
+      padding:5px 13px;font-size:11px;
+      font-family:'Space Mono',monospace;
+      color:rgba(255,255,255,.75);
+      white-space:nowrap;border-radius:6px;
+      box-shadow:0 2px 12px rgba(255,61,130,.12);
+    ">digital media</div>
   </div>
 
   <div class="hero-content">
@@ -538,14 +650,12 @@ article{ padding:0!important;margin:0!important; }
 
 <!-- PUBLICATIONS -->
 <div class="pubs-section" id="publications">
-  <!-- #7 — vr-headset: taller container so controller is visible at bottom -->
   <div class="pub-img-float pub-img-a">
     <img src="/assets/img/vr-headset.jpg" alt="VR headset" />
   </div>
   <div class="pub-img-float pub-img-b">
     <img src="/assets/img/vr-museum.jpg" alt="VR museum" />
   </div>
-  <!-- #8 — vr-space: no white square — overflow hidden + cover -->
   <div class="pub-img-float pub-img-c">
     <img src="/assets/img/vr-space.jpg" alt="VR space" />
   </div>
@@ -597,7 +707,6 @@ article{ padding:0!important;margin:0!important; }
 
   <div class="cv-divider"></div>
 
-  <!-- #9 — only Email + Bluesky; label teal, value white -->
   <div class="contact-panel" id="contact">
     <p class="section-label">Contact</p>
     <div class="contact-grid">
