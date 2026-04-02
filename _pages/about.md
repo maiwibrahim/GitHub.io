@@ -86,33 +86,66 @@ article{ padding:0!important;margin:0!important; }
 .hero-blob-b { width:320px;height:320px;background:rgba(13,191,180,.12);bottom:10%;right:28%; }
 .hero-blob-c { width:260px;height:260px;background:rgba(245,226,122,.07);top:20%;left:5%; }
 
-.ui-dots {
-  position:absolute;top:18px;right:20px;
-  display:flex;gap:5px;z-index:10;
-}
-.ui-dots span { width:6px;height:6px;border-radius:50%; }
-
-/* ---- AVATARS ---- */
-.av {
-  position:absolute;display:flex;flex-direction:column;
-  align-items:center;gap:4px;z-index:5;
-  opacity:0;animation:avFloat .7s ease forwards;
+/* ===================== AVATAR SYSTEM ===================== */
+.av-wrap {
+  position:absolute;
+  display:flex;flex-direction:column;
+  align-items:center;gap:7px;
+  z-index:5;
+  opacity:0;
+  animation:avFloat .7s ease forwards;
 }
 @keyframes avFloat {
   from{opacity:0;transform:translateY(14px);}
   to  {opacity:1;transform:translateY(0);}
 }
-.av-body {
-  border-radius:50% 50% 40% 40%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;
+
+/* Oval container — slightly taller than wide */
+.av-oval {
+  position:relative;
+  width:160px;
+  height:190px;
+  border-radius:50%;
+  overflow:hidden;
+  flex-shrink:0;
 }
-.av-shadow { border-radius:50%;height:5px; }
+
+/* Border ring rendered via outline trick so it sits outside the overflow:hidden */
+.av-oval::after {
+  content:'';
+  position:absolute;inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+}
+
+.av-oval--gold::after  { box-shadow:inset 0 0 0 2px rgba(245,226,122,.75), inset 0 0 18px rgba(0,0,0,.35); }
+.av-oval--pink::after  { box-shadow:inset 0 0 0 2px rgba(255,61,130,.80),  inset 0 0 18px rgba(0,0,0,.35); }
+.av-oval--teal::after  { box-shadow:inset 0 0 0 2px rgba(13,191,180,.80),  inset 0 0 18px rgba(0,0,0,.35); }
+
+.av-oval canvas {
+  display:block;
+  width:160px;
+  height:190px;
+}
+
 .av-label {
-  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.05em;
-  background:rgba(0,0,0,.38);padding:2px 7px;border-radius:2px;white-space:nowrap;
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.07em;
+  background:rgba(0,0,0,.42);padding:3px 9px;border-radius:3px;white-space:nowrap;
 }
-.av-icon { width:32px;height:32px;flex-shrink:0;display:block; }
+
+/* Floating tag pill */
+.hero-tag {
+  position:absolute;z-index:6;
+  opacity:0;animation:avFloat .7s ease forwards;
+  background:rgba(255,255,255,.09);
+  border:.5px solid rgba(255,255,255,.22);
+  padding:5px 13px;font-size:11px;
+  font-family:'Space Mono',monospace;
+  color:rgba(255,255,255,.75);
+  white-space:nowrap;border-radius:6px;
+  box-shadow:0 2px 12px rgba(255,61,130,.12);
+}
 
 /* ---- HERO CONTENT ---- */
 .hero-content {
@@ -324,7 +357,7 @@ article{ padding:0!important;margin:0!important; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
 
-  .av { transform:scale(.78);transform-origin:top left; }
+  .av-wrap { transform:scale(.75);transform-origin:top left; }
 
   .about-section {
     clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);
@@ -376,220 +409,38 @@ article{ padding:0!important;margin:0!important; }
   <div class="hero-blob hero-blob-b"></div>
   <div class="hero-blob hero-blob-c"></div>
 
-  <div class="ui-dots">
-    <span style="background:var(--teal);"></span>
-    <span style="background:var(--pink);"></span>
-    <span style="background:var(--yellow);"></span>
-  </div>
-
-  <!-- intensity02 — upper far right -->
-  <div class="av" style="top:16%;right:11%;animation-delay:.1s;">
-    <div class="av-body" style="width:56px;height:62px;background:rgba(245,226,122,.16);border:1px solid rgba(245,226,122,.5);">
-      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="intensity-clip">
-            <circle cx="20" cy="20" r="17"/>
-          </clipPath>
-        </defs>
-        <!-- intensity02: Massumi's pre-conscious intensity — resists capture.
-             A shape that is almost in focus, slightly trembling, never resolving.
-             All content clipped to circle. -->
-        <g clip-path="url(#intensity-clip)">
-          <!-- outer diffuse haze — ellipses disagree on form -->
-          <ellipse cx="20" cy="20" rx="16" ry="13" fill="rgba(255,248,180,0.07)"/>
-          <ellipse cx="22" cy="18" rx="13" ry="15" fill="rgba(255,240,130,0.07)"/>
-          <ellipse cx="17" cy="22" rx="14" ry="10" fill="rgba(255,252,200,0.07)"/>
-          <ellipse cx="21" cy="19" rx="10" ry="14" fill="rgba(245,220,100,0.07)"/>
-          <!-- mid layer — warmer, slightly more present, still no consensus -->
-          <ellipse cx="20" cy="20" rx="11" ry="9"  fill="rgba(255,248,180,0.10)"/>
-          <ellipse cx="22" cy="21" rx="9"  ry="12" fill="rgba(255,240,130,0.09)"/>
-          <ellipse cx="18" cy="19" rx="10" ry="8"  fill="rgba(255,252,210,0.11)"/>
-          <ellipse cx="20" cy="22" rx="8"  ry="10" fill="rgba(255,244,150,0.10)"/>
-          <!-- inner — warmest, most concentrated, still no true form -->
-          <ellipse cx="20" cy="20" rx="7"  ry="6"  fill="rgba(255,248,180,0.18)"/>
-          <ellipse cx="21" cy="19" rx="6"  ry="7"  fill="rgba(255,240,130,0.15)"/>
-          <ellipse cx="19" cy="21" rx="5"  ry="6"  fill="rgba(255,252,200,0.16)"/>
-          <!-- near-centre: almost something, almost nothing -->
-          <ellipse cx="20" cy="20" rx="4"  ry="3"  fill="rgba(255,248,180,0.22)"/>
-          <ellipse cx="20.5" cy="19.5" rx="2.5" ry="3" fill="rgba(255,244,160,0.20)"/>
-          <!-- tremor rings: suggest a boundary without committing to one -->
-          <ellipse cx="20" cy="20" rx="17" ry="14" fill="none" stroke="rgba(245,226,122,0.06)" stroke-width="2.5"/>
-          <ellipse cx="19" cy="21" rx="13" ry="11" fill="none" stroke="rgba(255,248,180,0.05)" stroke-width="1.8"/>
-          <ellipse cx="21" cy="19" rx="10" ry="9"  fill="none" stroke="rgba(245,220,100,0.06)" stroke-width="1.2"/>
-        </g>
-      </svg>
+  <!-- intensity02 — upper right, gold oval -->
+  <div class="av-wrap" style="top:38%;right:11%;animation-delay:.10s;">
+    <div class="av-oval av-oval--gold">
+      <canvas id="cv-intensity" width="320" height="380"></canvas>
     </div>
-    <div style="width:38px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
   </div>
 
-  <!-- extraction05 — upper centre-right -->
-  <div class="av" style="top:22%;right:40%;animation-delay:.28s;">
-    <div class="av-body" style="width:56px;height:62px;background:rgba(255,61,130,.2);border:1px solid rgba(255,61,130,.5);">
-      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="extraction-clip">
-            <circle cx="20" cy="20" r="17"/>
-          </clipPath>
-        </defs>
-        <!-- extraction05: funnel with silver pixelated dots above the mouth,
-             raining down and converging into the void. All clipped to circle. -->
-        <g clip-path="url(#extraction-clip)">
-          <!-- Funnel in lower portion of circle -->
-          <path d="M6 18 L34 18 L26 28 L26 38 L14 38 L14 28 Z"
-                stroke="rgba(255,100,160,0.9)" stroke-width="1.4"
-                fill="rgba(255,61,130,0.10)" stroke-linejoin="round"/>
-          <path d="M11 18 L29 18 L22 27 L22 38 L18 38 L18 27 Z"
-                fill="rgba(255,61,130,0.06)"/>
-          <!-- Dark void -->
-          <ellipse cx="20" cy="38" rx="6"   ry="2"   fill="rgba(10,0,15,0.88)"/>
-          <ellipse cx="20" cy="38" rx="3.5" ry="1.1" fill="rgba(0,0,0,0.95)"/>
-
-          <!-- SILVER PIXELATED DOTS — all above funnel mouth, inside circle -->
-          <!-- Row 1 — uppermost -->
-          <rect x="5"  y="3"  width="3"   height="3"   fill="rgba(200,210,220,0.95)" rx=".3"/>
-          <rect x="11" y="2"  width="2.5" height="2.5" fill="rgba(180,195,210,0.90)" rx=".3"/>
-          <rect x="17" y="3"  width="2.5" height="2.5" fill="rgba(215,225,232,0.92)" rx=".3"/>
-          <rect x="23" y="2"  width="3"   height="3"   fill="rgba(190,205,218,0.90)" rx=".3"/>
-          <rect x="30" y="3"  width="2.5" height="2.5" fill="rgba(205,215,225,0.88)" rx=".3"/>
-          <!-- Row 2 — converging inward -->
-          <rect x="7"  y="8"  width="2.5" height="2.5" fill="rgba(185,200,215,0.88)" rx=".3"/>
-          <rect x="13" y="7.5" width="2.5" height="2.5" fill="rgba(210,222,230,0.86)" rx=".3"/>
-          <rect x="19" y="8"  width="2"   height="2"   fill="rgba(225,232,238,0.88)" rx=".3"/>
-          <rect x="25" y="7.5" width="2.5" height="2.5" fill="rgba(195,208,220,0.85)" rx=".3"/>
-          <rect x="31" y="8"  width="2"   height="2"   fill="rgba(180,195,210,0.82)" rx=".3"/>
-          <!-- Row 3 — just above funnel mouth -->
-          <rect x="9"  y="13" width="2"   height="2"   fill="rgba(175,192,208,0.80)" rx=".2"/>
-          <rect x="15" y="12.5" width="2" height="2"   fill="rgba(205,218,228,0.80)" rx=".2"/>
-          <rect x="21" y="13" width="2"   height="2"   fill="rgba(215,225,235,0.80)" rx=".2"/>
-          <rect x="27" y="12.5" width="2" height="2"   fill="rgba(188,202,215,0.78)" rx=".2"/>
-          <!-- motion streaks -->
-          <line x1="6.5"  y1="6.5" x2="6.5"  y2="9.5" stroke="rgba(200,215,228,0.22)" stroke-width=".8" stroke-linecap="round"/>
-          <line x1="12.5" y1="6"   x2="12.5" y2="9"   stroke="rgba(210,222,232,0.20)" stroke-width=".8" stroke-linecap="round"/>
-          <line x1="20"   y1="6.5" x2="20"   y2="9.5" stroke="rgba(220,230,238,0.18)" stroke-width=".7" stroke-linecap="round"/>
-          <line x1="26.5" y1="6"   x2="26.5" y2="9"   stroke="rgba(200,212,225,0.20)" stroke-width=".8" stroke-linecap="round"/>
-          <!-- Inside funnel — silver dots already captured, converging to void -->
-          <rect x="15.5" y="20" width="2"   height="2"   fill="rgba(170,185,200,0.70)" rx=".2"/>
-          <rect x="21.5" y="21" width="1.8" height="1.8" fill="rgba(160,178,195,0.65)" rx=".2"/>
-          <rect x="18"   y="25" width="1.5" height="1.5" fill="rgba(150,168,185,0.50)" rx=".2"/>
-          <rect x="19.2" y="29" width="1.2" height="1.2" fill="rgba(140,158,175,0.38)" rx=".2"/>
-          <rect x="19.5" y="33" width=".9"  height=".9"  fill="rgba(130,148,165,0.25)" rx=".1"/>
-        </g>
-      </svg>
+  <!-- extraction05 — mid right, pink oval -->
+  <div class="av-wrap" style="top:46%;right:32%;animation-delay:.28s;">
+    <div class="av-oval av-oval--pink">
+      <canvas id="cv-extraction" width="320" height="380"></canvas>
     </div>
-    <div style="width:38px;background:rgba(255,61,130,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
   </div>
 
-  <!-- glitch_24 — mid between extraction & intensity -->
-  <div class="av" style="top:42%;right:28%;animation-delay:.45s;">
-    <div class="av-body" style="width:56px;height:62px;background:rgba(13,191,180,.18);border:1px solid rgba(13,191,180,.55);">
-      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <clipPath id="glitch-outer-clip">
-            <circle cx="20" cy="20" r="17"/>
-          </clipPath>
-          <clipPath id="screen-inner-clip">
-            <rect x="3" y="6" width="34" height="24" rx="1.5"/>
-          </clipPath>
-        </defs>
-        <!-- glitch_24: heavily corrupted screen. All clipped to circle. -->
-        <g clip-path="url(#glitch-outer-clip)">
-          <!-- Screen base -->
-          <rect x="3" y="6" width="34" height="24" rx="1.5"
-                fill="rgba(2,8,18,0.97)" stroke="rgba(13,191,180,0.6)" stroke-width="1.3"/>
-          <!-- Stand -->
-          <rect x="16" y="30" width="8" height="3" fill="rgba(13,191,180,0.35)" rx=".5"/>
-          <rect x="13" y="33" width="14" height="1.8" fill="rgba(13,191,180,0.3)" rx=".4"/>
-
-          <g clip-path="url(#screen-inner-clip)">
-            <!-- HARD GLITCH SLICES -->
-            <!-- Slice A: teal band offset right -->
-            <rect x="13" y="8"  width="32" height="3.5" fill="rgba(13,191,180,0.82)" rx=".2"/>
-            <rect x="3"  y="8"  width="14" height="3.5" fill="rgba(0,255,220,0.22)"  rx=".2"/>
-            <rect x="24" y="8"  width="16" height="3.5" fill="rgba(255,0,80,0.18)"   rx=".2"/>
-            <!-- Slice B: pink band offset left -->
-            <rect x="-6" y="13" width="26" height="2.5" fill="rgba(255,61,130,0.85)" rx=".2"/>
-            <rect x="3"  y="13" width="20" height="2.5" fill="rgba(255,0,80,0.18)"   rx=".2"/>
-            <!-- Slice C: yellow strip -->
-            <rect x="9"  y="17.5" width="30" height="1.8" fill="rgba(245,226,122,0.70)" rx=".2"/>
-            <!-- Slice D: teal chunk offset right -->
-            <rect x="17" y="21" width="28" height="2.5" fill="rgba(13,191,180,0.58)" rx=".2"/>
-            <rect x="8"  y="21" width="16" height="2.5" fill="rgba(255,61,130,0.18)" rx=".2"/>
-            <!-- Slice E: torn white strip near bottom -->
-            <rect x="3"  y="25" width="18" height="2"   fill="rgba(255,255,255,0.55)" rx=".2"/>
-            <rect x="22" y="25" width="14" height="2"   fill="rgba(13,191,180,0.40)"  rx=".2"/>
-            <!-- NOISE BLOCKS -->
-            <rect x="4"    y="6.5"  width="3"   height="3"   fill="rgba(255,240,130,1)"    rx=".1"/>
-            <rect x="30"   y="7"    width="3.5" height="2.5" fill="rgba(255,61,130,1)"     rx=".1"/>
-            <rect x="34"   y="8.5"  width="2.5" height="2.5" fill="rgba(0,255,220,1)"      rx=".1"/>
-            <rect x="4"    y="24"   width="4"   height="2"   fill="rgba(255,111,163,0.95)" rx=".1"/>
-            <rect x="22"   y="7"    width="2"   height="2"   fill="rgba(255,255,255,0.90)" rx=".1"/>
-            <rect x="9"    y="22"   width="3"   height="2.5" fill="rgba(245,226,122,0.90)" rx=".1"/>
-            <rect x="30"   y="20"   width="3.5" height="2.5" fill="rgba(13,191,180,1)"     rx=".1"/>
-            <rect x="6"    y="12"   width="2"   height="4"   fill="rgba(255,255,255,0.28)" rx=".1"/>
-            <rect x="34"   y="15"   width="3"   height="5"   fill="rgba(255,255,255,0.22)" rx=".1"/>
-            <!-- Inverted block -->
-            <rect x="17"   y="11.5" width="7"  height="4"   fill="rgba(255,255,255,0.65)" rx=".1"/>
-            <rect x="18.5" y="12.5" width="4"  height="2.5" fill="rgba(2,8,18,0.90)"      rx=".1"/>
-            <!-- missing-chunk: black patches over content -->
-            <rect x="3"  y="19"   width="6"  height="2"   fill="rgba(2,8,18,0.97)"     rx=".1"/>
-            <rect x="28" y="22.5" width="6"  height="2"   fill="rgba(2,8,18,0.97)"     rx=".1"/>
-            <!-- RGB CHANNEL FRINGE -->
-            <rect x="3"  y="8" width="3"   height="20" fill="rgba(255,0,80,0.22)"   rx=".1"/>
-            <rect x="5"  y="8" width="1.5" height="20" fill="rgba(0,255,220,0.18)"  rx=".1"/>
-            <rect x="34" y="8" width="3"   height="20" fill="rgba(255,0,80,0.20)"   rx=".1"/>
-            <rect x="33" y="8" width="1.5" height="20" fill="rgba(0,255,220,0.15)"  rx=".1"/>
-            <!-- SCAN TEARS -->
-            <line x1="3" y1="11.5" x2="37" y2="11.5" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
-            <line x1="3" y1="16.5" x2="37" y2="16.5" stroke="rgba(13,191,180,0.22)"  stroke-width="1.0"/>
-            <line x1="3" y1="20.5" x2="37" y2="20.5" stroke="rgba(255,61,130,0.15)"  stroke-width="0.8"/>
-            <line x1="3" y1="24"   x2="37" y2="24"   stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/>
-          </g>
-        </g>
-      </svg>
+  <!-- glitch_24 — lower right, teal oval -->
+  <div class="av-wrap" style="top:58%;right:11%;animation-delay:.45s;">
+    <div class="av-oval av-oval--teal">
+      <canvas id="cv-glitch" width="320" height="380"></canvas>
     </div>
-    <div style="width:38px;background:rgba(13,191,180,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
   </div>
 
-  <!-- "digital media" floating tag — centroid of the three avatars -->
-  <div style="position:absolute;top:30%;right:24%;z-index:6;opacity:0;animation:avFloat .7s ease .55s forwards;">
-    <div style="
-      background:rgba(255,255,255,.09);
-      border:.5px solid rgba(255,255,255,.22);
-      padding:5px 13px;font-size:11px;
-      font-family:'Space Mono',monospace;
-      color:rgba(255,255,255,.75);
-      white-space:nowrap;border-radius:6px;
-      box-shadow:0 2px 12px rgba(255,61,130,.12);
-    ">digital media</div>
-  </div>
-
-  <!--
-    "researching" floating tag.
-    Placed below intensity02 (top:16% right:11%) AND below glitch_24 (top:42%),
-    so top:54% right:9% puts it comfortably under both.
-    Lens SVG sits LEFT of the word with a gap so it never overlaps the text.
-  -->
-  <div style="position:absolute;top:54%;right:9%;z-index:6;opacity:0;animation:avFloat .7s ease .65s forwards;">
-    <div style="
-      background:rgba(255,255,255,.09);
-      border:.5px solid rgba(255,255,255,.22);
-      padding:5px 12px 5px 10px;
-      font-size:11px;
-      font-family:'Space Mono',monospace;
-      color:rgba(255,255,255,.75);
-      white-space:nowrap;border-radius:6px;
-      box-shadow:0 2px 12px rgba(255,61,130,.12);
-      display:inline-flex;align-items:center;gap:6px;
-    ">
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block;">
-        <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
-        <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-      researching
-    </div>
+  <!-- floating tags -->
+  <div class="hero-tag" style="top:30%;right:24%;animation-delay:.55s;">digital media</div>
+  <div class="hero-tag" style="top:54%;right:9%;animation-delay:.65s;display:inline-flex;align-items:center;gap:6px;">
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+      <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
+      <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    researching
   </div>
 
   <div class="hero-content">
@@ -695,6 +546,9 @@ article{ padding:0!important;margin:0!important; }
 </div>
 
 <script>
+/* =========================================================
+   SCROLL BAR
+   ========================================================= */
 (function(){
   var bar=document.getElementById('scrollBar');
   function onScroll(){
@@ -704,5 +558,295 @@ article{ padding:0!important;margin:0!important; }
   }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
+})();
+
+/* =========================================================
+   WEBGL SHADER UTILITY
+   ========================================================= */
+function initShader(canvas, fsSource) {
+  var gl = canvas.getContext('webgl', {antialias:true, alpha:true});
+  if (!gl) return null;
+
+  var vsSource = [
+    'attribute vec2 a_pos;',
+    'void main(){gl_Position=vec4(a_pos,0.0,1.0);}'
+  ].join('\n');
+
+  function compile(type, src) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vsSource));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fsSource));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  return {
+    gl: gl,
+    prog: prog,
+    u: function(name){ return gl.getUniformLocation(prog, name); }
+  };
+}
+
+function animate(ctx, draw) {
+  function frame(t) {
+    draw(t * 0.001);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+/* =========================================================
+   SHADER 1 — intensity02
+   Domain-warped fractal Brownian motion, golden warmth
+   ========================================================= */
+(function(){
+  var cv = document.getElementById('cv-intensity');
+  if (!cv) return;
+  var ctx = initShader(cv, [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2  u_res;',
+
+    'float hash(vec2 p){',
+    '  return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);',
+    '}',
+
+    'float noise(vec2 p){',
+    '  vec2 i=floor(p), f=fract(p);',
+    '  vec2 u=f*f*(3.0-2.0*f);',
+    '  return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),',
+    '             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);',
+    '}',
+
+    'float fbm(vec2 p){',
+    '  float v=0.0, a=0.5;',
+    '  mat2 r=mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.5));',
+    '  for(int i=0;i<6;i++){v+=a*noise(p);p=r*p*2.1;a*=0.5;}',
+    '  return v;',
+    '}',
+
+    'void main(){',
+    '  vec2 uv=(gl_FragCoord.xy/u_res)*2.0-1.0;',
+    '  uv.x*=u_res.x/u_res.y;',
+    '  float t=u_time*0.18;',
+    /* domain warp — two layers */
+    '  vec2 q=vec2(fbm(uv+vec2(0.0,0.0)),',
+    '              fbm(uv+vec2(5.2,1.3)));',
+    '  vec2 r=vec2(fbm(uv+4.0*q+vec2(1.7+t,9.2)),',
+    '              fbm(uv+4.0*q+vec2(8.3,2.8+t*0.7)));',
+    '  float f=fbm(uv+4.0*r);',
+    /* colour — golden warmth pools */
+    '  vec3 col=mix(vec3(0.12,0.06,0.01), vec3(0.70,0.52,0.08), clamp(f*f*4.0,0.0,1.0));',
+    '  col=mix(col, vec3(0.96,0.86,0.38), clamp(length(q),0.0,1.0));',
+    '  col=mix(col, vec3(1.00,0.97,0.72), f*f*f*f);',
+    /* vignette */
+    '  float vig=1.0-dot(uv*0.55,uv*0.55);',
+    '  col*=vig*vig;',
+    '  gl_FragColor=vec4(col,0.82*vig*vig);',
+    '}'
+  ].join('\n'));
+  if (!ctx) return;
+  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
+  ctx.gl.uniform2f(uRes, cv.width, cv.height);
+  animate(ctx, function(t){
+    ctx.gl.uniform1f(uTime, t);
+    ctx.gl.viewport(0,0,cv.width,cv.height);
+    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
+    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  });
+})();
+
+/* =========================================================
+   SHADER 2 — extraction05
+   Spinning vortex field + silver particle rain into void
+   ========================================================= */
+(function(){
+  var cv = document.getElementById('cv-extraction');
+  if (!cv) return;
+  var ctx = initShader(cv, [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2  u_res;',
+
+    'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+    'float hash1(float n){return fract(sin(n)*753.5453);}',
+
+    'void main(){',
+    '  vec2 uv=(gl_FragCoord.xy/u_res)*2.0-1.0;',
+    '  uv.x*=u_res.x/u_res.y;',
+    '  float t=u_time;',
+
+    /* --- vortex field --- */
+    '  float r=length(uv);',
+    '  float a=atan(uv.y,uv.x);',
+    '  float spin=a - t*1.4 - 3.0/(r+0.18);',
+    '  float swirl=sin(spin*5.0)*0.5+0.5;',
+    '  float arms=smoothstep(0.38,0.0,mod(spin*0.5+t*0.3,1.0)-0.5)*0.6;',
+
+    /* void pull — darkening towards centre */
+    '  float vd=1.0-smoothstep(0.0,0.55,r);',
+
+    /* base pink/magenta vortex colour */
+    '  vec3 vortex=mix(vec3(0.05,0.01,0.04), vec3(0.80,0.10,0.36), swirl*(1.0-vd));',
+    '  vortex+=arms*vec3(1.0,0.24,0.51)*0.5;',
+
+    /* --- silver particle rain --- */
+    /* tile UV into columns, each column has particles falling */
+    '  vec2 pUV=vec2((uv.x*0.5+0.5)*16.0, (uv.y*0.5+0.5));',
+    '  float col_id=floor(pUV.x);',
+    '  float col_frac=fract(pUV.x);',
+
+    /* each column: 4 staggered particles */
+    '  float sparkle=0.0;',
+    '  for(int k=0;k<4;k++){',
+    '    float ki=float(k);',
+    '    float speed=0.28+hash1(col_id*7.0+ki)*0.44;',
+    '    float phase=hash1(col_id*3.1+ki*5.7);',
+    '    float py=fract(phase - t*speed);',   /* falls top→0 */
+    '    float dy=abs(pUV.y-py);',
+    '    float dot_r=0.025+hash1(col_id+ki)*0.015;',
+    '    sparkle+=smoothstep(dot_r,0.0,dy)*smoothstep(0.4,0.0,abs(col_frac-0.5));',
+    '  }',
+
+    /* silver colour with slight blue tint, fade as they approach the vortex centre */
+    '  float fadeIn=smoothstep(0.0,0.08,r);',  /* don't show particles inside void */
+    '  vec3 silver=vec3(0.82,0.88,0.92)*sparkle*fadeIn;',
+
+    /* combine */
+    '  vec3 col=vortex+silver;',
+    /* vignette */
+    '  float vig=1.0-dot(uv*0.55,uv*0.55);',
+    '  col*=clamp(vig,0.0,1.0);',
+    '  float alpha=0.82*clamp(vig,0.0,1.0);',
+    '  gl_FragColor=vec4(col,alpha);',
+    '}'
+  ].join('\n'));
+  if (!ctx) return;
+  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
+  ctx.gl.uniform2f(uRes, cv.width, cv.height);
+  animate(ctx, function(t){
+    ctx.gl.uniform1f(uTime, t);
+    ctx.gl.viewport(0,0,cv.width,cv.height);
+    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
+    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  });
+})();
+
+/* =========================================================
+   SHADER 3 — glitch_24
+   CRT corruption: scanlines, RGB split, noise blocks,
+   chromatic aberration, all regenerating each frame
+   ========================================================= */
+(function(){
+  var cv = document.getElementById('cv-glitch');
+  if (!cv) return;
+  var ctx = initShader(cv, [
+    'precision highp float;',
+    'uniform float u_time;',
+    'uniform vec2  u_res;',
+
+    'float hash(float n){return fract(sin(n)*43758.5453);}',
+    'float hash2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+
+    'void main(){',
+    '  vec2 uv=gl_FragCoord.xy/u_res;',
+    '  float t=u_time;',
+
+    /* --- scanline baseline --- */
+    '  float scan=sin(uv.y*u_res.y*0.9)*0.04;',
+
+    /* --- per-scanline horizontal displacement (tear) --- */
+    '  float lineIdx=floor(uv.y*u_res.y);',
+    '  float tearT=floor(t*8.0);',   /* 8 tears/sec */
+    '  float tearR=hash(lineIdx*0.001+tearT);',
+    '  float tearStrength=step(0.88,tearR)*hash(lineIdx+tearT*3.7);',
+    '  float xShift=tearStrength*(hash(lineIdx*2.0+tearT)*2.0-1.0)*0.14;',
+
+    /* displaced uv for main channel */
+    '  vec2 uvD=vec2(uv.x+xShift, uv.y)+scan;',
+
+    /* --- RGB channel split (chromatic aberration) --- */
+    '  float caAmt=0.012+0.018*hash(floor(t*4.0));',
+    '  vec2 uvR=uvD+vec2( caAmt,  0.0);',
+    '  vec2 uvG=uvD+vec2( 0.0,    0.0);',
+    '  vec2 uvB=uvD+vec2(-caAmt,  0.0);',
+
+    /* --- base CRT screen colour (dark teal phosphor) --- */
+    '  float screenR=0.02+0.13*hash2(uvR*vec2(7.3,2.1)+t*0.5);',
+    '  float screenG=0.06+0.22*hash2(uvG*vec2(5.1,8.7)+t*0.4);',
+    '  float screenB=0.04+0.10*hash2(uvB*vec2(9.2,3.3)+t*0.6);',
+
+    /* teal phosphor tint base */
+    '  vec3 phosphor=vec3(screenR, screenG*1.6, screenB*1.4);',
+    '  phosphor+=vec3(0.0,0.28,0.25)*0.6;',
+
+    /* --- glitch colour bands --- */
+    /* Band: full-width teal horizontal slice, scrolling */
+    '  float b1y=fract(uv.y*3.0 - t*0.42);',
+    '  float band1=step(0.96,b1y)*0.9;',
+    '  vec3 bCol1=vec3(0.05,0.75,0.71)*band1;',
+
+    /* Band: pink slice going opposite */
+    '  float b2y=fract(uv.y*5.0 + t*0.31);',
+    '  float band2=step(0.975,b2y)*0.75;',
+    '  vec3 bCol2=vec3(1.0,0.24,0.51)*band2;',
+
+    /* Band: yellow thin stripe */
+    '  float b3y=fract(uv.y*9.0 - t*0.2+0.5);',
+    '  float band3=step(0.988,b3y)*0.6;',
+    '  vec3 bCol3=vec3(0.96,0.89,0.27)*band3;',
+
+    /* --- noise blocks (random coloured rectangles) --- */
+    /* divide screen into coarse cells, flicker */
+    '  vec2 cell8=floor(uv*8.0);',
+    '  float blockT=floor(t*12.0);',
+    '  float blockR=hash2(cell8+blockT);',
+    '  float isBlock=step(0.93,blockR);',
+    '  vec3 blockCol=vec3(hash(blockR*7.1),hash(blockR*13.3),hash(blockR*5.9))*isBlock;',
+    '  float blockAlpha=isBlock*0.65;',
+
+    /* --- scanline dark lines every 2 px --- */
+    '  float sline=0.65+0.35*step(0.5,fract(uv.y*u_res.y*0.5));',
+
+    /* --- compose --- */
+    '  vec3 col=phosphor;',
+    '  col+=bCol1+bCol2+bCol3;',
+    '  col=mix(col,blockCol,blockAlpha);',
+    '  col*=sline;',
+
+    /* vignette */
+    '  vec2 vUV=uv*2.0-1.0;',
+    '  float vig=1.0-dot(vUV*0.55,vUV*0.55);',
+    '  col*=vig;',
+
+    /* clamp */
+    '  col=clamp(col,0.0,1.0);',
+    '  gl_FragColor=vec4(col,0.82*vig);',
+    '}'
+  ].join('\n'));
+  if (!ctx) return;
+  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
+  ctx.gl.uniform2f(uRes, cv.width, cv.height);
+  animate(ctx, function(t){
+    ctx.gl.uniform1f(uTime, t);
+    ctx.gl.viewport(0,0,cv.width,cv.height);
+    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
+    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  });
 })();
 </script>
