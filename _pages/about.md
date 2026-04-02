@@ -90,27 +90,25 @@ article{ padding:0!important;margin:0!important; }
 .av-wrap {
   position:absolute;
   display:flex;flex-direction:column;
-  align-items:center;gap:7px;
+  align-items:center;gap:6px;
   z-index:5;
   opacity:0;
   animation:avFloat .7s ease forwards;
 }
 @keyframes avFloat {
-  from{opacity:0;transform:translateY(14px);}
+  from{opacity:0;transform:translateY(12px);}
   to  {opacity:1;transform:translateY(0);}
 }
 
-/* Oval container — slightly taller than wide */
+/* Oval — 100px wide × 120px tall */
 .av-oval {
   position:relative;
-  width:160px;
-  height:190px;
+  width:100px;
+  height:120px;
   border-radius:50%;
   overflow:hidden;
   flex-shrink:0;
 }
-
-/* Border ring rendered via outline trick so it sits outside the overflow:hidden */
 .av-oval::after {
   content:'';
   position:absolute;inset:0;
@@ -118,20 +116,19 @@ article{ padding:0!important;margin:0!important; }
   pointer-events:none;
   z-index:3;
 }
-
-.av-oval--gold::after  { box-shadow:inset 0 0 0 2px rgba(245,226,122,.75), inset 0 0 18px rgba(0,0,0,.35); }
-.av-oval--pink::after  { box-shadow:inset 0 0 0 2px rgba(255,61,130,.80),  inset 0 0 18px rgba(0,0,0,.35); }
-.av-oval--teal::after  { box-shadow:inset 0 0 0 2px rgba(13,191,180,.80),  inset 0 0 18px rgba(0,0,0,.35); }
+.av-oval--gold::after { box-shadow:inset 0 0 0 2px rgba(245,226,122,.80), inset 0 0 12px rgba(0,0,0,.45); }
+.av-oval--pink::after { box-shadow:inset 0 0 0 2px rgba(255,61,130,.85),  inset 0 0 12px rgba(0,0,0,.45); }
+.av-oval--teal::after { box-shadow:inset 0 0 0 2px rgba(13,191,180,.85),  inset 0 0 12px rgba(0,0,0,.45); }
 
 .av-oval canvas {
   display:block;
-  width:160px;
-  height:190px;
+  width:100px;
+  height:120px;
 }
 
 .av-label {
-  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.07em;
-  background:rgba(0,0,0,.42);padding:3px 9px;border-radius:3px;white-space:nowrap;
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.07em;
+  background:rgba(0,0,0,.42);padding:2px 7px;border-radius:3px;white-space:nowrap;
 }
 
 /* Floating tag pill */
@@ -140,7 +137,7 @@ article{ padding:0!important;margin:0!important; }
   opacity:0;animation:avFloat .7s ease forwards;
   background:rgba(255,255,255,.09);
   border:.5px solid rgba(255,255,255,.22);
-  padding:5px 13px;font-size:11px;
+  padding:4px 12px;font-size:10px;
   font-family:'Space Mono',monospace;
   color:rgba(255,255,255,.75);
   white-space:nowrap;border-radius:6px;
@@ -352,31 +349,20 @@ article{ padding:0!important;margin:0!important; }
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
   .site-nav a { font-size:10px; }
-
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-
-  .av-wrap { transform:scale(.75);transform-origin:top left; }
-
-  .about-section {
-    clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);
-    padding:80px 1.5rem 80px;margin-top:-30px;
-  }
+  .av-wrap { transform:scale(.65);transform-origin:top right; }
+  .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
   .about-img { width:190px;height:246px; }
   .text-col { transform:rotate(1.5deg);max-width:100%;min-width:unset; }
   .about-text { font-size:15px; }
   .section-label { font-size:15px; }
-
-  .pubs-section {
-    clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);
-    padding-top:80px;margin-top:-30px;
-  }
+  .pubs-section { clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);padding-top:80px;margin-top:-30px; }
   .pub-entry { font-size:15px; }
   .pub-img-float { display:none; }
-
   .cv-contact-section { grid-template-columns:1fr; }
   .cv-divider { display:none; }
   .cv-panel { padding:5rem 1.5rem 3rem; }
@@ -409,34 +395,51 @@ article{ padding:0!important;margin:0!important; }
   <div class="hero-blob hero-blob-b"></div>
   <div class="hero-blob hero-blob-c"></div>
 
-  <!-- intensity02 — upper right, gold oval -->
-  <div class="av-wrap" style="top:38%;right:11%;animation-delay:.10s;">
+  <!--
+    No-overlap layout — right side column stack.
+    Each av-wrap is 100px wide × ~148px total (oval 120px + gap 6px + label 22px).
+    Tags are ~24px tall.
+
+    Column A (far right, right:3%):
+      intensity02   top:14%  — occupies ~14% to ~14%+148px
+      "digital media" tag  top:41%  (clear below intensity02 at ~30vh on 900px = ~33%)
+      glitch_24     top:52%  — below tag
+
+    Column B (left of A, right:20%):
+      extraction05  top:33%  — vertically between intensity02 bottom and tag
+      "researching" tag  top:72%  — below both glitch and extraction
+  -->
+
+  <!-- intensity02 — column A, top — gold/pale-yellow -->
+  <div class="av-wrap" style="top:14%;right:3%;animation-delay:.10s;">
     <div class="av-oval av-oval--gold">
-      <canvas id="cv-intensity" width="320" height="380"></canvas>
+      <canvas id="cv-intensity" width="200" height="240"></canvas>
     </div>
     <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
   </div>
 
-  <!-- extraction05 — mid right, pink oval -->
-  <div class="av-wrap" style="top:46%;right:32%;animation-delay:.28s;">
+  <!-- extraction05 — column B, middle — pink -->
+  <div class="av-wrap" style="top:33%;right:18%;animation-delay:.28s;">
     <div class="av-oval av-oval--pink">
-      <canvas id="cv-extraction" width="320" height="380"></canvas>
+      <canvas id="cv-extraction" width="200" height="240"></canvas>
     </div>
     <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
   </div>
 
-  <!-- glitch_24 — lower right, teal oval -->
-  <div class="av-wrap" style="top:58%;right:11%;animation-delay:.45s;">
+  <!-- "digital media" tag — column A, below intensity02, above glitch -->
+  <div class="hero-tag" style="top:40%;right:3%;animation-delay:.55s;">digital media</div>
+
+  <!-- glitch_24 — column A, below tag — teal -->
+  <div class="av-wrap" style="top:50%;right:3%;animation-delay:.45s;">
     <div class="av-oval av-oval--teal">
-      <canvas id="cv-glitch" width="320" height="380"></canvas>
+      <canvas id="cv-glitch" width="200" height="240"></canvas>
     </div>
     <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
   </div>
 
-  <!-- floating tags -->
-  <div class="hero-tag" style="top:30%;right:24%;animation-delay:.55s;">digital media</div>
-  <div class="hero-tag" style="top:54%;right:9%;animation-delay:.65s;display:inline-flex;align-items:center;gap:6px;">
-    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+  <!-- "researching" tag — below both extraction and glitch -->
+  <div class="hero-tag" style="top:72%;right:13%;animation-delay:.65s;display:inline-flex;align-items:center;gap:6px;">
+    <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
       <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
       <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
@@ -469,18 +472,10 @@ article{ padding:0!important;margin:0!important; }
 
 <!-- PUBLICATIONS -->
 <div class="pubs-section" id="publications">
-  <div class="pub-img-float pub-img-a">
-    <img src="/assets/img/vr-headset.jpg" alt="VR headset" />
-  </div>
-  <div class="pub-img-float pub-img-b">
-    <img src="/assets/img/vr-museum.jpg" alt="VR museum" />
-  </div>
-  <div class="pub-img-float pub-img-c">
-    <img src="/assets/img/vr-space.jpg" alt="VR space" />
-  </div>
-  <div class="pub-img-float pub-img-d">
-    <img src="/assets/img/bci-headset.jpg" alt="BCI headset" />
-  </div>
+  <div class="pub-img-float pub-img-a"><img src="/assets/img/vr-headset.jpg" alt="VR headset" /></div>
+  <div class="pub-img-float pub-img-b"><img src="/assets/img/vr-museum.jpg" alt="VR museum" /></div>
+  <div class="pub-img-float pub-img-c"><img src="/assets/img/vr-space.jpg" alt="VR space" /></div>
+  <div class="pub-img-float pub-img-d"><img src="/assets/img/bci-headset.jpg" alt="BCI headset" /></div>
 
   <div class="pub-content">
     <p class="section-label">Research &amp; Publications</p>
@@ -561,292 +556,251 @@ article{ padding:0!important;margin:0!important; }
 })();
 
 /* =========================================================
-   WEBGL SHADER UTILITY
+   WEBGL UTILITY
    ========================================================= */
-function initShader(canvas, fsSource) {
-  var gl = canvas.getContext('webgl', {antialias:true, alpha:true});
+function mkGL(canvas, fsSrc) {
+  var gl = canvas.getContext('webgl',{antialias:true,alpha:true,premultipliedAlpha:false});
   if (!gl) return null;
-
-  var vsSource = [
-    'attribute vec2 a_pos;',
-    'void main(){gl_Position=vec4(a_pos,0.0,1.0);}'
-  ].join('\n');
-
-  function compile(type, src) {
-    var s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
-  }
-
-  var prog = gl.createProgram();
-  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vsSource));
-  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fsSource));
-  gl.linkProgram(prog);
-  gl.useProgram(prog);
-
-  var buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-  var loc = gl.getAttribLocation(prog, 'a_pos');
+  var vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}';
+  function sh(t,s){var x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);return x;}
+  var prog=gl.createProgram();
+  gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fsSrc));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  var buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(prog,'p');
   gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-  return {
-    gl: gl,
-    prog: prog,
-    u: function(name){ return gl.getUniformLocation(prog, name); }
-  };
+  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+  return{gl:gl,u:function(n){return gl.getUniformLocation(prog,n);}};
 }
-
-function animate(ctx, draw) {
-  function frame(t) {
-    draw(t * 0.001);
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-}
+function loop(c,fn){function f(t){fn(t*0.001);requestAnimationFrame(f);}requestAnimationFrame(f);}
 
 /* =========================================================
    SHADER 1 — intensity02
-   Domain-warped fractal Brownian motion, golden warmth
+   FBM domain warp. Palette: site yellow #f5e27a / #f9edaa / #fdf4d0
+   Very slow: t * 0.05
    ========================================================= */
 (function(){
-  var cv = document.getElementById('cv-intensity');
-  if (!cv) return;
-  var ctx = initShader(cv, [
+  var cv=document.getElementById('cv-intensity');
+  if(!cv)return;
+  var c=mkGL(cv,[
     'precision highp float;',
-    'uniform float u_time;',
-    'uniform vec2  u_res;',
-
-    'float hash(vec2 p){',
-    '  return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);',
-    '}',
-
-    'float noise(vec2 p){',
-    '  vec2 i=floor(p), f=fract(p);',
-    '  vec2 u=f*f*(3.0-2.0*f);',
-    '  return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),',
-    '             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);',
-    '}',
-
-    'float fbm(vec2 p){',
-    '  float v=0.0, a=0.5;',
-    '  mat2 r=mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.5));',
-    '  for(int i=0;i<6;i++){v+=a*noise(p);p=r*p*2.1;a*=0.5;}',
-    '  return v;',
-    '}',
-
+    'uniform float T;uniform vec2 R;',
+    'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+    'float n(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+    ' return mix(mix(h(i),h(i+vec2(1,0)),u.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),u.x),u.y);}',
+    'float fbm(vec2 p){float v=0.,a=.5;mat2 r=mat2(.8,.6,-.6,.8);',
+    ' for(int i=0;i<6;i++){v+=a*n(p);p=r*p*2.1;a*=.5;}return v;}',
     'void main(){',
-    '  vec2 uv=(gl_FragCoord.xy/u_res)*2.0-1.0;',
-    '  uv.x*=u_res.x/u_res.y;',
-    '  float t=u_time*0.18;',
-    /* domain warp — two layers */
-    '  vec2 q=vec2(fbm(uv+vec2(0.0,0.0)),',
-    '              fbm(uv+vec2(5.2,1.3)));',
-    '  vec2 r=vec2(fbm(uv+4.0*q+vec2(1.7+t,9.2)),',
-    '              fbm(uv+4.0*q+vec2(8.3,2.8+t*0.7)));',
-    '  float f=fbm(uv+4.0*r);',
-    /* colour — golden warmth pools */
-    '  vec3 col=mix(vec3(0.12,0.06,0.01), vec3(0.70,0.52,0.08), clamp(f*f*4.0,0.0,1.0));',
-    '  col=mix(col, vec3(0.96,0.86,0.38), clamp(length(q),0.0,1.0));',
-    '  col=mix(col, vec3(1.00,0.97,0.72), f*f*f*f);',
-    /* vignette */
-    '  float vig=1.0-dot(uv*0.55,uv*0.55);',
-    '  col*=vig*vig;',
-    '  gl_FragColor=vec4(col,0.82*vig*vig);',
+    ' vec2 uv=(gl_FragCoord.xy/R)*2.-1.;uv.x*=R.x/R.y;',
+    ' float t=T*0.05;',
+    ' vec2 q=vec2(fbm(uv+t),fbm(uv+vec2(5.2,1.3)+t*.8));',
+    ' vec2 r=vec2(fbm(uv+4.*q+vec2(1.7,9.2)),fbm(uv+4.*q+vec2(8.3,2.8+t*.6)));',
+    ' float f=fbm(uv+4.*r);',
+    /* site palette: navy base → #f5e27a → #fdf4d0 */
+    ' vec3 c1=vec3(0.04,0.10,0.18);',   /* dark navy */
+    ' vec3 c2=vec3(0.96,0.89,0.48);',   /* #f5e27a */
+    ' vec3 c3=vec3(0.99,0.93,0.72);',   /* #f9edaa */
+    ' vec3 c4=vec3(0.99,0.96,0.82);',   /* #fdf4d0 */
+    ' vec3 col=mix(c1,c2,clamp(f*f*3.,0.,1.));',
+    ' col=mix(col,c3,clamp(f*f*f*2.5,0.,1.));',
+    ' col=mix(col,c4,clamp(f*f*f*f*2.,0.,1.));',
+    ' float v=1.-dot(uv*.58,uv*.58);v=clamp(v,0.,1.);',
+    ' col*=v;',
+    ' gl_FragColor=vec4(col,0.88*v);',
     '}'
   ].join('\n'));
-  if (!ctx) return;
-  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
-  ctx.gl.uniform2f(uRes, cv.width, cv.height);
-  animate(ctx, function(t){
-    ctx.gl.uniform1f(uTime, t);
-    ctx.gl.viewport(0,0,cv.width,cv.height);
-    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
-    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  if(!c)return;
+  var uT=c.u('T'),uR=c.u('R');
+  c.gl.uniform2f(uR,cv.width,cv.height);
+  loop(c,function(t){
+    c.gl.uniform1f(uT,t);
+    c.gl.viewport(0,0,cv.width,cv.height);
+    c.gl.clear(c.gl.COLOR_BUFFER_BIT);
+    c.gl.drawArrays(c.gl.TRIANGLE_STRIP,0,4);
   });
 })();
 
 /* =========================================================
    SHADER 2 — extraction05
-   Spinning vortex field + silver particle rain into void
+   Funnel drawn in UV space. Pixelated silver dots fall from
+   above, converge into the funnel mouth, disappear into void.
+   Pink palette: #ff3d82 / #ff6fa3. Very slow motion t*0.06
    ========================================================= */
 (function(){
-  var cv = document.getElementById('cv-extraction');
-  if (!cv) return;
-  var ctx = initShader(cv, [
+  var cv=document.getElementById('cv-extraction');
+  if(!cv)return;
+  var c=mkGL(cv,[
     'precision highp float;',
-    'uniform float u_time;',
-    'uniform vec2  u_res;',
-
-    'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-    'float hash1(float n){return fract(sin(n)*753.5453);}',
+    'uniform float T;uniform vec2 R;',
+    'float h1(float n){return fract(sin(n)*43758.5);}',
 
     'void main(){',
-    '  vec2 uv=(gl_FragCoord.xy/u_res)*2.0-1.0;',
-    '  uv.x*=u_res.x/u_res.y;',
-    '  float t=u_time;',
+    ' vec2 uv=gl_FragCoord.xy/R;',  /* 0→1 both axes, y=0 bottom */
+    ' float t=T*0.06;',             /* very slow */
 
-    /* --- vortex field --- */
-    '  float r=length(uv);',
-    '  float a=atan(uv.y,uv.x);',
-    '  float spin=a - t*1.4 - 3.0/(r+0.18);',
-    '  float swirl=sin(spin*5.0)*0.5+0.5;',
-    '  float arms=smoothstep(0.38,0.0,mod(spin*0.5+t*0.3,1.0)-0.5)*0.6;',
+    /* FUNNEL geometry (in 0-1 uv space, y=0 bottom, y=1 top) */
+    /* Mouth at top (y≈0.88), stem exits at bottom (y≈0.10)   */
+    ' float fTop=0.88, fBot=0.12;',
+    ' float hwTop=0.38, hwBot=0.05;',  /* half-widths */
+    ' float cx=0.50;',
+    /* normalised progress along funnel 0=bot 1=top */
+    ' float fp=clamp((uv.y-fBot)/(fTop-fBot),0.,1.);',
+    ' float hw=mix(hwBot,hwTop,fp);',
+    ' float dx=abs(uv.x-cx)-hw;',   /* <0 inside funnel */
+    ' float inside=step(fBot,uv.y)*step(uv.y,fTop)*step(dx,0.);',
 
-    /* void pull — darkening towards centre */
-    '  float vd=1.0-smoothstep(0.0,0.55,r);',
+    /* funnel wall — thin pink stroke */
+    ' float wallD=abs(dx);',
+    ' float wall=inside==0.?0.:0.;', /* reset; compute edge */
+    /* edge: within wallThick of inner boundary */
+    ' float wallThick=0.018;',
+    ' float atEdge=smoothstep(wallThick,0.,abs(abs(uv.x-cx)-hw))',
+    '            *step(fBot,uv.y)*step(uv.y,fTop);',
 
-    /* base pink/magenta vortex colour */
-    '  vec3 vortex=mix(vec3(0.05,0.01,0.04), vec3(0.80,0.10,0.36), swirl*(1.0-vd));',
-    '  vortex+=arms*vec3(1.0,0.24,0.51)*0.5;',
+    /* void — dark circle at stem bottom */
+    ' vec2 vC=vec2(cx,fBot-0.06);',
+    ' float vR=0.07;',
+    ' float vd=smoothstep(vR,vR*0.3,length(uv-vC));',
 
-    /* --- silver particle rain --- */
-    /* tile UV into columns, each column has particles falling */
-    '  vec2 pUV=vec2((uv.x*0.5+0.5)*16.0, (uv.y*0.5+0.5));',
-    '  float col_id=floor(pUV.x);',
-    '  float col_frac=fract(pUV.x);',
+    /* faint pink glow inside funnel */
+    ' float fillGlow=inside*0.14*(1.-fp*0.6);',
 
-    /* each column: 4 staggered particles */
-    '  float sparkle=0.0;',
-    '  for(int k=0;k<4;k++){',
-    '    float ki=float(k);',
-    '    float speed=0.28+hash1(col_id*7.0+ki)*0.44;',
-    '    float phase=hash1(col_id*3.1+ki*5.7);',
-    '    float py=fract(phase - t*speed);',   /* falls top→0 */
-    '    float dy=abs(pUV.y-py);',
-    '    float dot_r=0.025+hash1(col_id+ki)*0.015;',
-    '    sparkle+=smoothstep(dot_r,0.0,dy)*smoothstep(0.4,0.0,abs(col_frac-0.5));',
-    '  }',
+    /* PIXELATED DOTS
+       Dots live above the funnel or inside it.
+       They fall slowly (controlled by t), converging x toward cx.
+       Rendered as small squares on a pixel grid. */
+    ' float dots=0.;',
+    ' float pxSz=0.055;',   /* dot square size in uv */
+    ' for(int ci=0;ci<18;ci++){',
+    '   float cf=float(ci)/17.;',
+    '   float xStart=0.04+cf*0.92;',
+    '   float spd=0.05+h1(float(ci)*7.3)*0.04;',   /* very slow */
+    '   for(int ri=0;ri<4;ri++){',
+    '     float ph=h1(float(ci)*4.1+float(ri)*9.7);',
+    '     float py=fract(ph+t*spd);',  /* 0=bottom appears from void, 1=top */
+    '     float uvY=py;',              /* direct uv y mapping */
+    '     float convX=mix(xStart,cx,(1.-py)*(1.-py));',  /* converge toward cx as falling */
+    '     vec2 dotCorner=vec2(convX-pxSz*0.5, uvY-pxSz*0.5);',
+    '     vec2 rel=uv-dotCorner;',
+    '     float inSq=step(0.,rel.x)*step(rel.x,pxSz)*step(0.,rel.y)*step(rel.y,pxSz);',
+    /* hide dots below the void */
+    '     float show=step(fBot+0.02,uvY);',
+    /* fade dots as they approach the void from above */
+    '     float fadeIn=smoothstep(fBot+0.02,fBot+0.15,uvY);',
+    '     float bright=0.55+h1(float(ci)+float(ri)*3.)*0.45;',
+    '     dots+=inSq*show*fadeIn*bright;',
+    '   }',
+    ' }',
 
-    /* silver colour with slight blue tint, fade as they approach the vortex centre */
-    '  float fadeIn=smoothstep(0.0,0.08,r);',  /* don't show particles inside void */
-    '  vec3 silver=vec3(0.82,0.88,0.92)*sparkle*fadeIn;',
+    /* COMPOSE */
+    ' vec3 bg   =vec3(0.04,0.01,0.10);',          /* deep dark */
+    ' vec3 pink =vec3(1.00,0.24,0.51);',           /* #ff3d82 */
+    ' vec3 pinkS=vec3(1.00,0.44,0.64);',           /* #ff6fa3 */
+    ' vec3 silv =vec3(0.80,0.87,0.94);',           /* silver */
 
-    /* combine */
-    '  vec3 col=vortex+silver;',
-    /* vignette */
-    '  float vig=1.0-dot(uv*0.55,uv*0.55);',
-    '  col*=clamp(vig,0.0,1.0);',
-    '  float alpha=0.82*clamp(vig,0.0,1.0);',
-    '  gl_FragColor=vec4(col,alpha);',
+    ' vec3 col=bg;',
+    ' col+=pinkS*fillGlow;',
+    ' col+=pink*atEdge*1.2;',
+    ' col+=silv*min(dots,1.);',
+    ' col=mix(col,vec3(0.),vd*0.95);',  /* void darkens */
+
+    ' float v=1.-dot((uv*2.-1.)*.55,(uv*2.-1.)*.55);v=clamp(v,0.,1.);',
+    ' col*=v;',
+    ' gl_FragColor=vec4(col,0.88*v);',
     '}'
   ].join('\n'));
-  if (!ctx) return;
-  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
-  ctx.gl.uniform2f(uRes, cv.width, cv.height);
-  animate(ctx, function(t){
-    ctx.gl.uniform1f(uTime, t);
-    ctx.gl.viewport(0,0,cv.width,cv.height);
-    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
-    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  if(!c)return;
+  var uT=c.u('T'),uR=c.u('R');
+  c.gl.uniform2f(uR,cv.width,cv.height);
+  loop(c,function(t){
+    c.gl.uniform1f(uT,t);
+    c.gl.viewport(0,0,cv.width,cv.height);
+    c.gl.clear(c.gl.COLOR_BUFFER_BIT);
+    c.gl.drawArrays(c.gl.TRIANGLE_STRIP,0,4);
   });
 })();
 
 /* =========================================================
    SHADER 3 — glitch_24
-   CRT corruption: scanlines, RGB split, noise blocks,
-   chromatic aberration, all regenerating each frame
+   CRT corruption. Teal palette: #0dbfb4 / #35d4ca / #80e8e3
+   Drastically slowed: tears 1Hz, blocks 1.5Hz, bands very slow.
    ========================================================= */
 (function(){
-  var cv = document.getElementById('cv-glitch');
-  if (!cv) return;
-  var ctx = initShader(cv, [
+  var cv=document.getElementById('cv-glitch');
+  if(!cv)return;
+  var c=mkGL(cv,[
     'precision highp float;',
-    'uniform float u_time;',
-    'uniform vec2  u_res;',
-
-    'float hash(float n){return fract(sin(n)*43758.5453);}',
-    'float hash2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
+    'uniform float T;uniform vec2 R;',
+    'float h1(float n){return fract(sin(n)*43758.5);}',
+    'float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5);}',
 
     'void main(){',
-    '  vec2 uv=gl_FragCoord.xy/u_res;',
-    '  float t=u_time;',
+    ' vec2 uv=gl_FragCoord.xy/R;',
+    ' float t=T;',
 
-    /* --- scanline baseline --- */
-    '  float scan=sin(uv.y*u_res.y*0.9)*0.04;',
+    /* slow tear: 1Hz */
+    ' float li=floor(uv.y*R.y);',
+    ' float tT=floor(t*1.0);',
+    ' float tR=h1(li*0.001+tT);',
+    ' float tS=step(0.94,tR)*h1(li+tT*3.7);',
+    ' float xs=tS*(h1(li*2.+tT)*2.-1.)*0.09;',
+    ' vec2 ud=vec2(uv.x+xs,uv.y);',
 
-    /* --- per-scanline horizontal displacement (tear) --- */
-    '  float lineIdx=floor(uv.y*u_res.y);',
-    '  float tearT=floor(t*8.0);',   /* 8 tears/sec */
-    '  float tearR=hash(lineIdx*0.001+tearT);',
-    '  float tearStrength=step(0.88,tearR)*hash(lineIdx+tearT*3.7);',
-    '  float xShift=tearStrength*(hash(lineIdx*2.0+tearT)*2.0-1.0)*0.14;',
+    /* RGB split — very slow change ~0.5Hz */
+    ' float ca=0.005+0.005*h1(floor(t*0.5));',
+    ' vec2 ur=ud+vec2(ca,0.);',
+    ' vec2 ug=ud;',
+    ' vec2 ub=ud+vec2(-ca,0.);',
 
-    /* displaced uv for main channel */
-    '  vec2 uvD=vec2(uv.x+xShift, uv.y)+scan;',
+    /* teal phosphor base — site colours #0dbfb4=(0.051,0.749,0.706) */
+    ' float pr=0.01+0.04*h2(ur*vec2(5.,2.)+t*0.05);',
+    ' float pg=0.08+0.16*h2(ug*vec2(4.,7.)+t*0.04);',
+    ' float pb=0.07+0.12*h2(ub*vec2(8.,3.)+t*0.05);',
+    /* tint toward #0dbfb4 */
+    ' vec3 phos=vec3(pr*0.4+0.015, pg+0.18, pb+0.17);',
 
-    /* --- RGB channel split (chromatic aberration) --- */
-    '  float caAmt=0.012+0.018*hash(floor(t*4.0));',
-    '  vec2 uvR=uvD+vec2( caAmt,  0.0);',
-    '  vec2 uvG=uvD+vec2( 0.0,    0.0);',
-    '  vec2 uvB=uvD+vec2(-caAmt,  0.0);',
+    /* slow scrolling teal bands */
+    ' float b1=fract(uv.y*2.0-t*0.025);',
+    ' vec3 bc1=vec3(0.05,0.75,0.71)*step(0.975,b1)*0.75;',  /* #0dbfb4 family */
+    ' float b2=fract(uv.y*3.5+t*0.018);',
+    ' vec3 bc2=vec3(0.21,0.83,0.79)*step(0.983,b2)*0.60;',  /* #35d4ca family */
+    /* rare pink accent band */
+    ' float b3=fract(uv.y*6.0-t*0.014+0.5);',
+    ' vec3 bc3=vec3(1.,0.24,0.51)*step(0.994,b3)*0.45;',
 
-    /* --- base CRT screen colour (dark teal phosphor) --- */
-    '  float screenR=0.02+0.13*hash2(uvR*vec2(7.3,2.1)+t*0.5);',
-    '  float screenG=0.06+0.22*hash2(uvG*vec2(5.1,8.7)+t*0.4);',
-    '  float screenB=0.04+0.10*hash2(uvB*vec2(9.2,3.3)+t*0.6);',
+    /* noise blocks 1.5Hz, teal variants */
+    ' vec2 cell=floor(uv*7.);',
+    ' float bT=floor(t*1.5);',
+    ' float bR=h2(cell+bT);',
+    ' float isB=step(0.96,bR);',
+    ' float bh=h1(bR*7.);',
+    ' vec3 bkCol=vec3(bh*0.2, 0.50+bh*0.44, 0.46+bh*0.38)*isB;',
+    ' float bkA=isB*0.50;',
 
-    /* teal phosphor tint base */
-    '  vec3 phosphor=vec3(screenR, screenG*1.6, screenB*1.4);',
-    '  phosphor+=vec3(0.0,0.28,0.25)*0.6;',
+    /* scanlines */
+    ' float sl=0.72+0.28*step(0.5,fract(uv.y*R.y*0.5));',
 
-    /* --- glitch colour bands --- */
-    /* Band: full-width teal horizontal slice, scrolling */
-    '  float b1y=fract(uv.y*3.0 - t*0.42);',
-    '  float band1=step(0.96,b1y)*0.9;',
-    '  vec3 bCol1=vec3(0.05,0.75,0.71)*band1;',
-
-    /* Band: pink slice going opposite */
-    '  float b2y=fract(uv.y*5.0 + t*0.31);',
-    '  float band2=step(0.975,b2y)*0.75;',
-    '  vec3 bCol2=vec3(1.0,0.24,0.51)*band2;',
-
-    /* Band: yellow thin stripe */
-    '  float b3y=fract(uv.y*9.0 - t*0.2+0.5);',
-    '  float band3=step(0.988,b3y)*0.6;',
-    '  vec3 bCol3=vec3(0.96,0.89,0.27)*band3;',
-
-    /* --- noise blocks (random coloured rectangles) --- */
-    /* divide screen into coarse cells, flicker */
-    '  vec2 cell8=floor(uv*8.0);',
-    '  float blockT=floor(t*12.0);',
-    '  float blockR=hash2(cell8+blockT);',
-    '  float isBlock=step(0.93,blockR);',
-    '  vec3 blockCol=vec3(hash(blockR*7.1),hash(blockR*13.3),hash(blockR*5.9))*isBlock;',
-    '  float blockAlpha=isBlock*0.65;',
-
-    /* --- scanline dark lines every 2 px --- */
-    '  float sline=0.65+0.35*step(0.5,fract(uv.y*u_res.y*0.5));',
-
-    /* --- compose --- */
-    '  vec3 col=phosphor;',
-    '  col+=bCol1+bCol2+bCol3;',
-    '  col=mix(col,blockCol,blockAlpha);',
-    '  col*=sline;',
-
-    /* vignette */
-    '  vec2 vUV=uv*2.0-1.0;',
-    '  float vig=1.0-dot(vUV*0.55,vUV*0.55);',
-    '  col*=vig;',
-
-    /* clamp */
-    '  col=clamp(col,0.0,1.0);',
-    '  gl_FragColor=vec4(col,0.82*vig);',
+    ' vec3 col=phos+bc1+bc2+bc3;',
+    ' col=mix(col,bkCol,bkA);',
+    ' col*=sl;',
+    ' vec2 vv=uv*2.-1.;',
+    ' float v=1.-dot(vv*.55,vv*.55);v=clamp(v,0.,1.);',
+    ' col*=v;col=clamp(col,0.,1.);',
+    ' gl_FragColor=vec4(col,0.88*v);',
     '}'
   ].join('\n'));
-  if (!ctx) return;
-  var uTime = ctx.u('u_time'), uRes = ctx.u('u_res');
-  ctx.gl.uniform2f(uRes, cv.width, cv.height);
-  animate(ctx, function(t){
-    ctx.gl.uniform1f(uTime, t);
-    ctx.gl.viewport(0,0,cv.width,cv.height);
-    ctx.gl.clear(ctx.gl.COLOR_BUFFER_BIT);
-    ctx.gl.drawArrays(ctx.gl.TRIANGLE_STRIP,0,4);
+  if(!c)return;
+  var uT=c.u('T'),uR=c.u('R');
+  c.gl.uniform2f(uR,cv.width,cv.height);
+  loop(c,function(t){
+    c.gl.uniform1f(uT,t);
+    c.gl.viewport(0,0,cv.width,cv.height);
+    c.gl.clear(c.gl.COLOR_BUFFER_BIT);
+    c.gl.drawArrays(c.gl.TRIANGLE_STRIP,0,4);
   });
 })();
 </script>
