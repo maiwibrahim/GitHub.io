@@ -70,12 +70,13 @@ article{ padding:0!important;margin:0!important; }
 }
 .site-nav a:hover { color:var(--teal-soft); }
 
-/* HERO */
+/* ===================== HERO ===================== */
+/* #4 — align-items:center raises name to mid-screen, closer to avatars */
 .hero {
   background:var(--hero-bg);
   min-height:100vh;width:100vw;
-  display:flex;align-items:flex-end;
-  padding:0 6vw 80px;
+  display:flex;align-items:center;
+  padding:52px 6vw 0;
   position:relative;overflow:hidden;
 }
 
@@ -92,10 +93,10 @@ article{ padding:0!important;margin:0!important; }
 }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-/* AVATARS */
+/* ---- AVATARS — #3 larger body + speech ---- */
 .av {
   position:absolute;display:flex;flex-direction:column;
-  align-items:center;gap:3px;z-index:5;
+  align-items:center;gap:4px;z-index:5;
   opacity:0;animation:avFloat .7s ease forwards;
 }
 @keyframes avFloat {
@@ -104,24 +105,29 @@ article{ padding:0!important;margin:0!important; }
 }
 .av-body {
   border-radius:50% 50% 40% 40%;
-  display:flex;align-items:center;justify-content:center;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px; /* #3 increased from 16/20 */
 }
 .av-shadow { border-radius:50%;height:5px; }
 .av-label {
-  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.05em;
-  background:rgba(0,0,0,.38);padding:1px 5px;border-radius:2px;white-space:nowrap;
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.05em;
+  background:rgba(0,0,0,.38);padding:2px 7px;border-radius:2px;white-space:nowrap;
 }
+/* #3 — speech text bigger */
 .speech {
   position:absolute;
-  background:rgba(255,255,255,.07);
-  border:.5px solid rgba(255,255,255,.14);
-  padding:3px 8px;font-size:8px;
+  background:rgba(255,255,255,.08);
+  border:.5px solid rgba(255,255,255,.18);
+  padding:5px 12px;font-size:11px;
   font-family:'Space Mono',monospace;
-  color:rgba(255,255,255,.55);
+  color:rgba(255,255,255,.7);
   white-space:nowrap;border-radius:6px 6px 6px 0;
 }
 
-/* HERO CONTENT */
+/* SVG intensity icon sizing */
+.intensity-icon { width:28px;height:28px;flex-shrink:0; }
+
+/* ---- HERO CONTENT ---- */
 .hero-content {
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:14px;max-width:600px;
@@ -134,8 +140,10 @@ article{ padding:0!important;margin:0!important; }
 .hero-name .first { color:var(--yellow-soft); }
 .hero-name .rest  { color:#e0f0f8; }
 .hero-name em     { font-style:italic;color:rgba(13,191,180,.45); }
+
+/* #1 — white tagline */
 .hero-desc {
-  font-size:clamp(14px,2vw,18px);color:rgba(13,191,180,.45);
+  font-size:clamp(14px,2vw,18px);color:#ffffff;
   font-style:italic;line-height:1.6;margin:0;
 }
 .hero-btn { margin-top:10px; }
@@ -147,7 +155,7 @@ article{ padding:0!important;margin:0!important; }
 }
 .hero-btn a:hover { background:var(--teal-soft); }
 
-/* ABOUT */
+/* ===================== ABOUT ===================== */
 .about-section {
   background:#f0f8fa;width:100vw;
   padding:130px max(2.5rem,6vw) 140px;
@@ -157,8 +165,9 @@ article{ padding:0!important;margin:0!important; }
   justify-content:center;align-items:center;position:relative;
 }
 
+/* #5 — match pub-entry size: 17px, Space Mono kept for style distinction */
 .section-label {
-  font-size:13px;letter-spacing:.24em;text-transform:uppercase;
+  font-size:17px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--pink);margin-bottom:2.5rem;
   font-style:normal;font-family:'Space Mono',monospace;
   text-align:center;width:100%;
@@ -176,7 +185,6 @@ article{ padding:0!important;margin:0!important; }
   align-self:center;
 }
 
-/* Crisp photo frame so it never blends into background */
 .about-img {
   width:230px;height:298px;
   object-fit:cover;object-position:top;display:block;
@@ -192,9 +200,10 @@ article{ padding:0!important;margin:0!important; }
   max-width:520px;transform:rotate(2.5deg);
   min-width:280px;padding-top:24px;
 }
+/* #5 — about-text matches pub-entry: 17px */
 .about-text { font-size:17px;line-height:1.95;color:#1a2e3a;margin:0; }
 
-/* PUBLICATIONS */
+/* ===================== PUBLICATIONS ===================== */
 @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-3deg);}  50%{transform:translateY(-18px) rotate(-3deg);} }
 @keyframes floatB { 0%,100%{transform:translateY(0) rotate(2deg);}   50%{transform:translateY(-14px) rotate(2deg);} }
 @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
@@ -210,7 +219,8 @@ article{ padding:0!important;margin:0!important; }
 .pubs-section * { color:#1a2e3a; }
 .pubs-section a { color:#1a2e3a!important;border-bottom:.5px solid rgba(26,46,58,.28);text-decoration:none; }
 .pubs-section a:hover { color:var(--pink)!important;border-bottom-color:var(--pink); }
-.pubs-section .section-label { color:var(--pink);margin-bottom:2rem;text-align:left;font-size:13px; }
+/* #5 — pubs section-label also 17px */
+.pubs-section .section-label { color:var(--pink);margin-bottom:2rem;text-align:left;font-size:17px; }
 
 .pub-img-float {
   position:absolute;z-index:2;overflow:hidden;
@@ -222,6 +232,9 @@ article{ padding:0!important;margin:0!important; }
   transition:opacity .45s ease,transform .45s ease;
 }
 .pub-img-float:hover img { opacity:.88;transform:scale(1.04); }
+
+/* #6 — vr-headset: object-position top so head is not cropped */
+.pub-img-a img { object-position:top center; }
 
 .pub-img-a { width:320px;height:230px;top:110px; right:22px;  animation:floatA 8s  ease-in-out infinite; }
 .pub-img-d { width:280px;height:258px;top:400px; right:60px;  animation:floatD 7s  ease-in-out infinite; }
@@ -252,7 +265,7 @@ article{ padding:0!important;margin:0!important; }
 .pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
 .pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
 
-/* CV + CONTACT */
+/* ===================== CV + CONTACT ===================== */
 .cv-contact-section {
   background:#0b1b2e;min-height:100vh;width:100vw;
   display:grid;grid-template-columns:1fr 1px 1fr;
@@ -277,7 +290,7 @@ article{ padding:0!important;margin:0!important; }
   padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);
   position:relative;z-index:2;
 }
-.cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem; }
+.cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 
 .cv-download {
   font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
@@ -293,7 +306,7 @@ article{ padding:0!important;margin:0!important; }
   padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);
   position:relative;z-index:2;
 }
-.contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem; }
+.contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 
 .contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px; }
 .contact-row {
@@ -319,20 +332,19 @@ article{ padding:0!important;margin:0!important; }
 }
 .contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
 
-/* MOBILE */
+/* ===================== MOBILE ===================== */
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem; }
   .site-nav a { font-size:9px; }
 
-  .hero { padding:52px 1.5rem 60px;align-items:flex-end;min-height:100svh; }
+  .hero { padding:52px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
 
-  .av { transform:scale(.68);transform-origin:top left; }
-  .av-1 { top:16%!important;right:1%!important;animation-delay:.1s; }
-  .av-2 { top:28%!important;right:1%!important;animation-delay:.25s; }
-  .av-3 { top:40%!important;right:1%!important;animation-delay:.4s; }
-  .av-4 { top:52%!important;right:1%!important;animation-delay:.55s; }
+  .av { transform:scale(.78);transform-origin:top left; }
+  .av-1 { top:18%!important;right:1%!important;animation-delay:.1s; }
+  .av-2 { top:30%!important;right:1%!important;animation-delay:.28s; }
+  .av-3 { top:44%!important;right:1%!important;animation-delay:.45s; }
 
   .about-section {
     clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);
@@ -342,7 +354,8 @@ article{ padding:0!important;margin:0!important; }
   .about-img-wrap { transform:rotate(-3deg); }
   .about-img { width:190px;height:246px; }
   .text-col { transform:rotate(1.5deg);max-width:100%;min-width:unset; }
-  .about-text { font-size:16px; }
+  .about-text { font-size:15px; }
+  .section-label { font-size:15px; }
 
   .pubs-section {
     clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);
@@ -389,41 +402,39 @@ article{ padding:0!important;margin:0!important; }
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!-- av-1: intensity02 — upper far right -->
-  <div class="av av-1" style="top:12%;right:12%;animation-delay:.1s;">
+  <!-- av-1: intensity02 — radiating circles SVG icon, upper right -->
+  <div class="av av-1" style="top:22%;right:12%;animation-delay:.1s;">
     <div style="position:relative;">
-      <div class="speech" style="top:-28px;left:30px;">researching 🔍</div>
+      <div class="speech" style="top:-34px;left:40px;">researching 🔍</div>
     </div>
-    <div class="av-body" style="width:40px;height:46px;background:rgba(245,226,122,.18);border:1px solid rgba(245,226,122,.45);">🌐</div>
-    <div class="av-shadow" style="width:28px;background:rgba(245,226,122,.1);"></div>
+    <div class="av-body" style="width:54px;height:60px;background:rgba(245,226,122,.18);border:1px solid rgba(245,226,122,.45);">
+      <!-- Radiating intensity circles -->
+      <svg class="intensity-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="3.5"  fill="rgba(245,226,122,0.96)"/>
+        <circle cx="16" cy="16" r="7"    stroke="rgba(245,226,122,0.68)" stroke-width="1.5" fill="none"/>
+        <circle cx="16" cy="16" r="11"   stroke="rgba(245,226,122,0.38)" stroke-width="1.2" fill="none"/>
+        <circle cx="16" cy="16" r="14.8" stroke="rgba(245,226,122,0.16)" stroke-width="1"   fill="none"/>
+      </svg>
+    </div>
+    <div class="av-shadow" style="width:36px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(249,237,170,.85);">intensity02</div>
   </div>
 
-  <!-- av-2: extraction_05 — upper centre-right -->
-  <div class="av av-2" style="top:10%;right:40%;animation-delay:.28s;">
+  <!-- av-2: extraction_05 — laptop, upper centre-right -->
+  <div class="av av-2" style="top:20%;right:40%;animation-delay:.28s;">
     <div style="position:relative;">
-      <div class="speech" style="top:-26px;right:28px;border-radius:6px 6px 0 6px;">digital media</div>
+      <div class="speech" style="top:-34px;right:36px;border-radius:6px 6px 0 6px;">digital media</div>
     </div>
-    <div class="av-body" style="width:36px;height:42px;background:rgba(255,61,130,.22);border:1px solid rgba(255,61,130,.45);">👾</div>
-    <div class="av-shadow" style="width:26px;background:rgba(255,61,130,.12);"></div>
+    <div class="av-body" style="width:50px;height:56px;background:rgba(255,61,130,.22);border:1px solid rgba(255,61,130,.45);">💻</div>
+    <div class="av-shadow" style="width:34px;background:rgba(255,61,130,.12);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(255,111,163,.85);">extraction_05</div>
   </div>
 
-  <!-- av-3: capture — mid centre-right, now a satellite dish — no speech bubble -->
-  <div class="av av-3" style="top:42%;right:38%;animation-delay:.45s;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(13,191,180,.2);border:1px solid rgba(13,191,180,.48);">📡</div>
-    <div class="av-shadow" style="width:26px;background:rgba(13,191,180,.1);"></div>
+  <!-- av-3: capture — stacked coins, mid centre-right -->
+  <div class="av av-3" style="top:44%;right:34%;animation-delay:.45s;">
+    <div class="av-body" style="width:50px;height:56px;background:rgba(13,191,180,.2);border:1px solid rgba(13,191,180,.48);">🪙</div>
+    <div class="av-shadow" style="width:34px;background:rgba(13,191,180,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(128,232,227,.85);">capture</div>
-  </div>
-
-  <!-- av-4: interface_24 — positioned between capture and intensity02 -->
-  <div class="av av-4" style="top:26%;right:22%;animation-delay:.62s;">
-    <div style="position:relative;">
-      <div class="speech" style="top:-26px;left:28px;border-radius:6px 6px 6px 0;">BCI online</div>
-    </div>
-    <div class="av-body" style="width:34px;height:40px;background:rgba(255,61,130,.2);border:1px solid rgba(255,61,130,.4);">🧠</div>
-    <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.1);"></div>
-    <div class="av-label" style="color:rgba(255,170,201,.85);">interface_24</div>
   </div>
 
   <div class="hero-content">
