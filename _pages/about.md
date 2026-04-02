@@ -1,218 +1,590 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GLSL Hero — Mai W. Ibrahim</title>
+---
+layout: about
+title: ""
+permalink: /
+nav: false
+news: false
+selected_papers: false
+social: false
+---
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
 :root {
-  --teal: #0dbfb4;
-  --pink: #ff3d82;
-  --yellow-soft: #f9edaa;
-  --hero-bg: #0b1b2e;
+  --hero-bg:      #0b1b2e;
+  --navy:         #0f2540;
+  --navy-soft:    #1a3a5c;
+  --teal:         #0dbfb4;
+  --teal-soft:    #35d4ca;
+  --teal-muted:   #80e8e3;
+  --pink:         #ff3d82;
+  --pink-soft:    #ff6fa3;
+  --pink-muted:   #ffaac9;
+  --yellow:       #f5e27a;
+  --yellow-soft:  #f9edaa;
+  --yellow-muted: #fdf4d0;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { overflow-x: hidden; }
 
-body {
-  background: var(--hero-bg);
-  overflow: hidden;
-  font-family: 'Lora', Georgia, serif;
-  width: 100vw; height: 100vh;
-}
-
-/* ── Avatar wrapper: circle frame + label stacked ── */
-.av-wrap {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  z-index: 5;
-  pointer-events: none;
-  opacity: 0;
-  animation: avIn 1s ease forwards;
-}
-@keyframes avIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 0.42; transform: translateY(0); }
+.container,.container-fluid,.container-md,
+main,#main-content,.col,.col-md,
+.row,.wrapper,.post,.profile {
+  max-width:100%!important;width:100%!important;
+  padding:0!important;margin:0!important;float:none!important;
 }
 
-/* The circle border that frames the shader canvas */
-.av-circle {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-  /* coloured ring — overridden per avatar via inline style */
-  box-shadow: 0 0 0 1.5px rgba(255,255,255,0.12), 0 4px 24px rgba(0,0,0,0.4);
+.page {
+  font-family:'Lora',Georgia,serif;
+  width:100vw;position:relative;left:50%;margin-left:-50vw;overflow-x:hidden;
+}
+.page *,.page *::before,.page *::after { box-sizing:border-box; }
+
+.post  { padding:0!important;margin:0!important; }
+article{ padding:0!important;margin:0!important; }
+.post-header              { display:none!important; }
+.navbar,nav.navbar        { display:none!important; }
+.p-name,.sidebar-header,.profile-name { display:none!important; }
+
+/* SCROLL BAR */
+.scroll-bar {
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  z-index:999999;transition:width .05s linear;pointer-events:none;
+  box-shadow:0 0 8px rgba(245,226,122,.55);
 }
 
-/* Shader canvas sits inside the circle, clipped to it */
-.av-circle canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100% !important;
-  height: 100% !important;
-  border-radius: 50%;
-  display: block;
-  opacity: 0;
-  transition: opacity 1.6s ease;
-}
-
-/* Thin inner shadow to reinforce the circle edge */
-.av-circle::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: inset 0 0 12px rgba(0,0,0,0.55);
-  pointer-events: none;
-  z-index: 2;
-}
-
-.av-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: .08em;
-  background: rgba(0,0,0,.42);
-  padding: 3px 9px;
-  border-radius: 2px;
-  white-space: nowrap;
-}
-
-/* ── Tags ── */
-.hero-tag {
-  position: absolute; z-index: 10;
-  opacity: 0; animation: tagIn .7s ease forwards;
-}
-@keyframes tagIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 0.4; transform: translateY(0); }
-}
-.hero-tag-inner {
-  background: rgba(255,255,255,.08);
-  border: .5px solid rgba(255,255,255,.2);
-  padding: 5px 13px;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px; color: rgba(255,255,255,.8);
-  white-space: nowrap; border-radius: 6px;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-
-/* ── NAV ── */
+/* NAV */
 .site-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 99;
-  background: rgba(11,27,46,.88); backdrop-filter: blur(14px);
-  display: flex; gap: 2rem; align-items: center; justify-content: flex-end;
-  height: 60px; padding: 0 3rem;
-  border-bottom: .5px solid rgba(13,191,180,.18);
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(11,27,46,.92);backdrop-filter:blur(14px);
+  display:flex;gap:2rem;align-items:center;justify-content:flex-end;
+  height:60px;padding:0 3rem;
+  border-bottom:.5px solid rgba(13,191,180,.18);
 }
 .site-nav a {
-  font-family: 'Space Mono', monospace; font-size: 12px;
-  color: #fff; text-decoration: none;
-  letter-spacing: .18em; text-transform: uppercase;
+  font-family:'Space Mono',monospace;font-size:12px;
+  color:#ffffff;text-decoration:none;
+  letter-spacing:.18em;text-transform:uppercase;transition:color .2s;
 }
+.site-nav a:hover { color:var(--teal-soft); }
 
-/* ── Hero layout ── */
+/* ===================== HERO ===================== */
 .hero {
-  position: relative; z-index: 2;
-  width: 100vw; height: 100vh;
-  display: flex; align-items: center;
-  padding: 60px 6vw 0;
-  pointer-events: none;
+  background:var(--hero-bg);
+  min-height:100vh;width:100vw;
+  display:flex;align-items:center;
+  padding:60px 6vw 0;
+  position:relative;overflow:hidden;
 }
 
-.hero-content {
-  position: relative; z-index: 10;
-  display: flex; flex-direction: column; gap: 14px;
-  max-width: 600px; pointer-events: auto;
+.hero-blob {
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1;
 }
-.hero-name {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-size: clamp(37px, 6.8vw, 76px);
-  font-weight: 400; line-height: .92;
-  white-space: nowrap; letter-spacing: -.01em;
-}
-.hero-name .first { color: var(--yellow-soft); }
-.hero-name .rest  { color: #e0f0f8; }
-.hero-name em     { font-style: italic; color: rgba(13,191,180,.45); }
-.hero-desc {
-  font-size: clamp(14px, 2vw, 18px);
-  color: #fff; font-style: italic; line-height: 1.6;
-}
-.hero-btn a {
-  font-family: 'Space Mono', monospace; font-size: 11px;
-  letter-spacing: .15em; text-transform: uppercase;
-  color: #0b1b2e; background: var(--teal);
-  padding: 12px 28px; text-decoration: none; display: inline-block;
-}
+.hero-blob-a { width:500px;height:500px;background:rgba(255,61,130,.14);top:-140px;right:3%; }
+.hero-blob-b { width:320px;height:320px;background:rgba(13,191,180,.12);bottom:10%;right:28%; }
+.hero-blob-c { width:260px;height:260px;background:rgba(245,226,122,.07);top:20%;left:5%; }
 
 .ui-dots {
-  position: absolute; top: 18px; right: 20px;
-  display: flex; gap: 5px; z-index: 20;
+  position:absolute;top:18px;right:20px;
+  display:flex;gap:5px;z-index:10;
 }
-.ui-dots span { width: 6px; height: 6px; border-radius: 50%; }
+.ui-dots span { width:6px;height:6px;border-radius:50%; }
+
+/* ---- AVATARS ---- */
+.av {
+  position:absolute;display:flex;flex-direction:column;
+  align-items:center;gap:4px;z-index:5;
+  opacity:0;animation:avFloat .7s ease forwards;
+}
+@keyframes avFloat {
+  from{opacity:0;transform:translateY(14px);}
+  to  {opacity:1;transform:translateY(0);}
+}
+.av-body {
+  border-radius:50% 50% 40% 40%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+}
+.av-shadow { border-radius:50%;height:5px; }
+.av-label {
+  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.05em;
+  background:rgba(0,0,0,.38);padding:2px 7px;border-radius:2px;white-space:nowrap;
+}
+.av-icon { width:32px;height:32px;flex-shrink:0;display:block; }
+
+/* ---- HERO CONTENT ---- */
+.hero-content {
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;gap:14px;max-width:600px;
+}
+.hero-name {
+  font-family:'DM Serif Display',Georgia,serif;
+  font-size:clamp(43px,7.9vw,89px);font-weight:400;
+  line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
+}
+.hero-name .first { color:var(--yellow-soft); }
+.hero-name .rest  { color:#e0f0f8; }
+.hero-name em     { font-style:italic;color:rgba(13,191,180,.45); }
+
+.hero-desc {
+  font-size:clamp(14px,2vw,18px);color:#ffffff;
+  font-style:italic;line-height:1.6;margin:0;
+}
+.hero-btn { margin-top:10px; }
+.hero-btn a {
+  font-family:'Space Mono',monospace;font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:#0b1b2e;background:var(--teal);
+  padding:12px 28px;text-decoration:none;display:inline-block;transition:background .2s;
+}
+.hero-btn a:hover { background:var(--teal-soft); }
+
+/* ===================== ABOUT ===================== */
+.about-section {
+  background:#f0f8fa;width:100vw;
+  padding:130px max(2.5rem,6vw) 140px;
+  margin-top:-60px;
+  clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;position:relative;
+}
+
+.section-label {
+  font-size:17px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--pink);margin-bottom:2.5rem;
+  font-style:normal;font-family:'Space Mono',monospace;
+  text-align:center;width:100%;
+}
+
+.about-inner {
+  display:flex;gap:9rem;align-items:center;
+  justify-content:center;flex-wrap:wrap;position:relative;
+}
+
+.about-img-wrap {
+  flex-shrink:0;
+  transform:rotate(-6deg);
+  position:relative;
+  align-self:center;
+}
+
+.about-img {
+  width:230px;height:298px;
+  object-fit:cover;object-position:top;display:block;
+  border-radius:3px;
+  box-shadow:
+    0 0 0 3px #fff,
+    6px 10px 36px rgba(255,61,130,.22),
+    -2px -2px 0 1px rgba(13,191,180,.35);
+}
+
+.text-col {
+  display:flex;flex-direction:column;gap:1.4rem;
+  max-width:520px;transform:rotate(2.5deg);
+  min-width:280px;padding-top:24px;
+}
+.about-text { font-size:16px;line-height:1.95;color:#1a2e3a;margin:0; }
+
+/* ===================== PUBLICATIONS ===================== */
+@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-3deg);}  50%{transform:translateY(-18px) rotate(-3deg);} }
+@keyframes floatB { 0%,100%{transform:translateY(0) rotate(2deg);}   50%{transform:translateY(-14px) rotate(2deg);} }
+@keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
+@keyframes floatD { 0%,100%{transform:translateY(0) rotate(4deg);}   50%{transform:translateY(-12px) rotate(4deg);} }
+
+.pubs-section {
+  background:#fdfcff;min-height:100vh;width:100vw;color:#1a2e3a;
+  margin-top:-60px;
+  clip-path:polygon(0 0,100% 60px,100% 100%,0 100%);
+  padding:130px max(2.5rem,6vw) 6rem;
+  position:relative;overflow:hidden;
+}
+.pubs-section * { color:#1a2e3a; }
+.pubs-section a { color:#1a2e3a!important;border-bottom:.5px solid rgba(26,46,58,.28);text-decoration:none; }
+.pubs-section a:hover { color:var(--pink)!important;border-bottom-color:var(--pink); }
+.pubs-section .section-label { color:var(--pink);margin-bottom:2rem;text-align:left;font-size:17px; }
+
+.pub-img-float {
+  position:absolute;z-index:2;overflow:hidden;
+  border-radius:4px;box-shadow:0 8px 32px rgba(255,61,130,.1);cursor:pointer;
+}
+.pub-img-float img {
+  width:100%;height:100%;object-fit:cover;display:block;
+  opacity:.14;filter:grayscale(10%);
+  transition:opacity .45s ease,transform .45s ease;
+}
+.pub-img-float:hover img { opacity:.88;transform:scale(1.04); }
+
+.pub-img-a { width:320px;height:310px;top:90px;right:22px;animation:floatA 8s ease-in-out infinite; }
+.pub-img-a img { object-fit:cover;object-position:top center; }
+.pub-img-c { width:280px;height:380px;top:490px;right:370px;animation:floatC 9s ease-in-out infinite;background:transparent; }
+.pub-img-c img { object-fit:cover;object-position:center;background:transparent; }
+.pub-img-d { width:280px;height:258px;top:430px;right:60px;animation:floatD 7s ease-in-out infinite; }
+.pub-img-b { width:260px;height:330px;top:110px;right:380px;animation:floatB 10s ease-in-out infinite; }
+
+.pub-content { position:relative;z-index:10;max-width:660px; }
+
+.pub-type-block { margin-bottom:2.8rem; }
+.pub-type-block:last-child { margin-bottom:0; }
+.pub-type-label {
+  font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:1rem;padding:5px 14px;display:inline-block;border-radius:3px;
+  font-family:'Space Mono',monospace;
+}
+.type-chapters  .pub-type-label { background:#d0eef8;color:#0a5e78; }
+.type-articles  .pub-type-label { background:#ffe5ef;color:var(--pink); }
+.type-reviews   .pub-type-label { background:#fdf4d0;color:#7a6820; }
+.type-interview .pub-type-label { background:#e8faf9;color:#0a7a74; }
+
+.pub-entry {
+  font-size:16px;line-height:1.9;color:#1a2e3a;
+  margin-bottom:.9rem;font-family:'Lora',serif;
+}
+.pub-entry:last-child { margin-bottom:0; }
+.pub-entry em { font-style:italic; }
+.pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
+.pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
+
+/* ===================== CV + CONTACT ===================== */
+.cv-contact-section {
+  background:#0b1b2e;min-height:100vh;width:100vw;
+  display:grid;grid-template-columns:1fr 1px 1fr;
+  position:relative;overflow:hidden;
+}
+.cv-blob {
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;
+}
+.cv-blob-a { width:500px;height:500px;background:rgba(255,61,130,.12);top:-120px;left:-100px; }
+.cv-blob-b { width:380px;height:380px;background:rgba(13,191,180,.1);bottom:-80px;right:-80px; }
+.cv-blob-c { width:280px;height:280px;background:rgba(245,226,122,.05);top:40%;left:40%; }
+
+.cv-top-stripe {
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  z-index:10;
+}
+.cv-divider { background:rgba(13,191,180,.14);align-self:stretch;position:relative;z-index:2; }
+
+.cv-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);
+  position:relative;z-index:2;
+}
+.cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
+
+.cv-download {
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:#0b1b2e;background:var(--teal);
+  text-decoration:none;padding:14px 32px;
+  display:inline-flex;align-items:center;gap:10px;transition:background .2s;width:fit-content;
+}
+.cv-download:hover { background:var(--teal-soft);color:#0b1b2e; }
+.cv-download::after { content:'↓';font-size:16px; }
+
+.contact-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);
+  position:relative;z-index:2;
+}
+.contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
+
+.contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px; }
+.contact-row {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 0;border-bottom:.5px solid rgba(13,191,180,.15);
+  text-decoration:none;
+  transition:padding-left .25s,color .2s;
+}
+.contact-row:first-child { border-top:.5px solid rgba(13,191,180,.15); }
+.contact-row:hover { padding-left:.65rem; }
+
+.contact-label {
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);min-width:100px;
+}
+.contact-value {
+  font-family:'Lora',serif;font-size:16px;font-style:italic;
+  color:#ffffff;flex:1;padding:0 1rem;
+}
+.contact-arrow {
+  font-family:'Space Mono',monospace;font-size:13px;
+  color:rgba(13,191,180,.36);transition:transform .2s,color .2s;
+}
+.contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
+.contact-row:hover .contact-value { color:var(--teal-muted); }
+
+/* ===================== MOBILE ===================== */
+@media (max-width:640px) {
+  .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
+  .site-nav a { font-size:10px; }
+
+  .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
+  .hero-name { white-space:normal; }
+  .hero-content { max-width:55%; }
+
+  .av { transform:scale(.78);transform-origin:top left; }
+
+  .about-section {
+    clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);
+    padding:80px 1.5rem 80px;margin-top:-30px;
+  }
+  .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
+  .about-img-wrap { transform:rotate(-3deg); }
+  .about-img { width:190px;height:246px; }
+  .text-col { transform:rotate(1.5deg);max-width:100%;min-width:unset; }
+  .about-text { font-size:15px; }
+  .section-label { font-size:15px; }
+
+  .pubs-section {
+    clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);
+    padding-top:80px;margin-top:-30px;
+  }
+  .pub-entry { font-size:15px; }
+  .pub-img-float { display:none; }
+
+  .cv-contact-section { grid-template-columns:1fr; }
+  .cv-divider { display:none; }
+  .cv-panel { padding:5rem 1.5rem 3rem; }
+  .contact-panel { padding:2rem 1.5rem 5rem; }
+  .contact-value { font-size:14px; }
+}
+
+@media (max-width:900px) and (min-width:641px) {
+  .pub-img-a { width:200px;height:194px;right:14px;top:100px; }
+  .pub-img-d { width:175px;height:161px;top:330px;right:38px; }
+  .pub-img-b { width:162px;height:206px;top:100px;right:238px; }
+  .pub-img-c { width:175px;height:237px;top:350px;right:231px; }
+}
 </style>
-</head>
-<body>
+
+<div class="page">
+
+<div class="scroll-bar" id="scrollBar"></div>
 
 <nav class="site-nav">
-  <a href="#">About</a>
-  <a href="#">Publications</a>
-  <a href="#">CV</a>
-  <a href="#">Contact</a>
+  <a href="#about">About</a>
+  <a href="#publications">Publications</a>
+  <a href="#cv">CV</a>
+  <a href="#contact">Contact</a>
 </nav>
 
-<div class="hero">
+<!-- HERO -->
+<div class="hero" id="hero">
+  <div class="hero-blob hero-blob-a"></div>
+  <div class="hero-blob hero-blob-b"></div>
+  <div class="hero-blob hero-blob-c"></div>
+
   <div class="ui-dots">
-    <span style="background:#0dbfb4;"></span>
-    <span style="background:#ff3d82;"></span>
-    <span style="background:#f5e27a;"></span>
+    <span style="background:var(--teal);"></span>
+    <span style="background:var(--pink);"></span>
+    <span style="background:var(--yellow);"></span>
   </div>
 
-  <!--
-    Positioning logic:
-    The hero name sits at ~50% vertically (flex align-items:center + 60px nav offset).
-    We want the HIGHEST avatar top edge to be just above that — so we use top:38% for
-    intensity02 (the topmost). The others cascade below it.
-    right% values mirror the original layout but condensed inward a touch.
-  -->
-
-  <!-- intensity02 — top-right, just above name level -->
-  <div class="av-wrap" id="wrap-intensity" style="top:38%; right:10%; animation-delay:.6s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(245,226,122,0.45); box-shadow: 0 0 0 1px rgba(245,226,122,0.12), 0 0 18px rgba(245,226,122,0.12), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-intensity" width="320" height="320"></canvas>
+  <!-- intensity02 — upper far right -->
+  <div class="av" style="top:16%;right:11%;animation-delay:.1s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(245,226,122,.16);border:1px solid rgba(245,226,122,.5);">
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="intensity-clip">
+            <circle cx="20" cy="20" r="17"/>
+          </clipPath>
+        </defs>
+        <!-- intensity02: Massumi's pre-conscious intensity — resists capture.
+             A shape that is almost in focus, slightly trembling, never resolving.
+             All content clipped to circle. -->
+        <g clip-path="url(#intensity-clip)">
+          <!-- outer diffuse haze — ellipses disagree on form -->
+          <ellipse cx="20" cy="20" rx="16" ry="13" fill="rgba(255,248,180,0.07)"/>
+          <ellipse cx="22" cy="18" rx="13" ry="15" fill="rgba(255,240,130,0.07)"/>
+          <ellipse cx="17" cy="22" rx="14" ry="10" fill="rgba(255,252,200,0.07)"/>
+          <ellipse cx="21" cy="19" rx="10" ry="14" fill="rgba(245,220,100,0.07)"/>
+          <!-- mid layer — warmer, slightly more present, still no consensus -->
+          <ellipse cx="20" cy="20" rx="11" ry="9"  fill="rgba(255,248,180,0.10)"/>
+          <ellipse cx="22" cy="21" rx="9"  ry="12" fill="rgba(255,240,130,0.09)"/>
+          <ellipse cx="18" cy="19" rx="10" ry="8"  fill="rgba(255,252,210,0.11)"/>
+          <ellipse cx="20" cy="22" rx="8"  ry="10" fill="rgba(255,244,150,0.10)"/>
+          <!-- inner — warmest, most concentrated, still no true form -->
+          <ellipse cx="20" cy="20" rx="7"  ry="6"  fill="rgba(255,248,180,0.18)"/>
+          <ellipse cx="21" cy="19" rx="6"  ry="7"  fill="rgba(255,240,130,0.15)"/>
+          <ellipse cx="19" cy="21" rx="5"  ry="6"  fill="rgba(255,252,200,0.16)"/>
+          <!-- near-centre: almost something, almost nothing -->
+          <ellipse cx="20" cy="20" rx="4"  ry="3"  fill="rgba(255,248,180,0.22)"/>
+          <ellipse cx="20.5" cy="19.5" rx="2.5" ry="3" fill="rgba(255,244,160,0.20)"/>
+          <!-- tremor rings: suggest a boundary without committing to one -->
+          <ellipse cx="20" cy="20" rx="17" ry="14" fill="none" stroke="rgba(245,226,122,0.06)" stroke-width="2.5"/>
+          <ellipse cx="19" cy="21" rx="13" ry="11" fill="none" stroke="rgba(255,248,180,0.05)" stroke-width="1.8"/>
+          <ellipse cx="21" cy="19" rx="10" ry="9"  fill="none" stroke="rgba(245,220,100,0.06)" stroke-width="1.2"/>
+        </g>
+      </svg>
     </div>
+    <div style="width:38px;background:rgba(245,226,122,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
   </div>
 
-  <!-- extraction05 — centre-right, slightly lower -->
-  <div class="av-wrap" id="wrap-extraction" style="top:46%; right:36%; animation-delay:.8s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(255,61,130,0.45); box-shadow: 0 0 0 1px rgba(255,61,130,0.12), 0 0 18px rgba(255,61,130,0.10), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-extraction" width="320" height="320"></canvas>
+  <!-- extraction05 — upper centre-right -->
+  <div class="av" style="top:22%;right:40%;animation-delay:.28s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(255,61,130,.2);border:1px solid rgba(255,61,130,.5);">
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="extraction-clip">
+            <circle cx="20" cy="20" r="17"/>
+          </clipPath>
+        </defs>
+        <!-- extraction05: funnel with silver pixelated dots above the mouth,
+             raining down and converging into the void. All clipped to circle. -->
+        <g clip-path="url(#extraction-clip)">
+          <!-- Funnel in lower portion of circle -->
+          <path d="M6 18 L34 18 L26 28 L26 38 L14 38 L14 28 Z"
+                stroke="rgba(255,100,160,0.9)" stroke-width="1.4"
+                fill="rgba(255,61,130,0.10)" stroke-linejoin="round"/>
+          <path d="M11 18 L29 18 L22 27 L22 38 L18 38 L18 27 Z"
+                fill="rgba(255,61,130,0.06)"/>
+          <!-- Dark void -->
+          <ellipse cx="20" cy="38" rx="6"   ry="2"   fill="rgba(10,0,15,0.88)"/>
+          <ellipse cx="20" cy="38" rx="3.5" ry="1.1" fill="rgba(0,0,0,0.95)"/>
+
+          <!-- SILVER PIXELATED DOTS — all above funnel mouth, inside circle -->
+          <!-- Row 1 — uppermost -->
+          <rect x="5"  y="3"  width="3"   height="3"   fill="rgba(200,210,220,0.95)" rx=".3"/>
+          <rect x="11" y="2"  width="2.5" height="2.5" fill="rgba(180,195,210,0.90)" rx=".3"/>
+          <rect x="17" y="3"  width="2.5" height="2.5" fill="rgba(215,225,232,0.92)" rx=".3"/>
+          <rect x="23" y="2"  width="3"   height="3"   fill="rgba(190,205,218,0.90)" rx=".3"/>
+          <rect x="30" y="3"  width="2.5" height="2.5" fill="rgba(205,215,225,0.88)" rx=".3"/>
+          <!-- Row 2 — converging inward -->
+          <rect x="7"  y="8"  width="2.5" height="2.5" fill="rgba(185,200,215,0.88)" rx=".3"/>
+          <rect x="13" y="7.5" width="2.5" height="2.5" fill="rgba(210,222,230,0.86)" rx=".3"/>
+          <rect x="19" y="8"  width="2"   height="2"   fill="rgba(225,232,238,0.88)" rx=".3"/>
+          <rect x="25" y="7.5" width="2.5" height="2.5" fill="rgba(195,208,220,0.85)" rx=".3"/>
+          <rect x="31" y="8"  width="2"   height="2"   fill="rgba(180,195,210,0.82)" rx=".3"/>
+          <!-- Row 3 — just above funnel mouth -->
+          <rect x="9"  y="13" width="2"   height="2"   fill="rgba(175,192,208,0.80)" rx=".2"/>
+          <rect x="15" y="12.5" width="2" height="2"   fill="rgba(205,218,228,0.80)" rx=".2"/>
+          <rect x="21" y="13" width="2"   height="2"   fill="rgba(215,225,235,0.80)" rx=".2"/>
+          <rect x="27" y="12.5" width="2" height="2"   fill="rgba(188,202,215,0.78)" rx=".2"/>
+          <!-- motion streaks -->
+          <line x1="6.5"  y1="6.5" x2="6.5"  y2="9.5" stroke="rgba(200,215,228,0.22)" stroke-width=".8" stroke-linecap="round"/>
+          <line x1="12.5" y1="6"   x2="12.5" y2="9"   stroke="rgba(210,222,232,0.20)" stroke-width=".8" stroke-linecap="round"/>
+          <line x1="20"   y1="6.5" x2="20"   y2="9.5" stroke="rgba(220,230,238,0.18)" stroke-width=".7" stroke-linecap="round"/>
+          <line x1="26.5" y1="6"   x2="26.5" y2="9"   stroke="rgba(200,212,225,0.20)" stroke-width=".8" stroke-linecap="round"/>
+          <!-- Inside funnel — silver dots already captured, converging to void -->
+          <rect x="15.5" y="20" width="2"   height="2"   fill="rgba(170,185,200,0.70)" rx=".2"/>
+          <rect x="21.5" y="21" width="1.8" height="1.8" fill="rgba(160,178,195,0.65)" rx=".2"/>
+          <rect x="18"   y="25" width="1.5" height="1.5" fill="rgba(150,168,185,0.50)" rx=".2"/>
+          <rect x="19.2" y="29" width="1.2" height="1.2" fill="rgba(140,158,175,0.38)" rx=".2"/>
+          <rect x="19.5" y="33" width=".9"  height=".9"  fill="rgba(130,148,165,0.25)" rx=".1"/>
+        </g>
+      </svg>
     </div>
+    <div style="width:38px;background:rgba(255,61,130,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
   </div>
 
-  <!-- glitch_24 — lower, between the other two -->
-  <div class="av-wrap" id="wrap-glitch" style="top:58%; right:22%; animation-delay:1s;">
-    <div class="av-circle" style="border: 1.5px solid rgba(13,191,180,0.45); box-shadow: 0 0 0 1px rgba(13,191,180,0.12), 0 0 18px rgba(13,191,180,0.10), 0 4px 20px rgba(0,0,0,0.4);">
-      <canvas id="c-glitch" width="320" height="320"></canvas>
+  <!-- glitch_24 — mid between extraction & intensity -->
+  <div class="av" style="top:42%;right:28%;animation-delay:.45s;">
+    <div class="av-body" style="width:56px;height:62px;background:rgba(13,191,180,.18);border:1px solid rgba(13,191,180,.55);">
+      <svg class="av-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="glitch-outer-clip">
+            <circle cx="20" cy="20" r="17"/>
+          </clipPath>
+          <clipPath id="screen-inner-clip">
+            <rect x="3" y="6" width="34" height="24" rx="1.5"/>
+          </clipPath>
+        </defs>
+        <!-- glitch_24: heavily corrupted screen. All clipped to circle. -->
+        <g clip-path="url(#glitch-outer-clip)">
+          <!-- Screen base -->
+          <rect x="3" y="6" width="34" height="24" rx="1.5"
+                fill="rgba(2,8,18,0.97)" stroke="rgba(13,191,180,0.6)" stroke-width="1.3"/>
+          <!-- Stand -->
+          <rect x="16" y="30" width="8" height="3" fill="rgba(13,191,180,0.35)" rx=".5"/>
+          <rect x="13" y="33" width="14" height="1.8" fill="rgba(13,191,180,0.3)" rx=".4"/>
+
+          <g clip-path="url(#screen-inner-clip)">
+            <!-- HARD GLITCH SLICES -->
+            <!-- Slice A: teal band offset right -->
+            <rect x="13" y="8"  width="32" height="3.5" fill="rgba(13,191,180,0.82)" rx=".2"/>
+            <rect x="3"  y="8"  width="14" height="3.5" fill="rgba(0,255,220,0.22)"  rx=".2"/>
+            <rect x="24" y="8"  width="16" height="3.5" fill="rgba(255,0,80,0.18)"   rx=".2"/>
+            <!-- Slice B: pink band offset left -->
+            <rect x="-6" y="13" width="26" height="2.5" fill="rgba(255,61,130,0.85)" rx=".2"/>
+            <rect x="3"  y="13" width="20" height="2.5" fill="rgba(255,0,80,0.18)"   rx=".2"/>
+            <!-- Slice C: yellow strip -->
+            <rect x="9"  y="17.5" width="30" height="1.8" fill="rgba(245,226,122,0.70)" rx=".2"/>
+            <!-- Slice D: teal chunk offset right -->
+            <rect x="17" y="21" width="28" height="2.5" fill="rgba(13,191,180,0.58)" rx=".2"/>
+            <rect x="8"  y="21" width="16" height="2.5" fill="rgba(255,61,130,0.18)" rx=".2"/>
+            <!-- Slice E: torn white strip near bottom -->
+            <rect x="3"  y="25" width="18" height="2"   fill="rgba(255,255,255,0.55)" rx=".2"/>
+            <rect x="22" y="25" width="14" height="2"   fill="rgba(13,191,180,0.40)"  rx=".2"/>
+            <!-- NOISE BLOCKS -->
+            <rect x="4"    y="6.5"  width="3"   height="3"   fill="rgba(255,240,130,1)"    rx=".1"/>
+            <rect x="30"   y="7"    width="3.5" height="2.5" fill="rgba(255,61,130,1)"     rx=".1"/>
+            <rect x="34"   y="8.5"  width="2.5" height="2.5" fill="rgba(0,255,220,1)"      rx=".1"/>
+            <rect x="4"    y="24"   width="4"   height="2"   fill="rgba(255,111,163,0.95)" rx=".1"/>
+            <rect x="22"   y="7"    width="2"   height="2"   fill="rgba(255,255,255,0.90)" rx=".1"/>
+            <rect x="9"    y="22"   width="3"   height="2.5" fill="rgba(245,226,122,0.90)" rx=".1"/>
+            <rect x="30"   y="20"   width="3.5" height="2.5" fill="rgba(13,191,180,1)"     rx=".1"/>
+            <rect x="6"    y="12"   width="2"   height="4"   fill="rgba(255,255,255,0.28)" rx=".1"/>
+            <rect x="34"   y="15"   width="3"   height="5"   fill="rgba(255,255,255,0.22)" rx=".1"/>
+            <!-- Inverted block -->
+            <rect x="17"   y="11.5" width="7"  height="4"   fill="rgba(255,255,255,0.65)" rx=".1"/>
+            <rect x="18.5" y="12.5" width="4"  height="2.5" fill="rgba(2,8,18,0.90)"      rx=".1"/>
+            <!-- missing-chunk: black patches over content -->
+            <rect x="3"  y="19"   width="6"  height="2"   fill="rgba(2,8,18,0.97)"     rx=".1"/>
+            <rect x="28" y="22.5" width="6"  height="2"   fill="rgba(2,8,18,0.97)"     rx=".1"/>
+            <!-- RGB CHANNEL FRINGE -->
+            <rect x="3"  y="8" width="3"   height="20" fill="rgba(255,0,80,0.22)"   rx=".1"/>
+            <rect x="5"  y="8" width="1.5" height="20" fill="rgba(0,255,220,0.18)"  rx=".1"/>
+            <rect x="34" y="8" width="3"   height="20" fill="rgba(255,0,80,0.20)"   rx=".1"/>
+            <rect x="33" y="8" width="1.5" height="20" fill="rgba(0,255,220,0.15)"  rx=".1"/>
+            <!-- SCAN TEARS -->
+            <line x1="3" y1="11.5" x2="37" y2="11.5" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+            <line x1="3" y1="16.5" x2="37" y2="16.5" stroke="rgba(13,191,180,0.22)"  stroke-width="1.0"/>
+            <line x1="3" y1="20.5" x2="37" y2="20.5" stroke="rgba(255,61,130,0.15)"  stroke-width="0.8"/>
+            <line x1="3" y1="24"   x2="37" y2="24"   stroke="rgba(255,255,255,0.12)" stroke-width="0.7"/>
+          </g>
+        </g>
+      </svg>
     </div>
+    <div style="width:38px;background:rgba(13,191,180,.1);height:5px;border-radius:50%;"></div>
     <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
   </div>
 
-  <!-- Floating tags — repositioned to sit near the avatar cluster -->
-  <div class="hero-tag" style="top:44%; right:24%; animation-delay:1.1s;">
-    <div class="hero-tag-inner">digital media</div>
+  <!-- "digital media" floating tag — centroid of the three avatars -->
+  <div style="position:absolute;top:30%;right:24%;z-index:6;opacity:0;animation:avFloat .7s ease .55s forwards;">
+    <div style="
+      background:rgba(255,255,255,.09);
+      border:.5px solid rgba(255,255,255,.22);
+      padding:5px 13px;font-size:11px;
+      font-family:'Space Mono',monospace;
+      color:rgba(255,255,255,.75);
+      white-space:nowrap;border-radius:6px;
+      box-shadow:0 2px 12px rgba(255,61,130,.12);
+    ">digital media</div>
   </div>
-  <div class="hero-tag" style="top:68%; right:8%; animation-delay:1.25s;">
-    <div class="hero-tag-inner">
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+
+  <!--
+    "researching" floating tag.
+    Placed below intensity02 (top:16% right:11%) AND below glitch_24 (top:42%),
+    so top:54% right:9% puts it comfortably under both.
+    Lens SVG sits LEFT of the word with a gap so it never overlaps the text.
+  -->
+  <div style="position:absolute;top:54%;right:9%;z-index:6;opacity:0;animation:avFloat .7s ease .65s forwards;">
+    <div style="
+      background:rgba(255,255,255,.09);
+      border:.5px solid rgba(255,255,255,.22);
+      padding:5px 12px 5px 10px;
+      font-size:11px;
+      font-family:'Space Mono',monospace;
+      color:rgba(255,255,255,.75);
+      white-space:nowrap;border-radius:6px;
+      box-shadow:0 2px 12px rgba(255,61,130,.12);
+      display:inline-flex;align-items:center;gap:6px;
+    ">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block;">
         <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
         <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
@@ -225,342 +597,112 @@ body {
       <span class="first">Mai</span><span class="rest"> W. <em>Ibrahim</em></span>
     </h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures.</p>
-    <div class="hero-btn" style="margin-top:10px;"><a href="#">Enter ↓</a></div>
+    <div class="hero-btn"><a href="#about">Enter ↓</a></div>
   </div>
 </div>
 
+<!-- ABOUT -->
+<div class="about-section" id="about">
+  <p class="section-label">About</p>
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <img class="about-img" src="/assets/img/prof_pic.jpg" alt="Mai W. Ibrahim" />
+    </div>
+    <div class="text-col">
+      <p class="about-text">My research examines the relationship between digital media, pre-conscious intensities, and political economy. I investigate how digital media act upon the human body prior to conscious awareness, and how platform capitalism transforms that bodily register into a site of extraction.</p>
+      <p class="about-text">My work engages a wide range of media, including virtual reality, brain-computer interfaces, social media, and video games.</p>
+      <p class="about-text">I am currently a sessional instructor at McMaster University in Hamilton, Canada. I was a Postdoctoral Visitor at York University's Department of Communication and Media Studies in 2024–2025, where I researched toxicity in video games. I completed my PhD in Communication, Rhetoric, and Digital Media at North Carolina State University.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="pubs-section" id="publications">
+  <div class="pub-img-float pub-img-a">
+    <img src="/assets/img/vr-headset.jpg" alt="VR headset" />
+  </div>
+  <div class="pub-img-float pub-img-b">
+    <img src="/assets/img/vr-museum.jpg" alt="VR museum" />
+  </div>
+  <div class="pub-img-float pub-img-c">
+    <img src="/assets/img/vr-space.jpg" alt="VR space" />
+  </div>
+  <div class="pub-img-float pub-img-d">
+    <img src="/assets/img/bci-headset.jpg" alt="BCI headset" />
+  </div>
+
+  <div class="pub-content">
+    <p class="section-label">Research &amp; Publications</p>
+
+    <div class="pub-type-block type-chapters">
+      <span class="pub-type-label">Book Chapters</span>
+      <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
+      <p class="pub-entry">Ibrahim, M. (2024). <a href="/assets/pdf/tahrir-square.pdf" target="_blank">Exploring <em>Tahrir Square</em> as an Intra-Active Hybrid Space</a>. In Joanna Godlewicz-Adamiec &amp; Pawel Piszczatowski (Eds.), <em>Re-Thinking Agency: Non-Anthropocentric Approaches</em> (pp. 21–33). Vandenhoeck &amp; Ruprecht.</p>
+      <p class="pub-entry">Ibrahim, M. (2023). <a href="/assets/pdf/posthuman-bci-vr.pdf" target="_blank">Posthuman Subjectivity in BCI-VR Entanglement</a>. In Veljko Dubljević &amp; Allen Coin (Eds.), <em>Policy, Identity, and Neurotechnology</em> (pp. 11–25). Springer.</p>
+      <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
+      <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
+    </div>
+
+    <div class="pub-type-block type-articles">
+      <span class="pub-type-label">Journal Articles</span>
+      <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR Through the <em>Better World Museum</em>. <em>Convergence</em>.</p>
+    </div>
+
+    <div class="pub-type-block type-reviews">
+      <span class="pub-type-label">Reviews</span>
+      <p class="pub-entry">Ibrahim, M. (2021). Review of the book <a href="/assets/pdf/nihilism-review.pdf" target="_blank"><em>Nihilism and Technology</em></a>, by N. Gertz. <em>Communication Design Quarterly</em>, 9(1), 32–34.</p>
+      <p class="pub-entry">Ibrahim, M. (2020). Review of the chapter <em>A Fast Food Civil Rights</em> in <em>Franchise</em>, by M. Chatelain. HASTAC.</p>
+    </div>
+
+    <div class="pub-type-block type-interview">
+      <span class="pub-type-label">Interview</span>
+      <p class="pub-entry">Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CV + CONTACT -->
+<div class="cv-contact-section" id="cv">
+  <div class="cv-top-stripe"></div>
+  <div class="cv-blob cv-blob-a"></div>
+  <div class="cv-blob cv-blob-b"></div>
+  <div class="cv-blob cv-blob-c"></div>
+
+  <div class="cv-panel">
+    <p class="section-label">CV</p>
+    <a class="cv-download" href="/assets/pdf/cv.pdf" target="_blank">Download CV</a>
+  </div>
+
+  <div class="cv-divider"></div>
+
+  <div class="contact-panel" id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-grid">
+      <a class="contact-row" href="mailto:mai.w.ibrahim@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">mai.w.ibrahim@gmail.com</span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a class="contact-row" href="https://bsky.app/profile/maiibrahim.bsky.social" target="_blank">
+        <span class="contact-label">Bluesky</span>
+        <span class="contact-value">@maiibrahim.bsky.social</span>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+</div>
+
 <script>
-// ── Shared WebGL boilerplate ──────────────────────────────────────────────────
-function createShaderProgram(gl, vert, frag) {
-  function compile(type, src) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, src);
-    gl.compileShader(s);
-    return s;
+(function(){
+  var bar=document.getElementById('scrollBar');
+  function onScroll(){
+    var s=window.scrollY||document.documentElement.scrollTop;
+    var d=document.documentElement.scrollHeight-window.innerHeight;
+    bar.style.width=(d>0?(s/d)*100:0)+'%';
   }
-  const prog = gl.createProgram();
-  gl.attachShader(prog, compile(gl.VERTEX_SHADER, vert));
-  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, frag));
-  gl.linkProgram(prog);
-  return prog;
-}
-
-function initCanvas(canvas) {
-  const gl = canvas.getContext('webgl', { premultipliedAlpha: false, alpha: true });
-  gl.clearColor(0, 0, 0, 0);
-  const verts = new Float32Array([-1,-1, 1,-1, -1,1, 1,1]);
-  const buf = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
-  const vert = `
-    attribute vec2 a_pos;
-    varying vec2 v_uv;
-    void main() {
-      v_uv = a_pos * 0.5 + 0.5;
-      gl_Position = vec4(a_pos, 0.0, 1.0);
-    }
-  `;
-  return { gl, vert };
-}
-
-function drawQuad(gl, prog) {
-  gl.useProgram(prog);
-  const loc = gl.getAttribLocation(prog, 'a_pos');
-  gl.enableVertexAttribArray(loc);
-  gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-}
-
-// ════════════════════════════════════════════════════════════════════════════
-// INTENSITY02 — domain-warped FBM, golden warmth that never resolves
-// ════════════════════════════════════════════════════════════════════════════
-(function () {
-  const canvas = document.getElementById('c-intensity');
-  const { gl, vert } = initCanvas(canvas);
-
-  const frag = `
-    precision highp float;
-    varying vec2 v_uv;
-    uniform float u_time;
-
-    vec3 hash3(vec2 p) {
-      vec3 q = vec3(dot(p,vec2(127.1,311.7)),
-                    dot(p,vec2(269.5,183.3)),
-                    dot(p,vec2(419.2,371.9)));
-      return fract(sin(q) * 43758.5453);
-    }
-    float noise(vec2 p) {
-      vec2 i = floor(p); vec2 f = fract(p);
-      vec2 u = f*f*(3.0-2.0*f);
-      return mix(mix(dot(hash3(i+vec2(0,0)).xy, f-vec2(0,0)),
-                     dot(hash3(i+vec2(1,0)).xy, f-vec2(1,0)), u.x),
-                 mix(dot(hash3(i+vec2(0,1)).xy, f-vec2(0,1)),
-                     dot(hash3(i+vec2(1,1)).xy, f-vec2(1,1)), u.x), u.y);
-    }
-    float fbm(vec2 p) {
-      float v = 0.0; float a = 0.5;
-      mat2 rot = mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.5));
-      for(int i=0; i<5; i++){
-        v += a * noise(p);
-        p = rot * p * 2.02;
-        a *= 0.5;
-      }
-      return v;
-    }
-
-    void main() {
-      vec2 uv = v_uv * 2.0 - 1.0;
-      float r = length(uv);
-      float mask = 1.0 - smoothstep(0.70, 1.0, r);
-      if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
-
-      float t = u_time * 0.18;
-      vec2 q = vec2(fbm(uv + vec2(0.0, 0.0) + t),
-                    fbm(uv + vec2(5.2, 1.3) + t * 0.7));
-      vec2 r2 = vec2(fbm(uv + 4.0*q + vec2(1.7, 9.2) + t * 0.4),
-                     fbm(uv + 4.0*q + vec2(8.3, 2.8) + t * 0.3));
-      float f = fbm(uv + 4.0*r2 + t * 0.2);
-      f = f*f*f + 0.6*f*f + 0.5*f;
-
-      vec3 col = mix(vec3(0.04, 0.11, 0.22), vec3(0.96, 0.89, 0.48),
-                     clamp(f * 2.0, 0.0, 1.0));
-      col = mix(col, vec3(0.99, 0.96, 0.82),
-                clamp((f - 0.5) * 2.0, 0.0, 1.0));
-      col *= (0.5 + 0.5 * (1.0 - r * 0.9));
-
-      float alpha = mask * 0.82 * smoothstep(0.0, 0.4, f + 0.2);
-      col *= alpha;
-      gl_FragColor = vec4(col, alpha);
-    }
-  `;
-
-  const prog = createShaderProgram(gl, vert, frag);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  let t = Math.random() * 100;
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(prog);
-    gl.uniform1f(uTime, t);
-    drawQuad(gl, prog);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 300);
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
 })();
-
-// ════════════════════════════════════════════════════════════════════════════
-// EXTRACTION05 — vortex + silver particle rain into void
-// ════════════════════════════════════════════════════════════════════════════
-(function () {
-  const canvas = document.getElementById('c-extraction');
-  const { gl, vert } = initCanvas(canvas);
-
-  const frag = `
-    precision highp float;
-    varying vec2 v_uv;
-    uniform float u_time;
-
-    float hash(float x) { return fract(sin(x) * 43758.5453); }
-    float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-    float noise(vec2 p) {
-      vec2 i = floor(p); vec2 f = fract(p);
-      vec2 u = f*f*(3.0-2.0*f);
-      float a = hash2(i), b = hash2(i+vec2(1,0)),
-            c = hash2(i+vec2(0,1)), d = hash2(i+vec2(1,1));
-      return mix(mix(a,b,u.x), mix(c,d,u.x), u.y);
-    }
-
-    float particles(vec2 uv, float t) {
-      float result = 0.0;
-      for(int i = 0; i < 18; i++) {
-        float fi = float(i);
-        float col_f = mod(fi, 6.0);
-        float row_f = floor(fi / 6.0);
-        float px = -0.55 + col_f * 0.22 + sin(fi * 2.3 + t * 0.4) * 0.04;
-        float baseY = 0.75 - row_f * 0.28;
-        float py = baseY - mod(t * (0.12 + hash(vec2(fi,0.0)) * 0.08) + hash(vec2(fi,1.0)), 1.2);
-        float d = length(uv - vec2(px, py));
-        float fade = 1.0 - smoothstep(-0.2, 0.5, py);
-        result += (1.0 - smoothstep(0.012, 0.030, d)) * fade * 0.85;
-      }
-      return clamp(result, 0.0, 1.0);
-    }
-
-    void main() {
-      vec2 uv = v_uv * 2.0 - 1.0;
-      float r   = length(uv);
-      float ang = atan(uv.y, uv.x);
-      float t   = u_time * 0.22;
-
-      float mask = 1.0 - smoothstep(0.72, 1.0, r);
-      if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
-
-      float spin   = ang - t * 1.4 + r * 3.5;
-      float funnel = sin(spin * 3.0) * 0.5 + 0.5;
-      funnel *= smoothstep(0.0, 0.55, r);
-      funnel *= (1.0 - smoothstep(0.40, 0.72, r));
-
-      float turb     = noise(uv * 3.5 + vec2(t * 0.5, -t * 0.3));
-      float voidMask = 1.0 - smoothstep(0.0, 0.22, r);
-
-      vec3 funnelCol = mix(vec3(0.55, 0.04, 0.22), vec3(1.0, 0.24, 0.51),
-                           clamp(funnel * 1.5 + turb * 0.4, 0.0, 1.0));
-      funnelCol = mix(funnelCol, vec3(0.0), voidMask);
-
-      float pts = particles(uv, t);
-      vec3 silverCol = mix(funnelCol, vec3(0.75, 0.82, 0.88), pts);
-
-      float alpha = mask * 0.82 * (funnel * 0.8 + turb * 0.2 + pts * 0.7 + 0.05);
-      alpha = clamp(alpha, 0.0, 0.82);
-      silverCol *= alpha / max(alpha, 0.001);
-      gl_FragColor = vec4(silverCol * alpha, alpha);
-    }
-  `;
-
-  const prog = createShaderProgram(gl, vert, frag);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  let t = Math.random() * 100;
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(prog);
-    gl.uniform1f(uTime, t);
-    drawQuad(gl, prog);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 600);
-})();
-
-// ════════════════════════════════════════════════════════════════════════════
-// GLITCH_24 — CRT corruption: scanlines, slice tears, RGB channel split
-// ════════════════════════════════════════════════════════════════════════════
-(function () {
-  const canvas = document.getElementById('c-glitch');
-  const { gl, vert } = initCanvas(canvas);
-
-  const frag = `
-    precision highp float;
-    varying vec2 v_uv;
-    uniform float u_time;
-
-    float hash(float x)  { return fract(sin(x) * 43758.5453); }
-    float hash2(vec2 p)  { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-    float noise(vec2 p) {
-      vec2 i = floor(p); vec2 f = fract(p);
-      vec2 u = f*f*(3.0-2.0*f);
-      return mix(mix(hash2(i),          hash2(i+vec2(1,0)), u.x),
-                 mix(hash2(i+vec2(0,1)), hash2(i+vec2(1,1)), u.x), u.y);
-    }
-
-    void main() {
-      vec2 uv = v_uv;
-      float t = u_time;
-      vec2 c = uv * 2.0 - 1.0;
-      float r = length(c);
-      float mask = 1.0 - smoothstep(0.70, 1.0, r);
-      if(mask < 0.001) { gl_FragColor = vec4(0.0); return; }
-
-      float sliceY    = floor(uv.y * 18.0) / 18.0;
-      float sliceSeed = hash(sliceY + floor(t * 7.0) * 0.3);
-      float tearStr   = step(0.82, sliceSeed) * hash(sliceY * 31.7 + t) * 0.18;
-      float uvX       = uv.x + tearStr * (hash(sliceY + t * 2.0) - 0.5);
-      float scanSeed  = hash(floor(uv.y * 80.0) + floor(t * 14.0));
-      uvX += (step(0.94, scanSeed) - 0.5) * 0.025;
-      vec2 uvD = vec2(clamp(uvX, 0.0, 1.0), uv.y);
-
-      float caAmt = 0.014 + sin(t * 0.9) * 0.006;
-      vec2 uvR = vec2(uvD.x + caAmt, uvD.y);
-      vec2 uvG = uvD;
-      vec2 uvB = vec2(uvD.x - caAmt, uvD.y);
-
-      float stripeR = 0.0, stripeG = 0.0, stripeB = 0.0;
-      float band    = floor(uvD.y * 7.0);
-      float bandCol = hash(band + 0.5);
-
-      stripeR += step(0.55,bandCol)*step(bandCol,0.70)*0.20*noise(uvR*vec2(6.,1.)+t*.3);
-      stripeG += step(0.55,bandCol)*step(bandCol,0.70)*0.88*noise(uvG*vec2(6.,1.)+t*.3);
-      stripeB += step(0.55,bandCol)*step(bandCol,0.70)*0.84*noise(uvB*vec2(6.,1.)+t*.3);
-      stripeR += step(0.30,bandCol)*step(bandCol,0.45)*0.90*noise(uvR*vec2(4.,1.)-t*.2);
-      stripeG += step(0.30,bandCol)*step(bandCol,0.45)*0.15*noise(uvG*vec2(4.,1.));
-      stripeB += step(0.30,bandCol)*step(bandCol,0.45)*0.42*noise(uvB*vec2(4.,1.));
-      stripeR += step(0.72,bandCol)*0.95*noise(uvR*vec2(5.,1.)+t*.4);
-      stripeG += step(0.72,bandCol)*0.88*noise(uvG*vec2(5.,1.)+t*.4);
-      stripeB += step(0.72,bandCol)*0.25;
-      stripeR += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
-      stripeG += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
-      stripeB += step(0.15,bandCol)*step(bandCol,0.22)*0.70;
-
-      vec3 screenCol = vec3(stripeR, stripeG, stripeB);
-
-      for(int i = 0; i < 6; i++) {
-        float fi = float(i);
-        float bx = hash(fi*7.3+floor(t*5.0));
-        float by = hash(fi*13.1+floor(t*4.0));
-        float bw = 0.06+hash(fi*3.7)*0.12;
-        float bh = 0.04+hash(fi*5.2)*0.08;
-        if(uvD.x>bx && uvD.x<bx+bw && uvD.y>by && uvD.y<by+bh) {
-          vec3 nc = vec3(hash(fi+t*.5),hash(fi*2.+t*.3),hash(fi*3.+t*.4));
-          nc = mix(nc, mix(vec3(.05,.75,.71),vec3(1.,.24,.51),hash(fi)), .7);
-          screenCol = mix(screenCol, nc, 0.9);
-        }
-      }
-
-      float scan = sin(uv.y * 180.0 + t * 0.5) * 0.5 + 0.5;
-      screenCol *= 0.82 + scan * 0.18;
-      screenCol *= (1.0 - r * 0.6);
-
-      vec3 dark = vec3(0.008, 0.03, 0.07);
-      float cStr = clamp(stripeR+stripeG+stripeB,0.,1.)*0.7+0.15;
-      screenCol = mix(dark, screenCol, cStr);
-
-      float alpha = mask * 0.82;
-      screenCol *= alpha;
-      gl_FragColor = vec4(screenCol, alpha);
-    }
-  `;
-
-  const prog = createShaderProgram(gl, vert, frag);
-  const uTime = gl.getUniformLocation(prog, 'u_time');
-  let t = Math.random() * 100;
-  function loop() {
-    requestAnimationFrame(loop);
-    t += 0.016;
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.useProgram(prog);
-    gl.uniform1f(uTime, t);
-    drawQuad(gl, prog);
-  }
-  loop();
-  setTimeout(() => { canvas.style.opacity = '1'; }, 900);
-})();
-
-// ── Ambient drift — gently float each wrapper div ───────────────────────────
-(function () {
-  const avatars = [
-    { el: document.getElementById('wrap-intensity'),  px: 0.0,  py: 0.0,  fx: 0.34, fy: 0.26, ax: 5, ay: 7 },
-    { el: document.getElementById('wrap-extraction'), px: 0.0,  py: 0.0,  fx: 0.29, fy: 0.22, ax: 4, ay: 5 },
-    { el: document.getElementById('wrap-glitch'),     px: 0.0,  py: 0.0,  fx: 0.28, fy: 0.21, ax: 6, ay: 5 },
-  ];
-
-  // Store natural CSS transform offsets (none — we drive via translateX/Y)
-  let t = 0;
-  function drift() {
-    requestAnimationFrame(drift);
-    t += 0.016;
-    avatars.forEach((av, i) => {
-      const dx = Math.sin(t * av.fx + i * 1.8) * av.ax;
-      const dy = Math.sin(t * av.fy + i * 2.4) * av.ay;
-      av.el.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-  }
-  drift();
-})();
-
-window.addEventListener('resize', () => location.reload());
 </script>
-</body>
-</html>
