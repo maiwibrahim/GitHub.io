@@ -47,6 +47,7 @@ article{ padding:0!important;margin:0!important; }
 .navbar,nav.navbar        { display:none!important; }
 .p-name,.sidebar-header,.profile-name { display:none!important; }
 
+/* SCROLL BAR */
 .scroll-bar {
   position:fixed;top:0;left:0;height:3px;width:0%;
   background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
@@ -54,6 +55,7 @@ article{ padding:0!important;margin:0!important; }
   box-shadow:0 0 8px rgba(245,226,122,.55);
 }
 
+/* NAV */
 .site-nav {
   position:fixed;top:0;left:0;right:0;z-index:99999;
   background:rgba(11,27,46,.92);backdrop-filter:blur(14px);
@@ -68,6 +70,7 @@ article{ padding:0!important;margin:0!important; }
 }
 .site-nav a:hover { color:var(--teal-soft); }
 
+/* ===================== HERO ===================== */
 .hero {
   background:var(--hero-bg);
   min-height:100vh;width:100vw;
@@ -75,120 +78,207 @@ article{ padding:0!important;margin:0!important; }
   padding:60px 6vw 0;
   position:relative;overflow:hidden;
 }
-.hero-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1; }
+
+.hero-blob {
+  position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1;
+}
 .hero-blob-a { width:500px;height:500px;background:rgba(255,61,130,.14);top:-140px;right:3%; }
 .hero-blob-b { width:320px;height:320px;background:rgba(13,191,180,.12);bottom:10%;right:28%; }
 .hero-blob-c { width:260px;height:260px;background:rgba(245,226,122,.07);top:20%;left:5%; }
 
-.ui-dots { position:absolute;top:18px;right:20px;display:flex;gap:5px;z-index:10; }
+.ui-dots {
+  position:absolute;top:18px;right:20px;
+  display:flex;gap:5px;z-index:10;
+}
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-.av {
-  position:absolute;display:flex;flex-direction:column;
-  align-items:center;gap:4px;z-index:5;
-  opacity:0;animation:avFloat .7s ease forwards;
+/* ---- SHADER AVATAR WRAPPERS ---- */
+.shader-wrap {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: avFadeIn 1s ease forwards;
+  pointer-events: none;
+  will-change: transform;
 }
-@keyframes avFloat {
-  from{opacity:0;transform:translateY(14px);}
-  to  {opacity:1;transform:translateY(0);}
-}
-.av-label {
-  font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.05em;
-  background:rgba(0,0,0,.38);padding:2px 7px;border-radius:2px;white-space:nowrap;
+@keyframes avFadeIn {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
+/* More elongated oval shape */
+.shader-oval {
+  overflow: hidden;
+  border-radius: 40% 60% 55% 45% / 35% 40% 60% 65%;
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,0.14),
+    0 0 28px rgba(13,191,180,0.10),
+    inset 0 0 14px rgba(0,0,0,0.35);
+  position: relative;
+}
+.shader-oval canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.av-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: .06em;
+  background: rgba(0,0,0,.42);
+  padding: 2px 8px; border-radius: 2px;
+  white-space: nowrap; color: #fff;
+}
+
+/* Floating tags */
+.hero-tag {
+  position: absolute; z-index: 6;
+  opacity: 0; animation: tagFadeIn .8s ease forwards;
+  pointer-events: none;
+}
+@keyframes tagFadeIn {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:0.40; transform:translateY(0); }
+}
+.hero-tag-inner {
+  background: rgba(255,255,255,.09);
+  border: .5px solid rgba(255,255,255,.22);
+  padding: 5px 13px; font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: rgba(255,255,255,.8);
+  white-space: nowrap; border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(255,61,130,.10);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+
+/* ---- HERO CONTENT ---- */
 .hero-content {
-  position:relative;z-index:10;
-  display:flex;flex-direction:column;gap:14px;max-width:600px;
+  position: relative; z-index: 10;
+  display: flex; flex-direction: column; gap: 14px; max-width: 600px;
 }
 .hero-name {
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(32px,5.4vw,62px);font-weight:400;
-  line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(37px,6.8vw,76px); font-weight: 400;
+  line-height: .92; white-space: nowrap; letter-spacing: -.01em; margin: 0;
 }
-.hero-name .first { color:var(--yellow-soft); }
-.hero-name .rest  { color:#e0f0f8; }
-.hero-name em     { font-style:italic;color:rgba(13,191,180,.45); }
+.hero-name .first { color: var(--yellow-soft); }
+.hero-name .rest  { color: #e0f0f8; }
+.hero-name em     { font-style: italic; color: rgba(13,191,180,.45); }
 
-.hero-desc { font-size:clamp(14px,2vw,18px);color:#ffffff;font-style:italic;line-height:1.6;margin:0; }
-.hero-btn { margin-top:10px; }
+.hero-desc {
+  font-size: clamp(14px,2vw,18px); color: #ffffff;
+  font-style: italic; line-height: 1.6; margin: 0;
+}
+.hero-btn { margin-top: 10px; }
 .hero-btn a {
-  font-family:'Space Mono',monospace;font-size:11px;
-  letter-spacing:.15em;text-transform:uppercase;
-  color:#0b1b2e;background:var(--teal);
-  padding:12px 28px;text-decoration:none;display:inline-block;transition:background .2s;
+  font-family: 'Space Mono', monospace; font-size: 11px;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: #0b1b2e; background: var(--teal);
+  padding: 12px 28px; text-decoration: none; display: inline-block; transition: background .2s;
 }
-.hero-btn a:hover { background:var(--teal-soft); }
+.hero-btn a:hover { background: var(--teal-soft); }
 
+/* ===================== ABOUT ===================== */
 .about-section {
-  background:#f0f8fa;width:100vw;
-  padding:130px max(2.5rem,6vw) 140px;
-  margin-top:-60px;
-  clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
-  min-height:100vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;position:relative;
+  background: #f0f8fa; width: 100vw;
+  padding: 130px max(2.5rem,6vw) 140px;
+  margin-top: -60px;
+  clip-path: polygon(0 60px,100% 0,100% 100%,0 100%);
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; position: relative;
 }
 .section-label {
-  font-size:17px;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--pink);margin-bottom:2.5rem;
-  font-style:normal;font-family:'Space Mono',monospace;
-  text-align:center;width:100%;
+  font-size: 17px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--pink); margin-bottom: 2.5rem;
+  font-style: normal; font-family: 'Space Mono', monospace;
+  text-align: center; width: 100%;
 }
 .about-inner {
-  display:flex;gap:9rem;align-items:center;
-  justify-content:center;flex-wrap:wrap;position:relative;
+  display: flex; gap: 9rem; align-items: center;
+  justify-content: center; flex-wrap: wrap; position: relative;
 }
-.about-img-wrap { flex-shrink:0;transform:rotate(-6deg);position:relative;align-self:center; }
+.about-img-wrap {
+  flex-shrink: 0; transform: rotate(-6deg);
+  position: relative; align-self: center;
+}
 .about-img {
-  width:230px;height:298px;object-fit:cover;object-position:top;display:block;border-radius:3px;
-  box-shadow:0 0 0 3px #fff,6px 10px 36px rgba(255,61,130,.22),-2px -2px 0 1px rgba(13,191,180,.35);
+  width: 230px; height: 298px;
+  object-fit: cover; object-position: top; display: block;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #fff, 6px 10px 36px rgba(255,61,130,.22), -2px -2px 0 1px rgba(13,191,180,.35);
 }
-.text-col { display:flex;flex-direction:column;gap:1.4rem;max-width:520px;transform:rotate(2.5deg);min-width:280px;padding-top:24px; }
-.about-text { font-size:16px;line-height:1.95;color:#1a2e3a;margin:0; }
+.text-col {
+  display: flex; flex-direction: column; gap: 1.4rem;
+  max-width: 520px; transform: rotate(2.5deg);
+  min-width: 280px; padding-top: 24px;
+}
+.about-text { font-size: 16px; line-height: 1.95; color: #1a2e3a; margin: 0; }
 
+/* ===================== PUBLICATIONS ===================== */
 @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-3deg);}  50%{transform:translateY(-18px) rotate(-3deg);} }
 @keyframes floatB { 0%,100%{transform:translateY(0) rotate(2deg);}   50%{transform:translateY(-14px) rotate(2deg);} }
 @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
 @keyframes floatD { 0%,100%{transform:translateY(0) rotate(4deg);}   50%{transform:translateY(-12px) rotate(4deg);} }
 
 .pubs-section {
-  background:#fdfcff;min-height:100vh;width:100vw;color:#1a2e3a;
-  margin-top:-60px;clip-path:polygon(0 0,100% 60px,100% 100%,0 100%);
-  padding:130px max(2.5rem,6vw) 6rem;position:relative;overflow:hidden;
+  background: #fdfcff; min-height: 100vh; width: 100vw; color: #1a2e3a;
+  margin-top: -60px;
+  clip-path: polygon(0 0,100% 60px,100% 100%,0 100%);
+  padding: 130px max(2.5rem,6vw) 6rem;
+  position: relative; overflow: hidden;
 }
-.pubs-section * { color:#1a2e3a; }
-.pubs-section a { color:#1a2e3a!important;border-bottom:.5px solid rgba(26,46,58,.28);text-decoration:none; }
-.pubs-section a:hover { color:var(--pink)!important;border-bottom-color:var(--pink); }
-.pubs-section .section-label { color:var(--pink);margin-bottom:2rem;text-align:left;font-size:17px; }
-.pub-img-float { position:absolute;z-index:2;overflow:hidden;border-radius:4px;box-shadow:0 8px 32px rgba(255,61,130,.1);cursor:pointer; }
-.pub-img-float img { width:100%;height:100%;object-fit:cover;display:block;opacity:.14;filter:grayscale(10%);transition:opacity .45s ease,transform .45s ease; }
-.pub-img-float:hover img { opacity:.88;transform:scale(1.04); }
+.pubs-section * { color: #1a2e3a; }
+.pubs-section a { color: #1a2e3a!important; border-bottom: .5px solid rgba(26,46,58,.28); text-decoration: none; }
+.pubs-section a:hover { color: var(--pink)!important; border-bottom-color: var(--pink); }
+.pubs-section .section-label { color: var(--pink); margin-bottom: 2rem; text-align: left; font-size: 17px; }
+
+.pub-img-float {
+  position: absolute; z-index: 2; overflow: hidden;
+  border-radius: 4px; box-shadow: 0 8px 32px rgba(255,61,130,.1); cursor: pointer;
+}
+.pub-img-float img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: .14; filter: grayscale(10%);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.pub-img-float:hover img { opacity: .88; transform: scale(1.04); }
 .pub-img-a { width:320px;height:310px;top:90px;right:22px;animation:floatA 8s ease-in-out infinite; }
 .pub-img-a img { object-fit:cover;object-position:top center; }
 .pub-img-c { width:280px;height:380px;top:490px;right:370px;animation:floatC 9s ease-in-out infinite;background:transparent; }
 .pub-img-c img { object-fit:cover;object-position:center;background:transparent; }
 .pub-img-d { width:280px;height:258px;top:430px;right:60px;animation:floatD 7s ease-in-out infinite; }
 .pub-img-b { width:260px;height:330px;top:110px;right:380px;animation:floatB 10s ease-in-out infinite; }
-.pub-content { position:relative;z-index:10;max-width:660px; }
-.pub-type-block { margin-bottom:2.8rem; }
-.pub-type-block:last-child { margin-bottom:0; }
+
+.pub-content { position: relative; z-index: 10; max-width: 660px; }
+.pub-type-block { margin-bottom: 2.8rem; }
+.pub-type-block:last-child { margin-bottom: 0; }
 .pub-type-label {
-  font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
-  margin-bottom:1rem;padding:5px 14px;display:inline-block;border-radius:3px;font-family:'Space Mono',monospace;
+  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: 1rem; padding: 5px 14px; display: inline-block; border-radius: 3px;
+  font-family: 'Space Mono', monospace;
 }
 .type-chapters  .pub-type-label { background:#d0eef8;color:#0a5e78; }
 .type-articles  .pub-type-label { background:#ffe5ef;color:var(--pink); }
 .type-reviews   .pub-type-label { background:#fdf4d0;color:#7a6820; }
 .type-interview .pub-type-label { background:#e8faf9;color:#0a7a74; }
-.pub-entry { font-size:16px;line-height:1.9;color:#1a2e3a;margin-bottom:.9rem;font-family:'Lora',serif; }
-.pub-entry:last-child { margin-bottom:0; }
-.pub-entry em { font-style:italic; }
-.pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
-.pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
+.pub-entry {
+  font-size: 16px; line-height: 1.9; color: #1a2e3a;
+  margin-bottom: .9rem; font-family: 'Lora', serif;
+}
+.pub-entry:last-child { margin-bottom: 0; }
+.pub-entry em { font-style: italic; }
+.pub-entry a { color: inherit; text-decoration: none; border-bottom: .5px solid rgba(26,46,58,.28); }
+.pub-entry a:hover { border-bottom-color: var(--pink); color: var(--pink)!important; }
 
+/* ===================== CV + CONTACT ===================== */
 .cv-contact-section {
-  background:#0b1b2e;min-height:100vh;width:100vw;
-  display:grid;grid-template-columns:1fr 1px 1fr;position:relative;overflow:hidden;
+  background: #0b1b2e; min-height: 100vh; width: 100vw;
+  display: grid; grid-template-columns: 1fr 1px 1fr;
+  position: relative; overflow: hidden;
 }
 .cv-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0; }
 .cv-blob-a { width:500px;height:500px;background:rgba(255,61,130,.12);top:-120px;left:-100px; }
@@ -196,19 +286,29 @@ article{ padding:0!important;margin:0!important; }
 .cv-blob-c { width:280px;height:280px;background:rgba(245,226,122,.05);top:40%;left:40%; }
 .cv-top-stripe {
   position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);z-index:10;
+  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  z-index:10;
 }
 .cv-divider { background:rgba(13,191,180,.14);align-self:stretch;position:relative;z-index:2; }
-.cv-panel { display:flex;flex-direction:column;justify-content:center;padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);position:relative;z-index:2; }
+.cv-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);
+  position:relative;z-index:2;
+}
 .cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 .cv-download {
-  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:#0b1b2e;background:var(--teal);text-decoration:none;padding:14px 32px;
+  font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:#0b1b2e;background:var(--teal);
+  text-decoration:none;padding:14px 32px;
   display:inline-flex;align-items:center;gap:10px;transition:background .2s;width:fit-content;
 }
 .cv-download:hover { background:var(--teal-soft);color:#0b1b2e; }
 .cv-download::after { content:'↓';font-size:16px; }
-.contact-panel { display:flex;flex-direction:column;justify-content:center;padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);position:relative;z-index:2; }
+.contact-panel {
+  display:flex;flex-direction:column;justify-content:center;
+  padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);
+  position:relative;z-index:2;
+}
 .contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 .contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px; }
 .contact-row {
@@ -218,19 +318,30 @@ article{ padding:0!important;margin:0!important; }
 }
 .contact-row:first-child { border-top:.5px solid rgba(13,191,180,.15); }
 .contact-row:hover { padding-left:.65rem; }
-.contact-label { font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);min-width:100px; }
-.contact-value { font-family:'Lora',serif;font-size:16px;font-style:italic;color:#ffffff;flex:1;padding:0 1rem; }
-.contact-arrow { font-family:'Space Mono',monospace;font-size:13px;color:rgba(13,191,180,.36);transition:transform .2s,color .2s; }
+.contact-label {
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);min-width:100px;
+}
+.contact-value {
+  font-family:'Lora',serif;font-size:16px;font-style:italic;
+  color:#ffffff;flex:1;padding:0 1rem;
+}
+.contact-arrow {
+  font-family:'Space Mono',monospace;font-size:13px;
+  color:rgba(13,191,180,.36);transition:transform .2s,color .2s;
+}
 .contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
 .contact-row:hover .contact-value { color:var(--teal-muted); }
 
+/* ===================== MOBILE ===================== */
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
   .site-nav a { font-size:10px; }
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-  .av { transform:scale(.78);transform-origin:top left; }
+  .shader-wrap,.hero-tag { display:none; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
@@ -256,6 +367,7 @@ article{ padding:0!important;margin:0!important; }
 </style>
 
 <div class="page">
+
 <div class="scroll-bar" id="scrollBar"></div>
 
 <nav class="site-nav">
@@ -265,209 +377,64 @@ article{ padding:0!important;margin:0!important; }
   <a href="#contact">Contact</a>
 </nav>
 
+<!-- ===================== HERO ===================== -->
 <div class="hero" id="hero">
   <div class="hero-blob hero-blob-a"></div>
   <div class="hero-blob hero-blob-b"></div>
   <div class="hero-blob hero-blob-c"></div>
+
   <div class="ui-dots">
     <span style="background:var(--teal);"></span>
     <span style="background:var(--pink);"></span>
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!--
-    Placement logic:
-    - Hero name flexes to ~47% vh. With clamp(32px,5.4vw,62px) it is smaller than before.
-    - intensity02 top:38% → its TOP is just barely above the name's first line.
-    - extraction05 top:50% → sits at name's vertical midpoint.
-    - glitch_24    top:61% → below the name.
-    - "digital media" tag at top:44% between the first two avatars.
-    - "researching" tag at top:73% below all three.
-  -->
-
-  <!-- intensity02 — YELLOW — intense bodily affect, energy radiating from body -->
-  <div class="av" style="top:38%;right:10%;animation-delay:.10s;">
-    <svg width="58" height="76" viewBox="0 0 58 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="i2clip">
-          <path d="M23 24 Q17 32 15 44 Q19 52 29 54 Q39 52 43 44 Q41 32 35 24 Z"/>
-        </clipPath>
-      </defs>
-      <!-- VR headset -->
-      <rect x="19" y="7"  width="20" height="11" rx="3"   fill="rgba(245,226,122,.20)" stroke="rgba(245,226,122,.82)" stroke-width="1.2"/>
-      <rect x="21" y="9"  width="6"  height="6"  rx="1.5" fill="rgba(245,226,122,.55)"/>
-      <rect x="30" y="9"  width="6"  height="6"  rx="1.5" fill="rgba(245,226,122,.55)"/>
-      <line x1="19" y1="12" x2="13" y2="12" stroke="rgba(245,226,122,.48)" stroke-width="1.1"/>
-      <line x1="39" y1="12" x2="45" y2="12" stroke="rgba(245,226,122,.48)" stroke-width="1.1"/>
-      <!-- Neck -->
-      <rect x="26" y="18" width="6"  height="5"  rx="1"   fill="rgba(245,226,122,.18)" stroke="rgba(245,226,122,.42)" stroke-width="1"/>
-      <!-- Torso outline -->
-      <path d="M23 24 Q17 32 15 44 Q19 52 29 54 Q39 52 43 44 Q41 32 35 24 Z"
-            fill="rgba(245,226,122,.10)" stroke="rgba(245,226,122,.68)" stroke-width="1.3"/>
-      <!-- Concentric pulse rings inside torso (intensity = pre-conscious bodily affect) -->
-      <g clip-path="url(#i2clip)">
-        <ellipse cx="29" cy="37" rx="3"  ry="3"   fill="none" stroke="rgba(245,226,122,.85)" stroke-width="1.3"/>
-        <ellipse cx="29" cy="37" rx="6"  ry="5.5" fill="none" stroke="rgba(245,226,122,.58)" stroke-width="1.0"/>
-        <ellipse cx="29" cy="37" rx="10" ry="9"   fill="none" stroke="rgba(245,226,122,.38)" stroke-width="0.9"/>
-        <ellipse cx="29" cy="37" rx="14" ry="12"  fill="none" stroke="rgba(245,226,122,.20)" stroke-width="0.8"/>
-      </g>
-      <!-- Energy rays escaping outward — affect overflowing the body boundary -->
-      <line x1="21" y1="27" x2="11" y2="19" stroke="rgba(245,226,122,.58)" stroke-width="1.1" stroke-linecap="round"/>
-      <line x1="17" y1="32" x2="7"  y2="27" stroke="rgba(245,226,122,.44)" stroke-width="0.9" stroke-linecap="round"/>
-      <line x1="15" y1="38" x2="4"  y2="37" stroke="rgba(245,226,122,.32)" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="37" y1="27" x2="47" y2="19" stroke="rgba(245,226,122,.58)" stroke-width="1.1" stroke-linecap="round"/>
-      <line x1="41" y1="32" x2="51" y2="27" stroke="rgba(245,226,122,.44)" stroke-width="0.9" stroke-linecap="round"/>
-      <line x1="43" y1="38" x2="54" y2="37" stroke="rgba(245,226,122,.32)" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="16" y1="45" x2="5"  y2="48" stroke="rgba(245,226,122,.25)" stroke-width="0.8" stroke-linecap="round"/>
-      <line x1="42" y1="45" x2="53" y2="48" stroke="rgba(245,226,122,.25)" stroke-width="0.8" stroke-linecap="round"/>
-      <!-- Arms raised — body fully activated -->
-      <path d="M21 31 Q12 29 8 23"  fill="none" stroke="rgba(245,226,122,.65)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M37 31 Q46 29 50 23" fill="none" stroke="rgba(245,226,122,.65)" stroke-width="1.4" stroke-linecap="round"/>
-      <!-- Legs -->
-      <path d="M23 54 Q21 62 20 70" fill="none" stroke="rgba(245,226,122,.52)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M35 54 Q37 62 38 70" fill="none" stroke="rgba(245,226,122,.52)" stroke-width="1.4" stroke-linecap="round"/>
-    </svg>
-    <div style="width:38px;height:5px;border-radius:50%;background:rgba(245,226,122,.10);"></div>
-    <div class="av-label" style="color:rgba(249,237,170,.9);">intensity02</div>
+  <!-- intensity02 — upper right, warm golden tones -->
+  <div class="shader-wrap" id="wrap-intensity"
+       style="top:35%;right:9%;animation-delay:.45s;">
+    <div class="shader-oval"
+         style="width:160px;height:120px;
+                border-radius:42% 58% 50% 50% / 32% 38% 62% 68%;">
+      <canvas id="c-intensity" width="160" height="120"></canvas>
+    </div>
+    <div class="av-label" style="color:rgba(249,237,170,.88);">intensity02</div>
   </div>
 
-  <!-- extraction05 — PINK — data extracted from the body as silver particles rising up -->
-  <div class="av" style="top:50%;right:37%;animation-delay:.28s;">
-    <svg width="58" height="76" viewBox="0 0 58 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="e5clip">
-          <path d="M23 24 Q17 32 15 44 Q19 52 29 54 Q39 52 43 44 Q41 32 35 24 Z"/>
-        </clipPath>
-      </defs>
-      <!-- VR headset -->
-      <rect x="19" y="7"  width="20" height="11" rx="3"   fill="rgba(255,61,130,.20)" stroke="rgba(255,61,130,.82)" stroke-width="1.2"/>
-      <rect x="21" y="9"  width="6"  height="6"  rx="1.5" fill="rgba(255,61,130,.55)"/>
-      <rect x="30" y="9"  width="6"  height="6"  rx="1.5" fill="rgba(255,61,130,.55)"/>
-      <line x1="19" y1="12" x2="13" y2="12" stroke="rgba(255,61,130,.48)" stroke-width="1.1"/>
-      <line x1="39" y1="12" x2="45" y2="12" stroke="rgba(255,61,130,.48)" stroke-width="1.1"/>
-      <!-- Neck -->
-      <rect x="26" y="18" width="6" height="5" rx="1" fill="rgba(255,61,130,.18)" stroke="rgba(255,61,130,.42)" stroke-width="1"/>
-      <!-- Torso outline -->
-      <path d="M23 24 Q17 32 15 44 Q19 52 29 54 Q39 52 43 44 Q41 32 35 24 Z"
-            fill="rgba(255,61,130,.10)" stroke="rgba(255,61,130,.65)" stroke-width="1.3"/>
-      <!-- Data grid inside — structured information held in the body -->
-      <g clip-path="url(#e5clip)">
-        <line x1="15" y1="30" x2="43" y2="30" stroke="rgba(255,61,130,.28)" stroke-width="0.7"/>
-        <line x1="15" y1="35" x2="43" y2="35" stroke="rgba(255,61,130,.28)" stroke-width="0.7"/>
-        <line x1="15" y1="40" x2="43" y2="40" stroke="rgba(255,61,130,.28)" stroke-width="0.7"/>
-        <line x1="15" y1="45" x2="43" y2="45" stroke="rgba(255,61,130,.28)" stroke-width="0.7"/>
-        <line x1="23" y1="24" x2="23" y2="54" stroke="rgba(255,61,130,.20)" stroke-width="0.6"/>
-        <line x1="29" y1="24" x2="29" y2="54" stroke="rgba(255,61,130,.20)" stroke-width="0.6"/>
-        <line x1="35" y1="24" x2="35" y2="54" stroke="rgba(255,61,130,.20)" stroke-width="0.6"/>
-        <!-- Data nodes at intersections — being activated, about to leave -->
-        <rect x="22" y="29" width="2.2" height="2.2" rx=".4" fill="rgba(255,61,130,.82)"/>
-        <rect x="28" y="34" width="2.2" height="2.2" rx=".4" fill="rgba(255,111,163,.76)"/>
-        <rect x="34" y="29" width="2.2" height="2.2" rx=".4" fill="rgba(255,61,130,.70)"/>
-        <rect x="22" y="39" width="2.2" height="2.2" rx=".4" fill="rgba(255,111,163,.65)"/>
-        <rect x="28" y="44" width="2.2" height="2.2" rx=".4" fill="rgba(255,61,130,.58)"/>
-        <rect x="34" y="39" width="2.2" height="2.2" rx=".4" fill="rgba(255,111,163,.52)"/>
-      </g>
-      <!-- Extraction upward streams — dashed lines from body to collection node -->
-      <line x1="22" y1="23" x2="27" y2="5"  stroke="rgba(255,61,130,.42)" stroke-width="0.85" stroke-linecap="round" stroke-dasharray="2.2 2"/>
-      <line x1="29" y1="23" x2="29" y2="3"  stroke="rgba(255,61,130,.52)" stroke-width="0.95" stroke-linecap="round" stroke-dasharray="2.2 1.8"/>
-      <line x1="36" y1="23" x2="31" y2="5"  stroke="rgba(255,61,130,.42)" stroke-width="0.85" stroke-linecap="round" stroke-dasharray="2.2 2"/>
-      <!-- Silver particle data — escaping upward at different stages -->
-      <rect x="25.5" y="20" width="2.2" height="2.2" rx=".3" fill="rgba(205,220,232,.92)"/>
-      <rect x="31.5" y="18" width="1.9" height="1.9" rx=".3" fill="rgba(215,228,238,.86)"/>
-      <rect x="22.5" y="15" width="1.8" height="1.8" rx=".3" fill="rgba(195,212,226,.82)"/>
-      <rect x="28"   y="12" width="2.1" height="2.1" rx=".3" fill="rgba(208,222,234,.76)"/>
-      <rect x="33"   y="10" width="1.7" height="1.7" rx=".3" fill="rgba(198,214,228,.70)"/>
-      <rect x="25"   y="8"  width="1.7" height="1.7" rx=".3" fill="rgba(202,218,230,.64)"/>
-      <!-- Collection node at crown — platform harvesting point -->
-      <circle cx="29" cy="4"  r="2.4" fill="rgba(255,61,130,.92)" stroke="rgba(255,61,130,1)"   stroke-width="0.8"/>
-      <circle cx="29" cy="4"  r="1.1" fill="rgba(255,210,228,1)"/>
-      <!-- Arms — open/passive, data flowing away -->
-      <path d="M21 33 Q13 35 9 41"  fill="none" stroke="rgba(255,61,130,.60)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M37 33 Q45 35 49 41" fill="none" stroke="rgba(255,61,130,.60)" stroke-width="1.4" stroke-linecap="round"/>
-      <!-- Legs -->
-      <path d="M23 54 Q21 62 20 70" fill="none" stroke="rgba(255,61,130,.48)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M35 54 Q37 62 38 70" fill="none" stroke="rgba(255,61,130,.48)" stroke-width="1.4" stroke-linecap="round"/>
-    </svg>
-    <div style="width:38px;height:5px;border-radius:50%;background:rgba(255,61,130,.10);"></div>
-    <div class="av-label" style="color:rgba(255,111,163,.9);">extraction05</div>
+  <!-- extraction05 — mid right, hot pink vortex -->
+  <div class="shader-wrap" id="wrap-extraction"
+       style="top:50%;right:36%;animation-delay:.65s;">
+    <div class="shader-oval"
+         style="width:150px;height:108px;
+                border-radius:50% 50% 44% 56% / 36% 42% 58% 64%;">
+      <canvas id="c-extraction" width="150" height="108"></canvas>
+    </div>
+    <div class="av-label" style="color:rgba(255,111,163,.88);">extraction05</div>
   </div>
 
-  <!-- glitch_24 — TEAL — body sliced into displaced horizontal strips, RGB fringe -->
-  <div class="av" style="top:61%;right:20%;animation-delay:.45s;">
-    <svg width="58" height="76" viewBox="0 0 58 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- VR headset — with RGB ghost layers for chromatic aberration -->
-      <rect x="21" y="7.6" width="20" height="11" rx="3" fill="none" stroke="rgba(255,61,130,.24)" stroke-width="1"/>
-      <rect x="17" y="7.2" width="20" height="11" rx="3" fill="none" stroke="rgba(13,191,180,.18)"  stroke-width="1"/>
-      <rect x="19" y="7"   width="20" height="11" rx="3" fill="rgba(13,191,180,.20)" stroke="rgba(13,191,180,.84)" stroke-width="1.2"/>
-      <rect x="21" y="9"   width="6"  height="6"  rx="1.5" fill="rgba(13,191,180,.55)"/>
-      <rect x="30" y="9"   width="6"  height="6"  rx="1.5" fill="rgba(13,191,180,.55)"/>
-      <!-- one lens with pink ghost — corrupted display -->
-      <rect x="22" y="9.6" width="5.5" height="4.5" rx="1" fill="rgba(255,61,130,.22)"/>
-      <line x1="19" y1="12" x2="13" y2="12" stroke="rgba(13,191,180,.48)" stroke-width="1.1"/>
-      <line x1="39" y1="12" x2="45" y2="12" stroke="rgba(13,191,180,.48)" stroke-width="1.1"/>
-      <!-- Neck -->
-      <rect x="26" y="18" width="6" height="5" rx="1" fill="rgba(13,191,180,.18)" stroke="rgba(13,191,180,.42)" stroke-width="1"/>
-
-      <!-- Body as FOUR displaced horizontal slices — the glitch -->
-      <!-- Slice 1 (upper torso) — shifted left -4px -->
-      <path d="M23 24 Q18 28 16 31 L43 31 Q41 28 35 24 Z"
-            fill="rgba(13,191,180,.14)" stroke="rgba(13,191,180,.65)" stroke-width="1.1"
-            transform="translate(-4,0)"/>
-      <!-- Slice 2 — no shift, anchor -->
-      <path d="M16 31 L43 31 L42 38 L15 38 Z"
-            fill="rgba(13,191,180,.12)" stroke="rgba(13,191,180,.58)" stroke-width="1.1"/>
-      <!-- Slice 3 — shifted right +5px -->
-      <path d="M15 38 L42 38 L40 45 L17 45 Z"
-            fill="rgba(13,191,180,.10)" stroke="rgba(13,191,180,.50)" stroke-width="1.1"
-            transform="translate(5,0)"/>
-      <!-- Slice 4 (lower torso) — shifted left -2px -->
-      <path d="M17 45 Q19 51 29 53 Q39 51 40 45 Z"
-            fill="rgba(13,191,180,.08)" stroke="rgba(13,191,180,.44)" stroke-width="1.1"
-            transform="translate(-2,0)"/>
-
-      <!-- Scan-tear lines at slice boundaries -->
-      <line x1="10" y1="31" x2="48" y2="31" stroke="rgba(255,255,255,.16)" stroke-width="1.2"/>
-      <line x1="10" y1="38" x2="48" y2="38" stroke="rgba(13,191,180,.20)"  stroke-width="1.0"/>
-      <line x1="10" y1="45" x2="48" y2="45" stroke="rgba(255,61,130,.14)"  stroke-width="0.8"/>
-
-      <!-- Pixel-noise artefacts scattered across slices — bright like CRT corruption -->
-      <rect x="14" y="25" width="4.5" height="2.2" rx=".2" fill="rgba(245,226,122,.92)"/>
-      <rect x="34" y="26" width="3.5" height="2"   rx=".2" fill="rgba(255,61,130,.90)"/>
-      <rect x="25" y="31" width="5.5" height="2.2" rx=".2" fill="rgba(13,191,180,1)"  />
-      <rect x="37" y="32" width="3.2" height="2"   rx=".2" fill="rgba(245,226,122,.88)"/>
-      <rect x="9"  y="34" width="4"   height="2"   rx=".2" fill="rgba(255,61,130,.82)"/>
-      <rect x="18" y="39" width="4.5" height="1.8" rx=".2" fill="rgba(13,191,180,.90)"/>
-      <rect x="38" y="40" width="5.5" height="2"   rx=".2" fill="rgba(245,226,122,.84)"/>
-      <rect x="26" y="45" width="3.5" height="2"   rx=".2" fill="rgba(255,61,130,.78)"/>
-      <!-- inverted block — white box over slice 2 -->
-      <rect x="27" y="33" width="7"  height="3.5" rx=".2" fill="rgba(255,255,255,.62)"/>
-      <rect x="28.5" y="34" width="4" height="2.2" rx=".2" fill="rgba(2,8,18,.92)"/>
-
-      <!-- Arms — right arm doubled/ghosted -->
-      <path d="M21 33 Q13 34 9 39"  fill="none" stroke="rgba(13,191,180,.62)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M23 33 Q15 34 11 39" fill="none" stroke="rgba(255,61,130,.22)" stroke-width="1.1" stroke-linecap="round"/>
-      <path d="M37 33 Q45 34 49 39" fill="none" stroke="rgba(13,191,180,.62)" stroke-width="1.4" stroke-linecap="round"/>
-
-      <!-- Legs — left leg displaced, right ghost -->
-      <path d="M23 53 Q21 61 20 70" fill="none" stroke="rgba(13,191,180,.55)" stroke-width="1.4" stroke-linecap="round" transform="translate(-3,0)"/>
-      <path d="M35 53 Q37 61 38 70" fill="none" stroke="rgba(13,191,180,.55)" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M23 53 Q21 61 20 70" fill="none" stroke="rgba(255,61,130,.18)" stroke-width="1.0" stroke-linecap="round"/>
-    </svg>
-    <div style="width:38px;height:5px;border-radius:50%;background:rgba(13,191,180,.10);"></div>
-    <div class="av-label" style="color:rgba(128,232,227,.9);">glitch_24</div>
+  <!-- glitch_24 — lower right, teal CRT glitch -->
+  <div class="shader-wrap" id="wrap-glitch"
+       style="top:60%;right:20%;animation-delay:.85s;">
+    <div class="shader-oval"
+         style="width:155px;height:112px;
+                border-radius:46% 54% 48% 52% / 34% 40% 60% 66%;">
+      <canvas id="c-glitch" width="155" height="112"></canvas>
+    </div>
+    <div class="av-label" style="color:rgba(128,232,227,.88);">glitch_24</div>
   </div>
 
-  <!-- "digital media" tag — between intensity02 and extraction05 -->
-  <div style="position:absolute;top:44%;right:26%;z-index:6;opacity:0;animation:avFloat .7s ease .55s forwards;">
-    <div style="background:rgba(255,255,255,.09);border:.5px solid rgba(255,255,255,.22);padding:5px 13px;font-size:11px;font-family:'Space Mono',monospace;color:rgba(255,255,255,.75);white-space:nowrap;border-radius:6px;box-shadow:0 2px 12px rgba(255,61,130,.12);">digital media</div>
+  <!-- "digital media" floating tag -->
+  <div class="hero-tag" style="top:44%;right:25%;animation-delay:1.05s;">
+    <div class="hero-tag-inner">digital media</div>
   </div>
 
-  <!-- "researching" tag — below all avatars -->
-  <div style="position:absolute;top:73%;right:9%;z-index:6;opacity:0;animation:avFloat .7s ease .65s forwards;">
-    <div style="background:rgba(255,255,255,.09);border:.5px solid rgba(255,255,255,.22);padding:5px 12px 5px 10px;font-size:11px;font-family:'Space Mono',monospace;color:rgba(255,255,255,.75);white-space:nowrap;border-radius:6px;box-shadow:0 2px 12px rgba(255,61,130,.12);display:inline-flex;align-items:center;gap:6px;">
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block;">
+  <!-- "researching" floating tag -->
+  <div class="hero-tag" style="top:68%;right:8%;animation-delay:1.2s;">
+    <div class="hero-tag-inner">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"
+           xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block;">
         <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.65)" stroke-width="1.3"/>
-        <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="7.4" y1="7.4" x2="11" y2="11"
+              stroke="rgba(255,255,255,0.65)" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
       researching
     </div>
@@ -482,7 +449,7 @@ article{ padding:0!important;margin:0!important; }
   </div>
 </div>
 
-<!-- ABOUT -->
+<!-- ===================== ABOUT ===================== -->
 <div class="about-section" id="about">
   <p class="section-label">About</p>
   <div class="about-inner">
@@ -497,14 +464,24 @@ article{ padding:0!important;margin:0!important; }
   </div>
 </div>
 
-<!-- PUBLICATIONS -->
+<!-- ===================== PUBLICATIONS ===================== -->
 <div class="pubs-section" id="publications">
-  <div class="pub-img-float pub-img-a"><img src="/assets/img/vr-headset.jpg" alt="VR headset"/></div>
-  <div class="pub-img-float pub-img-b"><img src="/assets/img/vr-museum.jpg"  alt="VR museum"/></div>
-  <div class="pub-img-float pub-img-c"><img src="/assets/img/vr-space.jpg"   alt="VR space"/></div>
-  <div class="pub-img-float pub-img-d"><img src="/assets/img/bci-headset.jpg" alt="BCI headset"/></div>
+  <div class="pub-img-float pub-img-a">
+    <img src="/assets/img/vr-headset.jpg" alt="VR headset" />
+  </div>
+  <div class="pub-img-float pub-img-b">
+    <img src="/assets/img/vr-museum.jpg" alt="VR museum" />
+  </div>
+  <div class="pub-img-float pub-img-c">
+    <img src="/assets/img/vr-space.jpg" alt="VR space" />
+  </div>
+  <div class="pub-img-float pub-img-d">
+    <img src="/assets/img/bci-headset.jpg" alt="BCI headset" />
+  </div>
+
   <div class="pub-content">
     <p class="section-label">Research &amp; Publications</p>
+
     <div class="pub-type-block type-chapters">
       <span class="pub-type-label">Book Chapters</span>
       <p class="pub-entry">Ibrahim, M. (2025). <a href="/assets/pdf/embodiment-social-vr.pdf" target="_blank">Embodiment and Representation in Social VR</a>. In Grant Bollmer, Katherine Guinness, and Yiğit Soncul (Eds.), <em>Handbook of Digital Cultures</em> (pp. 307–314). De Gruyter.</p>
@@ -513,15 +490,18 @@ article{ padding:0!important;margin:0!important; }
       <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2023). <a href="/assets/pdf/neurofeminism-bci.pdf" target="_blank">Neurofeminism in BCI and BBI Ethics as a Prelude to Political Neuroethics</a>. In Michele Farisco (Ed.), <em>Neuroethics and Cultural Diversity</em> (pp. 77–94). ISTE/Wiley.</p>
       <p class="pub-entry">Ibrahim, M. &amp; Dubljević, V. (2024). Prélude à la neuroéthique politique: neuroféminisme et éthique des ICM et ICC. <em>Neuroéthique et diversité culturelle</em>, p. 95. ISTE Group.</p>
     </div>
+
     <div class="pub-type-block type-articles">
       <span class="pub-type-label">Journal Articles</span>
       <p class="pub-entry">Ibrahim, M. (Accepted). Virtual Enchantment: Rethinking Engagement in Social VR through the <em>Better World Museum</em>. <em>Convergence</em>.</p>
     </div>
+
     <div class="pub-type-block type-reviews">
       <span class="pub-type-label">Reviews</span>
       <p class="pub-entry">Ibrahim, M. (2021). Review of the book <a href="/assets/pdf/nihilism-review.pdf" target="_blank"><em>Nihilism and Technology</em></a>, by N. Gertz. <em>Communication Design Quarterly</em>, 9(1), 32–34.</p>
       <p class="pub-entry">Ibrahim, M. (2020). Review of the chapter <em>A Fast Food Civil Rights</em> in <em>Franchise</em>, by M. Chatelain. HASTAC.</p>
     </div>
+
     <div class="pub-type-block type-interview">
       <span class="pub-type-label">Interview</span>
       <p class="pub-entry">Ibrahim, M. (2020). Unraveling the World of "Franchise" [Interview with M. Chatelain]. HASTAC.</p>
@@ -529,17 +509,20 @@ article{ padding:0!important;margin:0!important; }
   </div>
 </div>
 
-<!-- CV + CONTACT -->
+<!-- ===================== CV + CONTACT ===================== -->
 <div class="cv-contact-section" id="cv">
   <div class="cv-top-stripe"></div>
   <div class="cv-blob cv-blob-a"></div>
   <div class="cv-blob cv-blob-b"></div>
   <div class="cv-blob cv-blob-c"></div>
+
   <div class="cv-panel">
     <p class="section-label">CV</p>
     <a class="cv-download" href="/assets/pdf/cv.pdf" target="_blank">Download CV</a>
   </div>
+
   <div class="cv-divider"></div>
+
   <div class="contact-panel" id="contact">
     <p class="section-label">Contact</p>
     <div class="contact-grid">
@@ -557,18 +540,321 @@ article{ padding:0!important;margin:0!important; }
   </div>
 </div>
 
-</div>
+</div><!-- end .page -->
 
+<!-- ===================== SCRIPTS ===================== -->
 <script>
+// ── Scroll progress bar ─────────────────────────────────────────────────────
 (function(){
-  var bar=document.getElementById('scrollBar');
+  var bar = document.getElementById('scrollBar');
   function onScroll(){
-    var s=window.scrollY||document.documentElement.scrollTop;
-    var d=document.documentElement.scrollHeight-window.innerHeight;
-    bar.style.width=(d>0?(s/d)*100:0)+'%';
+    var s = window.scrollY || document.documentElement.scrollTop;
+    var d = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
   }
-  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 })();
-</script>
 
+// ── Shared WebGL boilerplate ────────────────────────────────────────────────
+function makeGL(canvas) {
+  var gl = canvas.getContext('webgl', {premultipliedAlpha:false, alpha:true});
+  if (!gl) return null;
+  gl.clearColor(0, 0, 0, 0);
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER,
+    new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  return gl;
+}
+
+function buildProg(gl, fragSrc) {
+  var vSrc = [
+    'attribute vec2 a_pos;',
+    'varying vec2 v_uv;',
+    'void main(){v_uv=a_pos*.5+.5;gl_Position=vec4(a_pos,0.,1.);}'
+  ].join('\n');
+  function sh(type, src){
+    var s=gl.createShader(type);
+    gl.shaderSource(s,src);gl.compileShader(s);return s;
+  }
+  var p=gl.createProgram();
+  gl.attachShader(p,sh(gl.VERTEX_SHADER,vSrc));
+  gl.attachShader(p,sh(gl.FRAGMENT_SHADER,fragSrc));
+  gl.linkProgram(p);
+  return p;
+}
+
+function frame(gl, prog, uLoc, t){
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.useProgram(prog);
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);
+  var a=gl.getAttribLocation(prog,'a_pos');
+  gl.enableVertexAttribArray(a);
+  gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+  gl.uniform1f(uLoc,t);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// INTENSITY02 — warm golden FBM pools, pale yellow tones
+// Very slow drift. Canvas: 160×120  aspect 1.333  → c.y *= 1.333
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-intensity');
+  var gl = makeGL(canvas); if(!gl) return;
+
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
+
+  // Oval mask — corrects for canvas aspect 160/120 = 1.333
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.;',
+  '  c.y*=1.333;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
+  '}',
+
+  'vec3 h3(vec2 p){',
+  '  vec3 q=vec3(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)),dot(p,vec2(419.2,371.9)));',
+  '  return fract(sin(q)*43758.5453);',
+  '}',
+  'float n(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(dot(h3(i).xy,f),dot(h3(i+vec2(1,0)).xy,f-vec2(1,0)),u.x),',
+  '             mix(dot(h3(i+vec2(0,1)).xy,f-vec2(0,1)),dot(h3(i+vec2(1,1)).xy,f-vec2(1,1)),u.x),u.y);',
+  '}',
+  'float fbm(vec2 p){',
+  '  float v=0.;float a=.5;',
+  '  mat2 r=mat2(.88,.48,-.48,.88);',
+  '  for(int i=0;i<5;i++){v+=a*n(p);p=r*p*2.02;a*=.5;}',
+  '  return v;',
+  '}',
+
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
+  // Very slow: t * 0.025 instead of 0.15
+  '  vec2 uv=v_uv*2.-1.;',
+  '  float t=u_time*.025;',
+  '  vec2 q=vec2(fbm(uv+t),fbm(uv+vec2(5.2,1.3)+t*.7));',
+  '  vec2 r2=vec2(fbm(uv+3.*q+vec2(1.7,9.2)+t*.4),fbm(uv+3.*q+vec2(8.3,2.8)+t*.3));',
+  '  float f=fbm(uv+3.*r2+t*.2);',
+  // Boost contrast so the pattern fills the oval properly
+  '  f=f*f*f+.6*f*f+.5*f;',
+  // Colours: deep navy → warm gold → pale yellow (site palette)
+  '  vec3 col=mix(vec3(.04,.10,.20),vec3(.96,.88,.30),clamp(f*2.2,0.,1.));',
+  '  col=mix(col,vec3(.98,.96,.82),clamp((f-.45)*2.5,0.,1.));',
+  // Soft centre vignette
+  '  col*=(.65+.45*(1.-length(uv)*.7));',
+  // Alpha: use mask directly — no extra strength multiplier killing visibility
+  // Keep the aesthetic subtlety with 0.38 ceiling
+  '  float alpha=m*.38;',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
+
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
+})();
+
+// ══════════════════════════════════════════════════════════════════════════
+// EXTRACTION05 — hot pink vortex, very slow spin, silver rim
+// Canvas: 150×108  aspect 1.389  → c.y *= 1.389
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-extraction');
+  var gl = makeGL(canvas); if(!gl) return;
+
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
+
+  'float hf(float x){return fract(sin(x)*43758.5453);}',
+  'float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float ns(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),',
+  '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
+  '}',
+
+  // Oval mask — 150/108 = 1.389
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.; c.y*=1.389;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
+  '}',
+
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
+
+  '  vec2 uv=v_uv*2.-1.;',
+  // Aspect correction for internal geometry
+  '  vec2 uvA=vec2(uv.x,uv.y*1.389);',
+  '  float r=length(uvA);',
+  '  float ang=atan(uvA.y,uvA.x);',
+  // Very slow: 0.04 instead of 0.22
+  '  float t=u_time*.04;',
+
+  // Slow spinning funnel
+  '  float spin=ang-t*0.6+r*3.5;',
+  '  float funnel=sin(spin*3.)*.5+.5;',
+  '  funnel*=smoothstep(0.,.45,r);',
+  '  funnel*=(1.-smoothstep(.44,.82,r));',
+
+  // Gentle turbulence, very slow
+  '  float turb=ns(uv*3.0+vec2(t*.3,-t*.2));',
+
+  // Dark void at centre
+  '  float vd=1.-smoothstep(0.,.14,r);',
+
+  // Hot pink palette — core site colour
+  '  vec3 col=mix(vec3(.55,.02,.20),vec3(1.,.24,.51),',
+  '    clamp(funnel*1.8+turb*.25,0.,1.));',
+  '  col=mix(col,vec3(0.),vd);',
+
+  // Teal rim highlight — uses second site colour
+  '  float rim=smoothstep(.36,.44,r)*(1.-smoothstep(.44,.58,r));',
+  '  col=mix(col,vec3(.05,.75,.71),rim*.50);',
+
+  // Pale glow at outermost ring
+  '  float glow=smoothstep(.60,.82,r)*(1.-smoothstep(.82,.98,r));',
+  '  col=mix(col,vec3(.98,.96,.82),glow*.30);',
+
+  // Alpha directly from mask — no compounding kills
+  '  float alpha=m*.38;',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
+
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
+})();
+
+// ══════════════════════════════════════════════════════════════════════════
+// GLITCH_24 — CRT teal/pink/yellow colour bands, very slow drift
+// Canvas: 155×112  aspect 1.384  → c.y *= 1.384
+// ══════════════════════════════════════════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('c-glitch');
+  var gl = makeGL(canvas); if(!gl) return;
+
+  var frag = [
+  'precision highp float;',
+  'varying vec2 v_uv;',
+  'uniform float u_time;',
+
+  'float hf(float x){return fract(sin(x)*43758.5453);}',
+  'float h2(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+  'float ns(vec2 p){',
+  '  vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);',
+  '  return mix(mix(h2(i),h2(i+vec2(1,0)),u.x),',
+  '             mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),u.x),u.y);',
+  '}',
+
+  // Oval mask — 155/112 = 1.384
+  'float mask(vec2 uv){',
+  '  vec2 c=uv*2.-1.; c.y*=1.384;',
+  '  return 1.-smoothstep(.72,.98,length(c));',
+  '}',
+
+  'void main(){',
+  '  float m=mask(v_uv);',
+  '  if(m<.001){gl_FragColor=vec4(0.);return;}',
+
+  '  vec2 uv=v_uv;',
+  // Very slow time — glitch is subtle, not frenetic
+  '  float t=u_time*.018;',
+
+  // Minimal horizontal jitter — very slow slice updates
+  '  float sy=floor(uv.y*10.)/10.;',
+  '  float ss=hf(sy+floor(t*0.8)*.45);',
+  '  float tear=step(.88,ss)*hf(sy*31.+t)*.06;',
+  '  float uvX=uv.x+tear*(hf(sy+t*0.5)-.5);',
+  '  uvX=clamp(uvX,0.,1.);',
+
+  // Very subtle RGB split, slow oscillation
+  '  float ca=.007+sin(t*.3)*.003;',
+  '  vec2 uvR=vec2(clamp(uvX+ca,0.,1.),uv.y);',
+  '  vec2 uvG=vec2(uvX,uv.y);',
+  '  vec2 uvB=vec2(clamp(uvX-ca,0.,1.),uv.y);',
+
+  // Colour bands — using site palette: teal, pink, yellow
+  '  float band=floor(uv.y*6.);',
+  '  float bc=hf(band+.5);',
+
+  '  float sR=0.,sG=0.,sB=0.;',
+
+  // Teal band — primary site teal
+  '  float iT=step(.52,bc)*step(bc,.70);',
+  '  sR+=iT*.08*ns(uvR*vec2(4.,1.)+t*.2);',
+  '  sG+=iT*.88*ns(uvG*vec2(4.,1.)+t*.2);',
+  '  sB+=iT*.82*ns(uvB*vec2(4.,1.)+t*.2);',
+
+  // Hot pink band
+  '  float iP=step(.25,bc)*step(bc,.42);',
+  '  sR+=iP*.95*ns(uvR*vec2(3.,1.)-t*.15);',
+  '  sG+=iP*.12*ns(uvG*vec2(3.,1.));',
+  '  sB+=iP*.38*ns(uvB*vec2(3.,1.));',
+
+  // Pale yellow band
+  '  float iY=step(.72,bc);',
+  '  sR+=iY*.96*ns(uvR*vec2(4.,1.)+t*.3);',
+  '  sG+=iY*.90*ns(uvG*vec2(4.,1.)+t*.3);',
+  '  sB+=iY*.15;',
+
+  // Dark navy fill for remaining bands
+  '  float iN=step(bc,.22);',
+  '  sR+=iN*.04; sG+=iN*.10; sB+=iN*.22;',
+
+  '  vec3 col=vec3(sR,sG,sB);',
+
+  // Scanlines — very subtle, slow
+  '  col*=.88+sin(uv.y*120.+t*.3)*.5*.12;',
+
+  // Vignette
+  '  vec2 cv=uv*2.-1.; col*=1.-length(cv)*.35;',
+
+  // Ensure dark base where no band matches
+  '  float cs=clamp(sR+sG+sB,0.,1.)*.70+.18;',
+  '  col=mix(vec3(.008,.028,.065),col,cs);',
+
+  // Alpha directly from mask — consistent with other avatars
+  '  float alpha=m*.38;',
+  '  gl_FragColor=vec4(col*alpha,alpha);',
+  '}'
+  ].join('\n');
+
+  var prog=buildProg(gl,frag);
+  var u=gl.getUniformLocation(prog,'u_time');
+  var t=Math.random()*100;
+  (function loop(){ requestAnimationFrame(loop); t+=.016; frame(gl,prog,u,t); })();
+})();
+
+// ── Ambient drift: translate each avatar-wrap on a slow sin path ───────────
+(function(){
+  var wraps=[
+    {el:document.getElementById('wrap-intensity'), ph:0.0, ax:5,ay:7,fx:.28,fy:.20},
+    {el:document.getElementById('wrap-extraction'),ph:1.5, ax:4,ay:6,fx:.24,fy:.17},
+    {el:document.getElementById('wrap-glitch'),    ph:2.9, ax:5,ay:5,fx:.22,fy:.26},
+  ];
+  var t=0;
+  (function drift(){
+    requestAnimationFrame(drift);
+    t+=.016;
+    wraps.forEach(function(w){
+      var dx=Math.sin(t*w.fx+w.ph)*w.ax;
+      var dy=Math.sin(t*w.fy+w.ph+.5)*w.ay;
+      w.el.style.transform='translate('+dx+'px,'+dy+'px)';
+    });
+  })();
+})();
+</script>
+ 
