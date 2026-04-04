@@ -68,13 +68,14 @@ article{ padding:0!important;margin:0!important; }
 }
 .site-nav a:hover { color:var(--teal-soft); }
 
-/* Hero — straight bottom edge (no clip-path) */
+/* ─── HERO — no clip-path, straight bottom edge ─── */
 .hero {
   background:var(--hero-bg);
   min-height:100vh;width:100vw;
   display:flex;align-items:center;
   padding:60px 6vw 80px;
   position:relative;overflow:hidden;
+  /* deliberately no clip-path so bottom is perfectly straight */
 }
 .hero-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1; }
 .hero-blob-a { width:500px;height:500px;background:rgba(255,61,130,.14);top:-140px;right:3%; }
@@ -84,6 +85,7 @@ article{ padding:0!important;margin:0!important; }
 .ui-dots { position:absolute;top:18px;right:20px;display:flex;gap:5px;z-index:10; }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
+/* ─── AVATARS ─── */
 .av {
   position:absolute;
   display:flex;flex-direction:column;align-items:center;
@@ -119,6 +121,7 @@ article{ padding:0!important;margin:0!important; }
 .float-tag.visible { opacity:0.72; transform:translateY(0); }
 .float-tag.with-icon { display:inline-flex;align-items:center;gap:5px;padding:5px 12px 5px 9px; }
 
+/* ─── HERO CONTENT & NAME ─── */
 .hero-content {
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:14px;max-width:600px;
@@ -130,7 +133,6 @@ article{ padding:0!important;margin:0!important; }
   display:flex;align-items:baseline;
 }
 .hero-name .first { color:#fdf0a0;font-weight:700; }
-/* W. — Playfair Display 300, font-size matched so cap-height ≈ DM Serif Display "I" cap-height */
 .hero-name .mid {
   color:#ffffff;
   font-family:'Playfair Display',Georgia,serif;
@@ -153,10 +155,11 @@ article{ padding:0!important;margin:0!important; }
 }
 .hero-btn a:hover { background:var(--teal-soft); }
 
-/* About — diagonal top, straight bottom */
+/* ─── ABOUT — diagonal top only, straight bottom ─── */
 .about-section {
   background:#f0f8fa;width:100vw;
   padding:130px max(2.5rem,6vw) 140px;
+  /* polygon: top-left inset, top-right flush, bottom-right flush, bottom-left flush = straight bottom */
   clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
   margin-top:-60px;
   min-height:100vh;display:flex;flex-direction:column;
@@ -185,10 +188,11 @@ article{ padding:0!important;margin:0!important; }
 @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
 @keyframes floatD { 0%,100%{transform:translateY(0) rotate(4deg);}   50%{transform:translateY(-12px) rotate(4deg);} }
 
+/* ─── PUBS — diagonal top, no overlap issue ─── */
 .pubs-section {
   background:#fdfcff;min-height:100vh;width:100vw;color:#1a2e3a;
-  margin-top:-60px;clip-path:polygon(0 0,100% 60px,100% 100%,0 100%);
-  padding:130px max(2.5rem,6vw) 6rem;position:relative;overflow:hidden;
+  margin-top:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  padding:80px max(2.5rem,6vw) 6rem;position:relative;overflow:hidden;
 }
 .pubs-section * { color:#1a2e3a; }
 .pubs-section a { color:#1a2e3a!important;border-bottom:.5px solid rgba(26,46,58,.28);text-decoration:none; }
@@ -220,11 +224,10 @@ article{ padding:0!important;margin:0!important; }
 .pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
 .pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
 
-/* CV + Contact — narrower, centred content */
+/* ─── CV + CONTACT ─── */
 .cv-contact-section {
   background:#0b1b2e;
-  min-height:56vh;
-  width:100vw;
+  min-height:56vh;width:100vw;
   display:grid;grid-template-columns:1fr 1px 1fr;
   position:relative;overflow:hidden;
 }
@@ -239,8 +242,7 @@ article{ padding:0!important;margin:0!important; }
 .cv-divider { background:rgba(13,191,180,.14);align-self:stretch;position:relative;z-index:2; }
 .cv-panel {
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:3.5rem max(2rem,5vw);
-  position:relative;z-index:2;
+  padding:3.5rem max(2rem,5vw);position:relative;z-index:2;
 }
 .cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 .cv-download {
@@ -252,8 +254,7 @@ article{ padding:0!important;margin:0!important; }
 .cv-download::after { content:'↓';font-size:16px; }
 .contact-panel {
   display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:3.5rem max(2rem,5vw);
-  position:relative;z-index:2;
+  padding:3.5rem max(2rem,5vw);position:relative;z-index:2;
 }
 .contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 .contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px;width:100%; }
@@ -270,15 +271,15 @@ article{ padding:0!important;margin:0!important; }
 .contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
 .contact-row:hover .contact-value { color:var(--teal-muted); }
 
+/* ─── MOBILE ─── */
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
   .site-nav a { font-size:10px; }
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-  .av { transform:scale(.72) translateY(0);transform-origin:top left; }
-  .av-body { font-size:13px; }
-  .av-mobile-hide { display:none!important; }
+  /* hide ALL avatars and float tags on mobile */
+  .av, .float-tag { display:none!important; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
@@ -286,7 +287,7 @@ article{ padding:0!important;margin:0!important; }
   .text-col { transform:rotate(1.5deg);max-width:100%;min-width:unset; }
   .about-text { font-size:15px; }
   .section-label { font-size:15px; }
-  .pubs-section { clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);padding-top:80px;margin-top:-30px; }
+  .pubs-section { padding-top:60px; }
   .pub-entry { font-size:15px; }
   .pub-img-float { display:none; }
   .cv-contact-section { grid-template-columns:1fr;min-height:auto; }
@@ -323,31 +324,31 @@ article{ padding:0!important;margin:0!important; }
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!-- Avatar 1: glitch — top-right (more opaque via JS) -->
+  <!-- av1: glitch — top-right | JS opacity: 0.72 -->
   <div class="av" id="av1" style="top:17%;right:8%;">
     <div class="av-body" style="width:42px;height:48px;background:rgba(8,52,58,.80);border:1px solid rgba(13,191,180,.55);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">👾</div>
     <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.16);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.80);">glitch</div>
   </div>
 
-  <!-- Avatar 2: intensity02 — mid-right, desktop only -->
-  <div class="av av-mobile-hide" id="av2" style="top:30%;right:22%;">
+  <!-- av2: intensity02 — mid-right | JS opacity: 0.58 (default) -->
+  <div class="av" id="av2" style="top:30%;right:22%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
     <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
     <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
 
-  <!-- "digital media" tag — desktop only -->
-  <div class="float-tag av-mobile-hide" id="tag1" style="top:19%;right:23%;">digital media</div>
+  <!-- "digital media" tag | JS opacity: 0.32 (faded) -->
+  <div class="float-tag" id="tag1" style="top:19%;right:23%;">digital media</div>
 
-  <!-- Avatar 3: extraction05 — desktop only -->
-  <div class="av av-mobile-hide" id="av3" style="top:22%;right:38%;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">😊</div>
+  <!-- av3: extraction05 — desktop | JS opacity: 0.58 (default, unchanged) -->
+  <div class="av" id="av3" style="top:22%;right:38%;">
+    <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">🤑</div>
     <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.14);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.80);">extraction05</div>
   </div>
 
-  <!-- "researching" tag -->
+  <!-- "researching" tag | JS opacity: 0.32 (faded) -->
   <div class="float-tag with-icon" id="tag2" style="top:44%;right:30%;">
     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
       <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.60)" stroke-width="1.3"/>
@@ -356,66 +357,67 @@ article{ padding:0!important;margin:0!important; }
     researching
   </div>
 
-  <!-- Avatar 4: ambient_24 — lower right, new emoji 🌿, more visible via JS -->
+  <!-- av4: ambient — lower right | JS opacity: 0.70 -->
   <div class="av" id="av4" style="top:50%;right:12%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(6,44,38,.80);border:1px solid rgba(0,210,170,.55);box-shadow:0 0 0 3px rgba(0,210,170,.08),0 8px 32px rgba(0,0,0,.88);">🌿</div>
     <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.14);"></div>
-    <div class="av-label" style="color:rgba(128,232,227,.80);">ambient_24</div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">ambient</div>
   </div>
 
-  <!-- Avatar 5: infrastructure — lower-mid right, desktop only -->
-  <div class="av av-mobile-hide" id="av5" style="top:62%;right:33%;">
+  <!-- av5: infrastructure — lower-mid right | JS opacity: 0.32 (faded) -->
+  <div class="av" id="av5" style="top:62%;right:33%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🧑‍💻</div>
     <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.80);">infrastructure</div>
   </div>
 
-  <!-- GHOST AVATARS — all desktop only -->
+  <!-- GHOST AVATARS -->
 
-  <!-- ghost a: 🧠 — top-far-right, no label -->
-  <div class="av ghost-av av-mobile-hide" id="gv1" style="top:8%;right:3%;">
+  <!-- gv1: 🧠 — top-far-right, no label | JS opacity: 0.32 -->
+  <div class="av ghost-av" id="gv1" style="top:8%;right:3%;">
     <div class="av-body" style="width:52px;height:58px;background:rgba(10,30,40,.92);border:1px solid rgba(13,191,180,.30);box-shadow:0 6px 28px rgba(0,0,0,.80);">🧠</div>
     <div class="av-shadow" style="width:34px;background:rgba(13,191,180,.08);"></div>
   </div>
 
-  <!-- ghost b: 🫀 — right of av1, not overlapping glitch, label: affect -->
-  <div class="av ghost-av av-mobile-hide" id="gv2" style="top:22%;right:3%;">
+  <!-- gv2: 🫀 — right edge below gv1, label: affect | JS opacity: 0.32 -->
+  <div class="av ghost-av" id="gv2" style="top:22%;right:3%;">
     <div class="av-body" style="width:28px;height:32px;background:rgba(40,10,30,.92);border:1px solid rgba(255,61,130,.28);box-shadow:0 6px 24px rgba(0,0,0,.78);">🫀</div>
     <div class="av-shadow" style="width:18px;background:rgba(255,61,130,.08);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.55);">affect</div>
   </div>
 
-  <!-- ghost c: 💻 — upper zone near av3, label: platform capitalism -->
-  <div class="av ghost-av av-mobile-hide" id="gv3" style="top:13%;right:48%;">
+  <!-- gv3: 💻 — upper zone near av3, label: platform capitalism | JS opacity: 0.32 -->
+  <div class="av ghost-av" id="gv3" style="top:13%;right:48%;">
     <div class="av-body" style="width:34px;height:40px;background:rgba(8,40,50,.92);border:1px solid rgba(13,191,180,.26);box-shadow:0 6px 24px rgba(0,0,0,.78);">💻</div>
     <div class="av-shadow" style="width:22px;background:rgba(13,191,180,.08);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.52);">platform capitalism</div>
   </div>
 
-  <!-- ghost d: 👁️ — between av4 and av5, no label -->
-  <div class="av ghost-av av-mobile-hide" id="gv4" style="top:56%;right:22%;">
-    <div class="av-body" style="width:44px;height:50px;background:rgba(30,20,8,.92);border:1px solid rgba(245,226,122,.26);box-shadow:0 6px 28px rgba(0,0,0,.80);">👁️</div>
-    <div class="av-shadow" style="width:28px;background:rgba(245,226,122,.08);"></div>
+  <!-- gv4: VR_24 — 🥽 — same intensity as extraction05 (0.58) | JS opacity: 0.58 -->
+  <div class="av" id="gv4" style="top:56%;right:22%;">
+    <div class="av-body" style="width:44px;height:50px;background:rgba(10,28,46,.80);border:1px solid rgba(13,191,180,.50);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">🥽</div>
+    <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.14);"></div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">VR_24</div>
   </div>
 
-  <!-- ghost e: 🕹️ — below av5, label: embodiment -->
-  <div class="av ghost-av av-mobile-hide" id="gv5" style="top:72%;right:40%;">
-    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🕹️</div>
+  <!-- gv5: embodiment — 🫧 — label: embodiment | JS opacity: 0.32 (faded) -->
+  <div class="av ghost-av" id="gv5" style="top:72%;right:40%;">
+    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🫧</div>
     <div class="av-shadow" style="width:16px;background:rgba(160,80,230,.08);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.52);">embodiment</div>
   </div>
 
-  <!-- ghost f: 🔬 — lower-right corner, no label -->
-  <div class="av ghost-av av-mobile-hide" id="gv6" style="top:68%;right:8%;">
+  <!-- gv6: 🔬 — lower-right corner, no label | JS opacity: 0.32 -->
+  <div class="av ghost-av" id="gv6" style="top:68%;right:8%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(6,30,28,.92);border:1px solid rgba(0,210,170,.24);box-shadow:0 6px 24px rgba(0,0,0,.78);">🔬</div>
     <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.08);"></div>
   </div>
 
-  <!-- float tag: neuropolitics — desktop only -->
-  <div class="float-tag av-mobile-hide" id="gtag1" style="top:9%;right:36%;opacity:0;">neuropolitics</div>
+  <!-- gtag1: neuropolitics | JS opacity: 0.30 -->
+  <div class="float-tag" id="gtag1" style="top:9%;right:36%;opacity:0;">neuropolitics</div>
 
-  <!-- float tag: pre-conscious — desktop only -->
-  <div class="float-tag av-mobile-hide" id="gtag2" style="top:64%;right:18%;opacity:0;">pre-conscious</div>
+  <!-- gtag2: pre-conscious | JS opacity: 0.30 -->
+  <div class="float-tag" id="gtag2" style="top:64%;right:18%;opacity:0;">pre-conscious 🌀</div>
 
   <div class="hero-content">
     <h1 class="hero-name">
@@ -505,30 +507,45 @@ article{ padding:0!important;margin:0!important; }
 
 <script>
 (function(){
-  var bar=document.getElementById('scrollBar');
+  var bar = document.getElementById('scrollBar');
   function onScroll(){
-    var s=window.scrollY||document.documentElement.scrollTop;
-    var d=document.documentElement.scrollHeight-window.innerHeight;
-    bar.style.width=(d>0?(s/d)*100:0)+'%';
+    var s = window.scrollY || document.documentElement.scrollTop;
+    var d = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (d > 0 ? (s/d)*100 : 0) + '%';
   }
-  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
+  /*
+   * Opacity tiers:
+   *   0.72  — glitch (av1)
+   *   0.70  — ambient (av4)
+   *   0.58  — extraction05 (av3), intensity02 (av2), VR_24 (gv4)  [default .av.visible]
+   *   0.32  — everything else: av5/infrastructure, all ghost-av,
+   *            tag1/digital-media, tag2/researching, gtag1/neuropolitics, gtag2/pre-conscious
+   */
   var delays = {
     av1:100, av2:220, tag1:300, av3:340, tag2:420, av4:500, av5:600,
     gv1:160, gv2:280, gv3:380, gv4:540, gv5:660, gv6:720,
     gtag1:440, gtag2:680
   };
-  var ghostTags     = { gtag1:true, gtag2:true };
-  var opacityOverrides = { av1:0.72, av4:0.70 };  /* glitch & ambient_24 more visible */
+  /* final opacity per id — anything not listed stays at .av.visible default (0.58) */
+  var opacities = {
+    av1:0.72,
+    av4:0.70,
+    /* av2, av3, gv4 stay at default 0.58 */
+    av5:0.32,
+    tag1:0.32, tag2:0.32,
+    gv1:0.32, gv2:0.32, gv3:0.32, gv5:0.32, gv6:0.32,
+    gtag1:0.30, gtag2:0.30
+  };
 
   Object.keys(delays).forEach(function(id){
     setTimeout(function(){
       var el = document.getElementById(id);
       if(!el) return;
       el.classList.add('visible');
-      if(ghostTags[id])        el.style.opacity = '0.30';
-      if(opacityOverrides[id]) el.style.opacity = String(opacityOverrides[id]);
+      if(opacities[id] !== undefined) el.style.opacity = String(opacities[id]);
     }, delays[id]);
   });
 })();
