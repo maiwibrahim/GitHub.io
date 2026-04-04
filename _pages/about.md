@@ -70,7 +70,7 @@ article{ padding:0!important;margin:0!important; }
 
 .hero {
   background:var(--hero-bg);
-  min-height:92vh;width:100vw;
+  height:100vh;min-height:100vh;width:100vw;
   display:flex;align-items:center;
   padding:60px 6vw 80px;
   position:relative;overflow:hidden;
@@ -293,7 +293,7 @@ article{ padding:0!important;margin:0!important; }
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
   .site-nav a { font-size:10px; }
-  .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
+  .hero { padding:56px 1.5rem 60px;align-items:center;height:100svh;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
   /* avatars visible on mobile — touch triggers hover effect */
