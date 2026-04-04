@@ -68,11 +68,12 @@ article{ padding:0!important;margin:0!important; }
 }
 .site-nav a:hover { color:var(--teal-soft); }
 
+/* Hero — straight bottom edge (no clip-path) */
 .hero {
   background:var(--hero-bg);
   min-height:100vh;width:100vw;
   display:flex;align-items:center;
-  padding:60px 6vw 0;
+  padding:60px 6vw 80px;
   position:relative;overflow:hidden;
 }
 .hero-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1; }
@@ -83,26 +84,19 @@ article{ padding:0!important;margin:0!important; }
 .ui-dots { position:absolute;top:18px;right:20px;display:flex;gap:5px;z-index:10; }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-/* Avatars — high visibility */
 .av {
   position:absolute;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:5px;
-  z-index:5;
-  opacity:0;
+  display:flex;flex-direction:column;align-items:center;
+  gap:5px;z-index:5;opacity:0;
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
 }
-.av.visible { opacity:0.58; transform:translateY(0); }
+.av.visible          { opacity:0.58; transform:translateY(0); }
 .av.ghost-av.visible { opacity:0.32; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   font-size:16px;
 }
 .av-shadow { border-radius:50%; height:5px; }
@@ -114,24 +108,16 @@ article{ padding:0!important;margin:0!important; }
 }
 
 .float-tag {
-  position:absolute;
-  z-index:6;
-  opacity:0;
+  position:absolute;z-index:6;opacity:0;
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
-  font-family:'Space Mono',monospace;
-  font-size:9px;
-  font-weight:400;
-  background:rgba(8,18,28,.78);
-  border:.5px solid rgba(255,255,255,.22);
-  color:rgba(255,255,255,.65);
-  white-space:nowrap;
-  border-radius:6px;
-  padding:4px 10px;
-  box-shadow:0 4px 18px rgba(0,0,0,.72);
+  font-family:'Space Mono',monospace;font-size:9px;font-weight:400;
+  background:rgba(8,18,28,.78);border:.5px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.65);white-space:nowrap;border-radius:6px;
+  padding:4px 10px;box-shadow:0 4px 18px rgba(0,0,0,.72);
 }
 .float-tag.visible { opacity:0.72; transform:translateY(0); }
-.float-tag.with-icon { display:inline-flex; align-items:center; gap:5px; padding:5px 12px 5px 9px; }
+.float-tag.with-icon { display:inline-flex;align-items:center;gap:5px;padding:5px 12px 5px 9px; }
 
 .hero-content {
   position:relative;z-index:10;
@@ -141,10 +127,21 @@ article{ padding:0!important;margin:0!important; }
   font-family:'DM Serif Display',Georgia,serif;
   font-size:clamp(32px,5.4vw,62px);font-weight:400;
   line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
+  display:flex;align-items:baseline;
 }
-.hero-name .first  { color:#fdf0a0;font-weight:700; }
-.hero-name .mid    { color:#ffffff;font-weight:300;font-family:'Playfair Display',Georgia,serif;opacity:1; }
-.hero-name .last   { color:rgba(13,191,180,.62);font-weight:700; }
+.hero-name .first { color:#fdf0a0;font-weight:700; }
+/* W. — Playfair Display 300, font-size matched so cap-height ≈ DM Serif Display "I" cap-height */
+.hero-name .mid {
+  color:#ffffff;
+  font-family:'Playfair Display',Georgia,serif;
+  font-weight:300;
+  font-size:0.90em;
+  line-height:1;
+  vertical-align:baseline;
+  display:inline-block;
+  padding:0 0.05em;
+}
+.hero-name .last { color:rgba(13,191,180,.62);font-weight:700; }
 
 .hero-desc { font-size:clamp(14px,2vw,18px);color:#ffffff;font-style:italic;line-height:1.6;margin:0; }
 .hero-btn { margin-top:10px; }
@@ -156,11 +153,12 @@ article{ padding:0!important;margin:0!important; }
 }
 .hero-btn a:hover { background:var(--teal-soft); }
 
+/* About — diagonal top, straight bottom */
 .about-section {
   background:#f0f8fa;width:100vw;
   padding:130px max(2.5rem,6vw) 140px;
-  margin-top:-60px;
   clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
+  margin-top:-60px;
   min-height:100vh;display:flex;flex-direction:column;
   justify-content:center;align-items:center;position:relative;
 }
@@ -222,9 +220,13 @@ article{ padding:0!important;margin:0!important; }
 .pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
 .pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
 
+/* CV + Contact — narrower, centred content */
 .cv-contact-section {
-  background:#0b1b2e;min-height:100vh;width:100vw;
-  display:grid;grid-template-columns:1fr 1px 1fr;position:relative;overflow:hidden;
+  background:#0b1b2e;
+  min-height:56vh;
+  width:100vw;
+  display:grid;grid-template-columns:1fr 1px 1fr;
+  position:relative;overflow:hidden;
 }
 .cv-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0; }
 .cv-blob-a { width:500px;height:500px;background:rgba(255,61,130,.12);top:-120px;left:-100px; }
@@ -235,7 +237,11 @@ article{ padding:0!important;margin:0!important; }
   background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);z-index:10;
 }
 .cv-divider { background:rgba(13,191,180,.14);align-self:stretch;position:relative;z-index:2; }
-.cv-panel { display:flex;flex-direction:column;justify-content:center;padding:6rem max(2rem,5vw) 6rem max(2.5rem,6vw);position:relative;z-index:2; }
+.cv-panel {
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:3.5rem max(2rem,5vw);
+  position:relative;z-index:2;
+}
 .cv-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
 .cv-download {
   font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
@@ -244,9 +250,13 @@ article{ padding:0!important;margin:0!important; }
 }
 .cv-download:hover { background:var(--teal-soft);color:#0b1b2e; }
 .cv-download::after { content:'↓';font-size:16px; }
-.contact-panel { display:flex;flex-direction:column;justify-content:center;padding:6rem max(2.5rem,6vw) 6rem max(2rem,5vw);position:relative;z-index:2; }
+.contact-panel {
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:3.5rem max(2rem,5vw);
+  position:relative;z-index:2;
+}
 .contact-panel .section-label { color:rgba(13,191,180,.62);text-align:left;margin-bottom:2rem;font-size:17px; }
-.contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px; }
+.contact-grid { display:flex;flex-direction:column;gap:0;max-width:420px;width:100%; }
 .contact-row {
   display:flex;align-items:center;justify-content:space-between;
   padding:1.3rem 0;border-bottom:.5px solid rgba(13,191,180,.15);
@@ -266,7 +276,7 @@ article{ padding:0!important;margin:0!important; }
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-  .av { transform:scale(.72) translateY(0); transform-origin:top left; }
+  .av { transform:scale(.72) translateY(0);transform-origin:top left; }
   .av-body { font-size:13px; }
   .av-mobile-hide { display:none!important; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
@@ -279,10 +289,10 @@ article{ padding:0!important;margin:0!important; }
   .pubs-section { clip-path:polygon(0 0,100% 30px,100% 100%,0 100%);padding-top:80px;margin-top:-30px; }
   .pub-entry { font-size:15px; }
   .pub-img-float { display:none; }
-  .cv-contact-section { grid-template-columns:1fr; }
+  .cv-contact-section { grid-template-columns:1fr;min-height:auto; }
   .cv-divider { display:none; }
-  .cv-panel { padding:5rem 1.5rem 3rem; }
-  .contact-panel { padding:2rem 1.5rem 5rem; }
+  .cv-panel { padding:3rem 1.5rem 2rem; }
+  .contact-panel { padding:1.5rem 1.5rem 3rem; }
   .contact-value { font-size:14px; }
 }
 @media (max-width:900px) and (min-width:641px) {
@@ -313,31 +323,31 @@ article{ padding:0!important;margin:0!important; }
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!-- Avatar 1: glitch_24 — top-right -->
+  <!-- Avatar 1: glitch — top-right (more opaque via JS) -->
   <div class="av" id="av1" style="top:17%;right:8%;">
     <div class="av-body" style="width:42px;height:48px;background:rgba(8,52,58,.80);border:1px solid rgba(13,191,180,.55);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">👾</div>
     <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.16);"></div>
-    <div class="av-label" style="color:rgba(128,232,227,.80);">glitch_24</div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">glitch</div>
   </div>
 
-  <!-- Avatar 2: intensity02 — mid-right -->
+  <!-- Avatar 2: intensity02 — mid-right, desktop only -->
   <div class="av av-mobile-hide" id="av2" style="top:30%;right:22%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
     <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
     <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
 
-  <!-- "digital media" tag — between extraction05 and glitch_24 -->
+  <!-- "digital media" tag — desktop only -->
   <div class="float-tag av-mobile-hide" id="tag1" style="top:19%;right:23%;">digital media</div>
 
-  <!-- Avatar 3: extraction05 -->
+  <!-- Avatar 3: extraction05 — desktop only -->
   <div class="av av-mobile-hide" id="av3" style="top:22%;right:38%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">😊</div>
     <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.14);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.80);">extraction05</div>
   </div>
 
-  <!-- "researching" tag — below intensity02, with extra top margin -->
+  <!-- "researching" tag -->
   <div class="float-tag with-icon" id="tag2" style="top:44%;right:30%;">
     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
       <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.60)" stroke-width="1.3"/>
@@ -346,70 +356,70 @@ article{ padding:0!important;margin:0!important; }
     researching
   </div>
 
-  <!-- Avatar 4: ambient — lower right -->
+  <!-- Avatar 4: ambient_24 — lower right, new emoji 🌿, more visible via JS -->
   <div class="av" id="av4" style="top:50%;right:12%;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(6,44,38,.80);border:1px solid rgba(0,210,170,.55);box-shadow:0 0 0 3px rgba(0,210,170,.08),0 8px 32px rgba(0,0,0,.88);">🌐</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(6,44,38,.80);border:1px solid rgba(0,210,170,.55);box-shadow:0 0 0 3px rgba(0,210,170,.08),0 8px 32px rgba(0,0,0,.88);">🌿</div>
     <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.14);"></div>
-    <div class="av-label" style="color:rgba(128,232,227,.80);">ambient</div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">ambient_24</div>
   </div>
 
-  <!-- Avatar 5: infrastructure — lower-mid right -->
-  <div class="av" id="av5" style="top:62%;right:33%;">
+  <!-- Avatar 5: infrastructure — lower-mid right, desktop only -->
+  <div class="av av-mobile-hide" id="av5" style="top:62%;right:33%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🧑‍💻</div>
     <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.80);">infrastructure</div>
   </div>
 
-  <!-- GHOST AVATARS — less visible on reveal, more opaque bodies, all hidden on mobile -->
+  <!-- GHOST AVATARS — all desktop only -->
 
-  <!-- ghost a: large, top-far-right, no label -->
+  <!-- ghost a: 🧠 — top-far-right, no label -->
   <div class="av ghost-av av-mobile-hide" id="gv1" style="top:8%;right:3%;">
     <div class="av-body" style="width:52px;height:58px;background:rgba(10,30,40,.92);border:1px solid rgba(13,191,180,.30);box-shadow:0 6px 28px rgba(0,0,0,.80);">🧠</div>
     <div class="av-shadow" style="width:34px;background:rgba(13,191,180,.08);"></div>
   </div>
 
-  <!-- ghost b: small, tucked between av1 and av2, label: affect -->
-  <div class="av ghost-av av-mobile-hide" id="gv2" style="top:25%;right:10%;">
+  <!-- ghost b: 🫀 — right of av1, not overlapping glitch, label: affect -->
+  <div class="av ghost-av av-mobile-hide" id="gv2" style="top:22%;right:3%;">
     <div class="av-body" style="width:28px;height:32px;background:rgba(40,10,30,.92);border:1px solid rgba(255,61,130,.28);box-shadow:0 6px 24px rgba(0,0,0,.78);">🫀</div>
     <div class="av-shadow" style="width:18px;background:rgba(255,61,130,.08);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.55);">affect</div>
   </div>
 
-  <!-- ghost c: medium, right of av3, label: platform capitalism -->
+  <!-- ghost c: 💻 — upper zone near av3, label: platform capitalism -->
   <div class="av ghost-av av-mobile-hide" id="gv3" style="top:13%;right:48%;">
     <div class="av-body" style="width:34px;height:40px;background:rgba(8,40,50,.92);border:1px solid rgba(13,191,180,.26);box-shadow:0 6px 24px rgba(0,0,0,.78);">💻</div>
     <div class="av-shadow" style="width:22px;background:rgba(13,191,180,.08);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.52);">platform capitalism</div>
   </div>
 
-  <!-- ghost d: large, between av4 and av5, no label -->
+  <!-- ghost d: 👁️ — between av4 and av5, no label -->
   <div class="av ghost-av av-mobile-hide" id="gv4" style="top:56%;right:22%;">
     <div class="av-body" style="width:44px;height:50px;background:rgba(30,20,8,.92);border:1px solid rgba(245,226,122,.26);box-shadow:0 6px 28px rgba(0,0,0,.80);">👁️</div>
     <div class="av-shadow" style="width:28px;background:rgba(245,226,122,.08);"></div>
   </div>
 
-  <!-- ghost e: small, below av5, label: embodiment -->
+  <!-- ghost e: 🕹️ — below av5, label: embodiment -->
   <div class="av ghost-av av-mobile-hide" id="gv5" style="top:72%;right:40%;">
     <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🕹️</div>
     <div class="av-shadow" style="width:16px;background:rgba(160,80,230,.08);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.52);">embodiment</div>
   </div>
 
-  <!-- ghost f: medium, lower-right corner, no label -->
+  <!-- ghost f: 🔬 — lower-right corner, no label -->
   <div class="av ghost-av av-mobile-hide" id="gv6" style="top:68%;right:8%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(6,30,28,.92);border:1px solid rgba(0,210,170,.24);box-shadow:0 6px 24px rgba(0,0,0,.78);">🔬</div>
     <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.08);"></div>
   </div>
 
-  <!-- float tag: neuropolitics — mid area, near gv3 -->
+  <!-- float tag: neuropolitics — desktop only -->
   <div class="float-tag av-mobile-hide" id="gtag1" style="top:9%;right:36%;opacity:0;">neuropolitics</div>
 
-  <!-- float tag: pre-conscious — near gv4/gv5 zone -->
+  <!-- float tag: pre-conscious — desktop only -->
   <div class="float-tag av-mobile-hide" id="gtag2" style="top:64%;right:18%;opacity:0;">pre-conscious</div>
 
   <div class="hero-content">
     <h1 class="hero-name">
-      <span class="first">Mai</span><span class="mid"> W. </span><span class="last">Ibrahim</span>
+      <span class="first">Mai</span><span class="mid">&nbsp;W.&nbsp;</span><span class="last">Ibrahim</span>
     </h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures.</p>
     <div class="hero-btn"><a href="#about">Enter ↓</a></div>
@@ -504,14 +514,21 @@ article{ padding:0!important;margin:0!important; }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
 
-  var delays = {av1:100,av2:220,tag1:300,av3:340,tag2:420,av4:500,av5:600,gv1:160,gv2:280,gv3:380,gv4:540,gv5:660,gv6:720,gtag1:440,gtag2:680};
-  var ghostTags = {gtag1:true,gtag2:true};
+  var delays = {
+    av1:100, av2:220, tag1:300, av3:340, tag2:420, av4:500, av5:600,
+    gv1:160, gv2:280, gv3:380, gv4:540, gv5:660, gv6:720,
+    gtag1:440, gtag2:680
+  };
+  var ghostTags     = { gtag1:true, gtag2:true };
+  var opacityOverrides = { av1:0.72, av4:0.70 };  /* glitch & ambient_24 more visible */
+
   Object.keys(delays).forEach(function(id){
     setTimeout(function(){
-      var el=document.getElementById(id);
+      var el = document.getElementById(id);
       if(!el) return;
       el.classList.add('visible');
-      if(ghostTags[id]) el.style.opacity='0.30';
+      if(ghostTags[id])        el.style.opacity = '0.30';
+      if(opacityOverrides[id]) el.style.opacity = String(opacityOverrides[id]);
     }, delays[id]);
   });
 })();
