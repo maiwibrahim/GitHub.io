@@ -68,14 +68,12 @@ article{ padding:0!important;margin:0!important; }
 }
 .site-nav a:hover { color:var(--teal-soft); }
 
-/* ─── HERO — no clip-path, straight bottom edge ─── */
 .hero {
   background:var(--hero-bg);
   min-height:100vh;width:100vw;
   display:flex;align-items:center;
   padding:60px 6vw 80px;
   position:relative;overflow:hidden;
-  /* deliberately no clip-path so bottom is perfectly straight */
 }
 .hero-blob { position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:1; }
 .hero-blob-a { width:500px;height:500px;background:rgba(255,61,130,.14);top:-140px;right:3%; }
@@ -85,7 +83,6 @@ article{ padding:0!important;margin:0!important; }
 .ui-dots { position:absolute;top:18px;right:20px;display:flex;gap:5px;z-index:10; }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-/* ─── AVATARS ─── */
 .av {
   position:absolute;
   display:flex;flex-direction:column;align-items:center;
@@ -121,7 +118,6 @@ article{ padding:0!important;margin:0!important; }
 .float-tag.visible { opacity:0.72; transform:translateY(0); }
 .float-tag.with-icon { display:inline-flex;align-items:center;gap:5px;padding:5px 12px 5px 9px; }
 
-/* ─── HERO CONTENT & NAME ─── */
 .hero-content {
   position:relative;z-index:10;
   display:flex;flex-direction:column;gap:14px;max-width:600px;
@@ -146,20 +142,10 @@ article{ padding:0!important;margin:0!important; }
 .hero-name .last { color:rgba(13,191,180,.62);font-weight:700; }
 
 .hero-desc { font-size:clamp(14px,2vw,18px);color:#ffffff;font-style:italic;line-height:1.6;margin:0; }
-.hero-btn { margin-top:10px; }
-.hero-btn a {
-  font-family:'Space Mono',monospace;font-size:11px;
-  letter-spacing:.15em;text-transform:uppercase;
-  color:#0b1b2e;background:var(--teal);
-  padding:12px 28px;text-decoration:none;display:inline-block;transition:background .2s;
-}
-.hero-btn a:hover { background:var(--teal-soft); }
 
-/* ─── ABOUT — diagonal top only, straight bottom ─── */
 .about-section {
   background:#f0f8fa;width:100vw;
   padding:130px max(2.5rem,6vw) 140px;
-  /* polygon: top-left inset, top-right flush, bottom-right flush, bottom-left flush = straight bottom */
   clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
   margin-top:-60px;
   min-height:100vh;display:flex;flex-direction:column;
@@ -188,7 +174,6 @@ article{ padding:0!important;margin:0!important; }
 @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-1.5deg);}50%{transform:translateY(-20px) rotate(-1.5deg);} }
 @keyframes floatD { 0%,100%{transform:translateY(0) rotate(4deg);}   50%{transform:translateY(-12px) rotate(4deg);} }
 
-/* ─── PUBS — diagonal top, no overlap issue ─── */
 .pubs-section {
   background:#fdfcff;min-height:100vh;width:100vw;color:#1a2e3a;
   margin-top:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
@@ -224,7 +209,6 @@ article{ padding:0!important;margin:0!important; }
 .pub-entry a { color:inherit;text-decoration:none;border-bottom:.5px solid rgba(26,46,58,.28); }
 .pub-entry a:hover { border-bottom-color:var(--pink);color:var(--pink)!important; }
 
-/* ─── CV + CONTACT ─── */
 .cv-contact-section {
   background:#0b1b2e;
   min-height:56vh;width:100vw;
@@ -271,14 +255,12 @@ article{ padding:0!important;margin:0!important; }
 .contact-row:hover .contact-arrow { transform:translateX(5px);color:var(--teal-soft); }
 .contact-row:hover .contact-value { color:var(--teal-muted); }
 
-/* ─── MOBILE ─── */
 @media (max-width:640px) {
   .site-nav { justify-content:flex-start;padding:0 1.5rem;gap:1.25rem;height:56px; }
   .site-nav a { font-size:10px; }
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-  /* hide ALL avatars and float tags on mobile */
   .av, .float-tag { display:none!important; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
@@ -324,31 +306,31 @@ article{ padding:0!important;margin:0!important; }
     <span style="background:var(--yellow);"></span>
   </div>
 
-  <!-- av1: glitch — top-right | JS opacity: 0.72 -->
-  <div class="av" id="av1" style="top:17%;right:8%;">
-    <div class="av-body" style="width:42px;height:48px;background:rgba(8,52,58,.80);border:1px solid rgba(13,191,180,.55);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">👾</div>
+  <!-- av1: glitch — top-right | ghost-av → opacity 0.32 (same as embodiment) | emoji: ⚡ -->
+  <div class="av ghost-av" id="av1" style="top:17%;right:8%;">
+    <div class="av-body" style="width:42px;height:48px;background:rgba(8,52,58,.80);border:1px solid rgba(13,191,180,.55);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">⚡</div>
     <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.16);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.80);">glitch</div>
   </div>
 
-  <!-- av2: intensity02 — mid-right | JS opacity: 0.58 (default) -->
+  <!-- av2: intensity02 — mid-right | opacity: 0.58 (exception, unchanged) -->
   <div class="av" id="av2" style="top:30%;right:22%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
     <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
     <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
 
-  <!-- "digital media" tag | JS opacity: 0.32 (faded) -->
+  <!-- "digital media" tag | opacity: 0.32 -->
   <div class="float-tag" id="tag1" style="top:19%;right:23%;">digital media</div>
 
-  <!-- av3: extraction05 — desktop | JS opacity: 0.58 (default, unchanged) -->
+  <!-- av3: materiality05 | opacity: 0.58 (exception, unchanged) -->
   <div class="av" id="av3" style="top:22%;right:38%;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">🤑</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">🪨</div>
     <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.14);"></div>
-    <div class="av-label" style="color:rgba(255,170,201,.80);">extraction05</div>
+    <div class="av-label" style="color:rgba(255,170,201,.80);">materiality05</div>
   </div>
 
-  <!-- "researching" tag | JS opacity: 0.32 (faded) -->
+  <!-- "researching" tag | opacity: 0.32 -->
   <div class="float-tag with-icon" id="tag2" style="top:44%;right:30%;">
     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
       <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.60)" stroke-width="1.3"/>
@@ -357,74 +339,65 @@ article{ padding:0!important;margin:0!important; }
     researching
   </div>
 
-  <!-- av4: ambient — lower right | JS opacity: 0.70 -->
-  <div class="av" id="av4" style="top:50%;right:12%;">
+  <!-- av4: ambient — lower right | ghost-av → opacity 0.32 (same as embodiment) | emoji: 🌿 -->
+  <div class="av ghost-av" id="av4" style="top:50%;right:12%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(6,44,38,.80);border:1px solid rgba(0,210,170,.55);box-shadow:0 0 0 3px rgba(0,210,170,.08),0 8px 32px rgba(0,0,0,.88);">🌿</div>
     <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.14);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.80);">ambient</div>
   </div>
 
-  <!-- av5: infrastructure — lower-mid right | JS opacity: 0.32 (faded) -->
+  <!-- av5: extraction05 | opacity: 0.32 -->
   <div class="av" id="av5" style="top:62%;right:33%;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🧑‍💻</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🤑</div>
     <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
-    <div class="av-label" style="color:rgba(200,160,240,.80);">infrastructure</div>
+    <div class="av-label" style="color:rgba(200,160,240,.80);">extraction05</div>
   </div>
 
   <!-- GHOST AVATARS -->
 
-  <!-- gv1: 🧠 — top-far-right, no label | JS opacity: 0.32 -->
-  <div class="av ghost-av" id="gv1" style="top:8%;right:3%;">
-    <div class="av-body" style="width:52px;height:58px;background:rgba(10,30,40,.92);border:1px solid rgba(13,191,180,.30);box-shadow:0 6px 28px rgba(0,0,0,.80);">🧠</div>
-    <div class="av-shadow" style="width:34px;background:rgba(13,191,180,.08);"></div>
-  </div>
+  <!-- gv1: DELETED (shocked smiley, top-far-right) -->
 
-  <!-- gv2: 🫀 — right edge below gv1, label: affect | JS opacity: 0.32 -->
+  <!-- gv2: affect | emoji: 🫀 | opacity: 0.32 -->
   <div class="av ghost-av" id="gv2" style="top:22%;right:3%;">
     <div class="av-body" style="width:28px;height:32px;background:rgba(40,10,30,.92);border:1px solid rgba(255,61,130,.28);box-shadow:0 6px 24px rgba(0,0,0,.78);">🫀</div>
     <div class="av-shadow" style="width:18px;background:rgba(255,61,130,.08);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.55);">affect</div>
   </div>
 
-  <!-- gv3: 💻 — upper zone near av3, label: platform capitalism | JS opacity: 0.32 -->
+  <!-- gv3: platform capitalism | emoji: 💹 | opacity: 0.32 -->
   <div class="av ghost-av" id="gv3" style="top:13%;right:48%;">
-    <div class="av-body" style="width:34px;height:40px;background:rgba(8,40,50,.92);border:1px solid rgba(13,191,180,.26);box-shadow:0 6px 24px rgba(0,0,0,.78);">💻</div>
+    <div class="av-body" style="width:34px;height:40px;background:rgba(8,40,50,.92);border:1px solid rgba(13,191,180,.26);box-shadow:0 6px 24px rgba(0,0,0,.78);">💹</div>
     <div class="av-shadow" style="width:22px;background:rgba(13,191,180,.08);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.52);">platform capitalism</div>
   </div>
 
-  <!-- gv4: VR_24 — 🥽 — same intensity as extraction05 (0.58) | JS opacity: 0.58 -->
+  <!-- gv4: VR_24 | 🥽 exception, unchanged | opacity: 0.58 -->
   <div class="av" id="gv4" style="top:56%;right:22%;">
     <div class="av-body" style="width:44px;height:50px;background:rgba(10,28,46,.80);border:1px solid rgba(13,191,180,.50);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">🥽</div>
     <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.14);"></div>
     <div class="av-label" style="color:rgba(128,232,227,.80);">VR_24</div>
   </div>
 
-  <!-- gv5: embodiment — 🫧 — label: embodiment | JS opacity: 0.32 (faded) -->
+  <!-- gv5: embodiment | 🫂 | opacity: 0.32 -->
   <div class="av ghost-av" id="gv5" style="top:72%;right:40%;">
-    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🫧</div>
+    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🫂</div>
     <div class="av-shadow" style="width:16px;background:rgba(160,80,230,.08);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.52);">embodiment</div>
   </div>
 
-  <!-- gv6: 🔬 — lower-right corner, no label | JS opacity: 0.32 -->
-  <div class="av ghost-av" id="gv6" style="top:68%;right:8%;">
-    <div class="av-body" style="width:38px;height:44px;background:rgba(6,30,28,.92);border:1px solid rgba(0,210,170,.24);box-shadow:0 6px 24px rgba(0,0,0,.78);">🔬</div>
-    <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.08);"></div>
-  </div>
+  <!-- gv6: DELETED (shocked smiley, lower-right) -->
 
-  <!-- gtag1: neuropolitics | JS opacity: 0.30 -->
-  <div class="float-tag" id="gtag1" style="top:9%;right:36%;opacity:0;">neuropolitics</div>
+  <!-- gtag1: infrastructure | opacity: 0.30 -->
+  <div class="float-tag" id="gtag1" style="top:9%;right:36%;opacity:0;">infrastructure</div>
 
-  <!-- gtag2: pre-conscious | JS opacity: 0.30 -->
-  <div class="float-tag" id="gtag2" style="top:64%;right:18%;opacity:0;">pre-conscious 🌀</div>
+  <!-- gtag2: pre-conscious | opacity: 0.30 -->
+  <div class="float-tag" id="gtag2" style="top:60%;right:38%;opacity:0;">pre-conscious 🌀</div>
 
   <div class="hero-content">
     <h1 class="hero-name">
       <span class="first">Mai</span><span class="mid">&nbsp;W.&nbsp;</span><span class="last">Ibrahim</span>
     </h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures.</p>
-    <div class="hero-btn"><a href="#about">Enter ↓</a></div>
   </div>
 </div>
 
@@ -518,25 +491,25 @@ article{ padding:0!important;margin:0!important; }
 
   /*
    * Opacity tiers:
-   *   0.72  — glitch (av1)
-   *   0.70  — ambient (av4)
-   *   0.58  — extraction05 (av3), intensity02 (av2), VR_24 (gv4)  [default .av.visible]
-   *   0.32  — everything else: av5/infrastructure, all ghost-av,
-   *            tag1/digital-media, tag2/researching, gtag1/neuropolitics, gtag2/pre-conscious
+   *   0.58  — intensity02 (av2), materiality05 (av3), VR_24 (gv4)
+   *   0.32  — glitch (av1) [ghost-av class], ambient (av4) [ghost-av class],
+   *            extraction05 (av5), affect (gv2), platform capitalism (gv3),
+   *            embodiment (gv5), tag1, tag2
+   *   0.30  — infrastructure (gtag1), pre-conscious (gtag2)
+   *
+   * gv1 (top-right) and gv6 (lower-right) DELETED.
+   * glitch and ambient use ghost-av CSS class → 0.32 automatically on .visible.
    */
   var delays = {
     av1:100, av2:220, tag1:300, av3:340, tag2:420, av4:500, av5:600,
-    gv1:160, gv2:280, gv3:380, gv4:540, gv5:660, gv6:720,
+    gv2:280, gv3:380, gv4:540, gv5:660,
     gtag1:440, gtag2:680
   };
-  /* final opacity per id — anything not listed stays at .av.visible default (0.58) */
+
   var opacities = {
-    av1:0.72,
-    av4:0.70,
-    /* av2, av3, gv4 stay at default 0.58 */
     av5:0.32,
     tag1:0.32, tag2:0.32,
-    gv1:0.32, gv2:0.32, gv3:0.32, gv5:0.32, gv6:0.32,
+    gv2:0.32, gv3:0.32, gv5:0.32,
     gtag1:0.30, gtag2:0.30
   };
 
