@@ -9,7 +9,7 @@ social: false
 ---
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
 :root {
   --hero-bg:      #0b1b2e;
@@ -48,10 +48,10 @@ article{ padding:0!important;margin:0!important; }
 .p-name,.sidebar-header,.profile-name { display:none!important; }
 
 .scroll-bar {
-  position:fixed;top:0;left:0;height:3px;width:0%;
-  background:linear-gradient(90deg,#e8d46a,#f5e89a,#fdf4d0,#f5e27a,#e8d46a);
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--yellow),var(--yellow-soft),var(--yellow-muted),var(--yellow-soft),var(--yellow));
   z-index:999999;transition:width .05s linear;pointer-events:none;
-  box-shadow:0 0 8px rgba(245,226,122,.55);
+  box-shadow:0 0 6px rgba(245,226,122,.70);
 }
 
 .site-nav {
@@ -141,9 +141,9 @@ article{ padding:0!important;margin:0!important; }
   font-size:clamp(32px,5.4vw,62px);font-weight:400;
   line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
 }
-.hero-name .first { color:var(--yellow-soft); }
-.hero-name .rest  { color:#e0f0f8; }
-.hero-name em     { font-style:italic;color:rgba(13,191,180,.45); }
+.hero-name .first  { color:#fdf0a0;font-weight:700; }
+.hero-name .mid    { color:#e0f0f8;font-weight:200; }
+.hero-name .last   { color:rgba(13,191,180,.62);font-weight:700; }
 
 .hero-desc { font-size:clamp(14px,2vw,18px);color:#ffffff;font-style:italic;line-height:1.6;margin:0; }
 .hero-btn { margin-top:10px; }
@@ -267,6 +267,7 @@ article{ padding:0!important;margin:0!important; }
   .hero-content { max-width:55%; }
   .av { transform:scale(.72) translateY(0); transform-origin:top left; }
   .av-body { font-size:13px; }
+  .av-mobile-hide { display:none!important; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
@@ -319,17 +320,17 @@ article{ padding:0!important;margin:0!important; }
   </div>
 
   <!-- Avatar 2: intensity02 — mid-right -->
-  <div class="av" id="av2" style="top:30%;right:22%;">
+  <div class="av av-mobile-hide" id="av2" style="top:30%;right:22%;">
     <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
     <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
     <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
 
   <!-- "digital media" tag — between extraction05 and glitch_24 -->
-  <div class="float-tag" id="tag1" style="top:19%;right:23%;">digital media</div>
+  <div class="float-tag av-mobile-hide" id="tag1" style="top:19%;right:23%;">digital media</div>
 
   <!-- Avatar 3: extraction05 -->
-  <div class="av" id="av3" style="top:22%;right:38%;">
+  <div class="av av-mobile-hide" id="av3" style="top:22%;right:38%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">😊</div>
     <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.14);"></div>
     <div class="av-label" style="color:rgba(255,170,201,.80);">extraction05</div>
@@ -360,7 +361,7 @@ article{ padding:0!important;margin:0!important; }
 
   <div class="hero-content">
     <h1 class="hero-name">
-      <span class="first">Mai</span><span class="rest"> W. <em>Ibrahim</em></span>
+      <span class="first">Mai</span><span class="mid"> W. </span><span class="last">Ibrahim</span>
     </h1>
     <p class="hero-desc">is a media theorist &amp; researcher of digital cultures.</p>
     <div class="hero-btn"><a href="#about">Enter ↓</a></div>
