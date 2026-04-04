@@ -96,6 +96,7 @@ article{ padding:0!important;margin:0!important; }
   transition:opacity .7s ease, transform .7s ease;
 }
 .av.visible { opacity:0.58; transform:translateY(0); }
+.av.ghost-av.visible { opacity:0.32; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
@@ -359,6 +360,53 @@ article{ padding:0!important;margin:0!important; }
     <div class="av-label" style="color:rgba(200,160,240,.80);">infrastructure</div>
   </div>
 
+  <!-- GHOST AVATARS — less visible on reveal, more opaque bodies, all hidden on mobile -->
+
+  <!-- ghost a: large, top-far-right, no label -->
+  <div class="av ghost-av av-mobile-hide" id="gv1" style="top:8%;right:3%;">
+    <div class="av-body" style="width:52px;height:58px;background:rgba(10,30,40,.92);border:1px solid rgba(13,191,180,.30);box-shadow:0 6px 28px rgba(0,0,0,.80);">🧠</div>
+    <div class="av-shadow" style="width:34px;background:rgba(13,191,180,.08);"></div>
+  </div>
+
+  <!-- ghost b: small, tucked between av1 and av2, label: affect -->
+  <div class="av ghost-av av-mobile-hide" id="gv2" style="top:25%;right:10%;">
+    <div class="av-body" style="width:28px;height:32px;background:rgba(40,10,30,.92);border:1px solid rgba(255,61,130,.28);box-shadow:0 6px 24px rgba(0,0,0,.78);">🫀</div>
+    <div class="av-shadow" style="width:18px;background:rgba(255,61,130,.08);"></div>
+    <div class="av-label" style="color:rgba(255,170,201,.55);">affect</div>
+  </div>
+
+  <!-- ghost c: medium, right of av3, label: platform capitalism -->
+  <div class="av ghost-av av-mobile-hide" id="gv3" style="top:13%;right:48%;">
+    <div class="av-body" style="width:34px;height:40px;background:rgba(8,40,50,.92);border:1px solid rgba(13,191,180,.26);box-shadow:0 6px 24px rgba(0,0,0,.78);">💻</div>
+    <div class="av-shadow" style="width:22px;background:rgba(13,191,180,.08);"></div>
+    <div class="av-label" style="color:rgba(128,232,227,.52);">platform capitalism</div>
+  </div>
+
+  <!-- ghost d: large, between av4 and av5, no label -->
+  <div class="av ghost-av av-mobile-hide" id="gv4" style="top:56%;right:22%;">
+    <div class="av-body" style="width:44px;height:50px;background:rgba(30,20,8,.92);border:1px solid rgba(245,226,122,.26);box-shadow:0 6px 28px rgba(0,0,0,.80);">👁️</div>
+    <div class="av-shadow" style="width:28px;background:rgba(245,226,122,.08);"></div>
+  </div>
+
+  <!-- ghost e: small, below av5, label: embodiment -->
+  <div class="av ghost-av av-mobile-hide" id="gv5" style="top:72%;right:40%;">
+    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🕹️</div>
+    <div class="av-shadow" style="width:16px;background:rgba(160,80,230,.08);"></div>
+    <div class="av-label" style="color:rgba(200,160,240,.52);">embodiment</div>
+  </div>
+
+  <!-- ghost f: medium, lower-right corner, no label -->
+  <div class="av ghost-av av-mobile-hide" id="gv6" style="top:68%;right:8%;">
+    <div class="av-body" style="width:38px;height:44px;background:rgba(6,30,28,.92);border:1px solid rgba(0,210,170,.24);box-shadow:0 6px 24px rgba(0,0,0,.78);">🔬</div>
+    <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.08);"></div>
+  </div>
+
+  <!-- float tag: neuropolitics — mid area, near gv3 -->
+  <div class="float-tag av-mobile-hide" id="gtag1" style="top:9%;right:36%;opacity:0;">neuropolitics</div>
+
+  <!-- float tag: pre-conscious — near gv4/gv5 zone -->
+  <div class="float-tag av-mobile-hide" id="gtag2" style="top:64%;right:18%;opacity:0;">pre-conscious</div>
+
   <div class="hero-content">
     <h1 class="hero-name">
       <span class="first">Mai</span><span class="mid"> W. </span><span class="last">Ibrahim</span>
@@ -456,11 +504,14 @@ article{ padding:0!important;margin:0!important; }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
 
-  var delays = {av1:100,av2:220,tag1:300,av3:340,tag2:420,av4:500,av5:600};
+  var delays = {av1:100,av2:220,tag1:300,av3:340,tag2:420,av4:500,av5:600,gv1:160,gv2:280,gv3:380,gv4:540,gv5:660,gv6:720,gtag1:440,gtag2:680};
+  var ghostTags = {gtag1:true,gtag2:true};
   Object.keys(delays).forEach(function(id){
     setTimeout(function(){
       var el=document.getElementById(id);
-      if(el) el.classList.add('visible');
+      if(!el) return;
+      el.classList.add('visible');
+      if(ghostTags[id]) el.style.opacity='0.30';
     }, delays[id]);
   });
 })();
