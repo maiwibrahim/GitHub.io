@@ -9,7 +9,7 @@ social: false
 ---
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:wght@300;400&family=Space+Mono:wght@400;700&family=Lora:ital,wght@0,300;0,400;0,500;1,400&display=swap');
 
 :root {
   --hero-bg:      #0b1b2e;
@@ -142,7 +142,7 @@ article{ padding:0!important;margin:0!important; }
   line-height:.92;white-space:nowrap;letter-spacing:-.01em;margin:0;
 }
 .hero-name .first  { color:#fdf0a0;font-weight:700; }
-.hero-name .mid    { color:#e0f0f8;font-weight:200; }
+.hero-name .mid    { color:#ffffff;font-weight:300;font-family:'Playfair Display',Georgia,serif;opacity:1; }
 .hero-name .last   { color:rgba(13,191,180,.62);font-weight:700; }
 
 .hero-desc { font-size:clamp(14px,2vw,18px);color:#ffffff;font-style:italic;line-height:1.6;margin:0; }
