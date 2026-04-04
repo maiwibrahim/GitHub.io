@@ -90,8 +90,8 @@ article{ padding:0!important;margin:0!important; }
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
 }
-.av.visible          { opacity:0.58; transform:translateY(0); }
-.av.ghost-av.visible { opacity:0.32; transform:translateY(0); }
+.av.visible          { opacity:0.10; transform:translateY(0); }
+.av.ghost-av.visible { opacity:0.08; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
@@ -104,19 +104,54 @@ article{ padding:0!important;margin:0!important; }
   letter-spacing:.06em;font-weight:400;
   background:rgba(0,0,0,.68);padding:3px 8px;border-radius:3px;white-space:nowrap;
   border:.5px solid rgba(255,255,255,.12);
+  transition:color .25s, border-color .25s, background .25s;
+}
+
+/* ─── AVATAR HOVER ─── */
+.av.visible:hover,
+.av.ghost-av.visible:hover {
+  opacity:1 !important;
+  transform:translateY(-6px) scale(1.08);
+  transition:opacity .25s ease, transform .25s ease;
+  z-index:20;
+  cursor:default;
+}
+.av.visible:hover .av-body,
+.av.ghost-av.visible:hover .av-body {
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.22));
+}
+.av.visible:hover .av-label,
+.av.ghost-av.visible:hover .av-label {
+  background:rgba(0,0,0,.88);
+  border-color:rgba(255,255,255,.38);
+  color:#ffffff !important;
+  letter-spacing:.10em;
 }
 
 .float-tag {
   position:absolute;z-index:6;opacity:0;
   transform:translateY(14px);
-  transition:opacity .7s ease, transform .7s ease;
+  transition:opacity .25s ease, transform .25s ease, background .25s, border-color .25s, color .25s, box-shadow .25s;
   font-family:'Space Mono',monospace;font-size:9px;font-weight:400;
   background:rgba(8,18,28,.78);border:.5px solid rgba(255,255,255,.22);
   color:rgba(255,255,255,.65);white-space:nowrap;border-radius:6px;
   padding:4px 10px;box-shadow:0 4px 18px rgba(0,0,0,.72);
+  cursor:default;
 }
-.float-tag.visible { opacity:0.72; transform:translateY(0); }
+.float-tag.visible { opacity:0.08; transform:translateY(0); }
 .float-tag.with-icon { display:inline-flex;align-items:center;gap:5px;padding:5px 12px 5px 9px; }
+
+/* ─── FLOAT TAG HOVER ─── */
+.float-tag.visible:hover {
+  opacity:1 !important;
+  transform:translateY(-4px) scale(1.06);
+  background:rgba(0,0,0,.92);
+  border-color:rgba(255,255,255,.50);
+  color:#ffffff;
+  box-shadow:0 6px 24px rgba(0,0,0,.88), 0 0 12px rgba(255,255,255,.08);
+  z-index:20;
+  letter-spacing:.12em;
+}
 
 .hero-content {
   position:relative;z-index:10;
@@ -261,7 +296,11 @@ article{ padding:0!important;margin:0!important; }
   .hero { padding:56px 1.5rem 60px;align-items:center;min-height:100svh; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
-  .av, .float-tag { display:none!important; }
+  /* avatars visible on mobile — touch triggers hover effect */
+  .av, .float-tag { display:flex; }
+  .float-tag { display:inline-flex; }
+  .av .av-body { font-size:13px; }
+  .av .av-label { font-size:7px; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
@@ -315,7 +354,7 @@ article{ padding:0!important;margin:0!important; }
 
   <!-- av2: intensity02 — mid-right | opacity: 0.58 (exception, unchanged) -->
   <div class="av" id="av2" style="top:30%;right:22%;">
-    <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
+    <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">📡</div>
     <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
     <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
@@ -380,7 +419,7 @@ article{ padding:0!important;margin:0!important; }
 
   <!-- gv5: embodiment | 🫂 | opacity: 0.32 -->
   <div class="av ghost-av" id="gv5" style="top:72%;right:40%;">
-    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🫂</div>
+    <div class="av-body" style="width:26px;height:30px;background:rgba(20,8,40,.92);border:1px solid rgba(160,90,230,.26);box-shadow:0 6px 20px rgba(0,0,0,.78);">🧬</div>
     <div class="av-shadow" style="width:16px;background:rgba(160,80,230,.08);"></div>
     <div class="av-label" style="color:rgba(200,160,240,.52);">embodiment</div>
   </div>
@@ -507,10 +546,15 @@ article{ padding:0!important;margin:0!important; }
   };
 
   var opacities = {
-    av5:0.32,
-    tag1:0.32, tag2:0.32,
-    gv2:0.32, gv3:0.32, gv5:0.32,
-    gtag1:0.30, gtag2:0.30
+    /* exceptions — keep original visibility */
+    /* av2 (intensity02), av3 (materiality05), gv4 (VR_24) stay at CSS default 0.58 via .av.visible */
+    /* lower everything else to barely visible */
+    av1:0.08,
+    av4:0.08,
+    av5:0.08,
+    tag1:0.06, tag2:0.06,
+    gv2:0.08, gv3:0.08, gv5:0.08,
+    gtag1:0.06, gtag2:0.06
   };
 
   Object.keys(delays).forEach(function(id){
