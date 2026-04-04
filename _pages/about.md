@@ -297,8 +297,9 @@ article{ padding:0!important;margin:0!important; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
   /* avatars visible on mobile — touch triggers hover effect */
-  .av, .float-tag { display:flex; }
-  .float-tag { display:inline-flex; }
+  /* show only 5: intensity (av2), VR (gv4), affect (gv2), embodiment (gv5), glitch (av1) */
+  .av, .float-tag { display:none; }
+  #av1, #av2, #gv2, #gv4, #gv5 { display:flex; }
   .av .av-body { font-size:13px; }
   .av .av-label { font-size:7px; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
@@ -382,11 +383,11 @@ article{ padding:0!important;margin:0!important; }
     <div class="av-label" style="color:rgba(128,232,227,.80);">ambient</div>
   </div>
 
-  <!-- av5: extraction -->
+  <!-- av5: extraction05 -->
   <div class="av" id="av5" style="top:62%;right:33%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🤑</div>
     <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
-    <div class="av-label" style="color:rgba(200,160,240,.80);">extraction</div>
+    <div class="av-label" style="color:rgba(200,160,240,.80);">extraction05</div>
   </div>
 
   <!-- GHOST AVATARS -->
@@ -528,7 +529,7 @@ article{ padding:0!important;margin:0!important; }
    * Opacity tiers:
    *   0.58  — intensity02 (av2), materiality05 (av3), VR_24 (gv4)
    *   0.32  — glitch (av1) [ghost-av], ambient (av4) [ghost-av],
-   *            extraction (av5), affect (gv2), platform capitalism (gv3),
+   *            extraction05 (av5), affect (gv2), platform capitalism (gv3),
    *            embodiment (gv5), tag1, tag2
    *   0.30  — infrastructure (gtag1), pre-conscious (gtag2)
    *   0.06  — liminal (tag-liminal)
