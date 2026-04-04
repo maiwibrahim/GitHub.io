@@ -70,7 +70,7 @@ article{ padding:0!important;margin:0!important; }
 
 .hero {
   background:var(--hero-bg);
-  min-height:100vh;width:100vw;
+  min-height:92vh;width:100vw;
   display:flex;align-items:center;
   padding:60px 6vw 80px;
   position:relative;overflow:hidden;
@@ -90,8 +90,8 @@ article{ padding:0!important;margin:0!important; }
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
 }
-.av.visible          { opacity:0.10; transform:translateY(0); }
-.av.ghost-av.visible { opacity:0.08; transform:translateY(0); }
+.av.visible          { opacity:0.16; transform:translateY(0); }
+.av.ghost-av.visible { opacity:0.13; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
@@ -181,8 +181,8 @@ article{ padding:0!important;margin:0!important; }
 .about-section {
   background:#f0f8fa;width:100vw;
   padding:130px max(2.5rem,6vw) 140px;
-  clip-path:polygon(0 60px,100% 0,100% 100%,0 100%);
-  margin-top:-60px;
+  clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+  margin-top:0;
   min-height:100vh;display:flex;flex-direction:column;
   justify-content:center;align-items:center;position:relative;
 }
@@ -303,7 +303,7 @@ article{ padding:0!important;margin:0!important; }
   #tag1, #gtag2 { display:inline-flex; }
   .av .av-body { font-size:13px; }
   .av .av-label { font-size:7px; }
-  .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
+  .about-section { clip-path:polygon(0 0,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:0; }
   .about-inner { flex-direction:column;align-items:center;gap:2.5rem; }
   .about-img-wrap { transform:rotate(-3deg); }
   .about-img { width:190px;height:246px; }
@@ -388,7 +388,7 @@ article{ padding:0!important;margin:0!important; }
   <div class="av" id="av5" style="top:62%;right:33%;">
     <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🤑</div>
     <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
-    <div class="av-label" style="color:rgba(200,160,240,.80);">extraction05</div>
+    <div class="av-label" style="color:rgba(200,160,240,.80);">extraction</div>
   </div>
 
   <!-- GHOST AVATARS -->
@@ -545,14 +545,14 @@ article{ padding:0!important;margin:0!important; }
   };
 
   var opacities = {
-    av1:0.08,
-    av4:0.08,
-    av5:0.08,
-    tag1:0.06, tag2:0.06,
-    'tag-liminal':0.06,
-    'tag-technology':0.06,
-    gv2:0.08, gv3:0.08, gv5:0.08,
-    gtag1:0.06, gtag2:0.06
+    av1:0.13,
+    av4:0.13,
+    av5:0.13,
+    tag1:0.11, tag2:0.11,
+    'tag-liminal':0.11,
+    'tag-technology':0.11,
+    gv2:0.13, gv3:0.13, gv5:0.13,
+    gtag1:0.11, gtag2:0.11
   };
 
   Object.keys(delays).forEach(function(id){
