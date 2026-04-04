@@ -95,7 +95,7 @@ article{ padding:0!important;margin:0!important; }
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
 }
-.av.visible { opacity:0.65; transform:translateY(0); }
+.av.visible { opacity:0.58; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
@@ -336,7 +336,7 @@ article{ padding:0!important;margin:0!important; }
   </div>
 
   <!-- "researching" tag — below intensity02, with extra top margin -->
-  <div class="float-tag with-icon" id="tag2" style="top:42%;right:30%;">
+  <div class="float-tag with-icon" id="tag2" style="top:44%;right:30%;">
     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
       <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.60)" stroke-width="1.3"/>
       <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.60)" stroke-width="1.4" stroke-linecap="round"/>
