@@ -91,11 +91,15 @@ article{ padding:0!important;margin:0!important; }
   align-items:center;
   gap:3px;
   z-index:5;
-  opacity:0;animation:avFloat .7s ease forwards;
+  opacity:0;animation:dimFloat .7s ease forwards;
 }
 @keyframes avFloat {
   from{opacity:0;transform:translateY(14px);}
   to  {opacity:1;transform:translateY(0);}
+}
+@keyframes dimFloat {
+  from{opacity:0;transform:translateY(14px);}
+  to  {opacity:0.38;transform:translateY(0);}
 }
 .av-body {
   border-radius:50% 50% 40% 40%;
@@ -306,51 +310,51 @@ article{ padding:0!important;margin:0!important; }
 
   <!-- Avatar 1: glitch_24 — top-right -->
   <div class="av" style="top:17%;right:8%;animation-delay:.10s;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(13,191,180,.55);border:1px solid rgba(13,191,180,.95);">👾</div>
-    <div class="av-shadow" style="width:26px;background:rgba(13,191,180,.40);"></div>
-    <div class="av-label" style="color:rgba(128,232,227,1);">glitch_24</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(8,38,42,.70);border:1px solid rgba(80,160,155,.45);box-shadow:0 8px 32px rgba(0,0,0,.90),0 2px 10px rgba(0,0,0,.70);">👾</div>
+    <div class="av-shadow" style="width:26px;background:rgba(13,191,180,.12);"></div>
+    <div class="av-label" style="color:rgba(128,200,195,.75);">glitch_24</div>
   </div>
 
-  <!-- Avatar 2: intensity02 — mid-right, no speech bubble -->
+  <!-- Avatar 2: intensity02 — mid-right -->
   <div class="av" style="top:30%;right:22%;animation-delay:.22s;">
-    <div class="av-body" style="width:32px;height:38px;background:rgba(245,226,122,.55);border:1px solid rgba(245,226,122,.95);">🤖</div>
-    <div class="av-shadow" style="width:23px;background:rgba(245,226,122,.38);"></div>
-    <div class="av-label" style="color:rgba(249,237,170,1);">intensity02</div>
+    <div class="av-body" style="width:32px;height:38px;background:rgba(38,34,8,.70);border:1px solid rgba(160,150,80,.45);box-shadow:0 8px 32px rgba(0,0,0,.90),0 2px 10px rgba(0,0,0,.70);">🤖</div>
+    <div class="av-shadow" style="width:23px;background:rgba(245,226,122,.12);"></div>
+    <div class="av-label" style="color:rgba(200,190,130,.75);">intensity02</div>
   </div>
 
   <!-- "digital media" tag — floating between extraction05 and glitch_24 -->
   <div style="position:absolute;top:19%;right:23%;z-index:6;opacity:0;animation:avFloat .7s ease .40s forwards;">
-    <div style="background:rgba(255,255,255,.14);border:.5px solid rgba(255,255,255,.38);padding:5px 13px;font-size:11px;font-family:'Space Mono',monospace;color:rgba(255,255,255,.95);white-space:nowrap;border-radius:6px;box-shadow:0 2px 12px rgba(255,61,130,.15);">digital media</div>
+    <div style="background:rgba(8,18,28,.70);border:.5px solid rgba(255,255,255,.18);padding:5px 13px;font-size:11px;font-family:'Space Mono',monospace;color:rgba(255,255,255,.50);white-space:nowrap;border-radius:6px;box-shadow:0 4px 18px rgba(0,0,0,.70);">digital media</div>
   </div>
 
   <!-- Avatar 3: extraction05 — no speech bubble -->
   <div class="av" style="top:22%;right:38%;animation-delay:.34s;">
-    <div class="av-body" style="width:30px;height:36px;background:rgba(255,61,130,.55);border:1px solid rgba(255,61,130,.95);">😊</div>
-    <div class="av-shadow" style="width:22px;background:rgba(255,61,130,.40);"></div>
-    <div class="av-label" style="color:rgba(255,111,163,1);">extraction05</div>
+    <div class="av-body" style="width:30px;height:36px;background:rgba(38,8,18,.70);border:1px solid rgba(160,70,100,.45);box-shadow:0 8px 32px rgba(0,0,0,.90),0 2px 10px rgba(0,0,0,.70);">😊</div>
+    <div class="av-shadow" style="width:22px;background:rgba(255,61,130,.12);"></div>
+    <div class="av-label" style="color:rgba(200,120,145,.75);">extraction05</div>
   </div>
 
   <!-- Avatar 4: ambient — lower right, with "researching" speech bubble -->
   <div class="av" style="top:50%;right:12%;animation-delay:.46s;">
     <div style="position:relative;">
-      <div class="speech" style="top:-28px;left:28px;display:inline-flex;align-items:center;gap:5px;">
+      <div class="speech" style="top:-28px;left:28px;display:inline-flex;align-items:center;gap:5px;background:rgba(8,18,28,.70);border:.5px solid rgba(255,255,255,.18);color:rgba(255,255,255,.50);box-shadow:0 4px 18px rgba(0,0,0,.70);">
         <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-          <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.90)" stroke-width="1.3"/>
-          <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.90)" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.45)" stroke-width="1.3"/>
+          <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.45)" stroke-width="1.4" stroke-linecap="round"/>
         </svg>
         researching
       </div>
     </div>
-    <div class="av-body" style="width:28px;height:34px;background:rgba(0,220,180,.55);border:1px solid rgba(0,220,180,.95);">🌐</div>
-    <div class="av-shadow" style="width:20px;background:rgba(0,220,180,.38);"></div>
-    <div class="av-label" style="color:rgba(160,255,220,1);">ambient</div>
+    <div class="av-body" style="width:28px;height:34px;background:rgba(6,32,28,.70);border:1px solid rgba(60,150,130,.45);box-shadow:0 8px 32px rgba(0,0,0,.90),0 2px 10px rgba(0,0,0,.70);">🌐</div>
+    <div class="av-shadow" style="width:20px;background:rgba(0,220,180,.12);"></div>
+    <div class="av-label" style="color:rgba(110,190,170,.75);">ambient</div>
   </div>
 
-  <!-- Avatar 5: infrastructure — lower-mid right, no speech bubble -->
+  <!-- Avatar 5: infrastructure — lower-mid right -->
   <div class="av" style="top:62%;right:33%;animation-delay:.58s;">
-    <div class="av-body" style="width:28px;height:34px;background:rgba(180,80,255,.55);border:1px solid rgba(180,80,255,.95);">🧑‍💻</div>
-    <div class="av-shadow" style="width:20px;background:rgba(180,80,255,.38);"></div>
-    <div class="av-label" style="color:rgba(220,160,255,1);">infrastructure</div>
+    <div class="av-body" style="width:28px;height:34px;background:rgba(22,8,38,.70);border:1px solid rgba(130,80,190,.45);box-shadow:0 8px 32px rgba(0,0,0,.90),0 2px 10px rgba(0,0,0,.70);">🧑‍💻</div>
+    <div class="av-shadow" style="width:20px;background:rgba(180,80,255,.12);"></div>
+    <div class="av-label" style="color:rgba(165,120,210,.75);">infrastructure</div>
   </div>
 
   <div class="hero-content">
