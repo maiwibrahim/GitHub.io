@@ -297,10 +297,10 @@ article{ padding:0!important;margin:0!important; }
   .hero-name { white-space:normal; }
   .hero-content { max-width:55%; }
   /* avatars visible on mobile — touch triggers hover effect */
-  /* show 6: intensity (av2), VR (gv4), embodiment (gv5), materiality (av3), politics (tag2), culture (gtag2), media (tag1) — capped at 6 visible */
+  /* show 6: VR (gv4), embodiment (gv5), materiality (av3), ambient (av4), affect (gv2), culture (gtag2), media (tag1) */
   .av, .float-tag { display:none; }
-  #av2, #av3, #gv4, #gv5 { display:flex; }
-  #tag1, #tag2, #gtag2 { display:inline-flex; }
+  #av3, #av4, #gv2, #gv4, #gv5 { display:flex; }
+  #tag1, #gtag2 { display:inline-flex; }
   .av .av-body { font-size:13px; }
   .av .av-label { font-size:7px; }
   .about-section { clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding:80px 1.5rem 80px;margin-top:-30px; }
