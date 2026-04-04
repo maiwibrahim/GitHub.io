@@ -83,32 +83,33 @@ article{ padding:0!important;margin:0!important; }
 .ui-dots { position:absolute;top:18px;right:20px;display:flex;gap:5px;z-index:10; }
 .ui-dots span { width:6px;height:6px;border-radius:50%; }
 
-/* Avatars */
+/* Avatars — high visibility */
 .av {
   position:absolute;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:3px;
+  gap:5px;
   z-index:5;
   opacity:0;
   transform:translateY(14px);
   transition:opacity .7s ease, transform .7s ease;
 }
-.av.visible { opacity:0.42; transform:translateY(0); }
+.av.visible { opacity:0.65; transform:translateY(0); }
 
 .av-body {
   border-radius:50% 50% 40% 40%;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:14px;
+  font-size:16px;
 }
 .av-shadow { border-radius:50%; height:5px; }
 .av-label {
-  font-family:'Space Mono',monospace;font-size:8px;
-  letter-spacing:.05em;
-  background:rgba(0,0,0,.62);padding:2px 6px;border-radius:2px;white-space:nowrap;
+  font-family:'Space Mono',monospace;font-size:9px;
+  letter-spacing:.06em;font-weight:400;
+  background:rgba(0,0,0,.68);padding:3px 8px;border-radius:3px;white-space:nowrap;
+  border:.5px solid rgba(255,255,255,.12);
 }
 
 .float-tag {
@@ -119,16 +120,17 @@ article{ padding:0!important;margin:0!important; }
   transition:opacity .7s ease, transform .7s ease;
   font-family:'Space Mono',monospace;
   font-size:9px;
-  background:rgba(8,18,28,.72);
-  border:.5px solid rgba(255,255,255,.20);
-  color:rgba(255,255,255,.55);
+  font-weight:400;
+  background:rgba(8,18,28,.78);
+  border:.5px solid rgba(255,255,255,.22);
+  color:rgba(255,255,255,.65);
   white-space:nowrap;
   border-radius:6px;
   padding:4px 10px;
   box-shadow:0 4px 18px rgba(0,0,0,.72);
 }
-.float-tag.visible { opacity:0.55; transform:translateY(0); }
-.float-tag.with-icon { display:inline-flex; align-items:center; gap:5px; padding:4px 10px 4px 8px; }
+.float-tag.visible { opacity:0.72; transform:translateY(0); }
+.float-tag.with-icon { display:inline-flex; align-items:center; gap:5px; padding:5px 12px 5px 9px; }
 
 .hero-content {
   position:relative;z-index:10;
@@ -311,16 +313,16 @@ article{ padding:0!important;margin:0!important; }
 
   <!-- Avatar 1: glitch_24 — top-right -->
   <div class="av" id="av1" style="top:17%;right:8%;">
-    <div class="av-body" style="width:36px;height:42px;background:rgba(8,38,42,.72);border:1px solid rgba(80,160,155,.48);box-shadow:0 8px 32px rgba(0,0,0,.88),0 2px 10px rgba(0,0,0,.68);">👾</div>
-    <div class="av-shadow" style="width:26px;background:rgba(13,191,180,.12);"></div>
-    <div class="av-label" style="color:rgba(128,200,195,.78);">glitch_24</div>
+    <div class="av-body" style="width:42px;height:48px;background:rgba(8,52,58,.80);border:1px solid rgba(13,191,180,.55);box-shadow:0 0 0 3px rgba(13,191,180,.08),0 8px 32px rgba(0,0,0,.88);">👾</div>
+    <div class="av-shadow" style="width:28px;background:rgba(13,191,180,.16);"></div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">glitch_24</div>
   </div>
 
   <!-- Avatar 2: intensity02 — mid-right -->
   <div class="av" id="av2" style="top:30%;right:22%;">
-    <div class="av-body" style="width:32px;height:38px;background:rgba(38,34,8,.72);border:1px solid rgba(160,150,80,.48);box-shadow:0 8px 32px rgba(0,0,0,.88),0 2px 10px rgba(0,0,0,.68);">🤖</div>
-    <div class="av-shadow" style="width:23px;background:rgba(245,226,122,.12);"></div>
-    <div class="av-label" style="color:rgba(200,190,130,.78);">intensity02</div>
+    <div class="av-body" style="width:38px;height:44px;background:rgba(52,48,8,.80);border:1px solid rgba(245,226,122,.55);box-shadow:0 0 0 3px rgba(245,226,122,.08),0 8px 32px rgba(0,0,0,.88);">🤖</div>
+    <div class="av-shadow" style="width:26px;background:rgba(245,226,122,.14);"></div>
+    <div class="av-label" style="color:rgba(249,237,170,.80);">intensity02</div>
   </div>
 
   <!-- "digital media" tag — between extraction05 and glitch_24 -->
@@ -328,32 +330,32 @@ article{ padding:0!important;margin:0!important; }
 
   <!-- Avatar 3: extraction05 -->
   <div class="av" id="av3" style="top:22%;right:38%;">
-    <div class="av-body" style="width:30px;height:36px;background:rgba(38,8,18,.72);border:1px solid rgba(160,70,100,.48);box-shadow:0 8px 32px rgba(0,0,0,.88),0 2px 10px rgba(0,0,0,.68);">😊</div>
-    <div class="av-shadow" style="width:22px;background:rgba(255,61,130,.12);"></div>
-    <div class="av-label" style="color:rgba(200,120,145,.78);">extraction05</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(52,8,24,.80);border:1px solid rgba(255,61,130,.55);box-shadow:0 0 0 3px rgba(255,61,130,.08),0 8px 32px rgba(0,0,0,.88);">😊</div>
+    <div class="av-shadow" style="width:24px;background:rgba(255,61,130,.14);"></div>
+    <div class="av-label" style="color:rgba(255,170,201,.80);">extraction05</div>
   </div>
 
-  <!-- "researching" tag — below intensity02, to its left, with spacing -->
-  <div class="float-tag with-icon" id="tag2" style="top:40%;right:30%;">
+  <!-- "researching" tag — below intensity02, with extra top margin -->
+  <div class="float-tag with-icon" id="tag2" style="top:42%;right:30%;">
     <svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
-      <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.50)" stroke-width="1.3"/>
-      <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.50)" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="5" cy="5" r="3.4" stroke="rgba(255,255,255,0.60)" stroke-width="1.3"/>
+      <line x1="7.4" y1="7.4" x2="11" y2="11" stroke="rgba(255,255,255,0.60)" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
     researching
   </div>
 
   <!-- Avatar 4: ambient — lower right -->
   <div class="av" id="av4" style="top:50%;right:12%;">
-    <div class="av-body" style="width:28px;height:34px;background:rgba(6,32,28,.72);border:1px solid rgba(60,150,130,.48);box-shadow:0 8px 32px rgba(0,0,0,.88),0 2px 10px rgba(0,0,0,.68);">🌐</div>
-    <div class="av-shadow" style="width:20px;background:rgba(0,220,180,.12);"></div>
-    <div class="av-label" style="color:rgba(110,190,170,.78);">ambient</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(6,44,38,.80);border:1px solid rgba(0,210,170,.55);box-shadow:0 0 0 3px rgba(0,210,170,.08),0 8px 32px rgba(0,0,0,.88);">🌐</div>
+    <div class="av-shadow" style="width:24px;background:rgba(0,210,170,.14);"></div>
+    <div class="av-label" style="color:rgba(128,232,227,.80);">ambient</div>
   </div>
 
   <!-- Avatar 5: infrastructure — lower-mid right -->
   <div class="av" id="av5" style="top:62%;right:33%;">
-    <div class="av-body" style="width:28px;height:34px;background:rgba(22,8,38,.72);border:1px solid rgba(130,80,190,.48);box-shadow:0 8px 32px rgba(0,0,0,.88),0 2px 10px rgba(0,0,0,.68);">🧑‍💻</div>
-    <div class="av-shadow" style="width:20px;background:rgba(180,80,255,.12);"></div>
-    <div class="av-label" style="color:rgba(165,120,210,.78);">infrastructure</div>
+    <div class="av-body" style="width:36px;height:42px;background:rgba(30,8,52,.80);border:1px solid rgba(160,90,230,.55);box-shadow:0 0 0 3px rgba(160,90,230,.08),0 8px 32px rgba(0,0,0,.88);">🧑‍💻</div>
+    <div class="av-shadow" style="width:24px;background:rgba(160,80,230,.14);"></div>
+    <div class="av-label" style="color:rgba(200,160,240,.80);">infrastructure</div>
   </div>
 
   <div class="hero-content">
@@ -453,7 +455,6 @@ article{ padding:0!important;margin:0!important; }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
 
-  // Stagger avatar and tag visibility via JS so opacity is fully controlled
   var delays = {av1:100,av2:220,tag1:300,av3:340,tag2:420,av4:500,av5:600};
   Object.keys(delays).forEach(function(id){
     setTimeout(function(){
